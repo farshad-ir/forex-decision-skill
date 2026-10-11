@@ -235,14 +235,30 @@ public:
 #endif
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #ifndef __MARKET_NOTEBOOK_MQH__
 #define __MARKET_NOTEBOOK_MQH__
 
 enum MARKET_VIEW
 {
-   MARKET_BEARISH = -1,
-   MARKET_PULLBACK_OR_TURN = 0,
-   MARKET_BULLISH = 1
+   MARKET_FROM_FLOOR   = -2,
+   MARKET_BEARISH      = -1,
+   MARKET_STUCK        =  0,
+   MARKET_BULLISH      =  1,
+   MARKET_FROM_CEILING =  2
 };
 
 class CMarketNotebook
@@ -256,9 +272,9 @@ private:
 public:
    CMarketNotebook()
    {
-      m_view        = MARKET_PULLBACK_OR_TURN;
+      m_view        = MARKET_STUCK;
       m_reason      = "هنوز شواهد کافی نداریم";
-      m_uncertainty = "جهت بازار مشخص نشده است";
+      m_uncertainty = "جهت حرکت مشخص نشده است";
       m_updated     = 0;
    }
 
@@ -297,12 +313,16 @@ public:
 
    string Summary()
    {
-      string state = "پول‌بک یا چرخش";
+      string state = "حرکت مشخصی نداریم";
 
-      if(m_view == MARKET_BEARISH)
-         state = "نزولی هستیم";
-      else if(m_view == MARKET_BULLISH)
-         state = "صعودی هستیم";
+      if(m_view == MARKET_BULLISH)
+         state = "به سمت بالا می‌رویم";
+      else if(m_view == MARKET_BEARISH)
+         state = "به سمت پایین می‌رویم";
+      else if(m_view == MARKET_FROM_CEILING)
+         state = "از سقف برگشتیم";
+      else if(m_view == MARKET_FROM_FLOOR)
+         state = "از کف برگشتیم";
 
       return "وضعیت: " + state
          + "\nدلیل: " + m_reason
@@ -313,6 +333,21 @@ public:
 };
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -422,48 +457,175 @@ public:
 #define __MARKET_OBSERVER_MQH__
 
 #include "FractalGeometry.mqh"
-#include "BoxBreakoutMachine.mqh"
 
-
-#define MO_MAX_MACHINES 20
+#define MO_MAX_BOXES 1000
 
 class CMarketObserver
 {
 private:
-   CBoxBreakoutMachine m_machines[MO_MAX_MACHINES];
-   int                 m_machineCount;
+   CMarketNotebook m_notebook;
 
-   CBoxRelationReview  m_relations;
-   CMarketNotebook     m_notebook;
+   double   m_zoneHigh;
+   double   m_zoneLow;
+   int      m_zoneBoxCount;
+   datetime m_zoneStart;
+   datetime m_zoneEnd;
 
+   bool     m_zoneReady;
    datetime m_lastCandle;
    datetime m_lastBoxStart;
    datetime m_lastBoxEnd;
 
-   string RelationEvidence(
-      CFractalGeometry &fractal,
-      FlatZone &newBox
-   )
+   double   m_lastClose;
+   bool     m_hasLastClose;
+
+   // ساخت محدوده مشترک باکس‌های متصل از نظر زمانی
+   bool BuildSharedZone(CFractalGeometry &fractal)
    {
-      FlatZone oldBox;
+      int total = fractal.SmallBoxCount();
 
-      if(!fractal.GetSmallBox(1, oldBox))
-         return "باکس قبلی برای مقایسه موجود نیست";
+      if(total <= 0)
+         return false;
 
-      double overlap = 0.0;
-      double overlapPercent = 0.0;
+      if(total > MO_MAX_BOXES)
+         total = MO_MAX_BOXES;
 
-      BOX_RELATION r = m_relations.Compare(
-         newBox, oldBox, overlap, overlapPercent
-      );
+      FlatZone box;
 
-      return "رابطه باکس جدید با قبلی: "
-         + m_relations.Name(r)
-         + "؛ هم‌پوشانی="
-         + DoubleToString(overlapPercent, 1) + "%";
+      // گروه با جدیدترین باکس آغاز می‌شود.
+      if(!fractal.GetSmallBox(0, box))
+         return false;
+
+      m_zoneHigh     = box.highPrice;
+      m_zoneLow      = box.lowPrice;
+      m_zoneBoxCount = 1;
+      m_zoneStart    = box.startTime;
+      m_zoneEnd      = box.endTime;
+
+      datetime groupStart = box.startTime;
+
+      // باکس‌ها از جدیدترین به قدیمی‌ترین مرتب شده‌اند.
+      for(int i = 1; i < total; i++)
+      {
+         if(!fractal.GetSmallBox(i, box))
+            break;
+
+         // پایان باکس قدیمی‌تر باید حداکثر یک کندل
+         // با شروع گروه فاصله داشته باشد.
+         if(box.endTime <
+            groupStart - PeriodSeconds(PERIOD_H1))
+         {
+            break;
+         }
+
+         // این باکس به گروه زمانی متصل است.
+         groupStart = box.startTime;
+
+         m_zoneBoxCount++;
+
+         if(box.startTime < m_zoneStart)
+            m_zoneStart = box.startTime;
+
+         if(box.endTime > m_zoneEnd)
+            m_zoneEnd = box.endTime;
+
+         // قیمت فقط برای محاسبه سقف و کف گروه استفاده می‌شود.
+         if(box.highPrice > m_zoneHigh)
+            m_zoneHigh = box.highPrice;
+
+         if(box.lowPrice < m_zoneLow)
+            m_zoneLow = box.lowPrice;
+      }
+
+      m_zoneReady = true;
+
+      return true;
    }
 
-   void AddNewBox(CFractalGeometry &fractal)
+   // بررسی کندل بسته‌شده و ثبت تغییر وضعیت
+   void ObserveCandle(datetime candleTime)
+   {
+      if(!m_zoneReady)
+         return;
+
+      double h = iHigh(_Symbol, PERIOD_H1, 1);
+      double l = iLow(_Symbol, PERIOD_H1, 1);
+      double c = iClose(_Symbol, PERIOD_H1, 1);
+
+      if(h == 0 || l == 0 || c == 0)
+         return;
+
+      MARKET_VIEW nextView = m_notebook.View();
+
+      string reason = m_notebook.Reason();
+      string uncertainty = m_notebook.Uncertainty();
+
+      // بسته‌شدن بیرون سقف
+      if(c > m_zoneHigh)
+      {
+         nextView = MARKET_BULLISH;
+         reason = "کندل بالای سقف گروه زمانی بسته شد";
+         uncertainty = "ادامه حرکت صعودی هنوز تأیید نشده است";
+      }
+      // بسته‌شدن بیرون کف
+      else if(c < m_zoneLow)
+      {
+         nextView = MARKET_BEARISH;
+         reason = "کندل پایین کف گروه زمانی بسته شد";
+         uncertainty = "ادامه حرکت نزولی هنوز تأیید نشده است";
+      }
+      // نفوذ از سقف و بسته‌شدن داخل محدوده
+      else if(h > m_zoneHigh)
+      {
+         nextView = MARKET_FROM_CEILING;
+         reason = "قیمت از سقف عبور کرد اما داخل محدوده بسته شد";
+         uncertainty = "ادامه حرکت بعدی هنوز مشخص نیست";
+      }
+      // نفوذ از کف و بسته‌شدن داخل محدوده
+      else if(l < m_zoneLow)
+      {
+         nextView = MARKET_FROM_FLOOR;
+         reason = "قیمت از کف عبور کرد اما داخل محدوده بسته شد";
+         uncertainty = "ادامه حرکت بعدی هنوز مشخص نیست";
+      }
+      // حرکت داخل محدوده بر اساس مقایسه دو بسته‌شدن
+      else if(m_hasLastClose && c > m_lastClose)
+      {
+         nextView = MARKET_BULLISH;
+         reason = "بسته‌شدن کندل بالاتر از بسته‌شدن قبلی است";
+         uncertainty = "قیمت هنوز داخل محدوده مشترک قرار دارد";
+      }
+      else if(m_hasLastClose && c < m_lastClose)
+      {
+         nextView = MARKET_BEARISH;
+         reason = "بسته‌شدن کندل پایین‌تر از بسته‌شدن قبلی است";
+         uncertainty = "قیمت هنوز داخل محدوده مشترک قرار دارد";
+      }
+      else
+      {
+         nextView = MARKET_STUCK;
+         reason = "بسته‌شدن قیمت تغییر معناداری نسبت به کندل قبلی ندارد";
+         uncertainty = "جهت بعدی هنوز مشخص نیست";
+      }
+
+      // فقط هنگام تغییر وضعیت، دفترچه را به‌روز می‌کنیم.
+      if(nextView != m_notebook.View())
+      {
+         m_notebook.Revise(
+            nextView,
+            reason,
+            uncertainty,
+            candleTime
+         );
+
+         Print("[MarketObserver] ", m_notebook.Summary());
+      }
+
+      m_lastClose = c;
+      m_hasLastClose = true;
+   }
+
+   void CheckNewBox(CFractalGeometry &fractal)
    {
       FlatZone box;
 
@@ -472,134 +634,54 @@ private:
 
       if(box.startTime == m_lastBoxStart &&
          box.endTime == m_lastBoxEnd)
-         return;
-
-      if(m_machineCount >= MO_MAX_MACHINES)
       {
-         Print("[MarketObserver] Machine limit reached.");
          return;
       }
-
-      string relation = RelationEvidence(fractal, box);
-
-      m_machines[m_machineCount].Start(box);
-      m_machineCount++;
 
       m_lastBoxStart = box.startTime;
       m_lastBoxEnd   = box.endTime;
 
-      //Print("[MarketObserver] ", relation);
-      m_notebook.Revise(
-         m_notebook.View(),
-         m_notebook.Reason(),
-         relation,
-         TimeCurrent()
+      if(!BuildSharedZone(fractal))
+         return;
+
+      Print(
+         "[MarketObserver] Shared time group: ",
+         m_zoneBoxCount,
+         " boxes; High=",
+         DoubleToString(m_zoneHigh, _Digits),
+         " Low=",
+         DoubleToString(m_zoneLow, _Digits),
+         " Start=",
+         TimeToString(m_zoneStart, TIME_DATE | TIME_MINUTES),
+         " End=",
+         TimeToString(m_zoneEnd, TIME_DATE | TIME_MINUTES)
       );
-   }
-
-   void ApplyEvents(datetime candleTime)
-   {
-      bool bullish = false;
-      bool bearish = false;
-      bool uncertain = false;
-
-      string bullReason = "";
-      string bearReason = "";
-      string uncertainReason = "";
-
-      for(int i = 0; i < m_machineCount; i++)
-      {
-         BOX_EVENT e = m_machines[i].Feed(1);
-
-         switch(e)
-         {
-            case BOX_EVENT_UPPER_BREAKOUT:
-               bullish = true;
-               bullReason = "بسته‌شدن قیمت بالای سقف یک باکس";
-               break;
-
-            case BOX_EVENT_LOWER_BREAKOUT:
-               bearish = true;
-               bearReason = "بسته‌شدن قیمت پایین کف یک باکس";
-               break;
-
-            case BOX_EVENT_UPPER_PENETRATION:
-               uncertain = true;
-               uncertainReason =
-                  "نفوذ به سقف باکس بدون بسته‌شدن بالای آن";
-               break;
-
-            case BOX_EVENT_LOWER_PENETRATION:
-               uncertain = true;
-               uncertainReason =
-                  "نفوذ به کف باکس بدون بسته‌شدن پایین آن";
-               break;
-
-            case BOX_EVENT_CLOSE_INSIDE:
-               uncertain = true;
-               uncertainReason =
-                  "قیمت پس از خروج یا آزمون به داخل باکس برگشته است";
-               break;
-
-            default:
-               break;
-         }
-      }
-
-      // شواهد مخالف هم‌زمان: نتیجهٔ جهت‌دار صادر نمی‌کنیم.
-      if(bullish && bearish)
-      {
-         m_notebook.Revise(
-            MARKET_PULLBACK_OR_TURN,
-            "باکس‌های مختلف شواهد شکست مخالف داده‌اند",
-            "جهت بازار تا روشن‌شدن تعارض مشخص نیست",
-            candleTime
-         );
-      }
-      else if(bullish)
-      {
-         m_notebook.Revise(
-            MARKET_BULLISH,
-            bullReason,
-            "شکست یک باکس به‌تنهایی اثبات‌کنندهٔ روند صعودی نیست",
-            candleTime
-         );
-      }
-      else if(bearish)
-      {
-         m_notebook.Revise(
-            MARKET_BEARISH,
-            bearReason,
-            "شکست یک باکس به‌تنهایی اثبات‌کنندهٔ روند نزولی نیست",
-            candleTime
-         );
-      }
-      else if(uncertain)
-      {
-         m_notebook.Revise(
-            MARKET_PULLBACK_OR_TURN,
-            uncertainReason,
-            "برای تشخیص پول‌بک از چرخش، ساختار قبلی نیز باید بررسی شود",
-            candleTime
-         );
-      }
    }
 
 public:
    CMarketObserver()
    {
-      m_machineCount = 0;
-      m_lastCandle   = 0;
-      m_lastBoxStart = 0;
-      m_lastBoxEnd   = 0;
+      m_zoneHigh      = 0;
+      m_zoneLow       = 0;
+      m_zoneBoxCount  = 0;
+      m_zoneStart     = 0;
+      m_zoneEnd       = 0;
+
+      m_zoneReady     = false;
+      m_lastCandle    = 0;
+      m_lastBoxStart  = 0;
+      m_lastBoxEnd    = 0;
+
+      m_lastClose     = 0;
+      m_hasLastClose  = false;
    }
 
    void Init(CFractalGeometry &fractal)
    {
-      AddNewBox(fractal);
+      CheckNewBox(fractal);
    }
 
-   // newBoxArrived را خود اکسپرت با پولینگ تعیین می‌کند.
+   // newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
    void Update(
       CFractalGeometry &fractal,
       bool newCandle,
@@ -607,19 +689,19 @@ public:
    )
    {
       if(newBoxArrived)
-         AddNewBox(fractal);
+         CheckNewBox(fractal);
 
       if(!newCandle)
          return;
 
-      datetime t = iTime(_Symbol, PERIOD_CURRENT, 1);
+      datetime t = iTime(_Symbol, PERIOD_H1, 1);
 
       if(t == 0 || t == m_lastCandle)
          return;
 
       m_lastCandle = t;
 
-      ApplyEvents(t);
+      ObserveCandle(t);
    }
 
    MARKET_VIEW View()
@@ -631,7 +713,21 @@ public:
    {
       return m_notebook.Summary();
    }
+
+   double ZoneHigh()
+   {
+      return m_zoneHigh;
+   }
+
+   double ZoneLow()
+   {
+      return m_zoneLow;
+   }
+
+   int ZoneBoxCount()
+   {
+      return m_zoneBoxCount;
+   }
 };
 
 #endif
-
