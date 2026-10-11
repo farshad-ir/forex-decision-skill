@@ -271,8 +271,9 @@ private:
 
    string      m_reason;
    string      m_uncertainty;
-   datetime    m_updated;
-
+   datetime    m_eventTime;
+   datetime    m_theoryChangeTime;
+   
 public:
    CMarketNotebook()
    {
@@ -282,7 +283,9 @@ public:
 
       m_reason      = "هنوز رویدادی ثبت نشده است";
       m_uncertainty = "جهت حرکت هنوز مشخص نشده است";
-      m_updated     = 0;
+      
+      m_eventTime         =  0 ;
+      m_theoryChangeTime  =  0 ;
    }
 
    void Revise(
@@ -296,7 +299,7 @@ public:
       m_hasView     = true;
       m_reason      = reason;
       m_uncertainty = uncertainty;
-      m_updated     = when;
+      m_eventTime   = when;
    }
 
    // نظریه مستقل از چهار وضعیت رویدادی است.
@@ -305,8 +308,8 @@ public:
       if(m_stuckTheory == active)
          return false;
 
-      m_stuckTheory = active;
-      m_updated     = when;
+      m_stuckTheory      = active;
+      m_theoryChangeTime = when;
 
       return true;
    }
@@ -338,7 +341,7 @@ public:
 
    datetime UpdatedAt()
    {
-      return m_updated;
+      return m_eventTime;
    }
 
    string Summary()
@@ -362,12 +365,33 @@ public:
       if(m_stuckTheory)
          theory = "نظریه: درجا می‌زنیم";
 
-      return "رویداد بازار: " + state
+      string result = "رویداد بازار: " + state
          + "\n" + theory
          + "\nدلیل: " + m_reason
-         + "\nعامل تردید: " + m_uncertainty
-         + "\nزمان: "
-         + TimeToString(m_updated, TIME_DATE | TIME_MINUTES);
+         + "\nعامل تردید: " + m_uncertainty;
+      
+      if(m_hasView)
+      {
+         result += "\nزمان رویداد: "
+                + TimeToString(m_eventTime, TIME_DATE | TIME_MINUTES);
+      }
+      else
+      {
+         result += "\nزمان رویداد: هنوز رویدادی ثبت نشده است";
+      }
+      
+      if(m_theoryChangeTime > 0)
+      {
+         result += "\nزمان تغییر نظریه: "
+                + TimeToString(m_theoryChangeTime, TIME_DATE | TIME_MINUTES);
+      }
+      else
+      {
+         result += "\nزمان تغییر نظریه: هنوز تغییری ثبت نشده است";
+      }
+
+      return result;
+
    }
 };
 
@@ -496,6 +520,14 @@ public:
 
 #define MO_MAX_BOXES 1000
 
+struct MOLevelAlertState
+{
+   datetime boxStart;
+   bool     highAlerted;
+   bool     lowAlerted;
+};
+
+
 class CMarketObserver
 {
 private:
@@ -515,8 +547,17 @@ private:
    double   m_lastClose;
    bool     m_hasLastClose;
 
+
+   MOLevelAlertState m_levelAlertStates[MO_MAX_BOXES];
+
+   int m_levelAlertCount;
+   int m_nextLevelAlertSlot;
+
+
+
+
    // ساخت محدوده مشترک باکس‌های متصل از نظر زمانی
-   bool BuildSharedZone(CFractalGeometry &fractal)
+   bool BuildOverLapZone(CFractalGeometry &fractal)
    {
       int total = fractal.SmallBoxCount();
 
@@ -578,7 +619,131 @@ private:
       return true;
    }
 
-   // بررسی کندل بسته‌شده و ثبت تغییر وضعیت
+// یافتن وضعیت هشدار باکس؛ هر باکس با زمان شروع شناسایی می‌شود.
+int FindOrCreateLevelAlertState(datetime boxStart)
+{
+   for(int i = 0; i < m_levelAlertCount; i++)
+   {
+      if(m_levelAlertStates[i].boxStart == boxStart)
+         return i;
+   }
+
+   int idx;
+
+   if(m_levelAlertCount < MO_MAX_BOXES)
+   {
+      idx = m_levelAlertCount;
+      m_levelAlertCount++;
+   }
+   else
+   {
+      // اگر ظرفیت پر شد، قدیمی‌ترین رکوردهای چرخشی جایگزین می‌شوند.
+      idx = m_nextLevelAlertSlot;
+
+      m_nextLevelAlertSlot++;
+
+      if(m_nextLevelAlertSlot >= MO_MAX_BOXES)
+         m_nextLevelAlertSlot = 0;
+   }
+
+   m_levelAlertStates[idx].boxStart     = boxStart;
+   m_levelAlertStates[idx].highAlerted  = false;
+   m_levelAlertStates[idx].lowAlerted   = false;
+
+   return idx;
+}
+
+
+// بررسی تماس کندل بسته‌شده با سقف و کف تمام باکس‌ها.
+//
+// allowAlerts:
+//   true  = هشدار مجاز است.
+//   false = هشدار صادر نمی‌شود، اما وضعیت سطوح به‌روز می‌شود.
+void CheckBoxLevelTouches(
+   CFractalGeometry &fractal,
+   bool allowAlerts,
+   datetime candleTime
+)
+{
+   int total = fractal.SmallBoxCount();
+
+   if(total <= 0)
+      return;
+
+   if(total > MO_MAX_BOXES)
+      total = MO_MAX_BOXES;
+
+   double h = iHigh(_Symbol, PERIOD_H1, 1);
+   double l = iLow(_Symbol, PERIOD_H1, 1);
+
+   if(h == 0 || l == 0)
+      return;
+
+   for(int i = 0; i < total; i++)
+   {
+      FlatZone box;
+
+      if(!fractal.GetSmallBox(i, box))
+         continue;
+
+      int stateIndex =
+         FindOrCreateLevelAlertState(box.startTime);
+
+      // آیا دامنه کندل با سقف این باکس تقاطع دارد؟
+      bool touchesHigh =
+         (l <= box.highPrice && h >= box.highPrice);
+
+      if(!touchesHigh)
+      {
+         // با فاصله گرفتن از سطح، هشدار بعدی مجاز می‌شود.
+         m_levelAlertStates[stateIndex].highAlerted = false;
+      }
+      else if(allowAlerts &&
+              !m_levelAlertStates[stateIndex].highAlerted)
+      {
+         Print(
+            "[MarketObserver] LEVEL TOUCH: HIGH",
+            " BoxStart=",
+            TimeToString(box.startTime, TIME_DATE | TIME_MINUTES),
+            " Level=",
+            DoubleToString(box.highPrice, _Digits),
+            " Candle=",
+            TimeToString(candleTime, TIME_DATE | TIME_MINUTES)
+         );
+
+         m_levelAlertStates[stateIndex].highAlerted = true;
+      }
+
+
+      // آیا دامنه کندل با کف این باکس تقاطع دارد؟
+      bool touchesLow =
+         (l <= box.lowPrice && h >= box.lowPrice);
+
+      if(!touchesLow)
+      {
+         m_levelAlertStates[stateIndex].lowAlerted = false;
+      }
+      else if(allowAlerts &&
+              !m_levelAlertStates[stateIndex].lowAlerted)
+      {
+         Print(
+            "[MarketObserver] LEVEL TOUCH: LOW",
+            " BoxStart=",
+            TimeToString(box.startTime, TIME_DATE | TIME_MINUTES),
+            " Level=",
+            DoubleToString(box.lowPrice, _Digits),
+            " Candle=",
+            TimeToString(candleTime, TIME_DATE | TIME_MINUTES)
+         );
+
+         m_levelAlertStates[stateIndex].lowAlerted = true;
+      }
+   }
+}
+
+
+
+// بررسی کندل بسته‌شده و ثبت تغییر وضعیت
 // بررسی کندل بسته‌شده در گروه زمانی همپوشان
 void ObserveCandle(datetime candleTime)
 {
@@ -674,7 +839,7 @@ void ObserveCandle(datetime candleTime)
       m_lastBoxStart = box.startTime;
       m_lastBoxEnd   = box.endTime;
 
-      if(!BuildSharedZone(fractal))
+      if(!BuildOverLapZone(fractal))
          return;
          
          
@@ -717,6 +882,9 @@ public:
       m_lastCandle    = 0;
       m_lastBoxStart  = 0;
       m_lastBoxEnd    = 0;
+      
+      m_levelAlertCount    = 0;
+      m_nextLevelAlertSlot = 0;
    }
 
    void Init(CFractalGeometry &fractal)
@@ -724,7 +892,7 @@ public:
       CheckNewBox(fractal);
    }
 
-   // newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
+// newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
 void Update(
    CFractalGeometry &fractal,
    bool newCandle,
@@ -737,18 +905,40 @@ void Update(
    if(!newCandle)
       return;
 
-   // تا زمانی که گروه همپوشان تشکیل نشده،
-   // کندل را مصرف نمی‌کنیم.
-   if(!m_zoneReady || m_zoneBoxCount < 2)
-      return;
-
    datetime t = iTime(_Symbol, PERIOD_H1, 1);
 
    if(t == 0 || t == m_lastCandle)
       return;
 
-   // پس از آماده بودن گروه، کندل ثبت می‌شود.
+   // هر کندل بسته‌شده فقط یک بار پردازش می‌شود.
    m_lastCandle = t;
+
+   // تا وقتی گروه همپوشان فعال است، هشدار سطحی
+   // فقط در صورتی مجاز است که قیمت بیرون محدوده بسته شود.
+   bool allowLevelAlerts = true;
+
+   if(m_zoneReady && m_zoneBoxCount >= 2)
+   {
+      double c = iClose(_Symbol, PERIOD_H1, 1);
+
+      if(c == 0)
+         return;
+
+      allowLevelAlerts =
+         (c > m_zoneHigh || c < m_zoneLow);
+   }
+
+   // تمام باکس‌ها، مستقل از همپوشانی، بررسی می‌شوند.
+   CheckBoxLevelTouches(
+      fractal,
+      allowLevelAlerts,
+      t
+   );
+
+   // منطق رویدادهای فعلی فقط در صورت وجود گروه
+   // حداقل دو باکسی ادامه پیدا می‌کند.
+   if(!m_zoneReady || m_zoneBoxCount < 2)
+      return;
 
    ObserveCandle(t);
 }
