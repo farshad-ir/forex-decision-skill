@@ -1,0 +1,426 @@
+#ifndef __BOX_HISTORY_REVIEW_MQH__
+#define __BOX_HISTORY_REVIEW_MQH__
+
+#include "FractalGeometry.mqh"
+
+#define REVIEW_MAX_BOXES   20
+
+struct ReviewCandle
+{
+   datetime time;
+   double   high;
+   double   low;
+   double   close;
+};
+
+class CBoxHistoryReview
+{
+private:
+   FlatZone    m_boxes[REVIEW_MAX_BOXES];
+
+   int m_boxCount;
+   int m_candleCount;
+   int idx;
+
+public:
+   CBoxHistoryReview()
+   {
+      m_boxCount    = 0;
+      m_candleCount = 0;
+   }
+
+   void LoadBoxes(CFractalGeometry &fractal)
+   {
+      int total = fractal.SmallBoxCount();
+
+      m_boxCount = MathMin(total, REVIEW_MAX_BOXES);
+
+      for(int i = 0; i < m_boxCount; i++)
+      {
+         fractal.GetSmallBox(i, m_boxes[i]);
+      }
+
+      Print("Review boxes loaded: ", m_boxCount);
+   }
+
+   void CandleRev()
+   {
+      int b = m_boxCount - 1 ;
+      datetime t0 = m_boxes[b].startTime;
+      idx = iBarShift(_Symbol,PERIOD_H1, t0);
+
+      Print("Oldest box start: ",
+            TimeToString(t0, TIME_DATE | TIME_MINUTES));
+
+      Print("History starts at shift: ", idx,
+         " time: ",
+         TimeToString(iTime(_Symbol, PERIOD_H1, idx),
+                   TIME_DATE | TIME_MINUTES));      
+      
+      
+   }   
+
+   void Match()
+   {
+      for(int c = idx; c > 3 ; c--)
+      {
+         for(int b = m_boxCount - 1 ; b >= 0; b--)
+         {
+            FlatZone box = m_boxes[b];
+            datetime candleTime = iTime(_Symbol, PERIOD_H1, c );
+            
+            if(  candleTime < box.startTime ||
+                 candleTime > box.endTime)
+            {
+               continue;
+            }
+
+            Print(
+               "Candle=", TimeToString(candleTime),
+               " Box=", TimeToString(
+                  box.endTime, TIME_DATE | TIME_MINUTES),
+               " H=", DoubleToString(iHigh  (_Symbol, PERIOD_H1, c ), _Digits),
+               " L=", DoubleToString(iLow   (_Symbol, PERIOD_H1, c ), _Digits),
+               " C=", DoubleToString(iClose (_Symbol, PERIOD_H1, c ), _Digits)
+            );
+         }
+      }
+   }
+};
+
+#endif
+
+
+
+
+#ifndef __BOX_BREAKOUT_MACHINE_MQH__
+#define __BOX_BREAKOUT_MACHINE_MQH__
+
+#include "FractalGeometry.mqh"
+
+
+enum BoxMachineState
+{
+   BOX_MACHINE_OFF = 0,
+   BOX_MACHINE_INSIDE,
+   BOX_MACHINE_UPPER_TEST,
+   BOX_MACHINE_LOWER_TEST,
+   BOX_MACHINE_UPPER_BREAKOUT,
+   BOX_MACHINE_LOWER_BREAKOUT
+};
+
+
+class CBoxBreakoutMachine
+{
+private:
+
+   FlatZone          m_box;
+   BoxMachineState   m_state;
+   bool              m_active;
+
+   datetime          m_lastCandleTime;
+
+
+public:
+
+   CBoxBreakoutMachine()
+   {
+      m_active        = false;
+      m_state         = BOX_MACHINE_OFF;
+      m_lastCandleTime = 0;
+   }
+
+
+   void Start(FlatZone &box)
+   {
+      m_box            = box;
+      m_state          = BOX_MACHINE_INSIDE;
+      m_active         = true;
+      m_lastCandleTime = 0;
+
+      Print("BOX MACHINE START");
+      Print("  High: ", m_box.highPrice);
+      Print("  Low : ", m_box.lowPrice);
+      Print("  End : ",
+            TimeToString(m_box.endTime));
+   }
+
+
+   bool IsActive()
+   {
+      return m_active;
+   }
+   void PrintBoxID()
+   {
+      Print("[Box ", TimeToString(m_box.endTime, TIME_DATE|TIME_MINUTES), "] ");
+   }
+
+   BoxMachineState State()
+   {
+      return m_state;
+   }
+
+
+void Feed(int shift)
+{
+   if(!m_active)
+      return;
+
+   datetime candleTime =
+      iTime(_Symbol, PERIOD_CURRENT, shift);
+
+   double high =
+      iHigh(_Symbol, PERIOD_CURRENT, shift);
+
+   double low =
+      iLow(_Symbol, PERIOD_CURRENT, shift);
+
+   double close =
+      iClose(_Symbol, PERIOD_CURRENT, shift);
+
+   string boxID =
+      TimeToString(m_box.endTime, TIME_DATE | TIME_MINUTES);
+
+   string candleID =
+      TimeToString(candleTime, TIME_DATE | TIME_MINUTES);
+
+   Print("[Box ", boxID,
+         "] Candle ", candleID,
+         " | H=", DoubleToString(high, _Digits),
+         " L=", DoubleToString(low, _Digits),
+         " C=", DoubleToString(close, _Digits));
+
+   if(high > m_box.highPrice && close <= m_box.highPrice)
+   {
+      Print("[Box ", boxID, "] ",
+            candleID, " | UPPER PENETRATION");
+   }
+
+   if(low < m_box.lowPrice && close >= m_box.lowPrice)
+   {
+      Print("[Box ", boxID, "] ",
+            candleID, " | LOWER PENETRATION");
+   }
+
+   if(close > m_box.highPrice)
+   {
+      Print("[Box ", boxID, "] ",
+            candleID, " | UPPER BREAKOUT");
+   }
+
+   if(close < m_box.lowPrice)
+   {
+      Print("[Box ", boxID, "] ",
+            candleID, " | LOWER BREAKOUT");
+   }
+
+   if(close >= m_box.lowPrice &&
+      close <= m_box.highPrice)
+   {
+      Print("[Box ", boxID, "] ",
+            candleID, " | CLOSE INSIDE BOX");
+   }
+}
+
+
+
+
+};
+
+
+#endif
+
+
+
+
+
+
+
+#ifndef __BOX_RELATION_REVIEW_MQH__
+#define __BOX_RELATION_REVIEW_MQH__
+
+#include "FractalGeometry.mqh"
+
+#define RELATION_MAX_BOXES 20
+
+enum BOX_RELATION
+{
+   BOX_ABOVE,
+   BOX_BELOW,
+   BOX_EQUAL,
+   BOX_OVERLAP,
+   BOX_NEW_INSIDE_OLD,
+   BOX_NEW_CONTAINS_OLD,
+   BOX_TOUCH
+};
+
+class CBoxRelationReview
+{
+private:
+   FlatZone m_boxes[RELATION_MAX_BOXES];
+   int      m_boxCount;
+
+   double Epsilon()
+   {
+      return _Point * 0.5;
+   }
+
+   string RelationName(BOX_RELATION relation)
+   {
+      switch(relation)
+      {
+         case BOX_ABOVE:
+            return "ABOVE";
+
+         case BOX_BELOW:
+            return "BELOW";
+            
+         case BOX_EQUAL:
+            return "EQUAL";
+
+         case BOX_OVERLAP:
+            return "OVERLAP";
+
+         case BOX_NEW_INSIDE_OLD:
+            return "NEW_INSIDE_OLD";
+
+         case BOX_NEW_CONTAINS_OLD:
+            return "NEW_CONTAINS_OLD";
+
+         case BOX_TOUCH:
+            return "TOUCH";
+      }
+
+      return "UNKNOWN";
+   }
+
+   BOX_RELATION Compare(
+      FlatZone &newer,
+      FlatZone &older,
+      double &overlap,
+      double &overlapPercent)
+   {
+      double eps = Epsilon();
+
+      double newHigh = newer.highPrice;
+      double newLow  = newer.lowPrice;
+
+      double oldHigh = older.highPrice;
+      double oldLow  = older.lowPrice;
+
+      double commonHigh = MathMin(newHigh, oldHigh);
+      double commonLow  = MathMax(newLow, oldLow);
+
+      overlap = commonHigh - commonLow;
+
+      double newRange = newHigh - newLow;
+      double oldRange = oldHigh - oldLow;
+
+      double minRange = MathMin(newRange, oldRange);
+
+      overlapPercent = 0.0;
+
+      if(minRange > eps && overlap > eps)
+      {
+         overlapPercent = 100.0 * overlap / minRange;
+      }
+      
+      if(MathAbs(newHigh - oldHigh) <= eps &&
+         MathAbs(newLow  -  oldLow) <= eps)
+      {
+         return BOX_EQUAL;
+      }
+      
+      if(newLow > oldHigh + eps)
+         return BOX_ABOVE;
+
+      if(newHigh < oldLow - eps)
+         return BOX_BELOW;
+
+      if(MathAbs(newLow - oldHigh) <= eps ||
+         MathAbs(newHigh - oldLow) <= eps)
+      {
+         return BOX_TOUCH;
+      }
+
+      if(newHigh <= oldHigh + eps &&
+         newLow  >= oldLow  - eps)
+      {
+         return BOX_NEW_INSIDE_OLD;
+      }
+
+      if(newHigh >= oldHigh - eps &&
+         newLow  <= oldLow  + eps)
+      {
+         return BOX_NEW_CONTAINS_OLD;
+      }
+
+      return BOX_OVERLAP;
+   }
+
+public:
+   CBoxRelationReview()
+   {
+      m_boxCount = 0;
+   }
+
+   void LoadBoxes(CFractalGeometry &fractal)
+   {
+      int total = fractal.SmallBoxCount();
+
+      m_boxCount = MathMin(total, RELATION_MAX_BOXES);
+
+      for(int i = 0; i < m_boxCount; i++)
+      {
+         fractal.GetSmallBox(i, m_boxes[i]);
+      }
+
+      Print("Relation review loaded: ", m_boxCount);
+   }
+
+   void Analyze()
+   {
+      if(m_boxCount < 2)
+      {
+         Print("Relation review: not enough boxes.");
+         return;
+      }
+
+      Print("========== BOX RELATIONS BEGIN ==========");
+
+      Print("Newest box index: 0");
+      Print("Oldest box index: ", m_boxCount - 1);
+
+      // FIFO: index 0 is newest.
+      // Compare every newer box with every older box.
+
+      int i = 0;
+      
+      for(int j = 1; j < m_boxCount; j++)
+      {
+         FlatZone newer = m_boxes[i];
+         FlatZone older = m_boxes[j];
+
+         double overlap = 0.0;
+         double overlapPercent = 0.0;
+
+         BOX_RELATION relation =
+            Compare(newer, older,
+                    overlap, overlapPercent);
+
+         Print(
+            "NEW[", i, "] vs OLD[", j, "]",
+            " | Relation=", RelationName(relation),
+            " | Overlap=",
+            DoubleToString(MathMax(0.0, overlap), _Digits),
+            " | OverlapPct=",
+            DoubleToString(overlapPercent, 1)
+         );
+      }
+      
+
+      Print("========== BOX RELATIONS END ==========");
+   }
+};
+
+#endif
