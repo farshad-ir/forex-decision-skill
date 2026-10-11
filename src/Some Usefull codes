@@ -249,6 +249,7 @@ public:
 
 
 
+
 #ifndef __MARKET_NOTEBOOK_MQH__
 #define __MARKET_NOTEBOOK_MQH__
 
@@ -256,15 +257,18 @@ enum MARKET_VIEW
 {
    MARKET_FROM_FLOOR   = -2,
    MARKET_BEARISH      = -1,
-   MARKET_STUCK        =  0,
    MARKET_BULLISH      =  1,
-   MARKET_FROM_CEILING =  2
+   MARKET_FROM_CEILING =  2,
+   MARKET_STUCK        = 0
 };
 
 class CMarketNotebook
 {
 private:
    MARKET_VIEW m_view;
+   bool        m_hasView;
+   bool        m_stuckTheory;
+
    string      m_reason;
    string      m_uncertainty;
    datetime    m_updated;
@@ -272,9 +276,12 @@ private:
 public:
    CMarketNotebook()
    {
-      m_view        = MARKET_STUCK;
-      m_reason      = "هنوز شواهد کافی نداریم";
-      m_uncertainty = "جهت حرکت مشخص نشده است";
+      m_view        = MARKET_BULLISH;
+      m_hasView     = false;
+      m_stuckTheory = false;
+
+      m_reason      = "هنوز رویدادی ثبت نشده است";
+      m_uncertainty = "جهت حرکت هنوز مشخص نشده است";
       m_updated     = 0;
    }
 
@@ -286,14 +293,37 @@ public:
    )
    {
       m_view        = view;
+      m_hasView     = true;
       m_reason      = reason;
       m_uncertainty = uncertainty;
       m_updated     = when;
    }
 
+   // نظریه مستقل از چهار وضعیت رویدادی است.
+   bool SetStuckTheory(bool active, datetime when)
+   {
+      if(m_stuckTheory == active)
+         return false;
+
+      m_stuckTheory = active;
+      m_updated     = when;
+
+      return true;
+   }
+
    MARKET_VIEW View()
    {
       return m_view;
+   }
+
+   bool HasView()
+   {
+      return m_hasView;
+   }
+
+   bool StuckTheory()
+   {
+      return m_stuckTheory;
    }
 
    string Reason()
@@ -313,18 +343,27 @@ public:
 
    string Summary()
    {
-      string state = "حرکت مشخصی نداریم";
+      string state = "هنوز رویدادی ثبت نشده است";
 
-      if(m_view == MARKET_BULLISH)
-         state = "به سمت بالا می‌رویم";
-      else if(m_view == MARKET_BEARISH)
-         state = "به سمت پایین می‌رویم";
-      else if(m_view == MARKET_FROM_CEILING)
-         state = "از سقف برگشتیم";
-      else if(m_view == MARKET_FROM_FLOOR)
-         state = "از کف برگشتیم";
+      if(m_hasView)
+      {
+         if(m_view == MARKET_BULLISH)
+            state = "به سمت بالا می‌رویم";
+         else if(m_view == MARKET_BEARISH)
+            state = "به سمت پایین می‌رویم";
+         else if(m_view == MARKET_FROM_CEILING)
+            state = "از سقف برگشتیم";
+         else if(m_view == MARKET_FROM_FLOOR)
+            state = "از کف برگشتیم";
+      }
 
-      return "وضعیت: " + state
+      string theory = "نظریه درجا زدن فعال نیست";
+
+      if(m_stuckTheory)
+         theory = "نظریه: درجا می‌زنیم";
+
+      return "رویداد بازار: " + state
+         + "\n" + theory
          + "\nدلیل: " + m_reason
          + "\nعامل تردید: " + m_uncertainty
          + "\nزمان: "
@@ -333,9 +372,6 @@ public:
 };
 
 #endif
-
-
-
 
 
 
@@ -543,87 +579,84 @@ private:
    }
 
    // بررسی کندل بسته‌شده و ثبت تغییر وضعیت
-   void ObserveCandle(datetime candleTime)
+// بررسی کندل بسته‌شده در گروه زمانی همپوشان
+void ObserveCandle(datetime candleTime)
+{
+   // بدون حداقل دو باکس، تحلیل انجام نمی‌شود.
+   if(!m_zoneReady || m_zoneBoxCount < 2)
+      return;
+
+   double h = iHigh(_Symbol, PERIOD_H1, 1);
+   double l = iLow(_Symbol, PERIOD_H1, 1);
+   double c = iClose(_Symbol, PERIOD_H1, 1);
+
+   if(h == 0 || l == 0 || c == 0)
+      return;
+
+   MARKET_VIEW nextView = MARKET_STUCK ;
+   bool hasEvent = false;
+
+   string reason = "";
+   string uncertainty = "";
+
+   // 1. بسته‌شدن بالای سقف گروه
+   if(c > m_zoneHigh)
    {
-      if(!m_zoneReady)
-         return;
+      nextView = MARKET_BULLISH;
+      hasEvent = true;
 
-      double h = iHigh(_Symbol, PERIOD_H1, 1);
-      double l = iLow(_Symbol, PERIOD_H1, 1);
-      double c = iClose(_Symbol, PERIOD_H1, 1);
-
-      if(h == 0 || l == 0 || c == 0)
-         return;
-
-      MARKET_VIEW nextView = m_notebook.View();
-
-      string reason = m_notebook.Reason();
-      string uncertainty = m_notebook.Uncertainty();
-
-      // بسته‌شدن بیرون سقف
-      if(c > m_zoneHigh)
-      {
-         nextView = MARKET_BULLISH;
-         reason = "کندل بالای سقف گروه زمانی بسته شد";
-         uncertainty = "ادامه حرکت صعودی هنوز تأیید نشده است";
-      }
-      // بسته‌شدن بیرون کف
-      else if(c < m_zoneLow)
-      {
-         nextView = MARKET_BEARISH;
-         reason = "کندل پایین کف گروه زمانی بسته شد";
-         uncertainty = "ادامه حرکت نزولی هنوز تأیید نشده است";
-      }
-      // نفوذ از سقف و بسته‌شدن داخل محدوده
-      else if(h > m_zoneHigh)
-      {
-         nextView = MARKET_FROM_CEILING;
-         reason = "قیمت از سقف عبور کرد اما داخل محدوده بسته شد";
-         uncertainty = "ادامه حرکت بعدی هنوز مشخص نیست";
-      }
-      // نفوذ از کف و بسته‌شدن داخل محدوده
-      else if(l < m_zoneLow)
-      {
-         nextView = MARKET_FROM_FLOOR;
-         reason = "قیمت از کف عبور کرد اما داخل محدوده بسته شد";
-         uncertainty = "ادامه حرکت بعدی هنوز مشخص نیست";
-      }
-      // حرکت داخل محدوده بر اساس مقایسه دو بسته‌شدن
-      else if(m_hasLastClose && c > m_lastClose)
-      {
-         nextView = MARKET_BULLISH;
-         reason = "بسته‌شدن کندل بالاتر از بسته‌شدن قبلی است";
-         uncertainty = "قیمت هنوز داخل محدوده مشترک قرار دارد";
-      }
-      else if(m_hasLastClose && c < m_lastClose)
-      {
-         nextView = MARKET_BEARISH;
-         reason = "بسته‌شدن کندل پایین‌تر از بسته‌شدن قبلی است";
-         uncertainty = "قیمت هنوز داخل محدوده مشترک قرار دارد";
-      }
-      else
-      {
-         nextView = MARKET_STUCK;
-         reason = "بسته‌شدن قیمت تغییر معناداری نسبت به کندل قبلی ندارد";
-         uncertainty = "جهت بعدی هنوز مشخص نیست";
-      }
-
-      // فقط هنگام تغییر وضعیت، دفترچه را به‌روز می‌کنیم.
-      if(nextView != m_notebook.View())
-      {
-         m_notebook.Revise(
-            nextView,
-            reason,
-            uncertainty,
-            candleTime
-         );
-
-         Print("[MarketObserver] ", m_notebook.Summary());
-      }
-
-      m_lastClose = c;
-      m_hasLastClose = true;
+      reason = "کندل بالای سقف گروه زمانی بسته شد";
+      uncertainty = "ادامه حرکت صعودی هنوز تأیید نشده است";
    }
+   // 2. بسته‌شدن پایین کف گروه
+   else if(c < m_zoneLow)
+   {
+      nextView = MARKET_BEARISH;
+      hasEvent = true;
+
+      reason = "کندل پایین کف گروه زمانی بسته شد";
+      uncertainty = "ادامه حرکت نزولی هنوز تأیید نشده است";
+   }
+   // 3. عبور از سقف و بسته‌شدن داخل محدوده
+   else if(h > m_zoneHigh)
+   {
+      nextView = MARKET_FROM_CEILING;
+      hasEvent = true;
+
+      reason = "قیمت از سقف عبور کرد اما داخل محدوده بسته شد";
+      uncertainty = "حرکت بعدی هنوز مشخص نیست";
+   }
+   // 4. عبور از کف و بسته‌شدن داخل محدوده
+   else if(l < m_zoneLow)
+   {
+      nextView = MARKET_FROM_FLOOR;
+      hasEvent = true;
+
+      reason = "قیمت از کف عبور کرد اما داخل محدوده بسته شد";
+      uncertainty = "حرکت بعدی هنوز مشخص نیست";
+   }
+
+   // اگر هیچ‌یک از چهار رویداد رخ نداده باشد،
+   // نظریه درجا زدن برقرار می‌ماند.
+   // Close بالاتر یا پایین‌تر از کندل قبلی به‌تنهایی
+   // رویداد جدیدی ایجاد نمی‌کند.
+   if(!hasEvent)
+      return;
+
+   // فقط با وقوع یک رویداد جدید، وضعیت دفترچه را تغییر می‌دهیم.
+   if(!m_notebook.HasView() ||
+      nextView != m_notebook.View())
+   {
+      m_notebook.Revise(
+         nextView,
+         reason,
+         uncertainty,
+         candleTime
+      );
+
+      Print("[MarketObserver] ", m_notebook.Summary());
+   }
+}
 
    void CheckNewBox(CFractalGeometry &fractal)
    {
@@ -643,6 +676,19 @@ private:
 
       if(!BuildSharedZone(fractal))
          return;
+         
+         
+      // تشکیل گروه زمانی حداقل دو باکسی، نظریه درجا زدن را فعال می‌کند.
+      bool stuckTheory = (m_zoneBoxCount >= 2);
+      
+      if(m_notebook.SetStuckTheory(stuckTheory, m_zoneEnd))
+      {
+         if(stuckTheory)
+            Print("[MarketObserver] Theory: درجا می‌زنیم");
+         else
+            Print("[MarketObserver] Theory: درجا زدن غیرفعال شد");
+      }
+
 
       Print(
          "[MarketObserver] Shared time group: ",
@@ -671,9 +717,6 @@ public:
       m_lastCandle    = 0;
       m_lastBoxStart  = 0;
       m_lastBoxEnd    = 0;
-
-      m_lastClose     = 0;
-      m_hasLastClose  = false;
    }
 
    void Init(CFractalGeometry &fractal)
@@ -682,27 +725,37 @@ public:
    }
 
    // newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
-   void Update(
-      CFractalGeometry &fractal,
-      bool newCandle,
-      bool newBoxArrived
-   )
-   {
-      if(newBoxArrived)
-         CheckNewBox(fractal);
+void Update(
+   CFractalGeometry &fractal,
+   bool newCandle,
+   bool newBoxArrived
+)
+{
+   if(newBoxArrived)
+      CheckNewBox(fractal);
 
-      if(!newCandle)
-         return;
+   if(!newCandle)
+      return;
 
-      datetime t = iTime(_Symbol, PERIOD_H1, 1);
+   // تا زمانی که گروه همپوشان تشکیل نشده،
+   // کندل را مصرف نمی‌کنیم.
+   if(!m_zoneReady || m_zoneBoxCount < 2)
+      return;
 
-      if(t == 0 || t == m_lastCandle)
-         return;
+   datetime t = iTime(_Symbol, PERIOD_H1, 1);
 
-      m_lastCandle = t;
+   if(t == 0 || t == m_lastCandle)
+      return;
 
-      ObserveCandle(t);
-   }
+   // پس از آماده بودن گروه، کندل ثبت می‌شود.
+   m_lastCandle = t;
+
+   ObserveCandle(t);
+}
+
+
+
+
 
    MARKET_VIEW View()
    {
