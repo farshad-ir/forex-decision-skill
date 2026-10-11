@@ -93,11 +93,23 @@ public:
 
 
 
+
+
+
 #ifndef __BOX_BREAKOUT_MACHINE_MQH__
 #define __BOX_BREAKOUT_MACHINE_MQH__
 
 #include "FractalGeometry.mqh"
 
+enum BOX_EVENT
+{
+   BOX_EVENT_NONE = 0,
+   BOX_EVENT_UPPER_PENETRATION,
+   BOX_EVENT_LOWER_PENETRATION,
+   BOX_EVENT_UPPER_BREAKOUT,
+   BOX_EVENT_LOWER_BREAKOUT,
+   BOX_EVENT_CLOSE_INSIDE
+};
 
 enum BoxMachineState
 {
@@ -109,50 +121,33 @@ enum BoxMachineState
    BOX_MACHINE_LOWER_BREAKOUT
 };
 
-
 class CBoxBreakoutMachine
 {
 private:
-
-   FlatZone          m_box;
-   BoxMachineState   m_state;
-   bool              m_active;
-
-   datetime          m_lastCandleTime;
-
+   FlatZone        m_box;
+   BoxMachineState m_state;
+   bool            m_active;
+   datetime        m_lastCandleTime;
 
 public:
-
    CBoxBreakoutMachine()
    {
-      m_active        = false;
-      m_state         = BOX_MACHINE_OFF;
-      m_lastCandleTime = 0;
+      m_state          = BOX_MACHINE_OFF;
+      m_active          = false;
+      m_lastCandleTime  = 0;
    }
-
 
    void Start(FlatZone &box)
    {
-      m_box            = box;
-      m_state          = BOX_MACHINE_INSIDE;
-      m_active         = true;
-      m_lastCandleTime = 0;
-
-      Print("BOX MACHINE START");
-      Print("  High: ", m_box.highPrice);
-      Print("  Low : ", m_box.lowPrice);
-      Print("  End : ",
-            TimeToString(m_box.endTime));
+      m_box             = box;
+      m_state           = BOX_MACHINE_INSIDE;
+      m_active          = true;
+      m_lastCandleTime  = 0;
    }
-
 
    bool IsActive()
    {
       return m_active;
-   }
-   void PrintBoxID()
-   {
-      Print("[Box ", TimeToString(m_box.endTime, TIME_DATE|TIME_MINUTES), "] ");
    }
 
    BoxMachineState State()
@@ -160,78 +155,164 @@ public:
       return m_state;
    }
 
-
-void Feed(int shift)
-{
-   if(!m_active)
-      return;
-
-   datetime candleTime =
-      iTime(_Symbol, PERIOD_CURRENT, shift);
-
-   double high =
-      iHigh(_Symbol, PERIOD_CURRENT, shift);
-
-   double low =
-      iLow(_Symbol, PERIOD_CURRENT, shift);
-
-   double close =
-      iClose(_Symbol, PERIOD_CURRENT, shift);
-
-   string boxID =
-      TimeToString(m_box.endTime, TIME_DATE | TIME_MINUTES);
-
-   string candleID =
-      TimeToString(candleTime, TIME_DATE | TIME_MINUTES);
-
-   Print("[Box ", boxID,
-         "] Candle ", candleID,
-         " | H=", DoubleToString(high, _Digits),
-         " L=", DoubleToString(low, _Digits),
-         " C=", DoubleToString(close, _Digits));
-
-   if(high > m_box.highPrice && close <= m_box.highPrice)
+   datetime BoxEndTime()
    {
-      Print("[Box ", boxID, "] ",
-            candleID, " | UPPER PENETRATION");
+      return m_box.endTime;
    }
 
-   if(low < m_box.lowPrice && close >= m_box.lowPrice)
+   // فقط رویداد جدید را برمی‌گرداند.
+   // shift=1 یعنی آخرین کندل بسته‌شده.
+   BOX_EVENT Feed(int shift)
    {
-      Print("[Box ", boxID, "] ",
-            candleID, " | LOWER PENETRATION");
+      if(!m_active)
+         return BOX_EVENT_NONE;
+
+      datetime t = iTime(_Symbol, PERIOD_CURRENT, shift);
+
+      if(t == 0 || t == m_lastCandleTime)
+         return BOX_EVENT_NONE;
+
+      m_lastCandleTime = t;
+
+      double h = iHigh(_Symbol, PERIOD_CURRENT, shift);
+      double l = iLow(_Symbol, PERIOD_CURRENT, shift);
+      double c = iClose(_Symbol, PERIOD_CURRENT, shift);
+
+      BoxMachineState oldState = m_state;
+
+      // بسته‌شدن بیرون محدوده، بر نفوذ اولویت دارد.
+      if(c > m_box.highPrice)
+      {
+         m_state = BOX_MACHINE_UPPER_BREAKOUT;
+
+         if(oldState != m_state)
+            return BOX_EVENT_UPPER_BREAKOUT;
+
+         return BOX_EVENT_NONE;
+      }
+
+      if(c < m_box.lowPrice)
+      {
+         m_state = BOX_MACHINE_LOWER_BREAKOUT;
+
+         if(oldState != m_state)
+            return BOX_EVENT_LOWER_BREAKOUT;
+
+         return BOX_EVENT_NONE;
+      }
+
+      // قیمت داخل محدوده بسته شده است.
+      if(h > m_box.highPrice)
+      {
+         m_state = BOX_MACHINE_UPPER_TEST;
+
+         if(oldState != m_state)
+            return BOX_EVENT_UPPER_PENETRATION;
+
+         return BOX_EVENT_NONE;
+      }
+
+      if(l < m_box.lowPrice)
+      {
+         m_state = BOX_MACHINE_LOWER_TEST;
+
+         if(oldState != m_state)
+            return BOX_EVENT_LOWER_PENETRATION;
+
+         return BOX_EVENT_NONE;
+      }
+
+      // قیمت کاملاً درون باکس مانده است.
+      m_state = BOX_MACHINE_INSIDE;
+
+      if(oldState != BOX_MACHINE_INSIDE)
+         return BOX_EVENT_CLOSE_INSIDE;
+
+      return BOX_EVENT_NONE;
    }
-
-   if(close > m_box.highPrice)
-   {
-      Print("[Box ", boxID, "] ",
-            candleID, " | UPPER BREAKOUT");
-   }
-
-   if(close < m_box.lowPrice)
-   {
-      Print("[Box ", boxID, "] ",
-            candleID, " | LOWER BREAKOUT");
-   }
-
-   if(close >= m_box.lowPrice &&
-      close <= m_box.highPrice)
-   {
-      Print("[Box ", boxID, "] ",
-            candleID, " | CLOSE INSIDE BOX");
-   }
-}
-
-
-
-
 };
-
 
 #endif
 
 
+#ifndef __MARKET_NOTEBOOK_MQH__
+#define __MARKET_NOTEBOOK_MQH__
 
+enum MARKET_VIEW
+{
+   MARKET_BEARISH = -1,
+   MARKET_PULLBACK_OR_TURN = 0,
+   MARKET_BULLISH = 1
+};
+
+class CMarketNotebook
+{
+private:
+   MARKET_VIEW m_view;
+   string      m_reason;
+   string      m_uncertainty;
+   datetime    m_updated;
+
+public:
+   CMarketNotebook()
+   {
+      m_view        = MARKET_PULLBACK_OR_TURN;
+      m_reason      = "هنوز شواهد کافی نداریم";
+      m_uncertainty = "جهت بازار مشخص نشده است";
+      m_updated     = 0;
+   }
+
+   void Revise(
+      MARKET_VIEW view,
+      string reason,
+      string uncertainty,
+      datetime when
+   )
+   {
+      m_view        = view;
+      m_reason      = reason;
+      m_uncertainty = uncertainty;
+      m_updated     = when;
+   }
+
+   MARKET_VIEW View()
+   {
+      return m_view;
+   }
+
+   string Reason()
+   {
+      return m_reason;
+   }
+
+   string Uncertainty()
+   {
+      return m_uncertainty;
+   }
+
+   datetime UpdatedAt()
+   {
+      return m_updated;
+   }
+
+   string Summary()
+   {
+      string state = "پول‌بک یا چرخش";
+
+      if(m_view == MARKET_BEARISH)
+         state = "نزولی هستیم";
+      else if(m_view == MARKET_BULLISH)
+         state = "صعودی هستیم";
+
+      return "وضعیت: " + state
+         + "\nدلیل: " + m_reason
+         + "\nعامل تردید: " + m_uncertainty
+         + "\nزمان: "
+         + TimeToString(m_updated, TIME_DATE | TIME_MINUTES);
+   }
+};
+
+#endif
 
 
 
@@ -240,8 +321,6 @@ void Feed(int shift)
 #define __BOX_RELATION_REVIEW_MQH__
 
 #include "FractalGeometry.mqh"
-
-#define RELATION_MAX_BOXES 20
 
 enum BOX_RELATION
 {
@@ -257,170 +336,302 @@ enum BOX_RELATION
 class CBoxRelationReview
 {
 private:
-   FlatZone m_boxes[RELATION_MAX_BOXES];
-   int      m_boxCount;
-
    double Epsilon()
    {
       return _Point * 0.5;
    }
 
-   string RelationName(BOX_RELATION relation)
-   {
-      switch(relation)
-      {
-         case BOX_ABOVE:
-            return "ABOVE";
-
-         case BOX_BELOW:
-            return "BELOW";
-            
-         case BOX_EQUAL:
-            return "EQUAL";
-
-         case BOX_OVERLAP:
-            return "OVERLAP";
-
-         case BOX_NEW_INSIDE_OLD:
-            return "NEW_INSIDE_OLD";
-
-         case BOX_NEW_CONTAINS_OLD:
-            return "NEW_CONTAINS_OLD";
-
-         case BOX_TOUCH:
-            return "TOUCH";
-      }
-
-      return "UNKNOWN";
-   }
-
+public:
+   // newer = باکس جدیدتر
+   // older = باکس قدیمی‌تر
    BOX_RELATION Compare(
       FlatZone &newer,
       FlatZone &older,
       double &overlap,
-      double &overlapPercent)
+      double &overlapPercent
+   )
    {
       double eps = Epsilon();
 
-      double newHigh = newer.highPrice;
-      double newLow  = newer.lowPrice;
+      double nh = newer.highPrice;
+      double nl = newer.lowPrice;
+      double oh = older.highPrice;
+      double ol = older.lowPrice;
 
-      double oldHigh = older.highPrice;
-      double oldLow  = older.lowPrice;
+      double commonHigh = MathMin(nh, oh);
+      double commonLow  = MathMax(nl, ol);
 
-      double commonHigh = MathMin(newHigh, oldHigh);
-      double commonLow  = MathMax(newLow, oldLow);
+      overlap = MathMax(0.0, commonHigh - commonLow);
 
-      overlap = commonHigh - commonLow;
-
-      double newRange = newHigh - newLow;
-      double oldRange = oldHigh - oldLow;
-
+      double newRange = nh - nl;
+      double oldRange = oh - ol;
       double minRange = MathMin(newRange, oldRange);
 
       overlapPercent = 0.0;
 
       if(minRange > eps && overlap > eps)
-      {
          overlapPercent = 100.0 * overlap / minRange;
-      }
-      
-      if(MathAbs(newHigh - oldHigh) <= eps &&
-         MathAbs(newLow  -  oldLow) <= eps)
-      {
+
+      if(MathAbs(nh - oh) <= eps &&
+         MathAbs(nl - ol) <= eps)
          return BOX_EQUAL;
-      }
-      
-      if(newLow > oldHigh + eps)
+
+      if(nl > oh + eps)
          return BOX_ABOVE;
 
-      if(newHigh < oldLow - eps)
+      if(nh < ol - eps)
          return BOX_BELOW;
 
-      if(MathAbs(newLow - oldHigh) <= eps ||
-         MathAbs(newHigh - oldLow) <= eps)
-      {
+      if(MathAbs(nl - oh) <= eps ||
+         MathAbs(nh - ol) <= eps)
          return BOX_TOUCH;
-      }
 
-      if(newHigh <= oldHigh + eps &&
-         newLow  >= oldLow  - eps)
-      {
+      if(nh <= oh + eps && nl >= ol - eps)
          return BOX_NEW_INSIDE_OLD;
-      }
 
-      if(newHigh >= oldHigh - eps &&
-         newLow  <= oldLow  + eps)
-      {
+      if(nh >= oh - eps && nl <= ol + eps)
          return BOX_NEW_CONTAINS_OLD;
-      }
 
       return BOX_OVERLAP;
    }
 
-public:
-   CBoxRelationReview()
+   string Name(BOX_RELATION relation)
    {
-      m_boxCount = 0;
-   }
-
-   void LoadBoxes(CFractalGeometry &fractal)
-   {
-      int total = fractal.SmallBoxCount();
-
-      m_boxCount = MathMin(total, RELATION_MAX_BOXES);
-
-      for(int i = 0; i < m_boxCount; i++)
+      switch(relation)
       {
-         fractal.GetSmallBox(i, m_boxes[i]);
+         case BOX_ABOVE:           return "ABOVE";
+         case BOX_BELOW:           return "BELOW";
+         case BOX_EQUAL:           return "EQUAL";
+         case BOX_OVERLAP:         return "OVERLAP";
+         case BOX_NEW_INSIDE_OLD:  return "NEW_INSIDE_OLD";
+         case BOX_NEW_CONTAINS_OLD:return "NEW_CONTAINS_OLD";
+         case BOX_TOUCH:           return "TOUCH";
       }
 
-      Print("Relation review loaded: ", m_boxCount);
-   }
-
-   void Analyze()
-   {
-      if(m_boxCount < 2)
-      {
-         Print("Relation review: not enough boxes.");
-         return;
-      }
-
-      Print("========== BOX RELATIONS BEGIN ==========");
-
-      Print("Newest box index: 0");
-      Print("Oldest box index: ", m_boxCount - 1);
-
-      // FIFO: index 0 is newest.
-      // Compare every newer box with every older box.
-
-      int i = 0;
-      
-      for(int j = 1; j < m_boxCount; j++)
-      {
-         FlatZone newer = m_boxes[i];
-         FlatZone older = m_boxes[j];
-
-         double overlap = 0.0;
-         double overlapPercent = 0.0;
-
-         BOX_RELATION relation =
-            Compare(newer, older,
-                    overlap, overlapPercent);
-
-         Print(
-            "NEW[", i, "] vs OLD[", j, "]",
-            " | Relation=", RelationName(relation),
-            " | Overlap=",
-            DoubleToString(MathMax(0.0, overlap), _Digits),
-            " | OverlapPct=",
-            DoubleToString(overlapPercent, 1)
-         );
-      }
-      
-
-      Print("========== BOX RELATIONS END ==========");
+      return "UNKNOWN";
    }
 };
 
 #endif
+
+
+
+
+
+#ifndef __MARKET_OBSERVER_MQH__
+#define __MARKET_OBSERVER_MQH__
+
+#include "FractalGeometry.mqh"
+#include "BoxBreakoutMachine.mqh"
+
+
+#define MO_MAX_MACHINES 20
+
+class CMarketObserver
+{
+private:
+   CBoxBreakoutMachine m_machines[MO_MAX_MACHINES];
+   int                 m_machineCount;
+
+   CBoxRelationReview  m_relations;
+   CMarketNotebook     m_notebook;
+
+   datetime m_lastCandle;
+   datetime m_lastBoxStart;
+   datetime m_lastBoxEnd;
+
+   string RelationEvidence(
+      CFractalGeometry &fractal,
+      FlatZone &newBox
+   )
+   {
+      FlatZone oldBox;
+
+      if(!fractal.GetSmallBox(1, oldBox))
+         return "باکس قبلی برای مقایسه موجود نیست";
+
+      double overlap = 0.0;
+      double overlapPercent = 0.0;
+
+      BOX_RELATION r = m_relations.Compare(
+         newBox, oldBox, overlap, overlapPercent
+      );
+
+      return "رابطه باکس جدید با قبلی: "
+         + m_relations.Name(r)
+         + "؛ هم‌پوشانی="
+         + DoubleToString(overlapPercent, 1) + "%";
+   }
+
+   void AddNewBox(CFractalGeometry &fractal)
+   {
+      FlatZone box;
+
+      if(!fractal.GetSmallBox(0, box))
+         return;
+
+      if(box.startTime == m_lastBoxStart &&
+         box.endTime == m_lastBoxEnd)
+         return;
+
+      if(m_machineCount >= MO_MAX_MACHINES)
+      {
+         Print("[MarketObserver] Machine limit reached.");
+         return;
+      }
+
+      string relation = RelationEvidence(fractal, box);
+
+      m_machines[m_machineCount].Start(box);
+      m_machineCount++;
+
+      m_lastBoxStart = box.startTime;
+      m_lastBoxEnd   = box.endTime;
+
+      //Print("[MarketObserver] ", relation);
+      m_notebook.Revise(
+         m_notebook.View(),
+         m_notebook.Reason(),
+         relation,
+         TimeCurrent()
+      );
+   }
+
+   void ApplyEvents(datetime candleTime)
+   {
+      bool bullish = false;
+      bool bearish = false;
+      bool uncertain = false;
+
+      string bullReason = "";
+      string bearReason = "";
+      string uncertainReason = "";
+
+      for(int i = 0; i < m_machineCount; i++)
+      {
+         BOX_EVENT e = m_machines[i].Feed(1);
+
+         switch(e)
+         {
+            case BOX_EVENT_UPPER_BREAKOUT:
+               bullish = true;
+               bullReason = "بسته‌شدن قیمت بالای سقف یک باکس";
+               break;
+
+            case BOX_EVENT_LOWER_BREAKOUT:
+               bearish = true;
+               bearReason = "بسته‌شدن قیمت پایین کف یک باکس";
+               break;
+
+            case BOX_EVENT_UPPER_PENETRATION:
+               uncertain = true;
+               uncertainReason =
+                  "نفوذ به سقف باکس بدون بسته‌شدن بالای آن";
+               break;
+
+            case BOX_EVENT_LOWER_PENETRATION:
+               uncertain = true;
+               uncertainReason =
+                  "نفوذ به کف باکس بدون بسته‌شدن پایین آن";
+               break;
+
+            case BOX_EVENT_CLOSE_INSIDE:
+               uncertain = true;
+               uncertainReason =
+                  "قیمت پس از خروج یا آزمون به داخل باکس برگشته است";
+               break;
+
+            default:
+               break;
+         }
+      }
+
+      // شواهد مخالف هم‌زمان: نتیجهٔ جهت‌دار صادر نمی‌کنیم.
+      if(bullish && bearish)
+      {
+         m_notebook.Revise(
+            MARKET_PULLBACK_OR_TURN,
+            "باکس‌های مختلف شواهد شکست مخالف داده‌اند",
+            "جهت بازار تا روشن‌شدن تعارض مشخص نیست",
+            candleTime
+         );
+      }
+      else if(bullish)
+      {
+         m_notebook.Revise(
+            MARKET_BULLISH,
+            bullReason,
+            "شکست یک باکس به‌تنهایی اثبات‌کنندهٔ روند صعودی نیست",
+            candleTime
+         );
+      }
+      else if(bearish)
+      {
+         m_notebook.Revise(
+            MARKET_BEARISH,
+            bearReason,
+            "شکست یک باکس به‌تنهایی اثبات‌کنندهٔ روند نزولی نیست",
+            candleTime
+         );
+      }
+      else if(uncertain)
+      {
+         m_notebook.Revise(
+            MARKET_PULLBACK_OR_TURN,
+            uncertainReason,
+            "برای تشخیص پول‌بک از چرخش، ساختار قبلی نیز باید بررسی شود",
+            candleTime
+         );
+      }
+   }
+
+public:
+   CMarketObserver()
+   {
+      m_machineCount = 0;
+      m_lastCandle   = 0;
+      m_lastBoxStart = 0;
+      m_lastBoxEnd   = 0;
+   }
+
+   void Init(CFractalGeometry &fractal)
+   {
+      AddNewBox(fractal);
+   }
+
+   // newBoxArrived را خود اکسپرت با پولینگ تعیین می‌کند.
+   void Update(
+      CFractalGeometry &fractal,
+      bool newCandle,
+      bool newBoxArrived
+   )
+   {
+      if(newBoxArrived)
+         AddNewBox(fractal);
+
+      if(!newCandle)
+         return;
+
+      datetime t = iTime(_Symbol, PERIOD_CURRENT, 1);
+
+      if(t == 0 || t == m_lastCandle)
+         return;
+
+      m_lastCandle = t;
+
+      ApplyEvents(t);
+   }
+
+   MARKET_VIEW View()
+   {
+      return m_notebook.View();
+   }
+
+   string Summary()
+   {
+      return m_notebook.Summary();
+   }
+};
+
+#endif
+
