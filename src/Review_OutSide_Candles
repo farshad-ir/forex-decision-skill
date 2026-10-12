@@ -24,6 +24,11 @@ bool FindGapZone(CFractalGeometry &fractal)
 
    double eps = _Point * 0.5;
 
+   FlatZone gapBox;
+   bool foundGapBox = false;
+   int gapBoxIndex = -1;
+
+
    for(int i = 1; i < total; i++)
    {
       if(!fractal.GetSmallBox(i, box))
@@ -41,6 +46,11 @@ bool FindGapZone(CFractalGeometry &fractal)
       // اولین باکس فاقد همپوشانی؛ پایان جست‌وجو
       if(overlap <= eps)
       {
+
+         gapBox = box;
+         foundGapBox = true;
+         gapBoxIndex = i;
+   
          Print(
             "[MarketObserver] FIRST NON-OVERLAPPING BOX",
             " Index=", i,
