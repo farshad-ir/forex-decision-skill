@@ -1,475 +1,444 @@
-BOX High: 1.08764
-BOX EndTime: 2023.08.24 08:00
-Last Candle close: 1.07937
-Last Candle Time: 2023.08.25 23:00
-[MarketObserver] Theory: درجا می‌زنیم
-[MarketObserver] Shared OverLap group: 2 boxes; High=1.08764 Low=1.08557 Start=2023.08.23 20:00 End=2023.08.24 08:00
-[MarketObserver] رویداد بازار: به سمت پایین می‌رویم
-نظریه: درجا می‌زنیم
-دلیل: کندل پایین کف گروه زمانی بسته شد
-عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
-زمان رویداد: 2023.08.25 23:00
-زمان تغییر نظریه: 2023.08.24 08:00
-[MarketObserver] OVERLAP FINISHED: High=1.08764 Low=1.08557 End=2023.08.24 08:00 Candle=2023.08.25 23:00 Close=1.07937
-[MarketObserver] Theory: درجا زدن غیرفعال شد
-[ RiverCenter(Price), RiverWidth(pips): (1.07958,3.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07958,3.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07970,0.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07972,2.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07974,1.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07981,1.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07983,1.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07994,4.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08008,5.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08024,4.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08040,4.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08061,5.1) ]
-BOX High: 1.08125
-BOX EndTime: 2023.08.28 08:00
-Last Candle close: 1.08087
-Last Candle Time: 2023.08.28 10:00
-[MarketObserver] Shared OverLap group: 1 boxes; High=1.08125 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 21:00 Level=1.08125 Candle=2023.08.28 10:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08058,5.2) ]
-BOX High: 1.08208
-BOX EndTime: 2023.08.28 10:00
-Last Candle close: 1.08076
-Last Candle Time: 2023.08.28 12:00
-[MarketObserver] Theory: درجا می‌زنیم
-[MarketObserver] Shared OverLap group: 2 boxes; High=1.08208 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 10:00
-[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08208 Low=1.07913 OriginalEnd=2023.08.28 10:00 Candle=2023.08.28 12:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
-BOX High: 1.08208
-BOX EndTime: 2023.08.28 11:00
-Last Candle close: 1.08118
-Last Candle Time: 2023.08.28 13:00
-[MarketObserver] Shared OverLap group: 3 boxes; High=1.08208 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 11:00
-[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08208 Low=1.07913 OriginalEnd=2023.08.28 11:00 Candle=2023.08.28 13:00
-[MarketObserver] رویداد بازار: از سقف برگشتیم
-نظریه: درجا می‌زنیم
-دلیل: قیمت از سقف عبور کرد اما داخل محدوده بسته شد
-عامل تردید: حرکت بعدی هنوز مشخص نیست
-زمان رویداد: 2023.08.28 13:00
-زمان تغییر نظریه: 2023.08.28 10:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08067,2.8) ]
-BOX High: 1.08222
-BOX EndTime: 2023.08.28 13:00
-Last Candle close: 1.08102
-Last Candle Time: 2023.08.28 15:00
-[MarketObserver] Shared OverLap group: 4 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 13:00
-[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08222 Low=1.07913 OriginalEnd=2023.08.28 13:00 Candle=2023.08.28 15:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08072,1.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08070,1.6) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.7) ]
-BOX High: 1.08222
-BOX EndTime: 2023.08.28 17:00
-Last Candle close: 1.08075
-Last Candle Time: 2023.08.28 19:00
-[MarketObserver] Shared OverLap group: 6 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 17:00
-[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08222 Low=1.07913 OriginalEnd=2023.08.28 17:00 Candle=2023.08.28 19:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08083,1.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08096,2.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08110,3.8) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08121,4.4) ]
-[MarketObserver] رویداد بازار: به سمت بالا می‌رویم
-نظریه: درجا می‌زنیم
-دلیل: کندل بالای سقف گروه زمانی بسته شد
-عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
-زمان رویداد: 2023.08.29 01:00
-زمان تغییر نظریه: 2023.08.28 10:00
-[MarketObserver] OVERLAP FINISHED: High=1.08222 Low=1.07913 End=2023.08.28 17:00 Candle=2023.08.29 01:00 Close=1.08258
-[MarketObserver] Theory: درجا زدن غیرفعال شد
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 11:00 Level=1.08222 Candle=2023.08.29 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 10:00 Level=1.08222 Candle=2023.08.29 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 08:00 Level=1.08222 Candle=2023.08.29 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 02:00 Level=1.08208 Candle=2023.08.29 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 23:00 Level=1.08208 Candle=2023.08.29 01:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08144,5.4) ]
-BOX High: 1.08222
-BOX EndTime: 2023.08.29 00:00
-Last Candle close: 1.08255
-Last Candle Time: 2023.08.29 02:00
-[MarketObserver] Theory: درجا می‌زنیم
-[MarketObserver] Shared OverLap group: 7 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.29 00:00
-[MarketObserver] OVERLAP FINISHED: High=1.08222 Low=1.07913 End=2023.08.29 00:00 Candle=2023.08.29 02:00 Close=1.08255
-[MarketObserver] Theory: درجا زدن غیرفعال شد
-[ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 03:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 11:00 Level=1.08222 Candle=2023.08.29 03:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 10:00 Level=1.08222 Candle=2023.08.29 03:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 08:00 Level=1.08222 Candle=2023.08.29 03:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 02:00 Level=1.08208 Candle=2023.08.29 03:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 23:00 Level=1.08208 Candle=2023.08.29 03:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08176,6.5) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.29 04:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08205,7.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08229,9.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08251,9.3) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.29 07:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08254,8.1) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 11:00 Level=1.08222 Candle=2023.08.29 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 10:00 Level=1.08222 Candle=2023.08.29 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 08:00 Level=1.08222 Candle=2023.08.29 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 02:00 Level=1.08208 Candle=2023.08.29 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 23:00 Level=1.08208 Candle=2023.08.29 08:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08250,6.7) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 21:00 Level=1.08125 Candle=2023.08.29 09:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08229,5.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08228,5.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08209,4.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08195,5.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08171,7.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08150,8.7) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 13:00 Level=1.07988 Candle=2023.08.29 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 11:00 Level=1.07988 Candle=2023.08.29 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 10:00 Level=1.07993 Candle=2023.08.29 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 08:00 Level=1.07993 Candle=2023.08.29 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 02:00 Level=1.07934 Candle=2023.08.29 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.25 23:00 Level=1.07913 Candle=2023.08.29 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.25 21:00 Level=1.07913 Candle=2023.08.29 15:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08114,11.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08103,10.6) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 11:00 Level=1.08222 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 10:00 Level=1.08222 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 08:00 Level=1.08222 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 02:00 Level=1.08208 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 23:00 Level=1.08208 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 21:00 Level=1.08125 Candle=2023.08.29 17:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.29 17:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08126,8.8) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.08.29 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 20:00 Level=1.08557 Candle=2023.08.29 18:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.22 17:00 Level=1.08553 Candle=2023.08.29 18:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08179,7.3) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.29 19:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.08.29 19:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.08.29 19:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08242,11.5) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 20:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.29 20:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.29 20:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.29 20:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.08.29 20:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.08.29 20:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08315,19.3) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.29 21:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.08.29 21:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.08.29 21:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08380,23.3) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 19:00 Level=1.08902 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 00:00 Level=1.08841 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 20:00 Level=1.08841 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 17:00 Level=1.08841 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.17 04:00 Level=1.08867 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.17 01:00 Level=1.08867 Candle=2023.08.29 22:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.16 22:00 Level=1.08834 Candle=2023.08.29 22:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08464,27.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08528,28.6) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 00:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.30 00:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.30 00:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08576,31.6) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 00:00 Level=1.08841 Candle=2023.08.30 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 20:00 Level=1.08841 Candle=2023.08.30 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 17:00 Level=1.08841 Candle=2023.08.30 01:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.16 22:00 Level=1.08834 Candle=2023.08.30 01:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08623,31.2) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 02:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.30 02:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.30 02:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08638,28.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08651,23.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08663,18.0) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 05:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.08.30 05:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.08.30 05:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08671,12.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08681,9.8) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 07:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.08.30 07:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.08.30 07:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.30 07:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.08.30 07:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.08.30 07:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08675,8.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08672,9.0) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 09:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.30 09:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.30 09:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08677,8.6) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.08.30 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.08.30 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.30 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.08.30 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.08.30 10:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08672,7.9) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.08.30 11:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 20:00 Level=1.08557 Candle=2023.08.30 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.22 17:00 Level=1.08553 Candle=2023.08.30 11:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08672,7.1) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 19:00 Level=1.08902 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 00:00 Level=1.08841 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 20:00 Level=1.08841 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 17:00 Level=1.08841 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.17 04:00 Level=1.08867 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.17 01:00 Level=1.08867 Candle=2023.08.30 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.16 22:00 Level=1.08834 Candle=2023.08.30 12:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08703,4.9) ]
-BOX High: 1.0885
-BOX EndTime: 2023.08.30 11:00
-Last Candle close: 1.08903
-Last Candle Time: 2023.08.30 13:00
-[MarketObserver] Shared OverLap group: 1 boxes; High=1.08850 Low=1.08551 Start=2023.08.30 02:00 End=2023.08.30 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.30 13:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08731,6.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08731,6.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08741,5.7) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.30 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 19:00 Level=1.09045 Candle=2023.08.30 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 17:00 Level=1.09042 Candle=2023.08.30 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.30 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.15 00:00 Level=1.09175 Candle=2023.08.30 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.15 00:00 Level=1.09004 Candle=2023.08.30 15:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08811,13.2) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.11 20:00 Level=1.09262 Candle=2023.08.30 16:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08909,21.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08973,24.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09026,24.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09067,23.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09095,24.1) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.15 00:00 Level=1.09175 Candle=2023.08.30 21:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09133,26.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09150,22.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09159,15.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09173,11.4) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.11 20:00 Level=1.09262 Candle=2023.08.31 01:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09192,9.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09210,8.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09233,8.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09249,7.4) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.11 20:00 Level=1.09262 Candle=2023.08.31 05:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09247,7.0) ]
-BOX High: 1.09455
-BOX EndTime: 2023.08.31 04:00
-Last Candle close: 1.09203
-Last Candle Time: 2023.08.31 06:00
-[MarketObserver] Shared OverLap group: 1 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 04:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09231,5.7) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.30 16:00 Level=1.09167 Candle=2023.08.31 08:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.15 00:00 Level=1.09175 Candle=2023.08.31 08:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09223,4.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09198,4.6) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 19:00 Level=1.09045 Candle=2023.08.31 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 19:00 Level=1.08902 Candle=2023.08.31 10:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 17:00 Level=1.09042 Candle=2023.08.31 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.15 00:00 Level=1.09004 Candle=2023.08.31 10:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09155,8.8) ]
-BOX High: 1.09395
-BOX EndTime: 2023.08.31 09:00
-Last Candle close: 1.08779
-Last Candle Time: 2023.08.31 11:00
-[MarketObserver] Theory: درجا می‌زنیم
-[MarketObserver] Shared OverLap group: 2 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 09:00
-[MarketObserver] رویداد بازار: به سمت پایین می‌رویم
-نظریه: درجا می‌زنیم
-دلیل: کندل پایین کف گروه زمانی بسته شد
-عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
-زمان رویداد: 2023.08.31 11:00
-زمان تغییر نظریه: 2023.08.31 09:00
-[MarketObserver] OVERLAP FINISHED: High=1.09455 Low=1.09167 End=2023.08.31 09:00 Candle=2023.08.31 11:00 Close=1.08779
-[MarketObserver] Theory: درجا زدن غیرفعال شد
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 00:00 Level=1.08841 Candle=2023.08.31 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 20:00 Level=1.08841 Candle=2023.08.31 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 17:00 Level=1.08841 Candle=2023.08.31 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.17 04:00 Level=1.08867 Candle=2023.08.31 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.17 01:00 Level=1.08867 Candle=2023.08.31 11:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.16 22:00 Level=1.08834 Candle=2023.08.31 11:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09095,14.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.09095,14.0) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.31 12:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.31 12:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.31 12:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.31 12:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.08.31 12:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.08.31 12:00
-[ RiverCenter(Price), RiverWidth(pips): (1.09040,17.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08989,20.0) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.31 14:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.08.31 14:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.08.31 14:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08937,21.6) ]
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 00:00 Level=1.08841 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 20:00 Level=1.08841 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.18 17:00 Level=1.08841 Candle=2023.08.31 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.16 22:00 Level=1.08834 Candle=2023.08.31 15:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08898,21.6) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.30 02:00 Level=1.08551 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 20:00 Level=1.08557 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.22 17:00 Level=1.08553 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.08.31 16:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.08.31 16:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08828,24.1) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08778,23.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08714,23.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08659,23.2) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08625,20.6) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08591,18.6) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08555,17.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08530,15.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08506,14.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08492,12.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08482,10.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08462,9.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08459,8.6) ]
-BOX High: 1.08541
-BOX EndTime: 2023.09.01 03:00
-Last Candle close: 1.08439
-Last Candle Time: 2023.09.01 05:00
-[MarketObserver] Shared OverLap group: 1 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 03:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08451,7.6) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08451,7.6) ]
-BOX High: 1.08541
-BOX EndTime: 2023.09.01 04:00
-Last Candle close: 1.08417
-Last Candle Time: 2023.09.01 06:00
-[MarketObserver] Theory: درجا می‌زنیم
-[MarketObserver] Shared OverLap group: 2 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 04:00
-[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08541 Low=1.08352 OriginalEnd=2023.09.01 04:00 Candle=2023.09.01 06:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08445,6.8) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08445,6.8) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08446,5.7) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08449,4.8) ]
-[MarketObserver] رویداد بازار: از کف برگشتیم
-نظریه: درجا می‌زنیم
-دلیل: قیمت از کف عبور کرد اما داخل محدوده بسته شد
-عامل تردید: حرکت بعدی هنوز مشخص نیست
-زمان رویداد: 2023.09.01 09:00
-زمان تغییر نظریه: 2023.09.01 04:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08457,4.2) ]
-[MarketObserver] رویداد بازار: به سمت بالا می‌رویم
-نظریه: درجا می‌زنیم
-دلیل: کندل بالای سقف گروه زمانی بسته شد
-عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
-زمان رویداد: 2023.09.01 10:00
-زمان تغییر نظریه: 2023.09.01 04:00
-[MarketObserver] OVERLAP FINISHED: High=1.08541 Low=1.08352 End=2023.09.01 04:00 Candle=2023.09.01 10:00 Close=1.08559
-[MarketObserver] Theory: درجا زدن غیرفعال شد
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.31 21:00 Level=1.08541 Candle=2023.09.01 10:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.31 19:00 Level=1.08541 Candle=2023.09.01 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.30 02:00 Level=1.08551 Candle=2023.09.01 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.09.01 10:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 20:00 Level=1.08557 Candle=2023.09.01 10:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.22 17:00 Level=1.08553 Candle=2023.09.01 10:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08474,4.7) ]
-BOX High: 1.08541
-BOX EndTime: 2023.09.01 09:00
-Last Candle close: 1.08485
-Last Candle Time: 2023.09.01 11:00
-[MarketObserver] Theory: درجا می‌زنیم
-[MarketObserver] Shared OverLap group: 3 boxes; High=1.08541 Low=1.08284 Start=2023.08.31 19:00 End=2023.09.01 09:00
-[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08541 Low=1.08284 OriginalEnd=2023.09.01 09:00 Candle=2023.09.01 11:00
-[MarketObserver] رویداد بازار: از سقف برگشتیم
-نظریه: درجا می‌زنیم
-دلیل: قیمت از سقف عبور کرد اما داخل محدوده بسته شد
-عامل تردید: حرکت بعدی هنوز مشخص نیست
-زمان رویداد: 2023.09.01 11:00
-زمان تغییر نظریه: 2023.09.01 09:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08475,4.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08475,4.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08478,4.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08477,3.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08457,2.6) ]
-[MarketObserver] رویداد بازار: به سمت بالا می‌رویم
-نظریه: درجا می‌زنیم
-دلیل: کندل بالای سقف گروه زمانی بسته شد
-عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
-زمان رویداد: 2023.09.01 15:00
-زمان تغییر نظریه: 2023.09.01 09:00
-[MarketObserver] OVERLAP FINISHED: High=1.08541 Low=1.08284 End=2023.09.01 09:00 Candle=2023.09.01 15:00 Close=1.08639
-[MarketObserver] Theory: درجا زدن غیرفعال شد
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.09.01 00:00 Level=1.08541 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.31 21:00 Level=1.08541 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.31 21:00 Level=1.08362 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.31 19:00 Level=1.08541 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.31 19:00 Level=1.08352 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.30 02:00 Level=1.08551 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 20:00 Level=1.08557 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.22 17:00 Level=1.08553 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 17:00 Level=1.08753 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 20:00 Level=1.08646 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.18 17:00 Level=1.08646 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 01:00 Level=1.08617 Candle=2023.09.01 15:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.16 22:00 Level=1.08617 Candle=2023.09.01 15:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08485,3.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08492,2.9) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.09.01 00:00 Level=1.08284 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.31 21:00 Level=1.08362 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.31 19:00 Level=1.08352 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 11:00 Level=1.08222 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 10:00 Level=1.08222 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 08:00 Level=1.08222 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 02:00 Level=1.08208 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 23:00 Level=1.08208 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 21:00 Level=1.08125 Candle=2023.09.01 17:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.09.01 17:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08429,5.5) ]
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 13:00 Level=1.07988 Candle=2023.09.01 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 11:00 Level=1.07988 Candle=2023.09.01 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 10:00 Level=1.07993 Candle=2023.09.01 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 08:00 Level=1.07993 Candle=2023.09.01 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 02:00 Level=1.07934 Candle=2023.09.01 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.25 23:00 Level=1.07913 Candle=2023.09.01 18:00
-[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.25 21:00 Level=1.07913 Candle=2023.09.01 18:00
-[ RiverCenter(Price), RiverWidth(pips): (1.08344,14.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08266,20.8) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08199,24.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08135,27.0) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.08060,28.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07992,32.8) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07945,31.9) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07910,28.4) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07882,24.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07861,20.3) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07843,16.6) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07835,13.5) ]
-[ RiverCenter(Price), RiverWidth(pips): (1.07829,11.1) ]
+2023.08.28 00:00:00   BOX High: 1.08764
+2023.08.28 00:00:00   BOX EndTime: 2023.08.24 08:00
+2023.08.28 00:00:00   Last Candle close: 1.07937
+2023.08.28 00:00:00   Last Candle Time: 2023.08.25 23:00
+2023.08.28 00:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.08.28 00:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.08764 Low=1.08557 Start=2023.08.23 20:00 End=2023.08.24 08:00
+2023.08.28 00:00:00   [MarketObserver] رویداد بازار: به سمت پایین می‌رویم
+2023.08.28 00:00:00   نظریه: درجا می‌زنیم
+2023.08.28 00:00:00   دلیل: کندل پایین کف گروه زمانی بسته شد
+2023.08.28 00:00:00   عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
+2023.08.28 00:00:00   زمان رویداد: 2023.08.25 23:00
+2023.08.28 00:00:00   زمان تغییر نظریه: 2023.08.24 08:00
+2023.08.28 00:00:00   [MarketObserver] OVERLAP FINISHED: High=1.08764 Low=1.08557 End=2023.08.24 08:00 Candle=2023.08.25 23:00 Close=1.07937
+2023.08.28 00:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.08.28 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07958,3.7) ]
+2023.08.28 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07958,3.7) ]
+2023.08.28 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07970,0.5) ]
+2023.08.28 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07972,2.0) ]
+2023.08.28 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07974,1.9) ]
+2023.08.28 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07981,1.7) ]
+2023.08.28 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07983,1.3) ]
+2023.08.28 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07994,4.0) ]
+2023.08.28 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08008,5.9) ]
+2023.08.28 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08024,4.3) ]
+2023.08.28 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08040,4.0) ]
+2023.08.28 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08061,5.1) ]
+2023.08.28 11:00:00   BOX High: 1.08125
+2023.08.28 11:00:00   BOX EndTime: 2023.08.28 08:00
+2023.08.28 11:00:00   Last Candle close: 1.08087
+2023.08.28 11:00:00   Last Candle Time: 2023.08.28 10:00
+2023.08.28 11:00:00   [TheoryExperiment] THEORY SELECTED
+2023.08.28 11:00:00   Theory=RANDOM_BULLISH
+2023.08.28 11:00:00   Time=2023.08.28 08:00
+2023.08.28 11:00:00   ReferenceHigh=1.08125
+2023.08.28 11:00:00   ReferenceLow=1.07913
+2023.08.28 11:00:00   Evidence begins after candle=2023.08.28 10:00
+2023.08.28 11:00:00   [MarketObserver] Shared OverLap group: 1 boxes; High=1.08125 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 08:00
+2023.08.28 11:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 21:00 Level=1.08125 Candle=2023.08.28 10:00
+2023.08.28 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
+2023.08.28 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
+2023.08.28 12:00:00   [TheoryExperiment] EVIDENCE
+2023.08.28 12:00:00   Theory=RANDOM_BULLISH
+2023.08.28 12:00:00   Assessment=INCONCLUSIVE
+2023.08.28 12:00:00   Reason=Close inside reference zone
+2023.08.28 12:00:00   Candle=2023.08.28 11:00
+2023.08.28 12:00:00   Close=1.08005
+2023.08.28 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08058,5.2) ]
+2023.08.28 13:00:00   BOX High: 1.08208
+2023.08.28 13:00:00   BOX EndTime: 2023.08.28 10:00
+2023.08.28 13:00:00   Last Candle close: 1.08076
+2023.08.28 13:00:00   Last Candle Time: 2023.08.28 12:00
+2023.08.28 13:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.08.28 13:00:00   Reason=STUCK_RESUMED
+2023.08.28 13:00:00   Theory=RANDOM_BULLISH
+2023.08.28 13:00:00   Time=2023.08.28 10:00
+2023.08.28 13:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.08.28 13:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.08208 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 10:00
+2023.08.28 13:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08208 Low=1.07913 OriginalEnd=2023.08.28 10:00 Candle=2023.08.28 12:00
+2023.08.28 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
+2023.08.28 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
+2023.08.28 14:00:00   BOX High: 1.08208
+2023.08.28 14:00:00   BOX EndTime: 2023.08.28 11:00
+2023.08.28 14:00:00   Last Candle close: 1.08118
+2023.08.28 14:00:00   Last Candle Time: 2023.08.28 13:00
+2023.08.28 14:00:00   [MarketObserver] Shared OverLap group: 3 boxes; High=1.08208 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 11:00
+2023.08.28 14:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08208 Low=1.07913 OriginalEnd=2023.08.28 11:00 Candle=2023.08.28 13:00
+2023.08.28 14:00:00   [MarketObserver] رویداد بازار: از سقف برگشتیم
+2023.08.28 14:00:00   نظریه: درجا می‌زنیم
+2023.08.28 14:00:00   دلیل: قیمت از سقف عبور کرد اما داخل محدوده بسته شد
+2023.08.28 14:00:00   عامل تردید: حرکت بعدی هنوز مشخص نیست
+2023.08.28 14:00:00   زمان رویداد: 2023.08.28 13:00
+2023.08.28 14:00:00   زمان تغییر نظریه: 2023.08.28 10:00
+2023.08.28 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
+2023.08.28 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
+2023.08.28 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08067,2.8) ]
+2023.08.28 16:00:00   BOX High: 1.08222
+2023.08.28 16:00:00   BOX EndTime: 2023.08.28 13:00
+2023.08.28 16:00:00   Last Candle close: 1.08102
+2023.08.28 16:00:00   Last Candle Time: 2023.08.28 15:00
+2023.08.28 16:00:00   [MarketObserver] Shared OverLap group: 4 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 13:00
+2023.08.28 16:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08222 Low=1.07913 OriginalEnd=2023.08.28 13:00 Candle=2023.08.28 15:00
+2023.08.28 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
+2023.08.28 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
+2023.08.28 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08072,1.3) ]
+2023.08.28 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08070,1.6) ]
+2023.08.28 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08076,1.7) ]
+2023.08.28 20:00:00   BOX High: 1.08222
+2023.08.28 20:00:00   BOX EndTime: 2023.08.28 17:00
+2023.08.28 20:00:00   Last Candle close: 1.08075
+2023.08.28 20:00:00   Last Candle Time: 2023.08.28 19:00
+2023.08.28 20:00:00   [MarketObserver] Shared OverLap group: 6 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 17:00
+2023.08.28 20:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08222 Low=1.07913 OriginalEnd=2023.08.28 17:00 Candle=2023.08.28 19:00
+2023.08.28 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
+2023.08.28 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
+2023.08.28 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08076,1.2) ]
+2023.08.28 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08083,1.2) ]
+2023.08.28 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08096,2.1) ]
+2023.08.29 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08110,3.8) ]
+2023.08.29 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08121,4.4) ]
+2023.08.29 02:00:00   [MarketObserver] رویداد بازار: به سمت بالا می‌رویم
+2023.08.29 02:00:00   نظریه: درجا می‌زنیم
+2023.08.29 02:00:00   دلیل: کندل بالای سقف گروه زمانی بسته شد
+2023.08.29 02:00:00   عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
+2023.08.29 02:00:00   زمان رویداد: 2023.08.29 01:00
+2023.08.29 02:00:00   زمان تغییر نظریه: 2023.08.28 10:00
+2023.08.29 02:00:00   [MarketObserver] OVERLAP FINISHED: High=1.08222 Low=1.07913 End=2023.08.28 17:00 Candle=2023.08.29 01:00 Close=1.08258
+2023.08.29 02:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.08.29 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08144,5.4) ]
+2023.08.29 03:00:00   BOX High: 1.08222
+2023.08.29 03:00:00   BOX EndTime: 2023.08.29 00:00
+2023.08.29 03:00:00   Last Candle close: 1.08255
+2023.08.29 03:00:00   Last Candle Time: 2023.08.29 02:00
+2023.08.29 03:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.08.29 03:00:00   [MarketObserver] Shared OverLap group: 7 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.29 00:00
+2023.08.29 03:00:00   [MarketObserver] OVERLAP FINISHED: High=1.08222 Low=1.07913 End=2023.08.29 00:00 Candle=2023.08.29 02:00 Close=1.08255
+2023.08.29 03:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.08.29 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
+2023.08.29 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
+2023.08.29 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08176,6.5) ]
+2023.08.29 05:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.29 04:00
+2023.08.29 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08205,7.9) ]
+2023.08.29 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08229,9.0) ]
+2023.08.29 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08251,9.3) ]
+2023.08.29 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08254,8.1) ]
+2023.08.29 09:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 08:00
+2023.08.29 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08250,6.7) ]
+2023.08.29 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08229,5.4) ]
+2023.08.29 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08228,5.0) ]
+2023.08.29 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08209,4.3) ]
+2023.08.29 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08195,5.3) ]
+2023.08.29 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08171,7.1) ]
+2023.08.29 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08150,8.7) ]
+2023.08.29 16:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 13:00 Level=1.07988 Candle=2023.08.29 15:00
+2023.08.29 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08114,11.3) ]
+2023.08.29 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08103,10.6) ]
+2023.08.29 18:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 17:00
+2023.08.29 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08126,8.8) ]
+2023.08.29 19:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.08.29 18:00
+2023.08.29 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08179,7.3) ]
+2023.08.29 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08242,11.5) ]
+2023.08.29 21:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 20:00
+2023.08.29 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08315,19.3) ]
+2023.08.29 22:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.29 21:00
+2023.08.29 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08380,23.3) ]
+2023.08.29 23:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 22:00
+2023.08.29 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08464,27.7) ]
+2023.08.30 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08528,28.6) ]
+2023.08.30 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08576,31.6) ]
+2023.08.30 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08623,31.2) ]
+2023.08.30 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08638,28.1) ]
+2023.08.30 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08651,23.1) ]
+2023.08.30 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08663,18.0) ]
+2023.08.30 06:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 05:00
+2023.08.30 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08671,12.3) ]
+2023.08.30 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08681,9.8) ]
+2023.08.30 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08675,8.4) ]
+2023.08.30 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08672,9.0) ]
+2023.08.30 10:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 09:00
+2023.08.30 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08677,8.6) ]
+2023.08.30 11:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 10:00
+2023.08.30 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08672,7.9) ]
+2023.08.30 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08672,7.1) ]
+2023.08.30 13:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 12:00
+2023.08.30 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08703,4.9) ]
+2023.08.30 14:00:00   BOX High: 1.0885
+2023.08.30 14:00:00   BOX EndTime: 2023.08.30 11:00
+2023.08.30 14:00:00   Last Candle close: 1.08903
+2023.08.30 14:00:00   Last Candle Time: 2023.08.30 13:00
+2023.08.30 14:00:00   [TheoryExperiment] THEORY SELECTED
+2023.08.30 14:00:00   Theory=RANDOM_BULLISH
+2023.08.30 14:00:00   Time=2023.08.30 11:00
+2023.08.30 14:00:00   ReferenceHigh=1.08850
+2023.08.30 14:00:00   ReferenceLow=1.08551
+2023.08.30 14:00:00   Evidence begins after candle=2023.08.30 13:00
+2023.08.30 14:00:00   [MarketObserver] Shared OverLap group: 1 boxes; High=1.08850 Low=1.08551 Start=2023.08.30 02:00 End=2023.08.30 11:00
+2023.08.30 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08731,6.3) ]
+2023.08.30 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08731,6.3) ]
+2023.08.30 15:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 15:00:00   Theory=RANDOM_BULLISH
+2023.08.30 15:00:00   Assessment=INCONCLUSIVE
+2023.08.30 15:00:00   Reason=Close inside reference zone
+2023.08.30 15:00:00   Candle=2023.08.30 14:00
+2023.08.30 15:00:00   Close=1.08787
+2023.08.30 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08741,5.7) ]
+2023.08.30 16:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 16:00:00   Theory=RANDOM_BULLISH
+2023.08.30 16:00:00   Assessment=SUPPORT
+2023.08.30 16:00:00   Reason=Close above reference high
+2023.08.30 16:00:00   Candle=2023.08.30 15:00
+2023.08.30 16:00:00   Close=1.09211
+2023.08.30 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08811,13.2) ]
+2023.08.30 17:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.11 20:00 Level=1.09262 Candle=2023.08.30 16:00
+2023.08.30 17:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 17:00:00   Theory=RANDOM_BULLISH
+2023.08.30 17:00:00   Assessment=SUPPORT
+2023.08.30 17:00:00   Reason=Close above reference high
+2023.08.30 17:00:00   Candle=2023.08.30 16:00
+2023.08.30 17:00:00   Close=1.09448
+2023.08.30 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08909,21.9) ]
+2023.08.30 18:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 18:00:00   Theory=RANDOM_BULLISH
+2023.08.30 18:00:00   Assessment=SUPPORT
+2023.08.30 18:00:00   Reason=Close above reference high
+2023.08.30 18:00:00   Candle=2023.08.30 17:00
+2023.08.30 18:00:00   Close=1.09288
+2023.08.30 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08973,24.3) ]
+2023.08.30 19:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 19:00:00   Theory=RANDOM_BULLISH
+2023.08.30 19:00:00   Assessment=SUPPORT
+2023.08.30 19:00:00   Reason=Close above reference high
+2023.08.30 19:00:00   Candle=2023.08.30 18:00
+2023.08.30 19:00:00   Close=1.09257
+2023.08.30 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09026,24.4) ]
+2023.08.30 20:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 20:00:00   Theory=RANDOM_BULLISH
+2023.08.30 20:00:00   Assessment=SUPPORT
+2023.08.30 20:00:00   Reason=Close above reference high
+2023.08.30 20:00:00   Candle=2023.08.30 19:00
+2023.08.30 20:00:00   Close=1.09258
+2023.08.30 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09067,23.5) ]
+2023.08.30 21:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 21:00:00   Theory=RANDOM_BULLISH
+2023.08.30 21:00:00   Assessment=SUPPORT
+2023.08.30 21:00:00   Reason=Close above reference high
+2023.08.30 21:00:00   Candle=2023.08.30 20:00
+2023.08.30 21:00:00   Close=1.09203
+2023.08.30 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09095,24.1) ]
+2023.08.30 22:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 22:00:00   Theory=RANDOM_BULLISH
+2023.08.30 22:00:00   Assessment=SUPPORT
+2023.08.30 22:00:00   Reason=Close above reference high
+2023.08.30 22:00:00   Candle=2023.08.30 21:00
+2023.08.30 22:00:00   Close=1.09234
+2023.08.30 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09133,26.0) ]
+2023.08.30 23:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 23:00:00   Theory=RANDOM_BULLISH
+2023.08.30 23:00:00   Assessment=SUPPORT
+2023.08.30 23:00:00   Reason=Close above reference high
+2023.08.30 23:00:00   Candle=2023.08.30 22:00
+2023.08.30 23:00:00   Close=1.09216
+2023.08.30 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09150,22.2) ]
+2023.08.31 00:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 00:00:00   Theory=RANDOM_BULLISH
+2023.08.31 00:00:00   Assessment=SUPPORT
+2023.08.31 00:00:00   Reason=Close above reference high
+2023.08.31 00:00:00   Candle=2023.08.30 23:00
+2023.08.31 00:00:00   Close=1.09229
+2023.08.31 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09159,15.2) ]
+2023.08.31 01:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 01:00:00   Theory=RANDOM_BULLISH
+2023.08.31 01:00:00   Assessment=SUPPORT
+2023.08.31 01:00:00   Reason=Close above reference high
+2023.08.31 01:00:00   Candle=2023.08.31 00:00
+2023.08.31 01:00:00   Close=1.09227
+2023.08.31 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09173,11.4) ]
+2023.08.31 02:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 02:00:00   Theory=RANDOM_BULLISH
+2023.08.31 02:00:00   Assessment=SUPPORT
+2023.08.31 02:00:00   Reason=Close above reference high
+2023.08.31 02:00:00   Candle=2023.08.31 01:00
+2023.08.31 02:00:00   Close=1.09265
+2023.08.31 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09192,9.5) ]
+2023.08.31 03:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 03:00:00   Theory=RANDOM_BULLISH
+2023.08.31 03:00:00   Assessment=SUPPORT
+2023.08.31 03:00:00   Reason=Close above reference high
+2023.08.31 03:00:00   Candle=2023.08.31 02:00
+2023.08.31 03:00:00   Close=1.09293
+2023.08.31 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09210,8.2) ]
+2023.08.31 04:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 04:00:00   Theory=RANDOM_BULLISH
+2023.08.31 04:00:00   Assessment=SUPPORT
+2023.08.31 04:00:00   Reason=Close above reference high
+2023.08.31 04:00:00   Candle=2023.08.31 03:00
+2023.08.31 04:00:00   Close=1.09330
+2023.08.31 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09233,8.2) ]
+2023.08.31 05:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 05:00:00   Theory=RANDOM_BULLISH
+2023.08.31 05:00:00   Assessment=SUPPORT
+2023.08.31 05:00:00   Reason=Close above reference high
+2023.08.31 05:00:00   Candle=2023.08.31 04:00
+2023.08.31 05:00:00   Close=1.09288
+2023.08.31 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09249,7.4) ]
+2023.08.31 06:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 06:00:00   Theory=RANDOM_BULLISH
+2023.08.31 06:00:00   Assessment=SUPPORT
+2023.08.31 06:00:00   Reason=Close above reference high
+2023.08.31 06:00:00   Candle=2023.08.31 05:00
+2023.08.31 06:00:00   Close=1.09217
+2023.08.31 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09247,7.0) ]
+2023.08.31 07:00:00   BOX High: 1.09455
+2023.08.31 07:00:00   BOX EndTime: 2023.08.31 04:00
+2023.08.31 07:00:00   Last Candle close: 1.09203
+2023.08.31 07:00:00   Last Candle Time: 2023.08.31 06:00
+2023.08.31 07:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.08.31 07:00:00   Reason=NEW_BOX_ARRIVED
+2023.08.31 07:00:00   Theory=RANDOM_BULLISH
+2023.08.31 07:00:00   Time=2023.08.31 04:00
+2023.08.31 07:00:00   [TheoryExperiment] THEORY SELECTED
+2023.08.31 07:00:00   Theory=RANDOM_BEARISH
+2023.08.31 07:00:00   Time=2023.08.31 04:00
+2023.08.31 07:00:00   ReferenceHigh=1.09455
+2023.08.31 07:00:00   ReferenceLow=1.09167
+2023.08.31 07:00:00   Evidence begins after candle=2023.08.31 06:00
+2023.08.31 07:00:00   [MarketObserver] Shared OverLap group: 1 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 04:00
+2023.08.31 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
+2023.08.31 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
+2023.08.31 08:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 08:00:00   Theory=RANDOM_BEARISH
+2023.08.31 08:00:00   Assessment=INCONCLUSIVE
+2023.08.31 08:00:00   Reason=Close inside reference zone
+2023.08.31 08:00:00   Candle=2023.08.31 07:00
+2023.08.31 08:00:00   Close=1.09185
+2023.08.31 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09231,5.7) ]
+2023.08.31 09:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 09:00:00   Theory=RANDOM_BEARISH
+2023.08.31 09:00:00   Assessment=INCONCLUSIVE
+2023.08.31 09:00:00   Reason=Close inside reference zone
+2023.08.31 09:00:00   Candle=2023.08.31 08:00
+2023.08.31 09:00:00   Close=1.09178
+2023.08.31 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09223,4.7) ]
+2023.08.31 10:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 10:00:00   Theory=RANDOM_BEARISH
+2023.08.31 10:00:00   Assessment=SUPPORT
+2023.08.31 10:00:00   Reason=Close below reference low
+2023.08.31 10:00:00   Candle=2023.08.31 09:00
+2023.08.31 10:00:00   Close=1.09072
+2023.08.31 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09198,4.6) ]
+2023.08.31 11:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 19:00 Level=1.09045 Candle=2023.08.31 10:00
+2023.08.31 11:00:00   [TheoryExperiment] EVIDENCE
+2023.08.31 11:00:00   Theory=RANDOM_BEARISH
+2023.08.31 11:00:00   Assessment=SUPPORT
+2023.08.31 11:00:00   Reason=Close below reference low
+2023.08.31 11:00:00   Candle=2023.08.31 10:00
+2023.08.31 11:00:00   Close=1.08927
+2023.08.31 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09155,8.8) ]
+2023.08.31 12:00:00   BOX High: 1.09395
+2023.08.31 12:00:00   BOX EndTime: 2023.08.31 09:00
+2023.08.31 12:00:00   Last Candle close: 1.08779
+2023.08.31 12:00:00   Last Candle Time: 2023.08.31 11:00
+2023.08.31 12:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.08.31 12:00:00   Reason=STUCK_RESUMED
+2023.08.31 12:00:00   Theory=RANDOM_BEARISH
+2023.08.31 12:00:00   Time=2023.08.31 09:00
+2023.08.31 12:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.08.31 12:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 09:00
+2023.08.31 12:00:00   [MarketObserver] رویداد بازار: به سمت پایین می‌رویم
+2023.08.31 12:00:00   نظریه: درجا می‌زنیم
+2023.08.31 12:00:00   دلیل: کندل پایین کف گروه زمانی بسته شد
+2023.08.31 12:00:00   عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
+2023.08.31 12:00:00   زمان رویداد: 2023.08.31 11:00
+2023.08.31 12:00:00   زمان تغییر نظریه: 2023.08.31 09:00
+2023.08.31 12:00:00   [MarketObserver] OVERLAP FINISHED: High=1.09455 Low=1.09167 End=2023.08.31 09:00 Candle=2023.08.31 11:00 Close=1.08779
+2023.08.31 12:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.08.31 12:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 11:00
+2023.08.31 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09095,14.0) ]
+2023.08.31 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09095,14.0) ]
+2023.08.31 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09040,17.9) ]
+2023.08.31 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08989,20.0) ]
+2023.08.31 15:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.31 14:00
+2023.08.31 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08937,21.6) ]
+2023.08.31 16:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 15:00
+2023.08.31 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08898,21.6) ]
+2023.08.31 17:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.30 02:00 Level=1.08551 Candle=2023.08.31 16:00
+2023.08.31 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08828,24.1) ]
+2023.08.31 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08778,23.9) ]
+2023.08.31 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08714,23.4) ]
+2023.08.31 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08659,23.2) ]
+2023.08.31 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08625,20.6) ]
+2023.08.31 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08591,18.6) ]
+2023.08.31 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08555,17.7) ]
+2023.09.01 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08530,15.5) ]
+2023.09.01 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08506,14.9) ]
+2023.09.01 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08492,12.3) ]
+2023.09.01 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08482,10.0) ]
+2023.09.01 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08462,9.4) ]
+2023.09.01 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08459,8.6) ]
+2023.09.01 06:00:00   BOX High: 1.08541
+2023.09.01 06:00:00   BOX EndTime: 2023.09.01 03:00
+2023.09.01 06:00:00   Last Candle close: 1.08439
+2023.09.01 06:00:00   Last Candle Time: 2023.09.01 05:00
+2023.09.01 06:00:00   [TheoryExperiment] THEORY SELECTED
+2023.09.01 06:00:00   Theory=RANDOM_BULLISH
+2023.09.01 06:00:00   Time=2023.09.01 03:00
+2023.09.01 06:00:00   ReferenceHigh=1.08541
+2023.09.01 06:00:00   ReferenceLow=1.08352
+2023.09.01 06:00:00   Evidence begins after candle=2023.09.01 05:00
+2023.09.01 06:00:00   [MarketObserver] Shared OverLap group: 1 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 03:00
+2023.09.01 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08451,7.6) ]
+2023.09.01 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08451,7.6) ]
+2023.09.01 07:00:00   BOX High: 1.08541
+2023.09.01 07:00:00   BOX EndTime: 2023.09.01 04:00
+2023.09.01 07:00:00   Last Candle close: 1.08417
+2023.09.01 07:00:00   Last Candle Time: 2023.09.01 06:00
+2023.09.01 07:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.09.01 07:00:00   Reason=STUCK_RESUMED
+2023.09.01 07:00:00   Theory=RANDOM_BULLISH
+2023.09.01 07:00:00   Time=2023.09.01 04:00
+2023.09.01 07:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.09.01 07:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 04:00
+2023.09.01 07:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08541 Low=1.08352 OriginalEnd=2023.09.01 04:00 Candle=2023.09.01 06:00
+2023.09.01 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08445,6.8) ]
+2023.09.01 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08445,6.8) ]
+2023.09.01 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08446,5.7) ]
+2023.09.01 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08449,4.8) ]
+2023.09.01 10:00:00   [MarketObserver] رویداد بازار: از کف برگشتیم
+2023.09.01 10:00:00   نظریه: درجا می‌زنیم
+2023.09.01 10:00:00   دلیل: قیمت از کف عبور کرد اما داخل محدوده بسته شد
+2023.09.01 10:00:00   عامل تردید: حرکت بعدی هنوز مشخص نیست
+2023.09.01 10:00:00   زمان رویداد: 2023.09.01 09:00
+2023.09.01 10:00:00   زمان تغییر نظریه: 2023.09.01 04:00
+2023.09.01 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08457,4.2) ]
+2023.09.01 11:00:00   [MarketObserver] رویداد بازار: به سمت بالا می‌رویم
+2023.09.01 11:00:00   نظریه: درجا می‌زنیم
+2023.09.01 11:00:00   دلیل: کندل بالای سقف گروه زمانی بسته شد
+2023.09.01 11:00:00   عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
+2023.09.01 11:00:00   زمان رویداد: 2023.09.01 10:00
+2023.09.01 11:00:00   زمان تغییر نظریه: 2023.09.01 04:00
+2023.09.01 11:00:00   [MarketObserver] OVERLAP FINISHED: High=1.08541 Low=1.08352 End=2023.09.01 04:00 Candle=2023.09.01 10:00 Close=1.08559
+2023.09.01 11:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.09.01 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08474,4.7) ]
+2023.09.01 12:00:00   BOX High: 1.08541
+2023.09.01 12:00:00   BOX EndTime: 2023.09.01 09:00
+2023.09.01 12:00:00   Last Candle close: 1.08485
+2023.09.01 12:00:00   Last Candle Time: 2023.09.01 11:00
+2023.09.01 12:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.09.01 12:00:00   [MarketObserver] Shared OverLap group: 3 boxes; High=1.08541 Low=1.08284 Start=2023.08.31 19:00 End=2023.09.01 09:00
+2023.09.01 12:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08541 Low=1.08284 OriginalEnd=2023.09.01 09:00 Candle=2023.09.01 11:00
+2023.09.01 12:00:00   [MarketObserver] رویداد بازار: از سقف برگشتیم
+2023.09.01 12:00:00   نظریه: درجا می‌زنیم
+2023.09.01 12:00:00   دلیل: قیمت از سقف عبور کرد اما داخل محدوده بسته شد
+2023.09.01 12:00:00   عامل تردید: حرکت بعدی هنوز مشخص نیست
+2023.09.01 12:00:00   زمان رویداد: 2023.09.01 11:00
+2023.09.01 12:00:00   زمان تغییر نظریه: 2023.09.01 09:00
+2023.09.01 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08475,4.4) ]
+2023.09.01 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08475,4.4) ]
+2023.09.01 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08478,4.0) ]
+2023.09.01 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08477,3.4) ]
+2023.09.01 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08457,2.6) ]
+2023.09.01 16:00:00   [MarketObserver] رویداد بازار: به سمت بالا می‌رویم
+2023.09.01 16:00:00   نظریه: درجا می‌زنیم
+2023.09.01 16:00:00   دلیل: کندل بالای سقف گروه زمانی بسته شد
+2023.09.01 16:00:00   عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
+2023.09.01 16:00:00   زمان رویداد: 2023.09.01 15:00
