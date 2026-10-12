@@ -563,6 +563,7 @@ private:
    bool     m_theoryActive;
    bool     m_theoryBullish;
    bool     m_randomSeeded;
+   int      m_theoryAlertLevel;
    
    datetime m_theoryStartTime;
    datetime m_theoryStartCandle;
@@ -668,7 +669,9 @@ private:
       }
    
       m_theoryActive = true;
-   
+      
+      m_theoryAlertLevel = 0 ;
+      
       m_theoryStartTime = when;
    
       // آخرین کندل بسته‌شده در لحظه انتخاب.
@@ -721,7 +724,7 @@ private:
    
    
    // ارزیابی یک کندل بسته‌شده در برابر نظریهٔ فعال
-   void EvaluateRandomTheory(datetime candleTime)
+   void EvaluateDirectionalTheory(datetime candleTime)
    {
       if(!m_theoryActive)
          return;
@@ -734,6 +737,30 @@ private:
    
       if(c == 0)
          return;
+         
+      double referenceHeight =
+         m_theoryReferenceHigh - m_theoryReferenceLow;
+      
+      if(referenceHeight <= 0)
+         return;
+      
+      double contradictionDistance = 0.0;
+      
+      if(m_theoryBullish && c < m_theoryReferenceLow)
+      {
+         contradictionDistance =
+            m_theoryReferenceLow - c;
+      }
+      else if(!m_theoryBullish && c > m_theoryReferenceHigh)
+      {
+         contradictionDistance =
+            c - m_theoryReferenceHigh;
+      }
+      
+      double contradictionPercent =
+         100.0 * contradictionDistance / referenceHeight;
+         
+      
    
       string assessment = "INCONCLUSIVE";
       string reason = "Close inside reference zone";
@@ -749,6 +776,7 @@ private:
          {
             assessment = "CONTRADICTION";
             reason = "Close below reference low";
+            
          }
       }
       else
@@ -762,14 +790,36 @@ private:
          {
             assessment = "CONTRADICTION";
             reason = "Close above reference high";
+       
          }
       }
+
+
+      if(assessment == "CONTRADICTION")
+      {
+         int observedLevel = 0;
+      
+         if(contradictionPercent >= 80.0)
+            observedLevel = 3;
+         else if(contradictionPercent >= 30.0)
+            observedLevel = 2;
+         else if(contradictionPercent >= 5.0)
+            observedLevel = 1;
+      
+         if(observedLevel > m_theoryAlertLevel)
+            m_theoryAlertLevel = observedLevel;
+      }
+
+
    
       Print(
          "[TheoryExperiment] EVIDENCE",
          "\nTheory=", RandomTheoryName(),
          "\nAssessment=", assessment,
          "\nReason=", reason,
+         "\nAlertLevel=", m_theoryAlertLevel,
+         "\nContradictionPercent=",
+                  DoubleToString(contradictionPercent, 2),
          "\nCandle=",
          TimeToString(candleTime, TIME_DATE | TIME_MINUTES),
          "\nClose=", DoubleToString(c, _Digits)
@@ -1213,9 +1263,11 @@ public:
       m_hasAcceptedTouchPrice  = false;
       
       m_theoryActive  = false;
+      m_theoryAlertLevel = 0 ;
       
       m_theoryBullish = false;
       m_randomSeeded  = false;
+      
       
       m_theoryStartTime   = 0;
       m_theoryStartCandle = 0;
@@ -1472,7 +1524,7 @@ public:
          );
    
          // نظریه فعال، در صورت وجود، ارزیابی می‌شود.
-         EvaluateRandomTheory(t);
+         EvaluateDirectionalTheory(t);
       }
    
       // --------------------------------
