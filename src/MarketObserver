@@ -1,3 +1,28 @@
+enum RIVER_FAMILY
+{
+   RIVER_BELOW = 0,
+   RIVER_ABOVE,
+   RIVER_STREET_FIGHT
+};
+
+struct RiverIsland
+{
+   RIVER_FAMILY family;
+
+   int      candleCount;
+
+   datetime startTime;
+   datetime endTime;
+
+   double   maxHigh;
+   datetime maxHighTime;
+
+   double   minLow;
+   datetime minLowTime;
+};
+
+
+
 #ifndef __MARKET_OBSERVER_MQH__
 #define __MARKET_OBSERVER_MQH__
 
@@ -1076,7 +1101,7 @@ public:
    {
       return m_zoneBoxCount;
    }
-};
+
 
 
 // ساخت گروه باکس‌هایی که با SmallBox 0 همپوشانی دارند.
@@ -1341,7 +1366,7 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
       TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
    );
 
-   RiverIsland island;
+   RiverIsland island={};
    bool islandActive = false;
 
    int reviewedCandles = 0;
@@ -1464,4 +1489,17 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
       " ReviewedCandles=", reviewedCandles
    );
 }
+
+
+
+
+
+};
+
+
+
+
+
+
+#endif
 
