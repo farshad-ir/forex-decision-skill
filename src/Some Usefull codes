@@ -1369,29 +1369,57 @@ public:
                // ابتدا وضعیت جهت بعدی را تعیین کن.
                m_pendingDirectionValid = false;
    
+
                if(finishedBoxCount >= 4)
                {
-                  // زنجیره طولانی بوده است.
-                  // جهت شکست، جهت نظریه بعدی خواهد بود.
-                  m_pendingDirectionValid = true;
-   
-                  if(c > finishedHigh)
-                     m_pendingDirectionBullish = true;
-                  else if(c < finishedLow)
-                     m_pendingDirectionBullish = false;
-   
-                  // نظریه معلق قدیمی دیگر استفاده نمی‌شود.
+                  // -----------------------------------------
+                  // زنجیره بلند شکسته شده است.
+                  // نظریه بعدی همین حالا فعال می‌شود.
+                  // -----------------------------------------
+               
+                  // جهت نظریه مستقیماً از کندل شکست تعیین می‌شود.
+                  m_theoryBullish = (c > finishedHigh);
+               
+                  // محدوده مرجع همان زنجیره شکسته‌شده است.
+                  m_theoryReferenceHigh = finishedHigh;
+                  m_theoryReferenceLow  = finishedLow;
+               
+                  // نظریه معلق قبلی دیگر استفاده نمی‌شود.
                   m_suspendedTheoryValid = false;
-   
+               
+                  // دیگر نیازی به انتظار برای جهت معلق نداریم.
+                  m_pendingDirectionValid = false;
+               
+                  // فعال‌سازی فوری نظریه.
+                  m_theoryActive = true;
+               
+                  // کندل شکست محرک نظریه است، نه شاهد آن.
+                  m_theoryStartTime   = t;
+                  m_theoryStartCandle = t;
+               
                   Print(
                      "[TheoryExperiment] LONG OVERLAP BREAKOUT",
                      "\nBoxes=", finishedBoxCount,
                      "\nNext direction=",
-                     m_pendingDirectionBullish
-                     ? "BULLISH"
-                     : "BEARISH"
+                     m_theoryBullish ? "BULLISH" : "BEARISH"
+                  );
+               
+                  Print(
+                     "[TheoryExperiment] THEORY SELECTED",
+                     "\nTheory=", RandomTheoryName(),
+                     "\nMode=BREAKOUT",
+                     "\nTime=",
+                     TimeToString(t, TIME_DATE | TIME_MINUTES),
+                     "\nReferenceHigh=",
+                     DoubleToString(m_theoryReferenceHigh, _Digits),
+                     "\nReferenceLow=",
+                     DoubleToString(m_theoryReferenceLow, _Digits),
+                     "\nEvidence begins after candle=",
+                     TimeToString(t, TIME_DATE | TIME_MINUTES)
                   );
                }
+
+
                else
                {
                   // زنجیره کوتاه بوده است.

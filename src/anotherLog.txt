@@ -117,12 +117,29 @@
 2023.08.29 02:00:00   [TheoryExperiment] LONG OVERLAP BREAKOUT
 2023.08.29 02:00:00   Boxes=6
 2023.08.29 02:00:00   Next direction=BULLISH
+2023.08.29 02:00:00   [TheoryExperiment] THEORY SELECTED
+2023.08.29 02:00:00   Theory=RANDOM_BULLISH
+2023.08.29 02:00:00   Mode=BREAKOUT
+2023.08.29 02:00:00   Time=2023.08.29 01:00
+2023.08.29 02:00:00   ReferenceHigh=1.08222
+2023.08.29 02:00:00   ReferenceLow=1.07913
+2023.08.29 02:00:00   Evidence begins after candle=2023.08.29 01:00
 2023.08.29 02:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
 2023.08.29 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08144,5.4) ]
 2023.08.29 03:00:00   BOX High: 1.08222
 2023.08.29 03:00:00   BOX EndTime: 2023.08.29 00:00
 2023.08.29 03:00:00   Last Candle close: 1.08255
 2023.08.29 03:00:00   Last Candle Time: 2023.08.29 02:00
+2023.08.29 03:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 03:00:00   Theory=RANDOM_BULLISH
+2023.08.29 03:00:00   Assessment=SUPPORT
+2023.08.29 03:00:00   Reason=Close above reference high
+2023.08.29 03:00:00   Candle=2023.08.29 02:00
+2023.08.29 03:00:00   Close=1.08255
+2023.08.29 03:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.08.29 03:00:00   Reason=STUCK_RESUMED
+2023.08.29 03:00:00   Theory=RANDOM_BULLISH
+2023.08.29 03:00:00   Time=2023.08.29 00:00
 2023.08.29 03:00:00   [MarketObserver] Theory: درجا می‌زنیم
 2023.08.29 03:00:00   [MarketObserver] Shared OverLap group: 7 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.29 00:00
 2023.08.29 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
@@ -131,60 +148,275 @@
 2023.08.29 04:00:00   [TheoryExperiment] LONG OVERLAP BREAKOUT
 2023.08.29 04:00:00   Boxes=7
 2023.08.29 04:00:00   Next direction=BULLISH
+2023.08.29 04:00:00   [TheoryExperiment] THEORY SELECTED
+2023.08.29 04:00:00   Theory=RANDOM_BULLISH
+2023.08.29 04:00:00   Mode=BREAKOUT
+2023.08.29 04:00:00   Time=2023.08.29 03:00
+2023.08.29 04:00:00   ReferenceHigh=1.08222
+2023.08.29 04:00:00   ReferenceLow=1.07913
+2023.08.29 04:00:00   Evidence begins after candle=2023.08.29 03:00
 2023.08.29 04:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
 2023.08.29 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08176,6.5) ]
 2023.08.29 05:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.29 04:00
+2023.08.29 05:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 05:00:00   Theory=RANDOM_BULLISH
+2023.08.29 05:00:00   Assessment=SUPPORT
+2023.08.29 05:00:00   Reason=Close above reference high
+2023.08.29 05:00:00   Candle=2023.08.29 04:00
+2023.08.29 05:00:00   Close=1.08347
 2023.08.29 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08205,7.9) ]
+2023.08.29 06:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 06:00:00   Theory=RANDOM_BULLISH
+2023.08.29 06:00:00   Assessment=SUPPORT
+2023.08.29 06:00:00   Reason=Close above reference high
+2023.08.29 06:00:00   Candle=2023.08.29 05:00
+2023.08.29 06:00:00   Close=1.08355
 2023.08.29 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08229,9.0) ]
+2023.08.29 07:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 07:00:00   Theory=RANDOM_BULLISH
+2023.08.29 07:00:00   Assessment=SUPPORT
+2023.08.29 07:00:00   Reason=Close above reference high
+2023.08.29 07:00:00   Candle=2023.08.29 06:00
+2023.08.29 07:00:00   Close=1.08362
 2023.08.29 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08251,9.3) ]
+2023.08.29 08:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 08:00:00   Theory=RANDOM_BULLISH
+2023.08.29 08:00:00   Assessment=SUPPORT
+2023.08.29 08:00:00   Reason=Close above reference high
+2023.08.29 08:00:00   Candle=2023.08.29 07:00
+2023.08.29 08:00:00   Close=1.08241
 2023.08.29 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08254,8.1) ]
 2023.08.29 09:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 08:00
+2023.08.29 09:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 09:00:00   Theory=RANDOM_BULLISH
+2023.08.29 09:00:00   Assessment=INCONCLUSIVE
+2023.08.29 09:00:00   Reason=Close inside reference zone
+2023.08.29 09:00:00   Candle=2023.08.29 08:00
+2023.08.29 09:00:00   Close=1.08217
 2023.08.29 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08250,6.7) ]
+2023.08.29 10:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 10:00:00   Theory=RANDOM_BULLISH
+2023.08.29 10:00:00   Assessment=INCONCLUSIVE
+2023.08.29 10:00:00   Reason=Close inside reference zone
+2023.08.29 10:00:00   Candle=2023.08.29 09:00
+2023.08.29 10:00:00   Close=1.08087
 2023.08.29 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08229,5.4) ]
+2023.08.29 11:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 11:00:00   Theory=RANDOM_BULLISH
+2023.08.29 11:00:00   Assessment=INCONCLUSIVE
+2023.08.29 11:00:00   Reason=Close inside reference zone
+2023.08.29 11:00:00   Candle=2023.08.29 10:00
+2023.08.29 11:00:00   Close=1.08203
 2023.08.29 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08228,5.0) ]
+2023.08.29 12:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 12:00:00   Theory=RANDOM_BULLISH
+2023.08.29 12:00:00   Assessment=INCONCLUSIVE
+2023.08.29 12:00:00   Reason=Close inside reference zone
+2023.08.29 12:00:00   Candle=2023.08.29 11:00
+2023.08.29 12:00:00   Close=1.08101
 2023.08.29 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08209,4.3) ]
+2023.08.29 13:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 13:00:00   Theory=RANDOM_BULLISH
+2023.08.29 13:00:00   Assessment=INCONCLUSIVE
+2023.08.29 13:00:00   Reason=Close inside reference zone
+2023.08.29 13:00:00   Candle=2023.08.29 12:00
+2023.08.29 13:00:00   Close=1.08134
 2023.08.29 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08195,5.3) ]
+2023.08.29 14:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 14:00:00   Theory=RANDOM_BULLISH
+2023.08.29 14:00:00   Assessment=INCONCLUSIVE
+2023.08.29 14:00:00   Reason=Close inside reference zone
+2023.08.29 14:00:00   Candle=2023.08.29 13:00
+2023.08.29 14:00:00   Close=1.08066
 2023.08.29 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08171,7.1) ]
+2023.08.29 15:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 15:00:00   Theory=RANDOM_BULLISH
+2023.08.29 15:00:00   Assessment=INCONCLUSIVE
+2023.08.29 15:00:00   Reason=Close inside reference zone
+2023.08.29 15:00:00   Candle=2023.08.29 14:00
+2023.08.29 15:00:00   Close=1.08040
 2023.08.29 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08150,8.7) ]
 2023.08.29 16:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 13:00 Level=1.07988 Candle=2023.08.29 15:00
+2023.08.29 16:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 16:00:00   Theory=RANDOM_BULLISH
+2023.08.29 16:00:00   Assessment=INCONCLUSIVE
+2023.08.29 16:00:00   Reason=Close inside reference zone
+2023.08.29 16:00:00   Candle=2023.08.29 15:00
+2023.08.29 16:00:00   Close=1.07922
 2023.08.29 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08114,11.3) ]
+2023.08.29 17:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 17:00:00   Theory=RANDOM_BULLISH
+2023.08.29 17:00:00   Assessment=INCONCLUSIVE
+2023.08.29 17:00:00   Reason=Close inside reference zone
+2023.08.29 17:00:00   Candle=2023.08.29 16:00
+2023.08.29 17:00:00   Close=1.08036
 2023.08.29 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08103,10.6) ]
 2023.08.29 18:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 17:00
+2023.08.29 18:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 18:00:00   Theory=RANDOM_BULLISH
+2023.08.29 18:00:00   Assessment=SUPPORT
+2023.08.29 18:00:00   Reason=Close above reference high
+2023.08.29 18:00:00   Candle=2023.08.29 17:00
+2023.08.29 18:00:00   Close=1.08279
 2023.08.29 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08126,8.8) ]
 2023.08.29 19:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.08.29 18:00
+2023.08.29 19:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 19:00:00   Theory=RANDOM_BULLISH
+2023.08.29 19:00:00   Assessment=SUPPORT
+2023.08.29 19:00:00   Reason=Close above reference high
+2023.08.29 19:00:00   Candle=2023.08.29 18:00
+2023.08.29 19:00:00   Close=1.08500
 2023.08.29 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08179,7.3) ]
+2023.08.29 20:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 20:00:00   Theory=RANDOM_BULLISH
+2023.08.29 20:00:00   Assessment=SUPPORT
+2023.08.29 20:00:00   Reason=Close above reference high
+2023.08.29 20:00:00   Candle=2023.08.29 19:00
+2023.08.29 20:00:00   Close=1.08628
 2023.08.29 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08242,11.5) ]
 2023.08.29 21:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 20:00
+2023.08.29 21:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 21:00:00   Theory=RANDOM_BULLISH
+2023.08.29 21:00:00   Assessment=SUPPORT
+2023.08.29 21:00:00   Reason=Close above reference high
+2023.08.29 21:00:00   Candle=2023.08.29 20:00
+2023.08.29 21:00:00   Close=1.08734
 2023.08.29 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08315,19.3) ]
 2023.08.29 22:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.29 21:00
+2023.08.29 22:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 22:00:00   Theory=RANDOM_BULLISH
+2023.08.29 22:00:00   Assessment=SUPPORT
+2023.08.29 22:00:00   Reason=Close above reference high
+2023.08.29 22:00:00   Candle=2023.08.29 21:00
+2023.08.29 22:00:00   Close=1.08718
 2023.08.29 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08380,23.3) ]
 2023.08.29 23:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 22:00
+2023.08.29 23:00:00   [TheoryExperiment] EVIDENCE
+2023.08.29 23:00:00   Theory=RANDOM_BULLISH
+2023.08.29 23:00:00   Assessment=SUPPORT
+2023.08.29 23:00:00   Reason=Close above reference high
+2023.08.29 23:00:00   Candle=2023.08.29 22:00
+2023.08.29 23:00:00   Close=1.08854
 2023.08.29 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08464,27.7) ]
+2023.08.30 00:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 00:00:00   Theory=RANDOM_BULLISH
+2023.08.30 00:00:00   Assessment=SUPPORT
+2023.08.30 00:00:00   Reason=Close above reference high
+2023.08.30 00:00:00   Candle=2023.08.29 23:00
+2023.08.30 00:00:00   Close=1.08790
 2023.08.30 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08528,28.6) ]
+2023.08.30 01:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 01:00:00   Theory=RANDOM_BULLISH
+2023.08.30 01:00:00   Assessment=SUPPORT
+2023.08.30 01:00:00   Reason=Close above reference high
+2023.08.30 01:00:00   Candle=2023.08.30 00:00
+2023.08.30 01:00:00   Close=1.08781
 2023.08.30 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08576,31.6) ]
+2023.08.30 02:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 02:00:00   Theory=RANDOM_BULLISH
+2023.08.30 02:00:00   Assessment=SUPPORT
+2023.08.30 02:00:00   Reason=Close above reference high
+2023.08.30 02:00:00   Candle=2023.08.30 01:00
+2023.08.30 02:00:00   Close=1.08843
 2023.08.30 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08623,31.2) ]
+2023.08.30 03:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 03:00:00   Theory=RANDOM_BULLISH
+2023.08.30 03:00:00   Assessment=SUPPORT
+2023.08.30 03:00:00   Reason=Close above reference high
+2023.08.30 03:00:00   Candle=2023.08.30 02:00
+2023.08.30 03:00:00   Close=1.08691
 2023.08.30 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08638,28.1) ]
+2023.08.30 04:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 04:00:00   Theory=RANDOM_BULLISH
+2023.08.30 04:00:00   Assessment=SUPPORT
+2023.08.30 04:00:00   Reason=Close above reference high
+2023.08.30 04:00:00   Candle=2023.08.30 03:00
+2023.08.30 04:00:00   Close=1.08697
 2023.08.30 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08651,23.1) ]
+2023.08.30 05:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 05:00:00   Theory=RANDOM_BULLISH
+2023.08.30 05:00:00   Assessment=SUPPORT
+2023.08.30 05:00:00   Reason=Close above reference high
+2023.08.30 05:00:00   Candle=2023.08.30 04:00
+2023.08.30 05:00:00   Close=1.08687
 2023.08.30 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08663,18.0) ]
 2023.08.30 06:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 05:00
+2023.08.30 06:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 06:00:00   Theory=RANDOM_BULLISH
+2023.08.30 06:00:00   Assessment=SUPPORT
+2023.08.30 06:00:00   Reason=Close above reference high
+2023.08.30 06:00:00   Candle=2023.08.30 05:00
+2023.08.30 06:00:00   Close=1.08672
 2023.08.30 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08671,12.3) ]
+2023.08.30 07:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 07:00:00   Theory=RANDOM_BULLISH
+2023.08.30 07:00:00   Assessment=SUPPORT
+2023.08.30 07:00:00   Reason=Close above reference high
+2023.08.30 07:00:00   Candle=2023.08.30 06:00
+2023.08.30 07:00:00   Close=1.08691
 2023.08.30 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08681,9.8) ]
+2023.08.30 08:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 08:00:00   Theory=RANDOM_BULLISH
+2023.08.30 08:00:00   Assessment=SUPPORT
+2023.08.30 08:00:00   Reason=Close above reference high
+2023.08.30 08:00:00   Candle=2023.08.30 07:00
+2023.08.30 08:00:00   Close=1.08606
 2023.08.30 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08675,8.4) ]
+2023.08.30 09:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 09:00:00   Theory=RANDOM_BULLISH
+2023.08.30 09:00:00   Assessment=SUPPORT
+2023.08.30 09:00:00   Reason=Close above reference high
+2023.08.30 09:00:00   Candle=2023.08.30 08:00
+2023.08.30 09:00:00   Close=1.08665
 2023.08.30 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08672,9.0) ]
 2023.08.30 10:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 09:00
+2023.08.30 10:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 10:00:00   Theory=RANDOM_BULLISH
+2023.08.30 10:00:00   Assessment=SUPPORT
+2023.08.30 10:00:00   Reason=Close above reference high
+2023.08.30 10:00:00   Candle=2023.08.30 09:00
+2023.08.30 10:00:00   Close=1.08693
 2023.08.30 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08677,8.6) ]
 2023.08.30 11:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 10:00
+2023.08.30 11:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 11:00:00   Theory=RANDOM_BULLISH
+2023.08.30 11:00:00   Assessment=SUPPORT
+2023.08.30 11:00:00   Reason=Close above reference high
+2023.08.30 11:00:00   Candle=2023.08.30 10:00
+2023.08.30 11:00:00   Close=1.08647
 2023.08.30 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08672,7.9) ]
+2023.08.30 12:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 12:00:00   Theory=RANDOM_BULLISH
+2023.08.30 12:00:00   Assessment=SUPPORT
+2023.08.30 12:00:00   Reason=Close above reference high
+2023.08.30 12:00:00   Candle=2023.08.30 11:00
+2023.08.30 12:00:00   Close=1.08673
 2023.08.30 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08672,7.1) ]
 2023.08.30 13:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 12:00
+2023.08.30 13:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 13:00:00   Theory=RANDOM_BULLISH
+2023.08.30 13:00:00   Assessment=SUPPORT
+2023.08.30 13:00:00   Reason=Close above reference high
+2023.08.30 13:00:00   Candle=2023.08.30 12:00
+2023.08.30 13:00:00   Close=1.08888
 2023.08.30 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08703,4.9) ]
 2023.08.30 14:00:00   BOX High: 1.0885
 2023.08.30 14:00:00   BOX EndTime: 2023.08.30 11:00
 2023.08.30 14:00:00   Last Candle close: 1.08903
 2023.08.30 14:00:00   Last Candle Time: 2023.08.30 13:00
+2023.08.30 14:00:00   [TheoryExperiment] EVIDENCE
+2023.08.30 14:00:00   Theory=RANDOM_BULLISH
+2023.08.30 14:00:00   Assessment=SUPPORT
+2023.08.30 14:00:00   Reason=Close above reference high
+2023.08.30 14:00:00   Candle=2023.08.30 13:00
+2023.08.30 14:00:00   Close=1.08903
+2023.08.30 14:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.08.30 14:00:00   Reason=NEW_BOX_ARRIVED
+2023.08.30 14:00:00   Theory=RANDOM_BULLISH
+2023.08.30 14:00:00   Time=2023.08.30 11:00
 2023.08.30 14:00:00   [TheoryExperiment] THEORY SELECTED
 2023.08.30 14:00:00   Theory=RANDOM_BULLISH
-2023.08.30 14:00:00   Mode=BREAKOUT
+2023.08.30 14:00:00   Mode=RANDOM
 2023.08.30 14:00:00   Time=2023.08.30 11:00
 2023.08.30 14:00:00   ReferenceHigh=1.08850
 2023.08.30 14:00:00   ReferenceLow=1.08551
@@ -320,7 +552,7 @@
 2023.08.31 07:00:00   Theory=RANDOM_BULLISH
 2023.08.31 07:00:00   Time=2023.08.31 04:00
 2023.08.31 07:00:00   [TheoryExperiment] THEORY SELECTED
-2023.08.31 07:00:00   Theory=RANDOM_BULLISH
+2023.08.31 07:00:00   Theory=RANDOM_BEARISH
 2023.08.31 07:00:00   Mode=RANDOM
 2023.08.31 07:00:00   Time=2023.08.31 04:00
 2023.08.31 07:00:00   ReferenceHigh=1.09455
@@ -330,30 +562,30 @@
 2023.08.31 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
 2023.08.31 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
 2023.08.31 08:00:00   [TheoryExperiment] EVIDENCE
-2023.08.31 08:00:00   Theory=RANDOM_BULLISH
+2023.08.31 08:00:00   Theory=RANDOM_BEARISH
 2023.08.31 08:00:00   Assessment=INCONCLUSIVE
 2023.08.31 08:00:00   Reason=Close inside reference zone
 2023.08.31 08:00:00   Candle=2023.08.31 07:00
 2023.08.31 08:00:00   Close=1.09185
 2023.08.31 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09231,5.7) ]
 2023.08.31 09:00:00   [TheoryExperiment] EVIDENCE
-2023.08.31 09:00:00   Theory=RANDOM_BULLISH
+2023.08.31 09:00:00   Theory=RANDOM_BEARISH
 2023.08.31 09:00:00   Assessment=INCONCLUSIVE
 2023.08.31 09:00:00   Reason=Close inside reference zone
 2023.08.31 09:00:00   Candle=2023.08.31 08:00
 2023.08.31 09:00:00   Close=1.09178
 2023.08.31 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09223,4.7) ]
 2023.08.31 10:00:00   [TheoryExperiment] EVIDENCE
-2023.08.31 10:00:00   Theory=RANDOM_BULLISH
-2023.08.31 10:00:00   Assessment=CONTRADICTION
+2023.08.31 10:00:00   Theory=RANDOM_BEARISH
+2023.08.31 10:00:00   Assessment=SUPPORT
 2023.08.31 10:00:00   Reason=Close below reference low
 2023.08.31 10:00:00   Candle=2023.08.31 09:00
 2023.08.31 10:00:00   Close=1.09072
 2023.08.31 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09198,4.6) ]
 2023.08.31 11:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 19:00 Level=1.09045 Candle=2023.08.31 10:00
 2023.08.31 11:00:00   [TheoryExperiment] EVIDENCE
-2023.08.31 11:00:00   Theory=RANDOM_BULLISH
-2023.08.31 11:00:00   Assessment=CONTRADICTION
+2023.08.31 11:00:00   Theory=RANDOM_BEARISH
+2023.08.31 11:00:00   Assessment=SUPPORT
 2023.08.31 11:00:00   Reason=Close below reference low
 2023.08.31 11:00:00   Candle=2023.08.31 10:00
 2023.08.31 11:00:00   Close=1.08927
@@ -364,14 +596,14 @@
 2023.08.31 12:00:00   Last Candle Time: 2023.08.31 11:00
 2023.08.31 12:00:00   [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 11:00
 2023.08.31 12:00:00   [TheoryExperiment] EVIDENCE
-2023.08.31 12:00:00   Theory=RANDOM_BULLISH
-2023.08.31 12:00:00   Assessment=CONTRADICTION
+2023.08.31 12:00:00   Theory=RANDOM_BEARISH
+2023.08.31 12:00:00   Assessment=SUPPORT
 2023.08.31 12:00:00   Reason=Close below reference low
 2023.08.31 12:00:00   Candle=2023.08.31 11:00
 2023.08.31 12:00:00   Close=1.08779
 2023.08.31 12:00:00   [TheoryExperiment] THEORY EXPIRED
 2023.08.31 12:00:00   Reason=STUCK_RESUMED
-2023.08.31 12:00:00   Theory=RANDOM_BULLISH
+2023.08.31 12:00:00   Theory=RANDOM_BEARISH
 2023.08.31 12:00:00   Time=2023.08.31 09:00
 2023.08.31 12:00:00   [MarketObserver] Theory: درجا می‌زنیم
 2023.08.31 12:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 09:00
@@ -386,7 +618,7 @@
 2023.08.31 13:00:00   [MarketObserver] OVERLAP FINISHED: Boxes=2 High=1.09455 Low=1.09167 End=2023.08.31 09:00 Candle=2023.08.31 12:00 Close=1.08742
 2023.08.31 13:00:00   [TheoryExperiment] SHORT OVERLAP
 2023.08.31 13:00:00   Boxes=2
-2023.08.31 13:00:00   Resume=RANDOM_BULLISH
+2023.08.31 13:00:00   Resume=RANDOM_BEARISH
 2023.08.31 13:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
 2023.08.31 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09040,17.9) ]
 2023.08.31 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08989,20.0) ]
@@ -413,7 +645,7 @@
 2023.09.01 06:00:00   Last Candle close: 1.08439
 2023.09.01 06:00:00   Last Candle Time: 2023.09.01 05:00
 2023.09.01 06:00:00   [TheoryExperiment] THEORY SELECTED
-2023.09.01 06:00:00   Theory=RANDOM_BULLISH
+2023.09.01 06:00:00   Theory=RANDOM_BEARISH
 2023.09.01 06:00:00   Mode=RESUMED
 2023.09.01 06:00:00   Time=2023.09.01 03:00
 2023.09.01 06:00:00   ReferenceHigh=1.09455
@@ -427,14 +659,14 @@
 2023.09.01 07:00:00   Last Candle close: 1.08417
 2023.09.01 07:00:00   Last Candle Time: 2023.09.01 06:00
 2023.09.01 07:00:00   [TheoryExperiment] EVIDENCE
-2023.09.01 07:00:00   Theory=RANDOM_BULLISH
-2023.09.01 07:00:00   Assessment=CONTRADICTION
+2023.09.01 07:00:00   Theory=RANDOM_BEARISH
+2023.09.01 07:00:00   Assessment=SUPPORT
 2023.09.01 07:00:00   Reason=Close below reference low
 2023.09.01 07:00:00   Candle=2023.09.01 06:00
 2023.09.01 07:00:00   Close=1.08417
 2023.09.01 07:00:00   [TheoryExperiment] THEORY EXPIRED
 2023.09.01 07:00:00   Reason=STUCK_RESUMED
-2023.09.01 07:00:00   Theory=RANDOM_BULLISH
+2023.09.01 07:00:00   Theory=RANDOM_BEARISH
 2023.09.01 07:00:00   Time=2023.09.01 04:00
 2023.09.01 07:00:00   [MarketObserver] Theory: درجا می‌زنیم
 2023.09.01 07:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 04:00
@@ -450,3 +682,284 @@
 2023.09.01 10:00:00   زمان رویداد: 2023.09.01 09:00
 2023.09.01 10:00:00   زمان تغییر نظریه: 2023.09.01 04:00
 2023.09.01 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08457,4.2) ]
+2023.09.01 11:00:00   [MarketObserver] رویداد بازار: به سمت بالا می‌رویم
+2023.09.01 11:00:00   نظریه: درجا می‌زنیم
+2023.09.01 11:00:00   دلیل: کندل بالای سقف گروه زمانی بسته شد
+2023.09.01 11:00:00   عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
+2023.09.01 11:00:00   زمان رویداد: 2023.09.01 10:00
+2023.09.01 11:00:00   زمان تغییر نظریه: 2023.09.01 04:00
+2023.09.01 11:00:00   [MarketObserver] OVERLAP FINISHED: Boxes=2 High=1.08541 Low=1.08352 End=2023.09.01 04:00 Candle=2023.09.01 10:00 Close=1.08559
+2023.09.01 11:00:00   [TheoryExperiment] SHORT OVERLAP
+2023.09.01 11:00:00   Boxes=2
+2023.09.01 11:00:00   Resume=RANDOM_BEARISH
+2023.09.01 11:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.09.01 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08474,4.7) ]
+2023.09.01 12:00:00   BOX High: 1.08541
+2023.09.01 12:00:00   BOX EndTime: 2023.09.01 09:00
+2023.09.01 12:00:00   Last Candle close: 1.08485
+2023.09.01 12:00:00   Last Candle Time: 2023.09.01 11:00
+2023.09.01 12:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.09.01 12:00:00   [MarketObserver] Shared OverLap group: 3 boxes; High=1.08541 Low=1.08284 Start=2023.08.31 19:00 End=2023.09.01 09:00
+2023.09.01 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08475,4.4) ]
+2023.09.01 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08475,4.4) ]
+2023.09.01 13:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08541 Low=1.08284 OriginalEnd=2023.09.01 09:00 Candle=2023.09.01 12:00
+2023.09.01 13:00:00   [MarketObserver] رویداد بازار: از سقف برگشتیم
+2023.09.01 13:00:00   نظریه: درجا می‌زنیم
+2023.09.01 13:00:00   دلیل: قیمت از سقف عبور کرد اما داخل محدوده بسته شد
+2023.09.01 13:00:00   عامل تردید: حرکت بعدی هنوز مشخص نیست
+2023.09.01 13:00:00   زمان رویداد: 2023.09.01 12:00
+2023.09.01 13:00:00   زمان تغییر نظریه: 2023.09.01 09:00
+2023.09.01 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08478,4.0) ]
+2023.09.01 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08477,3.4) ]
+2023.09.01 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08457,2.6) ]
+2023.09.01 16:00:00   [MarketObserver] رویداد بازار: به سمت بالا می‌رویم
+2023.09.01 16:00:00   نظریه: درجا می‌زنیم
+2023.09.01 16:00:00   دلیل: کندل بالای سقف گروه زمانی بسته شد
+2023.09.01 16:00:00   عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
+2023.09.01 16:00:00   زمان رویداد: 2023.09.01 15:00
+2023.09.01 16:00:00   زمان تغییر نظریه: 2023.09.01 09:00
+2023.09.01 16:00:00   [MarketObserver] OVERLAP FINISHED: Boxes=3 High=1.08541 Low=1.08284 End=2023.09.01 09:00 Candle=2023.09.01 15:00 Close=1.08639
+2023.09.01 16:00:00   [TheoryExperiment] SHORT OVERLAP
+2023.09.01 16:00:00   Boxes=3
+2023.09.01 16:00:00   Resume=RANDOM_BEARISH
+2023.09.01 16:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.09.01 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08485,3.0) ]
+2023.09.01 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08492,2.9) ]
+2023.09.01 18:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.09.01 00:00 Level=1.08284 Candle=2023.09.01 17:00
+2023.09.01 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08429,5.5) ]
+2023.09.01 19:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 13:00 Level=1.07988 Candle=2023.09.01 18:00
+2023.09.01 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08344,14.5) ]
+2023.09.01 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08266,20.8) ]
+2023.09.01 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08199,24.5) ]
+2023.09.01 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08135,27.0) ]
+2023.09.01 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08060,28.4) ]
+2023.09.04 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07992,32.8) ]
+2023.09.04 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07945,31.9) ]
+2023.09.04 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07910,28.4) ]
+2023.09.04 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07882,24.3) ]
+2023.09.04 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07861,20.3) ]
+2023.09.04 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07843,16.6) ]
+2023.09.04 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07835,13.5) ]
+2023.09.04 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07829,11.1) ]
+2023.09.04 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07832,9.4) ]
+2023.09.04 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07838,9.0) ]
+2023.09.04 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07848,8.8) ]
+2023.09.04 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07864,8.8) ]
+2023.09.04 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07883,8.5) ]
+2023.09.04 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07894,7.6) ]
+2023.09.04 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07919,8.7) ]
+2023.09.04 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07934,8.1) ]
+2023.09.04 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07944,7.4) ]
+2023.09.04 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07950,6.8) ]
+2023.09.04 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07936,4.8) ]
+2023.09.04 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07946,3.4) ]
+2023.09.04 20:00:00   BOX High: 1.08088
+2023.09.04 20:00:00   BOX EndTime: 2023.09.04 17:00
+2023.09.04 20:00:00   Last Candle close: 1.07937
+2023.09.04 20:00:00   Last Candle Time: 2023.09.04 19:00
+2023.09.04 20:00:00   [TheoryExperiment] THEORY SELECTED
+2023.09.04 20:00:00   Theory=RANDOM_BEARISH
+2023.09.04 20:00:00   Mode=RESUMED
+2023.09.04 20:00:00   Time=2023.09.04 17:00
+2023.09.04 20:00:00   ReferenceHigh=1.09455
+2023.09.04 20:00:00   ReferenceLow=1.09167
+2023.09.04 20:00:00   Evidence begins after candle=2023.09.04 19:00
+2023.09.04 20:00:00   [MarketObserver] Shared OverLap group: 1 boxes; High=1.08088 Low=1.07833 Start=2023.09.04 05:00 End=2023.09.04 17:00
+2023.09.04 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07946,2.7) ]
+2023.09.04 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07946,2.7) ]
+2023.09.04 21:00:00   [TheoryExperiment] EVIDENCE
+2023.09.04 21:00:00   Theory=RANDOM_BEARISH
+2023.09.04 21:00:00   Assessment=SUPPORT
+2023.09.04 21:00:00   Reason=Close below reference low
+2023.09.04 21:00:00   Candle=2023.09.04 20:00
+2023.09.04 21:00:00   Close=1.07949
+2023.09.04 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07945,0.9) ]
+2023.09.04 22:00:00   BOX High: 1.08088
+2023.09.04 22:00:00   BOX EndTime: 2023.09.04 19:00
+2023.09.04 22:00:00   Last Candle close: 1.07954
+2023.09.04 22:00:00   Last Candle Time: 2023.09.04 21:00
+2023.09.04 22:00:00   [TheoryExperiment] EVIDENCE
+2023.09.04 22:00:00   Theory=RANDOM_BEARISH
+2023.09.04 22:00:00   Assessment=SUPPORT
+2023.09.04 22:00:00   Reason=Close below reference low
+2023.09.04 22:00:00   Candle=2023.09.04 21:00
+2023.09.04 22:00:00   Close=1.07954
+2023.09.04 22:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.09.04 22:00:00   Reason=STUCK_RESUMED
+2023.09.04 22:00:00   Theory=RANDOM_BEARISH
+2023.09.04 22:00:00   Time=2023.09.04 19:00
+2023.09.04 22:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.09.04 22:00:00   [MarketObserver] Shared OverLap group: 2 boxes; High=1.08088 Low=1.07833 Start=2023.09.04 05:00 End=2023.09.04 19:00
+2023.09.04 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07946,0.6) ]
+2023.09.04 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07946,0.6) ]
+2023.09.04 23:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08088 Low=1.07833 OriginalEnd=2023.09.04 19:00 Candle=2023.09.04 22:00
+2023.09.04 23:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07945,1.6) ]
+2023.09.05 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07948,2.0) ]
+2023.09.05 01:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07951,1.3) ]
+2023.09.05 02:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07949,1.1) ]
+2023.09.05 03:00:00   BOX High: 1.08088
+2023.09.05 03:00:00   BOX EndTime: 2023.09.05 00:00
+2023.09.05 03:00:00   Last Candle close: 1.07913
+2023.09.05 03:00:00   Last Candle Time: 2023.09.05 02:00
+2023.09.05 03:00:00   [MarketObserver] Shared OverLap group: 3 boxes; High=1.08088 Low=1.07833 Start=2023.09.04 05:00 End=2023.09.05 00:00
+2023.09.05 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07944,1.5) ]
+2023.09.05 03:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07944,1.5) ]
+2023.09.05 04:00:00   BOX High: 1.08
+2023.09.05 04:00:00   BOX EndTime: 2023.09.05 01:00
+2023.09.05 04:00:00   Last Candle close: 1.07931
+2023.09.05 04:00:00   Last Candle Time: 2023.09.05 03:00
+2023.09.05 04:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08088 Low=1.07833 OriginalEnd=2023.09.05 00:00 Candle=2023.09.05 03:00
+2023.09.05 04:00:00   [MarketObserver] Shared OverLap group: 4 boxes; High=1.08088 Low=1.07833 Start=2023.09.04 05:00 End=2023.09.05 01:00
+2023.09.05 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07941,0.9) ]
+2023.09.05 04:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07941,0.9) ]
+2023.09.05 05:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08088 Low=1.07833 OriginalEnd=2023.09.05 01:00 Candle=2023.09.05 04:00
+2023.09.05 05:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07932,1.3) ]
+2023.09.05 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07922,1.9) ]
+2023.09.05 07:00:00   BOX High: 1.08
+2023.09.05 07:00:00   BOX EndTime: 2023.09.05 04:00
+2023.09.05 07:00:00   Last Candle close: 1.07886
+2023.09.05 07:00:00   Last Candle Time: 2023.09.05 06:00
+2023.09.05 07:00:00   [MarketObserver] رویداد بازار: از کف برگشتیم
+2023.09.05 07:00:00   نظریه: درجا می‌زنیم
+2023.09.05 07:00:00   دلیل: قیمت از کف عبور کرد اما داخل محدوده بسته شد
+2023.09.05 07:00:00   عامل تردید: حرکت بعدی هنوز مشخص نیست
+2023.09.05 07:00:00   زمان رویداد: 2023.09.05 06:00
+2023.09.05 07:00:00   زمان تغییر نظریه: 2023.09.04 19:00
+2023.09.05 07:00:00   [MarketObserver] Shared OverLap group: 5 boxes; High=1.08088 Low=1.07833 Start=2023.09.04 05:00 End=2023.09.05 04:00
+2023.09.05 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07915,2.0) ]
+2023.09.05 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07915,2.0) ]
+2023.09.05 08:00:00   [MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08088 Low=1.07833 OriginalEnd=2023.09.05 04:00 Candle=2023.09.05 07:00
+2023.09.05 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07917,2.3) ]
+2023.09.05 09:00:00   BOX High: 1.07983
+2023.09.05 09:00:00   BOX EndTime: 2023.09.05 06:00
+2023.09.05 09:00:00   Last Candle close: 1.07858
+2023.09.05 09:00:00   Last Candle Time: 2023.09.05 08:00
+2023.09.05 09:00:00   [MarketObserver] Shared OverLap group: 6 boxes; High=1.08088 Low=1.07808 Start=2023.09.04 05:00 End=2023.09.05 06:00
+2023.09.05 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07906,2.6) ]
+2023.09.05 09:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07906,2.6) ]
+2023.09.05 10:00:00   BOX High: 1.07983
+2023.09.05 10:00:00   BOX EndTime: 2023.09.05 07:00
+2023.09.05 10:00:00   Last Candle close: 1.07664
+2023.09.05 10:00:00   Last Candle Time: 2023.09.05 09:00
+2023.09.05 10:00:00   [MarketObserver] رویداد بازار: به سمت پایین می‌رویم
+2023.09.05 10:00:00   نظریه: درجا می‌زنیم
+2023.09.05 10:00:00   دلیل: کندل پایین کف گروه زمانی بسته شد
+2023.09.05 10:00:00   عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
+2023.09.05 10:00:00   زمان رویداد: 2023.09.05 09:00
+2023.09.05 10:00:00   زمان تغییر نظریه: 2023.09.04 19:00
+2023.09.05 10:00:00   [MarketObserver] OVERLAP FINISHED: Boxes=6 High=1.08088 Low=1.07808 End=2023.09.05 06:00 Candle=2023.09.05 09:00 Close=1.07664
+2023.09.05 10:00:00   [TheoryExperiment] LONG OVERLAP BREAKOUT
+2023.09.05 10:00:00   Boxes=6
+2023.09.05 10:00:00   Next direction=BEARISH
+2023.09.05 10:00:00   [TheoryExperiment] THEORY SELECTED
+2023.09.05 10:00:00   Theory=RANDOM_BEARISH
+2023.09.05 10:00:00   Mode=BREAKOUT
+2023.09.05 10:00:00   Time=2023.09.05 09:00
+2023.09.05 10:00:00   ReferenceHigh=1.08088
+2023.09.05 10:00:00   ReferenceLow=1.07808
+2023.09.05 10:00:00   Evidence begins after candle=2023.09.05 09:00
+2023.09.05 10:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.09.05 10:00:00   [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.09.05 01:00 Level=1.07808 Candle=2023.09.05 09:00
+2023.09.05 10:00:00   [TheoryExperiment] THEORY EXPIRED
+2023.09.05 10:00:00   Reason=STUCK_RESUMED
+2023.09.05 10:00:00   Theory=RANDOM_BEARISH
+2023.09.05 10:00:00   Time=2023.09.05 07:00
+2023.09.05 10:00:00   [MarketObserver] Theory: درجا می‌زنیم
+2023.09.05 10:00:00   [MarketObserver] Shared OverLap group: 7 boxes; High=1.08088 Low=1.07808 Start=2023.09.04 05:00 End=2023.09.05 07:00
+2023.09.05 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07870,6.4) ]
+2023.09.05 10:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07870,6.4) ]
+2023.09.05 11:00:00   [MarketObserver] OVERLAP FINISHED: Boxes=7 High=1.08088 Low=1.07808 End=2023.09.05 07:00 Candle=2023.09.05 10:00 Close=1.07563
+2023.09.05 11:00:00   [TheoryExperiment] LONG OVERLAP BREAKOUT
+2023.09.05 11:00:00   Boxes=7
+2023.09.05 11:00:00   Next direction=BEARISH
+2023.09.05 11:00:00   [TheoryExperiment] THEORY SELECTED
+2023.09.05 11:00:00   Theory=RANDOM_BEARISH
+2023.09.05 11:00:00   Mode=BREAKOUT
+2023.09.05 11:00:00   Time=2023.09.05 10:00
+2023.09.05 11:00:00   ReferenceHigh=1.08088
+2023.09.05 11:00:00   ReferenceLow=1.07808
+2023.09.05 11:00:00   Evidence begins after candle=2023.09.05 10:00
+2023.09.05 11:00:00   [MarketObserver] Theory: درجا زدن غیرفعال شد
+2023.09.05 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07822,10.5) ]
+2023.09.05 12:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 12:00:00   Theory=RANDOM_BEARISH
+2023.09.05 12:00:00   Assessment=SUPPORT
+2023.09.05 12:00:00   Reason=Close below reference low
+2023.09.05 12:00:00   Candle=2023.09.05 11:00
+2023.09.05 12:00:00   Close=1.07482
+2023.09.05 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07769,14.3) ]
+2023.09.05 13:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 13:00:00   Theory=RANDOM_BEARISH
+2023.09.05 13:00:00   Assessment=SUPPORT
+2023.09.05 13:00:00   Reason=Close below reference low
+2023.09.05 13:00:00   Candle=2023.09.05 12:00
+2023.09.05 13:00:00   Close=1.07482
+2023.09.05 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07723,16.4) ]
+2023.09.05 14:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 14:00:00   Theory=RANDOM_BEARISH
+2023.09.05 14:00:00   Assessment=SUPPORT
+2023.09.05 14:00:00   Reason=Close below reference low
+2023.09.05 14:00:00   Candle=2023.09.05 13:00
+2023.09.05 14:00:00   Close=1.07394
+2023.09.05 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07668,18.6) ]
+2023.09.05 15:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 15:00:00   Theory=RANDOM_BEARISH
+2023.09.05 15:00:00   Assessment=SUPPORT
+2023.09.05 15:00:00   Reason=Close below reference low
+2023.09.05 15:00:00   Candle=2023.09.05 14:00
+2023.09.05 15:00:00   Close=1.07325
+2023.09.05 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07607,20.6) ]
+2023.09.05 16:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 16:00:00   Theory=RANDOM_BEARISH
+2023.09.05 16:00:00   Assessment=SUPPORT
+2023.09.05 16:00:00   Reason=Close below reference low
+2023.09.05 16:00:00   Candle=2023.09.05 15:00
+2023.09.05 16:00:00   Close=1.07440
+2023.09.05 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07572,20.8) ]
+2023.09.05 17:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 17:00:00   Theory=RANDOM_BEARISH
+2023.09.05 17:00:00   Assessment=SUPPORT
+2023.09.05 17:00:00   Reason=Close below reference low
+2023.09.05 17:00:00   Candle=2023.09.05 16:00
+2023.09.05 17:00:00   Close=1.07291
+2023.09.05 17:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07523,21.7) ]
+2023.09.05 18:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 18:00:00   Theory=RANDOM_BEARISH
+2023.09.05 18:00:00   Assessment=SUPPORT
+2023.09.05 18:00:00   Reason=Close below reference low
+2023.09.05 18:00:00   Candle=2023.09.05 17:00
+2023.09.05 18:00:00   Close=1.07083
+2023.09.05 18:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07452,22.7) ]
+2023.09.05 19:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 19:00:00   Theory=RANDOM_BEARISH
+2023.09.05 19:00:00   Assessment=SUPPORT
+2023.09.05 19:00:00   Reason=Close below reference low
+2023.09.05 19:00:00   Candle=2023.09.05 18:00
+2023.09.05 19:00:00   Close=1.07265
+2023.09.05 19:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07419,21.2) ]
+2023.09.05 20:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 20:00:00   Theory=RANDOM_BEARISH
+2023.09.05 20:00:00   Assessment=SUPPORT
+2023.09.05 20:00:00   Reason=Close below reference low
+2023.09.05 20:00:00   Candle=2023.09.05 19:00
+2023.09.05 20:00:00   Close=1.07295
+2023.09.05 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07393,19.7) ]
+2023.09.05 21:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 21:00:00   Theory=RANDOM_BEARISH
+2023.09.05 21:00:00   Assessment=SUPPORT
+2023.09.05 21:00:00   Reason=Close below reference low
+2023.09.05 21:00:00   Candle=2023.09.05 20:00
+2023.09.05 21:00:00   Close=1.07229
+2023.09.05 21:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07362,17.4) ]
+2023.09.05 22:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 22:00:00   Theory=RANDOM_BEARISH
+2023.09.05 22:00:00   Assessment=SUPPORT
+2023.09.05 22:00:00   Reason=Close below reference low
+2023.09.05 22:00:00   Candle=2023.09.05 21:00
+2023.09.05 22:00:00   Close=1.07216
+2023.09.05 22:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.07334,13.9) ]
+2023.09.05 23:00:00   [TheoryExperiment] EVIDENCE
+2023.09.05 23:00:00   Theory=RANDOM_BEARISH
+2023.09.05 23:00:00   Assessment=SUPPORT
+2023.09.05 23:00:00   Reason=Close below reference low
+2023.09.05 23:00:00   Candle=2023.09.05 22:00
