@@ -2,7 +2,7 @@
 // آرایه از جدیدترین به قدیمی‌ترین مرتب شده است.
 bool FindGapZone(CFractalGeometry &fractal)
 {
-   int total = fractal.SmallBoxCount();
+   int total = fractal.SmallBoxCount();ل
 
    if(total <= 0)
       return false;
@@ -25,7 +25,7 @@ bool FindGapZone(CFractalGeometry &fractal)
    double eps = _Point * 0.5;
 
    FlatZone gapBox;
-   int gapBoxIndex = -1;
+   
 
 
    for(int i = 1; i < total; i++)
@@ -47,7 +47,7 @@ bool FindGapZone(CFractalGeometry &fractal)
       {
 
          gapBox = box;
-         gapBoxIndex = i;
+         
    
          Print(
             "[MarketObserver] FIRST NON-OVERLAPPING BOX",
