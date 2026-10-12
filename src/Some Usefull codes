@@ -554,7 +554,160 @@ private:
    int m_levelAlertCount;
    int m_nextLevelAlertSlot;
 
+   double m_lastAcceptedTouchPrice;
+   bool   m_hasAcceptedTouchPrice;
 
+   // ------------------------------
+   // Random Theory Experiment
+   // ------------------------------
+   bool     m_theoryActive;
+   bool     m_theoryBullish;
+   bool     m_randomSeeded;
+   
+   datetime m_theoryStartTime;
+   datetime m_theoryStartCandle;
+   
+   double   m_theoryReferenceHigh;
+   double   m_theoryReferenceLow;
+
+
+   // نام دقیق نظریهٔ فعال
+   string RandomTheoryName()
+   {
+      if(m_theoryBullish)
+         return "RANDOM_BULLISH";
+   
+      return "RANDOM_BEARISH";
+   }
+   
+   
+   // انتخاب یک نظریهٔ تصادفی جدید
+   void SelectRandomTheory(datetime when)
+   {
+      // هنگام درجا زدن، نظریهٔ جهت‌دار فعال نمی‌شود.
+      if(m_notebook.StuckTheory())
+         return;
+   
+      // اگر نظریه‌ای فعال است، نظریهٔ دیگری نساز.
+      if(m_theoryActive)
+         return;
+   
+      if(!m_zoneReady)
+         return;
+   
+      // 0 = صعودی، 1 = نزولی
+      m_theoryBullish = ((MathRand() % 2) == 0);
+   
+      m_theoryActive = true;
+   
+      m_theoryStartTime = when;
+   
+      // آخرین کندل بسته‌شده در لحظهٔ انتخاب.
+      // این کندل نباید شاهد نظریهٔ تازه باشد.
+      m_theoryStartCandle =
+         iTime(_Symbol, PERIOD_H1, 1);
+   
+      if(m_theoryStartCandle == 0)
+         m_theoryStartCandle = when;
+   
+      // مرجع نظریه هنگام انتخاب ثابت می‌ماند.
+      m_theoryReferenceHigh = m_zoneHigh;
+      m_theoryReferenceLow  = m_zoneLow;
+   
+      Print(
+         "[TheoryExperiment] THEORY SELECTED",
+         "\nTheory=", RandomTheoryName(),
+         "\nTime=",
+         TimeToString(when, TIME_DATE | TIME_MINUTES),
+         "\nReferenceHigh=",
+         DoubleToString(m_theoryReferenceHigh, _Digits),
+         "\nReferenceLow=",
+         DoubleToString(m_theoryReferenceLow, _Digits),
+         "\nEvidence begins after candle=",
+         TimeToString(
+            m_theoryStartCandle,
+            TIME_DATE | TIME_MINUTES
+         )
+      );
+   }
+   
+   
+   // پایان نظریه بدون حذف شواهد ثبت‌شده در لاگ
+   void ExpireRandomTheory(
+      string reason,
+      datetime when
+   )
+   {
+      if(!m_theoryActive)
+         return;
+   
+      Print(
+         "[TheoryExperiment] THEORY EXPIRED",
+         "\nReason=", reason,
+         "\nTheory=", RandomTheoryName(),
+         "\nTime=",
+         TimeToString(when, TIME_DATE | TIME_MINUTES)
+      );
+   
+      m_theoryActive = false;
+   }
+   
+   
+   // ارزیابی یک کندل بسته‌شده در برابر نظریهٔ فعال
+   void EvaluateRandomTheory(datetime candleTime)
+   {
+      if(!m_theoryActive)
+         return;
+   
+      // کندل محرک انتخاب نظریه، شاهد محسوب نمی‌شود.
+      if(candleTime <= m_theoryStartCandle)
+         return;
+   
+      double c = iClose(_Symbol, PERIOD_H1, 1);
+   
+      if(c == 0)
+         return;
+   
+      string assessment = "INCONCLUSIVE";
+      string reason = "Close inside reference zone";
+   
+      if(m_theoryBullish)
+      {
+         if(c > m_theoryReferenceHigh)
+         {
+            assessment = "SUPPORT";
+            reason = "Close above reference high";
+         }
+         else if(c < m_theoryReferenceLow)
+         {
+            assessment = "CONTRADICTION";
+            reason = "Close below reference low";
+         }
+      }
+      else
+      {
+         if(c < m_theoryReferenceLow)
+         {
+            assessment = "SUPPORT";
+            reason = "Close below reference low";
+         }
+         else if(c > m_theoryReferenceHigh)
+         {
+            assessment = "CONTRADICTION";
+            reason = "Close above reference high";
+         }
+      }
+   
+      Print(
+         "[TheoryExperiment] EVIDENCE",
+         "\nTheory=", RandomTheoryName(),
+         "\nAssessment=", assessment,
+         "\nReason=", reason,
+         "\nCandle=",
+         TimeToString(candleTime, TIME_DATE | TIME_MINUTES),
+         "\nClose=", DoubleToString(c, _Digits)
+      );
+   }
 
 
    // ساخت محدوده مشترک باکس‌های متصل از نظر زمانی
@@ -658,9 +811,12 @@ int FindOrCreateLevelAlertState(datetime boxStart)
 
 // بررسی تماس کندل بسته‌شده با سقف و کف تمام باکس‌ها.
 //
-// allowAlerts:
-//   true  = هشدار مجاز است.
-//   false = هشدار صادر نمی‌شود، اما وضعیت سطوح به‌روز می‌شود.
+// قوانین هشدار:
+// 1. در هر کندل حداکثر یک هشدار ثبت می‌شود.
+// 2. اولین هشدار پذیرفته‌شده، شرط فاصله ندارد.
+// 3. هشدارهای کندل‌های بعدی باید حداقل 10 پیپ
+//    با آخرین هشدار پذیرفته‌شده فاصله داشته باشند.
+// 4. تمام وضعیت‌های سطح‌ها همچنان به‌روز می‌شوند.
 void CheckBoxLevelTouches(
    CFractalGeometry &fractal,
    bool allowAlerts,
@@ -681,6 +837,12 @@ void CheckBoxLevelTouches(
    if(h == 0 || l == 0)
       return;
 
+   // اولین تاچ جدیدی که در این کندل پیدا می‌شود.
+   bool     candidateFound = false;
+   string   candidateType  = "";
+   datetime candidateBoxStart = 0;
+   double   candidateLevel = 0.0;
+
    for(int i = 0; i < total; i++)
    {
       FlatZone box;
@@ -691,33 +853,37 @@ void CheckBoxLevelTouches(
       int stateIndex =
          FindOrCreateLevelAlertState(box.startTime);
 
-      // آیا دامنه کندل با سقف این باکس تقاطع دارد؟
+      // -------------------------
+      // بررسی سقف باکس
+      // -------------------------
       bool touchesHigh =
          (l <= box.highPrice && h >= box.highPrice);
 
       if(!touchesHigh)
       {
-         // با فاصله گرفتن از سطح، هشدار بعدی مجاز می‌شود.
+         // با فاصله گرفتن از سطح، هشدار بعدی آن سطح مجاز می‌شود.
          m_levelAlertStates[stateIndex].highAlerted = false;
       }
       else if(allowAlerts &&
               !m_levelAlertStates[stateIndex].highAlerted)
       {
-         Print(
-            "[MarketObserver] LEVEL TOUCH: HIGH",
-            " BoxStart=",
-            TimeToString(box.startTime, TIME_DATE | TIME_MINUTES),
-            " Level=",
-            DoubleToString(box.highPrice, _Digits),
-            " Candle=",
-            TimeToString(candleTime, TIME_DATE | TIME_MINUTES)
-         );
+         // فقط اولین تاچ جدید این کندل کاندید می‌شود.
+         if(!candidateFound)
+         {
+            candidateFound    = true;
+            candidateType     = "HIGH";
+            candidateBoxStart = box.startTime;
+            candidateLevel    = box.highPrice;
+         }
 
+         // سطح لمس‌شده ثبت‌شده محسوب می‌شود،
+         // حتی اگر کاندید آن کندل بعداً به دلیل فاصله رد شود.
          m_levelAlertStates[stateIndex].highAlerted = true;
       }
 
-
-      // آیا دامنه کندل با کف این باکس تقاطع دارد؟
+      // -------------------------
+      // بررسی کف باکس
+      // -------------------------
       bool touchesLow =
          (l <= box.lowPrice && h >= box.lowPrice);
 
@@ -728,19 +894,67 @@ void CheckBoxLevelTouches(
       else if(allowAlerts &&
               !m_levelAlertStates[stateIndex].lowAlerted)
       {
-         Print(
-            "[MarketObserver] LEVEL TOUCH: LOW",
-            " BoxStart=",
-            TimeToString(box.startTime, TIME_DATE | TIME_MINUTES),
-            " Level=",
-            DoubleToString(box.lowPrice, _Digits),
-            " Candle=",
-            TimeToString(candleTime, TIME_DATE | TIME_MINUTES)
-         );
+         if(!candidateFound)
+         {
+            candidateFound    = true;
+            candidateType     = "LOW";
+            candidateBoxStart = box.startTime;
+            candidateLevel    = box.lowPrice;
+         }
 
          m_levelAlertStates[stateIndex].lowAlerted = true;
       }
    }
+
+   // اگر در این کندل تاچ جدیدی پیدا نشد، تمام.
+   if(!candidateFound)
+      return;
+
+   // اندازه یک پیپ برای نمادهای 3 و 5 رقمی.
+   double pipSize =
+      ((_Digits == 3 || _Digits == 5)
+       ? 10.0 * _Point
+       : _Point);
+
+   // اولین هشدار هیچ محدودیت فاصله‌ای ندارد.
+   bool acceptAlert = !m_hasAcceptedTouchPrice;
+
+   if(m_hasAcceptedTouchPrice)
+   {
+      double distancePips =
+         MathAbs(candidateLevel - m_lastAcceptedTouchPrice)
+         / pipSize;
+
+      // هشدار جدید باید حداقل 10 پیپ فاصله داشته باشد.
+      acceptAlert = (distancePips >= 10.0);
+   }
+
+   // فاصله کافی نیست؛ هشدار این کندل نادیده گرفته می‌شود.
+   // قیمت آخرین هشدار پذیرفته‌شده تغییر نمی‌کند.
+   if(!acceptAlert)
+      return;
+
+   // ثبت تنها هشدار این کندل.
+   Print(
+      "[MarketObserver] LEVEL TOUCH: ",
+      candidateType,
+      " BoxStart=",
+      TimeToString(
+         candidateBoxStart,
+         TIME_DATE | TIME_MINUTES
+      ),
+      " Level=",
+      DoubleToString(candidateLevel, _Digits),
+      " Candle=",
+      TimeToString(
+         candleTime,
+         TIME_DATE | TIME_MINUTES
+      )
+   );
+
+   // مبنای مقایسه هشدارهای کندل‌های بعدی.
+   m_lastAcceptedTouchPrice = candidateLevel;
+   m_hasAcceptedTouchPrice  = true;
 }
 
 
@@ -841,13 +1055,29 @@ void ObserveCandle(datetime candleTime)
       m_lastBoxStart = box.startTime;
       m_lastBoxEnd   = box.endTime;
 
+
+
       if(!BuildOverLapZone(fractal))
          return;
-         
-         
-      // تشکیل گروه زمانی حداقل دو باکسی، نظریه درجا زدن را فعال می‌کند.
+      
+      
+      // وضعیت گروه جدید
       bool stuckTheory = (m_zoneBoxCount >= 2);
       
+      
+      // باکس جدید عمر نظریهٔ قبلی را تمام می‌کند.
+      // اگر گروه جدید نشانهٔ درجا زدن باشد، این دلیل
+      // بر پایان نظریه اولویت دارد.
+      if(m_theoryActive)
+      {
+         if(stuckTheory)
+            ExpireRandomTheory("STUCK_RESUMED", m_zoneEnd);
+         else
+            ExpireRandomTheory("NEW_BOX_ARRIVED", m_zoneEnd);
+      }
+      
+      
+      // ثبت وضعیت نظریهٔ درجا زدن
       if(m_notebook.SetStuckTheory(stuckTheory, m_zoneEnd))
       {
          if(stuckTheory)
@@ -855,6 +1085,15 @@ void ObserveCandle(datetime candleTime)
          else
             Print("[MarketObserver] Theory: درجا زدن غیرفعال شد");
       }
+      
+      
+      // اگر وضعیت جدید درجا زدن نیست، نظریهٔ تازه
+      // بلافاصله انتخاب می‌شود.
+      if(!stuckTheory)
+         SelectRandomTheory(m_zoneEnd);
+
+
+
 
 
       Print(
@@ -888,12 +1127,25 @@ public:
       
       m_levelAlertCount    = 0;
       m_nextLevelAlertSlot = 0;
+      
+      m_lastAcceptedTouchPrice = 0.0;
+      m_hasAcceptedTouchPrice  = false;
+
    }
 
    void Init(CFractalGeometry &fractal)
    {
+      // بذر تصادفی فقط یک بار تنظیم می‌شود.
+      if(!m_randomSeeded)
+      {
+         MathSrand((int)TimeLocal());
+         m_randomSeeded = true;
+      }
+   
       CheckNewBox(fractal);
    }
+
+
 
 // newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
 void Update(
@@ -1016,6 +1268,14 @@ void Update(
                "Theory: درجا زدن غیرفعال شد"
             );
          }
+         
+         
+         // پایان درجا زدن، اجازهٔ انتخاب نظریهٔ جهت‌دار را می‌دهد.
+         // کندل t با ثبت m_theoryStartCandle شاهد این نظریه نخواهد بود.
+         SelectRandomTheory(t);
+   
+         
+         
       }
    }
 
@@ -1028,6 +1288,17 @@ void Update(
    );
 
    // رویداد بازار برای گروه فعال قبلاً بررسی شده است.
+
+
+
+
+  // ارزیابی نظریهٔ آزمایشی روی کندل بسته‌شده
+  // فقط یک بار برای هر کندل، به کمک کنترل m_lastCandle.
+  EvaluateRandomTheory(t);
+ 
+  // رویداد بازار برای گروه فعال قبلاً بررسی شده است. 
+
+
 
 }
 
