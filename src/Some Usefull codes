@@ -538,6 +538,7 @@ private:
    int      m_zoneBoxCount;
    datetime m_zoneStart;
    datetime m_zoneEnd;
+   bool     m_zoneExtended;
 
    bool     m_zoneReady;
    datetime m_lastCandle;
@@ -614,8 +615,9 @@ private:
             m_zoneLow = box.lowPrice;
       }
 
+      m_zoneExtended = false;
       m_zoneReady = true;
-
+      
       return true;
    }
 
@@ -856,7 +858,7 @@ void ObserveCandle(datetime candleTime)
 
 
       Print(
-         "[MarketObserver] Shared time group: ",
+         "[MarketObserver] Shared OverLap group: ",
          m_zoneBoxCount,
          " boxes; High=",
          DoubleToString(m_zoneHigh, _Digits),
@@ -877,6 +879,7 @@ public:
       m_zoneBoxCount  = 0;
       m_zoneStart     = 0;
       m_zoneEnd       = 0;
+      m_zoneExtended  = false;
 
       m_zoneReady     = false;
       m_lastCandle    = 0;
@@ -915,32 +918,117 @@ void Update(
 
    // تا وقتی گروه همپوشان فعال است، هشدار سطحی
    // فقط در صورتی مجاز است که قیمت بیرون محدوده بسته شود.
-   bool allowLevelAlerts = true;
+   double c = iClose(_Symbol, PERIOD_H1, 1);
 
+   if(c == 0)
+      return;
+
+   bool allowLevelAlerts = true;
+   bool finishOverlap    = false;
+
+   // اگر گروه همپوشانی معتبر داریم، زمان و قیمت را
+   // هم‌زمان بررسی می‌کنیم.
    if(m_zoneReady && m_zoneBoxCount >= 2)
    {
-      double c = iClose(_Symbol, PERIOD_H1, 1);
+      bool timeExpired = (t > m_zoneEnd);
 
-      if(c == 0)
-         return;
-
-      allowLevelAlerts =
+      bool priceOutside =
          (c > m_zoneHigh || c < m_zoneLow);
+
+      // پایان همپوشانی فقط با تحقق هر دو شرط:
+      // 1. زمان گروه منقضی شده باشد.
+      // 2. قیمت بیرون محدوده بسته شده باشد.
+      if(timeExpired && priceOutside)
+      {
+         finishOverlap = true;
+         allowLevelAlerts = true;
+      }
+      else
+      {
+         // همپوشانی هنوز برقرار است؛
+         // هشدار سطحی تا زمان پایان آن ممنوع است.
+         allowLevelAlerts = false;
+
+         // زمان گذشته ولی قیمت هنوز داخل محدوده است.
+         // همپوشانی را امتداد می‌دهیم.
+         if(timeExpired && !priceOutside &&
+            !m_zoneExtended)
+         {
+            m_zoneExtended = true;
+
+            Print(
+               "[MarketObserver] OVERLAP EXTENDED: ",
+               "Price remains inside the zone; ",
+               "High=",
+               DoubleToString(m_zoneHigh, _Digits),
+               " Low=",
+               DoubleToString(m_zoneLow, _Digits),
+               " OriginalEnd=",
+               TimeToString(
+                  m_zoneEnd,
+                  TIME_DATE | TIME_MINUTES
+               ),
+               " Candle=",
+               TimeToString(
+                  t,
+                  TIME_DATE | TIME_MINUTES
+               )
+            );
+         }
+      }
+
+      // رویداد بازار با استفاده از محدوده فعلی
+      // بررسی می‌شود؛ حتی اگر همین کندل پایان همپوشانی
+      // را تأیید کرده باشد.
+      ObserveCandle(t);
+
+      if(finishOverlap)
+      {
+         Print(
+            "[MarketObserver] OVERLAP FINISHED: ",
+            "High=",
+            DoubleToString(m_zoneHigh, _Digits),
+            " Low=",
+            DoubleToString(m_zoneLow, _Digits),
+            " End=",
+            TimeToString(
+               m_zoneEnd,
+               TIME_DATE | TIME_MINUTES
+            ),
+            " Candle=",
+            TimeToString(
+               t,
+               TIME_DATE | TIME_MINUTES
+            ),
+            " Close=",
+            DoubleToString(c, _Digits)
+         );
+
+         // گروه قبلی دیگر مبنای تصمیم‌گیری نیست.
+         m_zoneReady     = false;
+         m_zoneBoxCount  = 0;
+         m_zoneExtended  = false;
+
+         if(m_notebook.SetStuckTheory(false, t))
+         {
+            Print(
+               "[MarketObserver] ",
+               "Theory: درجا زدن غیرفعال شد"
+            );
+         }
+      }
    }
 
-   // تمام باکس‌ها، مستقل از همپوشانی، بررسی می‌شوند.
+   // هشدار سطحی فقط بعد از پایان همپوشانی مجاز است.
+   // اگر همپوشانی فعالی نداریم، هشدارها مجازند.
    CheckBoxLevelTouches(
       fractal,
       allowLevelAlerts,
       t
    );
 
-   // منطق رویدادهای فعلی فقط در صورت وجود گروه
-   // حداقل دو باکسی ادامه پیدا می‌کند.
-   if(!m_zoneReady || m_zoneBoxCount < 2)
-      return;
+   // رویداد بازار برای گروه فعال قبلاً بررسی شده است.
 
-   ObserveCandle(t);
 }
 
 
