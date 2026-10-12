@@ -25,7 +25,6 @@ bool FindGapZone(CFractalGeometry &fractal)
    double eps = _Point * 0.5;
 
    FlatZone gapBox;
-   bool foundGapBox = false;
    int gapBoxIndex = -1;
 
 
@@ -48,7 +47,6 @@ bool FindGapZone(CFractalGeometry &fractal)
       {
 
          gapBox = box;
-         foundGapBox = true;
          gapBoxIndex = i;
    
          Print(
