@@ -1,0 +1,1467 @@
+#ifndef __MARKET_OBSERVER_MQH__
+#define __MARKET_OBSERVER_MQH__
+
+#include "FractalGeometry.mqh"
+#include "../MA_INERTIA/RainBowDynamics.mqh"
+
+#define MO_MAX_BOXES 1000
+
+struct MOLevelAlertState
+{
+   datetime boxStart;
+   bool     highAlerted;
+   bool     lowAlerted;
+};
+
+
+class CMarketObserver
+{
+private:
+   CMarketNotebook m_notebook;
+
+   double   m_zoneHigh;
+   double   m_zoneLow;
+   int      m_zoneBoxCount;
+   datetime m_zoneStart;
+   datetime m_zoneEnd;
+   bool     m_zoneExtended;
+
+   bool     m_zoneReady;
+   datetime m_lastCandle;
+   datetime m_lastBoxStart;
+   datetime m_lastBoxEnd;
+
+   double   m_lastClose;
+   bool     m_hasLastClose;
+   string   m_lastRiverOpinion;
+
+   MOLevelAlertState m_levelAlertStates[MO_MAX_BOXES];
+
+   int m_levelAlertCount;
+   int m_nextLevelAlertSlot;
+
+   double m_lastAcceptedTouchPrice;
+   bool   m_hasAcceptedTouchPrice;
+
+   // ------------------------------
+   // Random Theory Experiment
+   // ------------------------------
+   bool     m_theoryActive;
+   bool     m_theoryBullish;
+   bool     m_randomSeeded;
+   int      m_theoryAlertLevel;
+   
+   datetime m_theoryStartTime;
+   datetime m_theoryStartCandle;
+   
+   double   m_theoryReferenceHigh;
+   double   m_theoryReferenceLow;
+
+   // ------------------------------
+   // Suspended Theory
+   // ------------------------------
+   bool   m_suspendedTheoryValid;
+   bool   m_suspendedTheoryBullish;
+   
+   double m_suspendedReferenceHigh;
+   double m_suspendedReferenceLow;
+   
+   // ------------------------------
+   // Pending Breakout Direction
+   // ------------------------------
+   bool m_pendingDirectionValid;
+   bool m_pendingDirectionBullish;
+
+   // نام دقیق نظریهٔ فعال
+   string RandomTheoryName()
+   {
+      if(m_theoryBullish)
+         return "RANDOM_BULLISH";
+   
+      return "RANDOM_BEARISH";
+   }
+public:
+   void ConsultRiver()
+   {
+      double r1 = m_dyno.RainbowCenter(1); // جدیدترین نقطه
+      double r2 = m_dyno.RainbowCenter(2); // نقطه قبلی
+      double r3 = m_dyno.RainbowCenter(3); // نقطه قدیمی‌تر
+   
+      string opinion = "RIVER_UNCLEAR";
+   
+      if(r1 > r2 && r2 > r3)
+         opinion = "RIVER_RISING";
+      else if(r1 < r2 && r2 < r3)
+         opinion = "RIVER_FALLING";
+   
+      if(opinion != m_lastRiverOpinion)
+      {
+         Print("River Consultant: ", opinion);
+         m_lastRiverOpinion = opinion;
+      }
+
+   }
+private:
+   
+   // انتخاب نظریه بر اساس اولویت:
+   // 1. جهت شکست زنجیره طولانی
+   // 2. بازگرداندن نظریه معلق
+   // 3. انتخاب تصادفی
+   
+   void SelectRandomTheory(datetime when)
+   {
+   
+   
+      bool breakoutTheory = false;
+      
+      // هنگام درجا زدن، نظریه جهت‌دار فعال نمی‌شود.
+      if(m_notebook.StuckTheory())
+         return;
+   
+      // نظریه فعال دیگری نساز.
+      if(m_theoryActive)
+         return;
+   
+      // برای انتخاب نظریه باید محدوده معتبر باشد.
+      if(!m_zoneReady)
+         return;
+   
+      bool resumedTheory = false;
+   
+      // --------------------------------
+      // حالت اول: شکست زنجیره طولانی
+      // --------------------------------
+      if(m_pendingDirectionValid)
+      {
+         m_theoryBullish = m_pendingDirectionBullish;
+   
+         // نظریه جدید، محدوده گروه جدید را مرجع می‌گیرد.
+         m_theoryReferenceHigh = m_zoneHigh;
+         m_theoryReferenceLow  = m_zoneLow;
+         
+         breakoutTheory = true ;
+         
+         m_pendingDirectionValid = false;
+   
+         // نظریه معلق قبلی دیگر لازم نیست.
+         m_suspendedTheoryValid = false;
+      }
+   
+      // --------------------------------
+      // حالت دوم: بازگرداندن نظریه قبلی
+      // --------------------------------
+      else if(m_suspendedTheoryValid)
+      {
+         m_theoryBullish = m_suspendedTheoryBullish;
+   
+         // مرجع نظریه قبلی باید حفظ شود.
+         m_theoryReferenceHigh = m_suspendedReferenceHigh;
+         m_theoryReferenceLow  = m_suspendedReferenceLow;
+   
+         m_suspendedTheoryValid = false;
+   
+         resumedTheory = true;
+      }
+   
+      // --------------------------------
+      // حالت سوم: انتخاب تصادفی
+      // --------------------------------
+      else
+      {
+         m_theoryBullish = ((MathRand() % 2) == 0);
+   
+         m_theoryReferenceHigh = m_zoneHigh;
+         m_theoryReferenceLow  = m_zoneLow;
+      }
+   
+      m_theoryActive = true;
+      
+      m_theoryAlertLevel = 0 ;
+      
+      m_theoryStartTime = when;
+   
+      // آخرین کندل بسته‌شده در لحظه انتخاب.
+      // این کندل شاهد نظریه جدید نیست.
+      m_theoryStartCandle =
+         iTime(_Symbol, PERIOD_H1, 1);
+   
+      if(m_theoryStartCandle == 0)
+         m_theoryStartCandle = when;
+   
+      Print(
+         "[TheoryExperiment] THEORY SELECTED",
+         "\nTheory=", RandomTheoryName(),
+         "\nMode=",
+         resumedTheory ? "RESUMED" :
+         (breakoutTheory ? "BREAKOUT" : "RANDOM"),
+         "\nTime=",
+         TimeToString(when, TIME_DATE | TIME_MINUTES),
+         "\nReferenceHigh=",
+         DoubleToString(m_theoryReferenceHigh, _Digits),
+         "\nReferenceLow=",
+         DoubleToString(m_theoryReferenceLow, _Digits),
+         "\nEvidence begins after candle=",
+         TimeToString(
+            m_theoryStartCandle,
+            TIME_DATE | TIME_MINUTES
+         )
+      );
+   }
+  
+   // پایان نظریه بدون حذف شواهد ثبت‌شده در لاگ
+   void ExpireRandomTheory(
+      string reason,
+      datetime when
+   )
+   {
+      if(!m_theoryActive)
+         return;
+   
+      Print(
+         "[TheoryExperiment] THEORY EXPIRED",
+         "\nReason=", reason,
+         "\nTheory=", RandomTheoryName(),
+         "\nTime=",
+         TimeToString(when, TIME_DATE | TIME_MINUTES)
+      );
+   
+      m_theoryActive = false;
+   }
+   
+   
+   // ارزیابی یک کندل بسته‌شده در برابر نظریهٔ فعال
+   void EvaluateDirectionalTheory(datetime candleTime)
+   {
+      if(!m_theoryActive)
+         return;
+   
+      // کندل محرک انتخاب نظریه، شاهد محسوب نمی‌شود.
+      if(candleTime <= m_theoryStartCandle)
+         return;
+   
+      double c = iClose(_Symbol, PERIOD_H1, 1);
+   
+      if(c == 0)
+         return;
+         
+      double referenceHeight =
+         m_theoryReferenceHigh - m_theoryReferenceLow;
+      
+      if(referenceHeight <= 0)
+         return;
+      
+      double contradictionDistance = 0.0;
+      
+      if(m_theoryBullish && c < m_theoryReferenceLow)
+      {
+         contradictionDistance =
+            m_theoryReferenceLow - c;
+      }
+      else if(!m_theoryBullish && c > m_theoryReferenceHigh)
+      {
+         contradictionDistance =
+            c - m_theoryReferenceHigh;
+      }
+      
+      double contradictionPercent =
+         100.0 * contradictionDistance / referenceHeight;
+         
+      
+   
+      string assessment = "INCONCLUSIVE";
+      string reason = "Close inside reference zone";
+   
+      if(m_theoryBullish)
+      {
+         if(c > m_theoryReferenceHigh)
+         {
+            assessment = "SUPPORT";
+            reason = "Close above reference high";
+         }
+         else if(c < m_theoryReferenceLow)
+         {
+            assessment = "CONTRADICTION";
+            reason = "Close below reference low";
+            
+         }
+      }
+      else
+      {
+         if(c < m_theoryReferenceLow)
+         {
+            assessment = "SUPPORT";
+            reason = "Close below reference low";
+         }
+         else if(c > m_theoryReferenceHigh)
+         {
+            assessment = "CONTRADICTION";
+            reason = "Close above reference high";
+       
+         }
+      }
+
+
+      if(assessment == "CONTRADICTION")
+      {
+         int observedLevel = 0;
+      
+         if(contradictionPercent >= 80.0)
+            observedLevel = 3;
+         else if(contradictionPercent >= 30.0)
+            observedLevel = 2;
+         else if(contradictionPercent >= 5.0)
+            observedLevel = 1;
+      
+         if(observedLevel > m_theoryAlertLevel)
+            m_theoryAlertLevel = observedLevel;
+      }
+
+
+   
+      Print(
+         "[TheoryExperiment] EVIDENCE",
+         "\nTheory=", RandomTheoryName(),
+         "\nAssessment=", assessment,
+         "\nReason=", reason,
+         "\nAlertLevel=", m_theoryAlertLevel,
+         "\nContradictionPercent=",
+                  DoubleToString(contradictionPercent, 2),
+         "\nCandle=",
+         TimeToString(candleTime, TIME_DATE | TIME_MINUTES),
+         "\nClose=", DoubleToString(c, _Digits)
+      );
+   }
+
+
+   // ساخت محدوده مشترک باکس‌های متصل از نظر زمانی
+   bool BuildOverLapZone(CFractalGeometry &fractal)
+   {
+      int total = fractal.SmallBoxCount();
+
+      if(total <= 0)
+         return false;
+
+      if(total > MO_MAX_BOXES)
+         total = MO_MAX_BOXES;
+
+      FlatZone box;
+
+      // گروه با جدیدترین باکس آغاز می‌شود.
+      if(!fractal.GetSmallBox(0, box))
+         return false;
+
+      m_zoneHigh     = box.highPrice;
+      m_zoneLow      = box.lowPrice;
+      m_zoneBoxCount = 1;
+      m_zoneStart    = box.startTime;
+      m_zoneEnd      = box.endTime;
+
+      datetime groupStart = box.startTime;
+
+      // باکس‌ها از جدیدترین به قدیمی‌ترین مرتب شده‌اند.
+      for(int i = 1; i < total; i++)
+      {
+         if(!fractal.GetSmallBox(i, box))
+            break;
+
+         // پایان باکس قدیمی‌تر باید حداکثر یک کندل
+         // با شروع گروه فاصله داشته باشد.
+         if(box.endTime <
+            groupStart - PeriodSeconds(PERIOD_H1))
+         {
+            break;
+         }
+
+         // این باکس به گروه زمانی متصل است.
+         groupStart = box.startTime;
+
+         m_zoneBoxCount++;
+
+         if(box.startTime < m_zoneStart)
+            m_zoneStart = box.startTime;
+
+         if(box.endTime > m_zoneEnd)
+            m_zoneEnd = box.endTime;
+
+         // قیمت فقط برای محاسبه سقف و کف گروه استفاده می‌شود.
+         if(box.highPrice > m_zoneHigh)
+            m_zoneHigh = box.highPrice;
+
+         if(box.lowPrice < m_zoneLow)
+            m_zoneLow = box.lowPrice;
+      }
+
+      m_zoneExtended = false;
+      m_zoneReady = true;
+      
+      return true;
+   }
+
+// یافتن وضعیت هشدار باکس؛ هر باکس با زمان شروع شناسایی می‌شود.
+int FindOrCreateLevelAlertState(datetime boxStart)
+{
+   for(int i = 0; i < m_levelAlertCount; i++)
+   {
+      if(m_levelAlertStates[i].boxStart == boxStart)
+         return i;
+   }
+
+   int idx;
+
+   if(m_levelAlertCount < MO_MAX_BOXES)
+   {
+      idx = m_levelAlertCount;
+      m_levelAlertCount++;
+   }
+   else
+   {
+      // اگر ظرفیت پر شد، قدیمی‌ترین رکوردهای چرخشی جایگزین می‌شوند.
+      idx = m_nextLevelAlertSlot;
+
+      m_nextLevelAlertSlot++;
+
+      if(m_nextLevelAlertSlot >= MO_MAX_BOXES)
+         m_nextLevelAlertSlot = 0;
+   }
+
+   m_levelAlertStates[idx].boxStart     = boxStart;
+   m_levelAlertStates[idx].highAlerted  = false;
+   m_levelAlertStates[idx].lowAlerted   = false;
+
+   return idx;
+}
+
+
+// بررسی تماس کندل بسته‌شده با سقف و کف تمام باکس‌ها.
+//
+// قوانین هشدار:
+// 1. در هر کندل حداکثر یک هشدار ثبت می‌شود.
+// 2. اولین هشدار پذیرفته‌شده، شرط فاصله ندارد.
+// 3. هشدارهای کندل‌های بعدی باید حداقل 10 پیپ
+//    با آخرین هشدار پذیرفته‌شده فاصله داشته باشند.
+// 4. تمام وضعیت‌های سطح‌ها همچنان به‌روز می‌شوند.
+void CheckBoxLevelTouches(
+   CFractalGeometry &fractal,
+   bool allowAlerts,
+   datetime candleTime
+)
+{
+   int total = fractal.SmallBoxCount();
+
+   if(total <= 0)
+      return;
+
+   if(total > MO_MAX_BOXES)
+      total = MO_MAX_BOXES;
+
+   double h = iHigh(_Symbol, PERIOD_H1, 1);
+   double l = iLow(_Symbol, PERIOD_H1, 1);
+
+   if(h == 0 || l == 0)
+      return;
+
+   // اولین تاچ جدیدی که در این کندل پیدا می‌شود.
+   bool     candidateFound = false;
+   string   candidateType  = "";
+   datetime candidateBoxStart = 0;
+   double   candidateLevel = 0.0;
+
+   for(int i = 0; i < total; i++)
+   {
+      FlatZone box;
+
+      if(!fractal.GetSmallBox(i, box))
+         continue;
+
+      int stateIndex =
+         FindOrCreateLevelAlertState(box.startTime);
+
+      // -------------------------
+      // بررسی سقف باکس
+      // -------------------------
+      bool touchesHigh =
+         (l <= box.highPrice && h >= box.highPrice);
+
+      if(!touchesHigh)
+      {
+         // با فاصله گرفتن از سطح، هشدار بعدی آن سطح مجاز می‌شود.
+         m_levelAlertStates[stateIndex].highAlerted = false;
+      }
+      else if(allowAlerts &&
+              !m_levelAlertStates[stateIndex].highAlerted)
+      {
+         // فقط اولین تاچ جدید این کندل کاندید می‌شود.
+         if(!candidateFound)
+         {
+            candidateFound    = true;
+            candidateType     = "HIGH";
+            candidateBoxStart = box.startTime;
+            candidateLevel    = box.highPrice;
+         }
+
+         // سطح لمس‌شده ثبت‌شده محسوب می‌شود،
+         // حتی اگر کاندید آن کندل بعداً به دلیل فاصله رد شود.
+         m_levelAlertStates[stateIndex].highAlerted = true;
+      }
+
+      // -------------------------
+      // بررسی کف باکس
+      // -------------------------
+      bool touchesLow =
+         (l <= box.lowPrice && h >= box.lowPrice);
+
+      if(!touchesLow)
+      {
+         m_levelAlertStates[stateIndex].lowAlerted = false;
+      }
+      else if(allowAlerts &&
+              !m_levelAlertStates[stateIndex].lowAlerted)
+      {
+         if(!candidateFound)
+         {
+            candidateFound    = true;
+            candidateType     = "LOW";
+            candidateBoxStart = box.startTime;
+            candidateLevel    = box.lowPrice;
+         }
+
+         m_levelAlertStates[stateIndex].lowAlerted = true;
+      }
+   }
+
+   // اگر در این کندل تاچ جدیدی پیدا نشد، تمام.
+   if(!candidateFound)
+      return;
+
+   // اندازه یک پیپ برای نمادهای 3 و 5 رقمی.
+   double pipSize =
+      ((_Digits == 3 || _Digits == 5)
+       ? 10.0 * _Point
+       : _Point);
+
+   // اولین هشدار هیچ محدودیت فاصله‌ای ندارد.
+   bool acceptAlert = !m_hasAcceptedTouchPrice;
+
+   if(m_hasAcceptedTouchPrice)
+   {
+      double distancePips =
+         MathAbs(candidateLevel - m_lastAcceptedTouchPrice)
+         / pipSize;
+
+      // هشدار جدید باید حداقل 10 پیپ فاصله داشته باشد.
+      acceptAlert = (distancePips >= 10.0);
+   }
+
+   // فاصله کافی نیست؛ هشدار این کندل نادیده گرفته می‌شود.
+   // قیمت آخرین هشدار پذیرفته‌شده تغییر نمی‌کند.
+   if(!acceptAlert)
+      return;
+
+   // ثبت تنها هشدار این کندل.
+   Print(
+      "[MarketObserver] LEVEL TOUCH: ",
+      candidateType,
+      " BoxStart=",
+      TimeToString(
+         candidateBoxStart,
+         TIME_DATE | TIME_MINUTES
+      ),
+      " Level=",
+      DoubleToString(candidateLevel, _Digits),
+      " Candle=",
+      TimeToString(
+         candleTime,
+         TIME_DATE | TIME_MINUTES
+      )
+   );
+
+   // مبنای مقایسه هشدارهای کندل‌های بعدی.
+   m_lastAcceptedTouchPrice = candidateLevel;
+   m_hasAcceptedTouchPrice  = true;
+}
+
+
+
+// بررسی کندل بسته‌شده و ثبت تغییر وضعیت
+// بررسی کندل بسته‌شده در گروه زمانی همپوشان
+void ObserveCandle(datetime candleTime)
+{
+   // بدون حداقل دو باکس، تحلیل انجام نمی‌شود.
+   if(!m_zoneReady || m_zoneBoxCount < 2)
+      return;
+
+   double h = iHigh(_Symbol, PERIOD_H1, 1);
+   double l = iLow(_Symbol, PERIOD_H1, 1);
+   double c = iClose(_Symbol, PERIOD_H1, 1);
+
+   if(h == 0 || l == 0 || c == 0)
+      return;
+
+   MARKET_VIEW nextView = MARKET_STUCK ;
+   bool hasEvent = false;
+
+   string reason = "";
+   string uncertainty = "";
+
+   // 1. بسته‌شدن بالای سقف گروه
+   if(c > m_zoneHigh)
+   {
+      nextView = MARKET_BULLISH;
+      hasEvent = true;
+
+      reason = "کندل بالای سقف گروه زمانی بسته شد";
+      uncertainty = "ادامه حرکت صعودی هنوز تأیید نشده است";
+   }
+   // 2. بسته‌شدن پایین کف گروه
+   else if(c < m_zoneLow)
+   {
+      nextView = MARKET_BEARISH;
+      hasEvent = true;
+
+      reason = "کندل پایین کف گروه زمانی بسته شد";
+      uncertainty = "ادامه حرکت نزولی هنوز تأیید نشده است";
+   }
+   // 3. عبور از سقف و بسته‌شدن داخل محدوده
+   else if(h > m_zoneHigh)
+   {
+      nextView = MARKET_FROM_CEILING;
+      hasEvent = true;
+
+      reason = "قیمت از سقف عبور کرد اما داخل محدوده بسته شد";
+      uncertainty = "حرکت بعدی هنوز مشخص نیست";
+   }
+   // 4. عبور از کف و بسته‌شدن داخل محدوده
+   else if(l < m_zoneLow)
+   {
+      nextView = MARKET_FROM_FLOOR;
+      hasEvent = true;
+
+      reason = "قیمت از کف عبور کرد اما داخل محدوده بسته شد";
+      uncertainty = "حرکت بعدی هنوز مشخص نیست";
+   }
+
+   // اگر هیچ‌یک از چهار رویداد رخ نداده باشد،
+   // نظریه درجا زدن برقرار می‌ماند.
+   // Close بالاتر یا پایین‌تر از کندل قبلی به‌تنهایی
+   // رویداد جدیدی ایجاد نمی‌کند.
+   if(!hasEvent)
+      return;
+
+   // فقط با وقوع یک رویداد جدید، وضعیت دفترچه را تغییر می‌دهیم.
+   if(!m_notebook.HasView() ||
+      nextView != m_notebook.View())
+   {
+      m_notebook.Revise(
+         nextView,
+         reason,
+         uncertainty,
+         candleTime
+      );
+
+      Print("[MarketObserver] ", m_notebook.Summary());
+   }
+}
+
+   void CheckNewBox(CFractalGeometry &fractal)
+   {
+      FlatZone box;
+
+      if(!fractal.GetSmallBox(0, box))
+         return;
+
+      if(box.startTime == m_lastBoxStart &&
+         box.endTime == m_lastBoxEnd)
+      {
+         return;
+      }
+
+      m_lastBoxStart = box.startTime;
+      m_lastBoxEnd   = box.endTime;
+
+
+
+      if(!BuildOverLapZone(fractal))
+         return;
+      
+      
+      // وضعیت گروه جدید
+      bool stuckTheory = (m_zoneBoxCount >= 2);
+      
+      
+      // باکس جدید عمر نظریهٔ قبلی را تمام می‌کند.
+      // اگر گروه جدید نشانهٔ درجا زدن باشد، این دلیل
+      // بر پایان نظریه اولویت دارد.
+      if(m_theoryActive)
+      {
+         if(stuckTheory)
+         {
+         
+            // نظریه و محدوده مرجع آن را پیش از غیرفعال‌کردن حفظ کن.
+            m_suspendedTheoryValid   = true;
+            m_suspendedTheoryBullish = m_theoryBullish;
+      
+            m_suspendedReferenceHigh = m_theoryReferenceHigh;
+            m_suspendedReferenceLow  = m_theoryReferenceLow;
+
+      
+            ExpireRandomTheory("STUCK_RESUMED", m_zoneEnd);
+         }
+         else
+         {
+            ExpireRandomTheory("NEW_BOX_ARRIVED", m_zoneEnd);
+         }
+      }
+
+      
+      
+      // ثبت وضعیت نظریهٔ درجا زدن
+      if(m_notebook.SetStuckTheory(stuckTheory, m_zoneEnd))
+      {
+         if(stuckTheory)
+            Print("[MarketObserver] Theory: درجا می‌زنیم");
+         else
+            Print("[MarketObserver] Theory: درجا زدن غیرفعال شد");
+      }
+      
+      
+      // اگر وضعیت جدید درجا زدن نیست، نظریهٔ تازه
+      // بلافاصله انتخاب می‌شود.
+      if(!stuckTheory)
+         SelectRandomTheory(m_zoneEnd);
+
+
+
+
+
+      Print(
+         "[MarketObserver] Shared OverLap group: ",
+         m_zoneBoxCount,
+         " boxes; High=",
+         DoubleToString(m_zoneHigh, _Digits),
+         " Low=",
+         DoubleToString(m_zoneLow, _Digits),
+         " Start=",
+         TimeToString(m_zoneStart, TIME_DATE | TIME_MINUTES),
+         " End=",
+         TimeToString(m_zoneEnd, TIME_DATE | TIME_MINUTES)
+      );
+   }
+private:
+    CRainBowDynamics *m_dyno;
+public:
+   void Set(CRainBowDynamics &dyno)
+   {
+       m_dyno = &dyno;
+   }
+   
+   CMarketObserver()
+   {
+      m_dyno          = NULL;
+      m_zoneHigh      = 0;
+      m_zoneLow       = 0;
+      m_zoneBoxCount  = 0;
+      m_zoneStart     = 0;
+      m_zoneEnd       = 0;
+      m_zoneExtended  = false;
+
+      m_zoneReady     = false;
+      m_lastCandle    = 0;
+      m_lastBoxStart  = 0;
+      m_lastBoxEnd    = 0;
+      
+      m_levelAlertCount    = 0;
+      m_nextLevelAlertSlot = 0;
+      
+      m_lastAcceptedTouchPrice = 0.0;
+      m_hasAcceptedTouchPrice  = false;
+      
+      m_theoryActive  = false;
+      m_theoryAlertLevel = 0 ;
+      
+      m_theoryBullish = false;
+      m_randomSeeded  = false;
+      
+      
+      m_theoryStartTime   = 0;
+      m_theoryStartCandle = 0;
+      
+      m_theoryReferenceHigh = 0.0;
+      m_theoryReferenceLow  = 0.0;
+      
+      m_suspendedTheoryValid   = false;
+      m_suspendedTheoryBullish = false;
+      
+      m_suspendedReferenceHigh = 0.0;
+      m_suspendedReferenceLow  = 0.0;
+      
+      m_pendingDirectionValid   = false;
+      m_pendingDirectionBullish = false;
+      
+      m_lastRiverOpinion = "";
+
+
+   }
+
+   void Init(CFractalGeometry &fractal)
+   {
+      // بذر تصادفی فقط یک بار تنظیم می‌شود.
+      if(!m_randomSeeded)
+      {
+         MathSrand((int)TimeLocal());
+         m_randomSeeded = true;
+      }
+   
+      CheckNewBox(fractal);
+   }
+
+
+
+   // newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
+   //
+   void Update(
+      CFractalGeometry &fractal,
+      bool newCandle,
+      bool newBoxArrived
+   )
+   {
+      bool processCandle = false;
+   
+      datetime t = 0;
+      double c = 0.0;
+   
+      // --------------------------------
+      // 1. تشخیص کندل بسته‌شده جدید
+      // --------------------------------
+      if(newCandle)
+      {
+         t = iTime(_Symbol, PERIOD_H1, 1);
+         c = iClose(_Symbol, PERIOD_H1, 1);
+   
+         if(t > 0 && c != 0 && t != m_lastCandle)
+         {
+            m_lastCandle = t;
+            processCandle = true;
+         }
+      }
+   
+      // --------------------------------
+      // 2. بررسی زنجیره قبلی
+      // --------------------------------
+      if(processCandle)
+      {
+         bool allowLevelAlerts = true;
+         bool finishOverlap    = false;
+   
+         // اگر زنجیره همپوشانی فعال است،
+         // ابتدا با اطلاعات همین زنجیره تصمیم بگیر.
+         if(m_zoneReady && m_zoneBoxCount >= 2)
+         {
+            bool timeExpired = (t > m_zoneEnd);
+   
+            bool priceOutside =
+               (c > m_zoneHigh || c < m_zoneLow);
+   
+            if(timeExpired && priceOutside)
+            {
+               finishOverlap = true;
+               allowLevelAlerts = true;
+            }
+            else
+            {
+               allowLevelAlerts = false;
+   
+               if(timeExpired &&
+                  !priceOutside &&
+                  !m_zoneExtended)
+               {
+                  m_zoneExtended = true;
+   
+                  Print(
+                     "[MarketObserver] OVERLAP EXTENDED: ",
+                     "Price remains inside the zone; ",
+                     "High=",
+                     DoubleToString(m_zoneHigh, _Digits),
+                     " Low=",
+                     DoubleToString(m_zoneLow, _Digits),
+                     " OriginalEnd=",
+                     TimeToString(
+                        m_zoneEnd,
+                        TIME_DATE | TIME_MINUTES
+                     ),
+                     " Candle=",
+                     TimeToString(
+                        t,
+                        TIME_DATE | TIME_MINUTES
+                     )
+                  );
+               }
+            }
+   
+            // ثبت رویداد بازار با محدوده قدیمی.
+            ObserveCandle(t);
+   
+            // --------------------------------
+            // 3. پایان زنجیره همپوشانی
+            // --------------------------------
+            if(finishOverlap)
+            {
+               // این اطلاعات باید قبل از پاک‌سازی حفظ شوند.
+               int finishedBoxCount = m_zoneBoxCount;
+   
+               double finishedHigh = m_zoneHigh;
+               double finishedLow  = m_zoneLow;
+   
+               Print(
+                  "[MarketObserver] OVERLAP FINISHED: ",
+                  "Boxes=",
+                  finishedBoxCount,
+                  " High=",
+                  DoubleToString(finishedHigh, _Digits),
+                  " Low=",
+                  DoubleToString(finishedLow, _Digits),
+                  " End=",
+                  TimeToString(
+                     m_zoneEnd,
+                     TIME_DATE | TIME_MINUTES
+                  ),
+                  " Candle=",
+                  TimeToString(
+                     t,
+                     TIME_DATE | TIME_MINUTES
+                  ),
+                  " Close=",
+                  DoubleToString(c, _Digits)
+               );
+   
+               // ابتدا وضعیت جهت بعدی را تعیین کن.
+               m_pendingDirectionValid = false;
+   
+
+               if(finishedBoxCount >= 4)
+               {
+                  // -----------------------------------------
+                  // زنجیره بلند شکسته شده است.
+                  // نظریه بعدی همین حالا فعال می‌شود.
+                  // -----------------------------------------
+               
+                  // جهت نظریه مستقیماً از کندل شکست تعیین می‌شود.
+                  m_theoryBullish = (c > finishedHigh);
+               
+                  // محدوده مرجع همان زنجیره شکسته‌شده است.
+                  m_theoryReferenceHigh = finishedHigh;
+                  m_theoryReferenceLow  = finishedLow;
+               
+                  // نظریه معلق قبلی دیگر استفاده نمی‌شود.
+                  m_suspendedTheoryValid = false;
+               
+                  // دیگر نیازی به انتظار برای جهت معلق نداریم.
+                  m_pendingDirectionValid = false;
+               
+                  // فعال‌سازی فوری نظریه.
+                  m_theoryActive = true;
+               
+                  // کندل شکست محرک نظریه است، نه شاهد آن.
+                  m_theoryStartTime   = t;
+                  m_theoryStartCandle = t;
+               
+                  Print(
+                     "[TheoryExperiment] LONG OVERLAP BREAKOUT",
+                     "\nBoxes=", finishedBoxCount,
+                     "\nNext direction=",
+                     m_theoryBullish ? "BULLISH" : "BEARISH"
+                  );
+               
+                  Print(
+                     "[TheoryExperiment] THEORY SELECTED",
+                     "\nTheory=", RandomTheoryName(),
+                     "\nMode=BREAKOUT",
+                     "\nTime=",
+                     TimeToString(t, TIME_DATE | TIME_MINUTES),
+                     "\nReferenceHigh=",
+                     DoubleToString(m_theoryReferenceHigh, _Digits),
+                     "\nReferenceLow=",
+                     DoubleToString(m_theoryReferenceLow, _Digits),
+                     "\nEvidence begins after candle=",
+                     TimeToString(t, TIME_DATE | TIME_MINUTES)
+                  );
+               }
+
+
+               else
+               {
+                  // زنجیره کوتاه بوده است.
+                  // اگر نظریه قبلی ذخیره شده، همان نظریه
+                  // با همان محدوده مرجع بازگردانده می‌شود.
+                  if(m_suspendedTheoryValid)
+                  {
+                     Print(
+                        "[TheoryExperiment] SHORT OVERLAP",
+                        "\nBoxes=", finishedBoxCount,
+                        "\nResume=",
+                        m_suspendedTheoryBullish
+                        ? "RANDOM_BULLISH"
+                        : "RANDOM_BEARISH"
+                     );
+                  }
+                  else
+                  {
+                     Print(
+                        "[TheoryExperiment] SHORT OVERLAP",
+                        "\nBoxes=", finishedBoxCount,
+                        "\nNo suspended theory; ",
+                        "random selection remains available."
+                     );
+                  }
+               }
+   
+               // زنجیره قبلی دیگر مبنای تصمیم‌گیری نیست.
+               m_zoneReady    = false;
+               m_zoneBoxCount = 0;
+               m_zoneExtended = false;
+   
+               if(m_notebook.SetStuckTheory(false, t))
+               {
+                  Print(
+                     "[MarketObserver] ",
+                     "Theory: درجا زدن غیرفعال شد"
+                  );
+               }
+            }
+         }
+   
+         // --------------------------------
+         // 4. هشدارهای سطحی
+         // --------------------------------
+         CheckBoxLevelTouches(
+            fractal,
+            allowLevelAlerts,
+            t
+         );
+   
+         // نظریه فعال، در صورت وجود، ارزیابی می‌شود.
+         EvaluateDirectionalTheory(t);
+      }
+   
+      // --------------------------------
+      // 5. پردازش باکس جدید
+      // --------------------------------
+      // مهم: این بخش پس از ارزیابی کندل و زنجیره قبلی اجرا می‌شود.
+      if(newBoxArrived)
+         CheckNewBox(fractal);
+   }
+
+
+
+   MARKET_VIEW View()
+   {
+      return m_notebook.View();
+   }
+
+   string Summary()
+   {
+      return m_notebook.Summary();
+   }
+
+   double ZoneHigh()
+   {
+      return m_zoneHigh;
+   }
+
+   double ZoneLow()
+   {
+      return m_zoneLow;
+   }
+
+   int ZoneBoxCount()
+   {
+      return m_zoneBoxCount;
+   }
+};
+
+
+// ساخت گروه باکس‌هایی که با SmallBox 0 همپوشانی دارند.
+// آرایه از جدیدترین به قدیمی‌ترین مرتب شده است.
+bool FindGapZone(CFractalGeometry &fractal)
+{
+   int total = fractal.SmallBoxCount();
+
+   if(total <= 0)
+      return false;
+
+   if(total > MO_MAX_BOXES)
+      total = MO_MAX_BOXES;
+
+   FlatZone baseBox;
+   FlatZone box;
+
+   if(!fractal.GetSmallBox(0, baseBox))
+      return false;
+
+   m_zoneHigh     = baseBox.highPrice;
+   m_zoneLow      = baseBox.lowPrice;
+   m_zoneBoxCount = 1;
+   m_zoneStart    = baseBox.startTime;
+   m_zoneEnd      = baseBox.endTime;
+
+   double eps = _Point * 0.5;
+
+   FlatZone gapBox;
+   
+
+
+   for(int i = 1; i < total; i++)
+   {
+      if(!fractal.GetSmallBox(i, box))
+         break;
+
+      // همپوشانی قیمتی باکس قدیمی با باکس 0
+      double commonHigh =
+         MathMin(baseBox.highPrice, box.highPrice);
+
+      double commonLow =
+         MathMax(baseBox.lowPrice, box.lowPrice);
+
+      double overlap = commonHigh - commonLow;
+
+      // اولین باکس فاقد همپوشانی؛ پایان جست‌وجو
+      if(overlap <= eps)
+      {
+
+         gapBox = box;
+         
+   
+         Print(
+            "[MarketObserver] FIRST NON-OVERLAPPING BOX",
+            " Index=", i,
+            " High=", DoubleToString(box.highPrice, _Digits),
+            " Low=", DoubleToString(box.lowPrice, _Digits)
+         );
+
+         break;
+      }
+
+      // این باکس عضو گروه است.
+      m_zoneBoxCount++;
+
+      if(box.highPrice > m_zoneHigh)
+         m_zoneHigh = box.highPrice;
+
+      if(box.lowPrice < m_zoneLow)
+         m_zoneLow = box.lowPrice;
+
+      if(box.startTime < m_zoneStart)
+         m_zoneStart = box.startTime;
+
+      if(box.endTime > m_zoneEnd)
+         m_zoneEnd = box.endTime;
+   }
+
+   m_zoneExtended = false;
+   m_zoneReady    = true;
+
+   Print(
+      "[MarketObserver] OVERLAP GROUP",
+      " Boxes=", m_zoneBoxCount,
+      " High=", DoubleToString(m_zoneHigh, _Digits),
+      " Low=", DoubleToString(m_zoneLow, _Digits),
+      " Start=", TimeToString(m_zoneStart, TIME_DATE | TIME_MINUTES),
+      " End=", TimeToString(m_zoneEnd, TIME_DATE | TIME_MINUTES)
+   );
+
+   return true;
+}
+
+
+string RiverFamilyName(RIVER_FAMILY family)
+{
+   if(family == RIVER_BELOW)
+      return "BELOW_RIVER";
+
+   if(family == RIVER_ABOVE)
+      return "ABOVE_RIVER";
+
+   return "STREET_FIGHT";
+}
+
+
+RIVER_FAMILY ClassifyRiverCandle(
+   int shift,
+   double &center,
+   double &widthPips
+)
+{
+   center    = m_dyno.RainbowCenter(shift);
+   widthPips = m_dyno.RainbowWidth(shift);
+
+   double o = iOpen(_Symbol, PERIOD_H1, shift);
+   double c = iClose(_Symbol, PERIOD_H1, shift);
+
+   // اگر داده رودخانه موجود نباشد، کندل از افراز جا نمی‌ماند.
+   // موقتاً آن را در خانواده مبارزات قرار می‌دهیم.
+   if(center == 0.0 || widthPips <= 0.0)
+      return RIVER_STREET_FIGHT;
+
+   double pipSize =
+      ((_Digits == 3 || _Digits == 5)
+       ? 10.0 * _Point
+       : _Point);
+
+   double halfWidth = MathAbs(widthPips) * pipSize / 2.0;
+
+   double riverUpper = center + halfWidth;
+   double riverLower = center - halfWidth;
+
+   double bodyHigh = MathMax(o, c);
+   double bodyLow  = MathMin(o, c);
+   double bodySize = bodyHigh - bodyLow;
+
+   // برای کندل بدون بدنه، موقعیت Close ملاک است.
+   if(bodySize <= _Point * 0.1)
+   {
+      if(c > riverUpper)
+         return RIVER_ABOVE;
+
+      if(c < riverLower)
+         return RIVER_BELOW;
+
+      return RIVER_STREET_FIGHT;
+   }
+
+   // طول بدنه‌ای که بالاتر از رودخانه قرار دارد
+   double aboveLength =
+      MathMax(
+         0.0,
+         bodyHigh - MathMax(bodyLow, riverUpper)
+      );
+
+   // طول بدنه‌ای که پایین‌تر از رودخانه قرار دارد
+   double belowLength =
+      MathMax(
+         0.0,
+         MathMin(bodyHigh, riverLower) - bodyLow
+      );
+
+   // افراز شل: سمت غالب بدنه تعیین‌کننده است.
+   if(aboveLength > belowLength)
+      return RIVER_ABOVE;
+
+   if(belowLength > aboveLength)
+      return RIVER_BELOW;
+
+   return RIVER_STREET_FIGHT;
+}
+
+
+void PrintRiverIsland(RiverIsland &island)
+{
+   Print(
+      "[RiverGap] ISLAND",
+      " Family=", RiverFamilyName(island.family),
+      " Candles=", island.candleCount,
+
+      " Start=",
+      TimeToString(island.startTime, TIME_DATE | TIME_MINUTES),
+
+      " End=",
+      TimeToString(island.endTime, TIME_DATE | TIME_MINUTES),
+
+      " MaxHigh=",
+      DoubleToString(island.maxHigh, _Digits),
+
+      " MaxHighCandle=",
+      TimeToString(island.maxHighTime, TIME_DATE | TIME_MINUTES),
+
+      " MinLow=",
+      DoubleToString(island.minLow, _Digits),
+
+      " MinLowCandle=",
+      TimeToString(island.minLowTime, TIME_DATE | TIME_MINUTES)
+   );
+}
+
+void ReviewGapWithRiver(CFractalGeometry &fractal)
+{
+   int total = fractal.SmallBoxCount();
+
+   // حداقل باید یک باکس عضو گروه و یک باکس بیرون گروه داشته باشیم.
+   if(total <= m_zoneBoxCount || m_zoneBoxCount < 1)
+   {
+      Print(
+         "[RiverGap] No older non-overlapping box available."
+      );
+      return;
+   }
+
+   FlatZone newerBox;
+   FlatZone olderBox;
+
+   int newerIndex = m_zoneBoxCount - 1;
+   int olderIndex = m_zoneBoxCount;
+
+   if(!fractal.GetSmallBox(newerIndex, newerBox))
+      return;
+
+   if(!fractal.GetSmallBox(olderIndex, olderBox))
+      return;
+
+   // فقط فاصله واقعی زمانی بین دو باکس بررسی می‌شود.
+   if(olderBox.endTime >= newerBox.startTime)
+   {
+      Print(
+         "[RiverGap] No chronological candle gap.",
+         " OlderEnd=",
+         TimeToString(olderBox.endTime, TIME_DATE | TIME_MINUTES),
+         " NewerStart=",
+         TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
+      );
+
+      return;
+   }
+
+   int olderShift =
+      iBarShift(_Symbol, PERIOD_H1, olderBox.endTime, false);
+
+   int newerShift =
+      iBarShift(_Symbol, PERIOD_H1, newerBox.startTime, false);
+
+   if(olderShift < 0 || newerShift < 0 ||
+      olderShift <= newerShift)
+   {
+      Print("[RiverGap] Invalid candle shifts.");
+      return;
+   }
+
+   Print(
+      "[RiverGap] REVIEW START",
+      " OlderBoxIndex=", olderIndex,
+      " NewerBoxIndex=", newerIndex,
+      " From=",
+      TimeToString(olderBox.endTime, TIME_DATE | TIME_MINUTES),
+      " To=",
+      TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
+   );
+
+   RiverIsland island;
+   bool islandActive = false;
+
+   int reviewedCandles = 0;
+
+   // شیفت بزرگ‌تر یعنی کندل قدیمی‌تر.
+   // پیمایش از قدیمی به جدید انجام می‌شود.
+   for(int shift = olderShift; shift >= newerShift; shift--)
+   {
+      datetime candleTime =
+         iTime(_Symbol, PERIOD_H1, shift);
+
+      if(candleTime <= olderBox.endTime ||
+         candleTime >= newerBox.startTime)
+      {
+         continue;
+      }
+
+      double o = iOpen(_Symbol, PERIOD_H1, shift);
+      double h = iHigh(_Symbol, PERIOD_H1, shift);
+      double l = iLow(_Symbol, PERIOD_H1, shift);
+      double c = iClose(_Symbol, PERIOD_H1, shift);
+
+      if(candleTime == 0 || o == 0.0 ||
+         h == 0.0 || l == 0.0 || c == 0.0)
+      {
+         continue;
+      }
+
+      double center = 0.0;
+      double widthPips = 0.0;
+
+      RIVER_FAMILY family =
+         ClassifyRiverCandle(shift, center, widthPips);
+
+      reviewedCandles++;
+
+      Print(
+         "[RiverGap] CANDLE",
+         " Time=",
+         TimeToString(candleTime, TIME_DATE | TIME_MINUTES),
+
+         " Family=", RiverFamilyName(family),
+
+         " O=", DoubleToString(o, _Digits),
+         " H=", DoubleToString(h, _Digits),
+         " L=", DoubleToString(l, _Digits),
+         " C=", DoubleToString(c, _Digits),
+
+         " RiverCenter=", DoubleToString(center, _Digits),
+         " RiverWidthPips=", DoubleToString(widthPips, 2),
+
+         " RiverData=",
+         (center != 0.0 && widthPips > 0.0)
+         ? "VALID"
+         : "MISSING"
+      );
+
+      // شروع اولین جزیره
+      if(!islandActive)
+      {
+         island.family      = family;
+         island.candleCount = 1;
+
+         island.startTime = candleTime;
+         island.endTime   = candleTime;
+
+         island.maxHigh     = h;
+         island.maxHighTime = candleTime;
+
+         island.minLow     = l;
+         island.minLowTime = candleTime;
+
+         islandActive = true;
+         continue;
+      }
+
+      // تغییر خانواده یعنی پایان جزیره قبلی
+      if(family != island.family)
+      {
+         PrintRiverIsland(island);
+
+         island.family      = family;
+         island.candleCount = 1;
+
+         island.startTime = candleTime;
+         island.endTime   = candleTime;
+
+         island.maxHigh     = h;
+         island.maxHighTime = candleTime;
+
+         island.minLow     = l;
+         island.minLowTime = candleTime;
+
+         continue;
+      }
+
+      // کندل جدید به همان جزیره تعلق دارد.
+      island.candleCount++;
+      island.endTime = candleTime;
+
+      if(h > island.maxHigh)
+      {
+         island.maxHigh     = h;
+         island.maxHighTime = candleTime;
+      }
+
+      if(l < island.minLow)
+      {
+         island.minLow     = l;
+         island.minLowTime = candleTime;
+      }
+   }
+
+   // ثبت آخرین جزیره
+   if(islandActive)
+      PrintRiverIsland(island);
+
+   Print(
+      "[RiverGap] REVIEW FINISHED",
+      " ReviewedCandles=", reviewedCandles
+   );
+}
+
