@@ -75,6 +75,9 @@ bool FindGapZone(CFractalGeometry &fractal)
          m_zoneEnd = box.endTime;
    }
 
+   if(gapBox.startTime == 0 || gapBox.endTime == 0)
+      return false;
+
    m_zoneExtended = false;
    m_zoneReady    = true;
 
