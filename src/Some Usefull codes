@@ -570,6 +570,20 @@ private:
    double   m_theoryReferenceHigh;
    double   m_theoryReferenceLow;
 
+   // ------------------------------
+   // Suspended Theory
+   // ------------------------------
+   bool   m_suspendedTheoryValid;
+   bool   m_suspendedTheoryBullish;
+   
+   double m_suspendedReferenceHigh;
+   double m_suspendedReferenceLow;
+   
+   // ------------------------------
+   // Pending Breakout Direction
+   // ------------------------------
+   bool m_pendingDirectionValid;
+   bool m_pendingDirectionBullish;
 
    // نام دقیق نظریهٔ فعال
    string RandomTheoryName()
@@ -581,42 +595,96 @@ private:
    }
    
    
-   // انتخاب یک نظریهٔ تصادفی جدید
+   
+   // انتخاب نظریه بر اساس اولویت:
+   // 1. جهت شکست زنجیره طولانی
+   // 2. بازگرداندن نظریه معلق
+   // 3. انتخاب تصادفی
+   
    void SelectRandomTheory(datetime when)
    {
-      // هنگام درجا زدن، نظریهٔ جهت‌دار فعال نمی‌شود.
+   
+   
+      bool breakoutTheory = false;
+      
+      // هنگام درجا زدن، نظریه جهت‌دار فعال نمی‌شود.
       if(m_notebook.StuckTheory())
          return;
    
-      // اگر نظریه‌ای فعال است، نظریهٔ دیگری نساز.
+      // نظریه فعال دیگری نساز.
       if(m_theoryActive)
          return;
    
+      // برای انتخاب نظریه باید محدوده معتبر باشد.
       if(!m_zoneReady)
          return;
    
-      // 0 = صعودی، 1 = نزولی
-      m_theoryBullish = ((MathRand() % 2) == 0);
+      bool resumedTheory = false;
+   
+      // --------------------------------
+      // حالت اول: شکست زنجیره طولانی
+      // --------------------------------
+      if(m_pendingDirectionValid)
+      {
+         m_theoryBullish = m_pendingDirectionBullish;
+   
+         // نظریه جدید، محدوده گروه جدید را مرجع می‌گیرد.
+         m_theoryReferenceHigh = m_zoneHigh;
+         m_theoryReferenceLow  = m_zoneLow;
+         
+         breakoutTheory = true ;
+         
+         m_pendingDirectionValid = false;
+   
+         // نظریه معلق قبلی دیگر لازم نیست.
+         m_suspendedTheoryValid = false;
+      }
+   
+      // --------------------------------
+      // حالت دوم: بازگرداندن نظریه قبلی
+      // --------------------------------
+      else if(m_suspendedTheoryValid)
+      {
+         m_theoryBullish = m_suspendedTheoryBullish;
+   
+         // مرجع نظریه قبلی باید حفظ شود.
+         m_theoryReferenceHigh = m_suspendedReferenceHigh;
+         m_theoryReferenceLow  = m_suspendedReferenceLow;
+   
+         m_suspendedTheoryValid = false;
+   
+         resumedTheory = true;
+      }
+   
+      // --------------------------------
+      // حالت سوم: انتخاب تصادفی
+      // --------------------------------
+      else
+      {
+         m_theoryBullish = ((MathRand() % 2) == 0);
+   
+         m_theoryReferenceHigh = m_zoneHigh;
+         m_theoryReferenceLow  = m_zoneLow;
+      }
    
       m_theoryActive = true;
    
       m_theoryStartTime = when;
    
-      // آخرین کندل بسته‌شده در لحظهٔ انتخاب.
-      // این کندل نباید شاهد نظریهٔ تازه باشد.
+      // آخرین کندل بسته‌شده در لحظه انتخاب.
+      // این کندل شاهد نظریه جدید نیست.
       m_theoryStartCandle =
          iTime(_Symbol, PERIOD_H1, 1);
    
       if(m_theoryStartCandle == 0)
          m_theoryStartCandle = when;
    
-      // مرجع نظریه هنگام انتخاب ثابت می‌ماند.
-      m_theoryReferenceHigh = m_zoneHigh;
-      m_theoryReferenceLow  = m_zoneLow;
-   
       Print(
          "[TheoryExperiment] THEORY SELECTED",
          "\nTheory=", RandomTheoryName(),
+         "\nMode=",
+         resumedTheory ? "RESUMED" :
+         (breakoutTheory ? "BREAKOUT" : "RANDOM"),
          "\nTime=",
          TimeToString(when, TIME_DATE | TIME_MINUTES),
          "\nReferenceHigh=",
@@ -630,8 +698,7 @@ private:
          )
       );
    }
-   
-   
+  
    // پایان نظریه بدون حذف شواهد ثبت‌شده در لاگ
    void ExpireRandomTheory(
       string reason,
@@ -1071,10 +1138,24 @@ void ObserveCandle(datetime candleTime)
       if(m_theoryActive)
       {
          if(stuckTheory)
+         {
+         
+            // نظریه و محدوده مرجع آن را پیش از غیرفعال‌کردن حفظ کن.
+            m_suspendedTheoryValid   = true;
+            m_suspendedTheoryBullish = m_theoryBullish;
+      
+            m_suspendedReferenceHigh = m_theoryReferenceHigh;
+            m_suspendedReferenceLow  = m_theoryReferenceLow;
+
+      
             ExpireRandomTheory("STUCK_RESUMED", m_zoneEnd);
+         }
          else
+         {
             ExpireRandomTheory("NEW_BOX_ARRIVED", m_zoneEnd);
+         }
       }
+
       
       
       // ثبت وضعیت نظریهٔ درجا زدن
@@ -1130,6 +1211,27 @@ public:
       
       m_lastAcceptedTouchPrice = 0.0;
       m_hasAcceptedTouchPrice  = false;
+      
+      m_theoryActive  = false;
+      
+      m_theoryBullish = false;
+      m_randomSeeded  = false;
+      
+      m_theoryStartTime   = 0;
+      m_theoryStartCandle = 0;
+      
+      m_theoryReferenceHigh = 0.0;
+      m_theoryReferenceLow  = 0.0;
+      
+      m_suspendedTheoryValid   = false;
+      m_suspendedTheoryBullish = false;
+      
+      m_suspendedReferenceHigh = 0.0;
+      m_suspendedReferenceLow  = 0.0;
+      
+      m_pendingDirectionValid   = false;
+      m_pendingDirectionBullish = false;
+
 
    }
 
@@ -1147,162 +1249,211 @@ public:
 
 
 
-// newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
-void Update(
-   CFractalGeometry &fractal,
-   bool newCandle,
-   bool newBoxArrived
-)
-{
-   if(newBoxArrived)
-      CheckNewBox(fractal);
-
-   if(!newCandle)
-      return;
-
-   datetime t = iTime(_Symbol, PERIOD_H1, 1);
-
-   if(t == 0 || t == m_lastCandle)
-      return;
-
-   // هر کندل بسته‌شده فقط یک بار پردازش می‌شود.
-   m_lastCandle = t;
-
-   // تا وقتی گروه همپوشان فعال است، هشدار سطحی
-   // فقط در صورتی مجاز است که قیمت بیرون محدوده بسته شود.
-   double c = iClose(_Symbol, PERIOD_H1, 1);
-
-   if(c == 0)
-      return;
-
-   bool allowLevelAlerts = true;
-   bool finishOverlap    = false;
-
-   // اگر گروه همپوشانی معتبر داریم، زمان و قیمت را
-   // هم‌زمان بررسی می‌کنیم.
-   if(m_zoneReady && m_zoneBoxCount >= 2)
+   // newCandle و newBoxArrived را فراخواننده تعیین می‌کند.
+   //
+   void Update(
+      CFractalGeometry &fractal,
+      bool newCandle,
+      bool newBoxArrived
+   )
    {
-      bool timeExpired = (t > m_zoneEnd);
-
-      bool priceOutside =
-         (c > m_zoneHigh || c < m_zoneLow);
-
-      // پایان همپوشانی فقط با تحقق هر دو شرط:
-      // 1. زمان گروه منقضی شده باشد.
-      // 2. قیمت بیرون محدوده بسته شده باشد.
-      if(timeExpired && priceOutside)
-      {
-         finishOverlap = true;
-         allowLevelAlerts = true;
-      }
-      else
-      {
-         // همپوشانی هنوز برقرار است؛
-         // هشدار سطحی تا زمان پایان آن ممنوع است.
-         allowLevelAlerts = false;
-
-         // زمان گذشته ولی قیمت هنوز داخل محدوده است.
-         // همپوشانی را امتداد می‌دهیم.
-         if(timeExpired && !priceOutside &&
-            !m_zoneExtended)
-         {
-            m_zoneExtended = true;
-
-            Print(
-               "[MarketObserver] OVERLAP EXTENDED: ",
-               "Price remains inside the zone; ",
-               "High=",
-               DoubleToString(m_zoneHigh, _Digits),
-               " Low=",
-               DoubleToString(m_zoneLow, _Digits),
-               " OriginalEnd=",
-               TimeToString(
-                  m_zoneEnd,
-                  TIME_DATE | TIME_MINUTES
-               ),
-               " Candle=",
-               TimeToString(
-                  t,
-                  TIME_DATE | TIME_MINUTES
-               )
-            );
-         }
-      }
-
-      // رویداد بازار با استفاده از محدوده فعلی
-      // بررسی می‌شود؛ حتی اگر همین کندل پایان همپوشانی
-      // را تأیید کرده باشد.
-      ObserveCandle(t);
-
-      if(finishOverlap)
-      {
-         Print(
-            "[MarketObserver] OVERLAP FINISHED: ",
-            "High=",
-            DoubleToString(m_zoneHigh, _Digits),
-            " Low=",
-            DoubleToString(m_zoneLow, _Digits),
-            " End=",
-            TimeToString(
-               m_zoneEnd,
-               TIME_DATE | TIME_MINUTES
-            ),
-            " Candle=",
-            TimeToString(
-               t,
-               TIME_DATE | TIME_MINUTES
-            ),
-            " Close=",
-            DoubleToString(c, _Digits)
-         );
-
-         // گروه قبلی دیگر مبنای تصمیم‌گیری نیست.
-         m_zoneReady     = false;
-         m_zoneBoxCount  = 0;
-         m_zoneExtended  = false;
-
-         if(m_notebook.SetStuckTheory(false, t))
-         {
-            Print(
-               "[MarketObserver] ",
-               "Theory: درجا زدن غیرفعال شد"
-            );
-         }
-         
-         
-         // پایان درجا زدن، اجازهٔ انتخاب نظریهٔ جهت‌دار را می‌دهد.
-         // کندل t با ثبت m_theoryStartCandle شاهد این نظریه نخواهد بود.
-         SelectRandomTheory(t);
+      bool processCandle = false;
    
-         
-         
+      datetime t = 0;
+      double c = 0.0;
+   
+      // --------------------------------
+      // 1. تشخیص کندل بسته‌شده جدید
+      // --------------------------------
+      if(newCandle)
+      {
+         t = iTime(_Symbol, PERIOD_H1, 1);
+         c = iClose(_Symbol, PERIOD_H1, 1);
+   
+         if(t > 0 && c != 0 && t != m_lastCandle)
+         {
+            m_lastCandle = t;
+            processCandle = true;
+         }
       }
+   
+      // --------------------------------
+      // 2. بررسی زنجیره قبلی
+      // --------------------------------
+      if(processCandle)
+      {
+         bool allowLevelAlerts = true;
+         bool finishOverlap    = false;
+   
+         // اگر زنجیره همپوشانی فعال است،
+         // ابتدا با اطلاعات همین زنجیره تصمیم بگیر.
+         if(m_zoneReady && m_zoneBoxCount >= 2)
+         {
+            bool timeExpired = (t > m_zoneEnd);
+   
+            bool priceOutside =
+               (c > m_zoneHigh || c < m_zoneLow);
+   
+            if(timeExpired && priceOutside)
+            {
+               finishOverlap = true;
+               allowLevelAlerts = true;
+            }
+            else
+            {
+               allowLevelAlerts = false;
+   
+               if(timeExpired &&
+                  !priceOutside &&
+                  !m_zoneExtended)
+               {
+                  m_zoneExtended = true;
+   
+                  Print(
+                     "[MarketObserver] OVERLAP EXTENDED: ",
+                     "Price remains inside the zone; ",
+                     "High=",
+                     DoubleToString(m_zoneHigh, _Digits),
+                     " Low=",
+                     DoubleToString(m_zoneLow, _Digits),
+                     " OriginalEnd=",
+                     TimeToString(
+                        m_zoneEnd,
+                        TIME_DATE | TIME_MINUTES
+                     ),
+                     " Candle=",
+                     TimeToString(
+                        t,
+                        TIME_DATE | TIME_MINUTES
+                     )
+                  );
+               }
+            }
+   
+            // ثبت رویداد بازار با محدوده قدیمی.
+            ObserveCandle(t);
+   
+            // --------------------------------
+            // 3. پایان زنجیره همپوشانی
+            // --------------------------------
+            if(finishOverlap)
+            {
+               // این اطلاعات باید قبل از پاک‌سازی حفظ شوند.
+               int finishedBoxCount = m_zoneBoxCount;
+   
+               double finishedHigh = m_zoneHigh;
+               double finishedLow  = m_zoneLow;
+   
+               Print(
+                  "[MarketObserver] OVERLAP FINISHED: ",
+                  "Boxes=",
+                  finishedBoxCount,
+                  " High=",
+                  DoubleToString(finishedHigh, _Digits),
+                  " Low=",
+                  DoubleToString(finishedLow, _Digits),
+                  " End=",
+                  TimeToString(
+                     m_zoneEnd,
+                     TIME_DATE | TIME_MINUTES
+                  ),
+                  " Candle=",
+                  TimeToString(
+                     t,
+                     TIME_DATE | TIME_MINUTES
+                  ),
+                  " Close=",
+                  DoubleToString(c, _Digits)
+               );
+   
+               // ابتدا وضعیت جهت بعدی را تعیین کن.
+               m_pendingDirectionValid = false;
+   
+               if(finishedBoxCount >= 4)
+               {
+                  // زنجیره طولانی بوده است.
+                  // جهت شکست، جهت نظریه بعدی خواهد بود.
+                  m_pendingDirectionValid = true;
+   
+                  if(c > finishedHigh)
+                     m_pendingDirectionBullish = true;
+                  else if(c < finishedLow)
+                     m_pendingDirectionBullish = false;
+   
+                  // نظریه معلق قدیمی دیگر استفاده نمی‌شود.
+                  m_suspendedTheoryValid = false;
+   
+                  Print(
+                     "[TheoryExperiment] LONG OVERLAP BREAKOUT",
+                     "\nBoxes=", finishedBoxCount,
+                     "\nNext direction=",
+                     m_pendingDirectionBullish
+                     ? "BULLISH"
+                     : "BEARISH"
+                  );
+               }
+               else
+               {
+                  // زنجیره کوتاه بوده است.
+                  // اگر نظریه قبلی ذخیره شده، همان نظریه
+                  // با همان محدوده مرجع بازگردانده می‌شود.
+                  if(m_suspendedTheoryValid)
+                  {
+                     Print(
+                        "[TheoryExperiment] SHORT OVERLAP",
+                        "\nBoxes=", finishedBoxCount,
+                        "\nResume=",
+                        m_suspendedTheoryBullish
+                        ? "RANDOM_BULLISH"
+                        : "RANDOM_BEARISH"
+                     );
+                  }
+                  else
+                  {
+                     Print(
+                        "[TheoryExperiment] SHORT OVERLAP",
+                        "\nBoxes=", finishedBoxCount,
+                        "\nNo suspended theory; ",
+                        "random selection remains available."
+                     );
+                  }
+               }
+   
+               // زنجیره قبلی دیگر مبنای تصمیم‌گیری نیست.
+               m_zoneReady    = false;
+               m_zoneBoxCount = 0;
+               m_zoneExtended = false;
+   
+               if(m_notebook.SetStuckTheory(false, t))
+               {
+                  Print(
+                     "[MarketObserver] ",
+                     "Theory: درجا زدن غیرفعال شد"
+                  );
+               }
+            }
+         }
+   
+         // --------------------------------
+         // 4. هشدارهای سطحی
+         // --------------------------------
+         CheckBoxLevelTouches(
+            fractal,
+            allowLevelAlerts,
+            t
+         );
+   
+         // نظریه فعال، در صورت وجود، ارزیابی می‌شود.
+         EvaluateRandomTheory(t);
+      }
+   
+      // --------------------------------
+      // 5. پردازش باکس جدید
+      // --------------------------------
+      // مهم: این بخش پس از ارزیابی کندل و زنجیره قبلی اجرا می‌شود.
+      if(newBoxArrived)
+         CheckNewBox(fractal);
    }
-
-   // هشدار سطحی فقط بعد از پایان همپوشانی مجاز است.
-   // اگر همپوشانی فعالی نداریم، هشدارها مجازند.
-   CheckBoxLevelTouches(
-      fractal,
-      allowLevelAlerts,
-      t
-   );
-
-   // رویداد بازار برای گروه فعال قبلاً بررسی شده است.
-
-
-
-
-  // ارزیابی نظریهٔ آزمایشی روی کندل بسته‌شده
-  // فقط یک بار برای هر کندل، به کمک کنترل m_lastCandle.
-  EvaluateRandomTheory(t);
- 
-  // رویداد بازار برای گروه فعال قبلاً بررسی شده است. 
-
-
-
-}
-
-
 
 
 
