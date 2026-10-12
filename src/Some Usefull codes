@@ -513,6 +513,33 @@ public:
 
 
 
+
+
+enum RIVER_FAMILY
+{
+   RIVER_FAMILY_BELOW = 0,
+   RIVER_FAMILY_ABOVE,
+   RIVER_STREET_FIGHT
+};
+
+struct RiverIsland
+{
+   RIVER_FAMILY family;
+
+   int      candleCount;
+
+   datetime startTime;
+   datetime endTime;
+
+   double   maxHigh;
+   datetime maxHighTime;
+
+   double   minLow;
+   datetime minLowTime;
+};
+
+
+
 #ifndef __MARKET_OBSERVER_MQH__
 #define __MARKET_OBSERVER_MQH__
 
@@ -1591,6 +1618,404 @@ public:
    {
       return m_zoneBoxCount;
    }
+
+
+
+// ساخت گروه باکس‌هایی که با SmallBox 0 همپوشانی دارند.
+// آرایه از جدیدترین به قدیمی‌ترین مرتب شده است.
+bool FindGapZone(CFractalGeometry &fractal)
+{
+   int total = fractal.SmallBoxCount();
+
+   if(total <= 0)
+      return false;
+
+   if(total > MO_MAX_BOXES)
+      total = MO_MAX_BOXES;
+
+   FlatZone baseBox;
+   FlatZone box;
+
+   if(!fractal.GetSmallBox(0, baseBox))
+      return false;
+
+   m_zoneHigh     = baseBox.highPrice;
+   m_zoneLow      = baseBox.lowPrice;
+   m_zoneBoxCount = 1;
+   m_zoneStart    = baseBox.startTime;
+   m_zoneEnd      = baseBox.endTime;
+
+   double eps = _Point * 0.5;
+
+   FlatZone gapBox;
+   
+
+
+   for(int i = 1; i < total; i++)
+   {
+      if(!fractal.GetSmallBox(i, box))
+         break;
+
+      // همپوشانی قیمتی باکس قدیمی با باکس 0
+      double commonHigh =
+         MathMin(baseBox.highPrice, box.highPrice);
+
+      double commonLow =
+         MathMax(baseBox.lowPrice, box.lowPrice);
+
+      double overlap = commonHigh - commonLow;
+
+      // اولین باکس فاقد همپوشانی؛ پایان جست‌وجو
+      if(overlap <= eps)
+      {
+
+         gapBox = box;
+         
+   
+         Print(
+            "[MarketObserver] FIRST NON-OVERLAPPING BOX",
+            " Index=", i,
+            " High=", DoubleToString(box.highPrice, _Digits),
+            " Low=", DoubleToString(box.lowPrice, _Digits)
+         );
+
+         break;
+      }
+
+      // این باکس عضو گروه است.
+      m_zoneBoxCount++;
+
+      if(box.highPrice > m_zoneHigh)
+         m_zoneHigh = box.highPrice;
+
+      if(box.lowPrice < m_zoneLow)
+         m_zoneLow = box.lowPrice;
+
+      if(box.startTime < m_zoneStart)
+         m_zoneStart = box.startTime;
+
+      if(box.endTime > m_zoneEnd)
+         m_zoneEnd = box.endTime;
+   }
+
+   m_zoneExtended = false;
+   m_zoneReady    = true;
+
+   Print(
+      "[MarketObserver] OVERLAP GROUP",
+      " Boxes=", m_zoneBoxCount,
+      " High=", DoubleToString(m_zoneHigh, _Digits),
+      " Low=", DoubleToString(m_zoneLow, _Digits),
+      " Start=", TimeToString(m_zoneStart, TIME_DATE | TIME_MINUTES),
+      " End=", TimeToString(m_zoneEnd, TIME_DATE | TIME_MINUTES)
+   );
+
+   return true;
+}
+
+
+string RiverFamilyName(RIVER_FAMILY family)
+{
+   if(family == RIVER_FAMILY_BELOW)
+      return "BELOW_RIVER";
+
+   if(family == RIVER_FAMILY_ABOVE)
+      return "ABOVE_RIVER";
+
+   return "STREET_FIGHT";
+}
+
+
+RIVER_FAMILY ClassifyRiverCandle(
+   int shift,
+   double &center,
+   double &widthPips
+)
+{
+   center    = m_dyno.RainbowCenter(shift);
+   widthPips = m_dyno.RainbowWidth(shift);
+
+   double o = iOpen(_Symbol, PERIOD_H1, shift);
+   double c = iClose(_Symbol, PERIOD_H1, shift);
+
+   // اگر داده رودخانه موجود نباشد، کندل از افراز جا نمی‌ماند.
+   // موقتاً آن را در خانواده مبارزات قرار می‌دهیم.
+   if(center == 0.0 || widthPips <= 0.0)
+      return RIVER_STREET_FIGHT;
+
+   double pipSize =
+      ((_Digits == 3 || _Digits == 5)
+       ? 10.0 * _Point
+       : _Point);
+
+   double halfWidth = MathAbs(widthPips) * pipSize / 2.0;
+
+   double riverUpper = center + halfWidth;
+   double riverLower = center - halfWidth;
+
+   double bodyHigh = MathMax(o, c);
+   double bodyLow  = MathMin(o, c);
+   double bodySize = bodyHigh - bodyLow;
+
+   // برای کندل بدون بدنه، موقعیت Close ملاک است.
+   if(bodySize <= _Point * 0.1)
+   {
+      if(c > riverUpper)
+         return RIVER_FAMILY_ABOVE;
+
+      if(c < riverLower)
+         return RIVER_FAMILY_BELOW;
+
+      return RIVER_STREET_FIGHT;
+   }
+
+   // طول بدنه‌ای که بالاتر از رودخانه قرار دارد
+   double aboveLength =
+      MathMax(
+         0.0,
+         bodyHigh - MathMax(bodyLow, riverUpper)
+      );
+
+   // طول بدنه‌ای که پایین‌تر از رودخانه قرار دارد
+   double belowLength =
+      MathMax(
+         0.0,
+         MathMin(bodyHigh, riverLower) - bodyLow
+      );
+
+   // افراز شل: سمت غالب بدنه تعیین‌کننده است.
+   if(aboveLength > belowLength)
+      return RIVER_FAMILY_ABOVE;
+
+   if(belowLength > aboveLength)
+      return RIVER_FAMILY_BELOW;
+
+   return RIVER_STREET_FIGHT;
+}
+
+
+void PrintRiverIsland(RiverIsland &island)
+{
+   Print(
+      "[RiverGap] ISLAND",
+      " Family=", RiverFamilyName(island.family),
+      " Candles=", island.candleCount,
+
+      " Start=",
+      TimeToString(island.startTime, TIME_DATE | TIME_MINUTES),
+
+      " End=",
+      TimeToString(island.endTime, TIME_DATE | TIME_MINUTES),
+
+      " MaxHigh=",
+      DoubleToString(island.maxHigh, _Digits),
+
+      " MaxHighCandle=",
+      TimeToString(island.maxHighTime, TIME_DATE | TIME_MINUTES),
+
+      " MinLow=",
+      DoubleToString(island.minLow, _Digits),
+
+      " MinLowCandle=",
+      TimeToString(island.minLowTime, TIME_DATE | TIME_MINUTES)
+   );
+}
+
+void ReviewGapWithRiver(CFractalGeometry &fractal)
+{
+   int total = fractal.SmallBoxCount();
+
+   // حداقل باید یک باکس عضو گروه و یک باکس بیرون گروه داشته باشیم.
+   if(total <= m_zoneBoxCount || m_zoneBoxCount < 1)
+   {
+      Print(
+         "[RiverGap] No older non-overlapping box available."
+      );
+      return;
+   }
+
+   FlatZone newerBox;
+   FlatZone olderBox;
+
+   int newerIndex = m_zoneBoxCount - 1;
+   int olderIndex = m_zoneBoxCount;
+
+   if(!fractal.GetSmallBox(newerIndex, newerBox))
+      return;
+
+   if(!fractal.GetSmallBox(olderIndex, olderBox))
+      return;
+
+   // فقط فاصله واقعی زمانی بین دو باکس بررسی می‌شود.
+   if(olderBox.endTime >= newerBox.startTime)
+   {
+      Print(
+         "[RiverGap] No chronological candle gap.",
+         " OlderEnd=",
+         TimeToString(olderBox.endTime, TIME_DATE | TIME_MINUTES),
+         " NewerStart=",
+         TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
+      );
+
+      return;
+   }
+
+   int olderShift =
+      iBarShift(_Symbol, PERIOD_H1, olderBox.endTime, false);
+
+   int newerShift =
+      iBarShift(_Symbol, PERIOD_H1, newerBox.startTime, false);
+
+   if(olderShift < 0 || newerShift < 0 ||
+      olderShift <= newerShift)
+   {
+      Print("[RiverGap] Invalid candle shifts.");
+      return;
+   }
+
+   Print(
+      "[RiverGap] REVIEW START",
+      " OlderBoxIndex=", olderIndex,
+      " NewerBoxIndex=", newerIndex,
+      " From=",
+      TimeToString(olderBox.endTime, TIME_DATE | TIME_MINUTES),
+      " To=",
+      TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
+   );
+
+   RiverIsland island={};
+   bool islandActive = false;
+
+   int reviewedCandles = 0;
+
+   // شیفت بزرگ‌تر یعنی کندل قدیمی‌تر.
+   // پیمایش از قدیمی به جدید انجام می‌شود.
+   for(int shift = olderShift; shift >= newerShift; shift--)
+   {
+      datetime candleTime =
+         iTime(_Symbol, PERIOD_H1, shift);
+
+      if(candleTime <= olderBox.endTime ||
+         candleTime >= newerBox.startTime)
+      {
+         continue;
+      }
+
+      double o = iOpen(_Symbol, PERIOD_H1, shift);
+      double h = iHigh(_Symbol, PERIOD_H1, shift);
+      double l = iLow(_Symbol, PERIOD_H1, shift);
+      double c = iClose(_Symbol, PERIOD_H1, shift);
+
+      if(candleTime == 0 || o == 0.0 ||
+         h == 0.0 || l == 0.0 || c == 0.0)
+      {
+         continue;
+      }
+
+      double center = 0.0;
+      double widthPips = 0.0;
+
+      RIVER_FAMILY family =
+         ClassifyRiverCandle(shift, center, widthPips);
+
+      reviewedCandles++;
+
+      Print(
+         "[RiverGap] CANDLE",
+         " Time=",
+         TimeToString(candleTime, TIME_DATE | TIME_MINUTES),
+
+         " Family=", RiverFamilyName(family),
+
+         " O=", DoubleToString(o, _Digits),
+         " H=", DoubleToString(h, _Digits),
+         " L=", DoubleToString(l, _Digits),
+         " C=", DoubleToString(c, _Digits),
+
+         " RiverCenter=", DoubleToString(center, _Digits),
+         " RiverWidthPips=", DoubleToString(widthPips, 2),
+
+         " RiverData=",
+         (center != 0.0 && widthPips > 0.0)
+         ? "VALID"
+         : "MISSING"
+      );
+
+      // شروع اولین جزیره
+      if(!islandActive)
+      {
+         island.family      = family;
+         island.candleCount = 1;
+
+         island.startTime = candleTime;
+         island.endTime   = candleTime;
+
+         island.maxHigh     = h;
+         island.maxHighTime = candleTime;
+
+         island.minLow     = l;
+         island.minLowTime = candleTime;
+
+         islandActive = true;
+         continue;
+      }
+
+      // تغییر خانواده یعنی پایان جزیره قبلی
+      if(family != island.family)
+      {
+         PrintRiverIsland(island);
+
+         island.family      = family;
+         island.candleCount = 1;
+
+         island.startTime = candleTime;
+         island.endTime   = candleTime;
+
+         island.maxHigh     = h;
+         island.maxHighTime = candleTime;
+
+         island.minLow     = l;
+         island.minLowTime = candleTime;
+
+         continue;
+      }
+
+      // کندل جدید به همان جزیره تعلق دارد.
+      island.candleCount++;
+      island.endTime = candleTime;
+
+      if(h > island.maxHigh)
+      {
+         island.maxHigh     = h;
+         island.maxHighTime = candleTime;
+      }
+
+      if(l < island.minLow)
+      {
+         island.minLow     = l;
+         island.minLowTime = candleTime;
+      }
+   }
+
+   // ثبت آخرین جزیره
+   if(islandActive)
+      PrintRiverIsland(island);
+
+   Print(
+      "[RiverGap] REVIEW FINISHED",
+      " ReviewedCandles=", reviewedCandles
+   );
+}
+
+
+
+
+
 };
+
+
+
+
+
 
 #endif
