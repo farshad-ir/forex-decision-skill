@@ -548,7 +548,7 @@ private:
 
    double   m_lastClose;
    bool     m_hasLastClose;
-
+   string   m_lastRiverOpinion;
 
    MOLevelAlertState m_levelAlertStates[MO_MAX_BOXES];
 
@@ -595,8 +595,28 @@ private:
    
       return "RANDOM_BEARISH";
    }
+public:
+   void ConsultRiver()
+   {
+      double r1 = m_dyno.RainbowCenter(1); // جدیدترین نقطه
+      double r2 = m_dyno.RainbowCenter(2); // نقطه قبلی
+      double r3 = m_dyno.RainbowCenter(3); // نقطه قدیمی‌تر
    
+      string opinion = "RIVER_UNCLEAR";
    
+      if(r1 > r2 && r2 > r3)
+         opinion = "RIVER_RISING";
+      else if(r1 < r2 && r2 < r3)
+         opinion = "RIVER_FALLING";
+   
+      if(opinion != m_lastRiverOpinion)
+      {
+         Print("River Consultant: ", opinion);
+         m_lastRiverOpinion = opinion;
+      }
+
+   }
+private:
    
    // انتخاب نظریه بر اساس اولویت:
    // 1. جهت شکست زنجیره طولانی
@@ -1242,12 +1262,13 @@ void ObserveCandle(datetime candleTime)
       );
    }
 private:
-   CRainBowDynamics *m_dyno;
+    CRainBowDynamics *m_dyno;
 public:
    void Set(CRainBowDynamics &dyno)
    {
-      m_dyno = &dyno;
+       m_dyno = &dyno;
    }
+   
    CMarketObserver()
    {
       m_dyno          = NULL;
@@ -1290,6 +1311,8 @@ public:
       
       m_pendingDirectionValid   = false;
       m_pendingDirectionBullish = false;
+      
+      m_lastRiverOpinion = "";
 
 
    }
