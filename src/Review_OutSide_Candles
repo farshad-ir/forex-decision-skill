@@ -1,10 +1,6 @@
-FindGapZone
-
-
-
 // ساخت گروه باکس‌هایی که با SmallBox 0 همپوشانی دارند.
 // آرایه از جدیدترین به قدیمی‌ترین مرتب شده است.
-bool BuildOverLapZone(CFractalGeometry &fractal)
+bool FindGapZone(CFractalGeometry &fractal)
 {
    int total = fractal.SmallBoxCount();
 
@@ -87,8 +83,6 @@ bool BuildOverLapZone(CFractalGeometry &fractal)
 }
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 enum RIVER_FAMILY
 {
    RIVER_BELOW = 0,
@@ -113,8 +107,6 @@ struct RiverIsland
 };
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 string RiverFamilyName(RIVER_FAMILY family)
 {
    if(family == RIVER_BELOW)
@@ -125,8 +117,6 @@ string RiverFamilyName(RIVER_FAMILY family)
 
    return "STREET_FIGHT";
 }
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 RIVER_FAMILY ClassifyRiverCandle(
@@ -197,9 +187,6 @@ RIVER_FAMILY ClassifyRiverCandle(
 }
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 void PrintRiverIsland(RiverIsland &island)
 {
    Print(
@@ -226,10 +213,6 @@ void PrintRiverIsland(RiverIsland &island)
       TimeToString(island.minLowTime, TIME_DATE | TIME_MINUTES)
    );
 }
-
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void ReviewGapWithRiver(CFractalGeometry &fractal)
 {
