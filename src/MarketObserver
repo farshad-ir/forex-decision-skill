@@ -1,7 +1,8 @@
+
 enum RIVER_FAMILY
 {
-   RIVER_BELOW = 0,
-   RIVER_ABOVE,
+   RIVER_FAMILY_BELOW = 0,
+   RIVER_FAMILY_ABOVE,
    RIVER_STREET_FIGHT
 };
 
@@ -1199,10 +1200,10 @@ bool FindGapZone(CFractalGeometry &fractal)
 
 string RiverFamilyName(RIVER_FAMILY family)
 {
-   if(family == RIVER_BELOW)
+   if(family == RIVER_FAMILY_BELOW)
       return "BELOW_RIVER";
 
-   if(family == RIVER_ABOVE)
+   if(family == RIVER_FAMILY_ABOVE)
       return "ABOVE_RIVER";
 
    return "STREET_FIGHT";
@@ -1244,10 +1245,10 @@ RIVER_FAMILY ClassifyRiverCandle(
    if(bodySize <= _Point * 0.1)
    {
       if(c > riverUpper)
-         return RIVER_ABOVE;
+         return RIVER_FAMILY_ABOVE;
 
       if(c < riverLower)
-         return RIVER_BELOW;
+         return RIVER_FAMILY_BELOW;
 
       return RIVER_STREET_FIGHT;
    }
@@ -1268,10 +1269,10 @@ RIVER_FAMILY ClassifyRiverCandle(
 
    // افراز شل: سمت غالب بدنه تعیین‌کننده است.
    if(aboveLength > belowLength)
-      return RIVER_ABOVE;
+      return RIVER_FAMILY_ABOVE;
 
    if(belowLength > aboveLength)
-      return RIVER_BELOW;
+      return RIVER_FAMILY_BELOW;
 
    return RIVER_STREET_FIGHT;
 }
