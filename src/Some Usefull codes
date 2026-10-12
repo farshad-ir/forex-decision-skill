@@ -517,6 +517,7 @@ public:
 #define __MARKET_OBSERVER_MQH__
 
 #include "FractalGeometry.mqh"
+#include "../MA_INERTIA/RainBowDynamics.mqh"
 
 #define MO_MAX_BOXES 1000
 
@@ -1240,10 +1241,16 @@ void ObserveCandle(datetime candleTime)
          TimeToString(m_zoneEnd, TIME_DATE | TIME_MINUTES)
       );
    }
-
+private:
+   CRainBowDynamics *m_dyno;
 public:
+   void Set(CRainBowDynamics &dyno)
+   {
+      m_dyno = &dyno;
+   }
    CMarketObserver()
    {
+      m_dyno          = NULL;
       m_zoneHigh      = 0;
       m_zoneLow       = 0;
       m_zoneBoxCount  = 0;
