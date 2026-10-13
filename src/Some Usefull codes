@@ -2097,113 +2097,31 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
       return;
    }
 
-   FlatZone box0;
+   FlatZone box0, box1;
 
-   if(!fractal.GetSmallBox(0, box0))
-   {
-      Print("[RedCarpet] SKIPPED: cannot read box 0");
+   fractal.GetSmallBox(0, box0);
+   fractal.GetSmallBox(1, box1);
+
+   int oneHour = 60 * 60;
+
+   // اگر بین دو باکس کندل مستقلی وجود ندارد، بررسی نکن.
+   if(box1.endTime + oneHour >= box0.startTime)
       return;
-   }
-
-   // جلوگیری از پردازش دوباره همان رویداد
-   if(box0.startTime == m_lastRedCarpetBoxStart &&
-      box0.endTime == m_lastRedCarpetBoxEnd)
-      return;
-
-   m_lastRedCarpetBoxStart = box0.startTime;
-   m_lastRedCarpetBoxEnd   = box0.endTime;
-
-   if(total > MO_MAX_BOXES)
-      total = MO_MAX_BOXES;
-
-   int overlapBoxCount = 1;
-   int box1Index = -1;
-
-   FlatZone box;
-   FlatZone newestGroupOldestBox = box0;
-   FlatZone box1={};
-
-   double eps = _Point * 0.5;
-
-   // پیدا کردن گروه باکس‌های هم‌پوشان با باکس صفر
-   for(int i = 1; i < total; i++)
-   {
-      if(!fractal.GetSmallBox(i, box))
-         break;
-
-      double commonHigh =
-         MathMin(box0.highPrice, box.highPrice);
-
-      double commonLow =
-         MathMax(box0.lowPrice, box.lowPrice);
-
-      double overlap = commonHigh - commonLow;
-
-      if(overlap <= eps)
-      {
-         box1 = box;
-         box1Index = i;
-         break;
-      }
-
-      overlapBoxCount++;
-      newestGroupOldestBox = box;
-   }
-
-   if(box1Index < 0)
-   {
-      Print("[RedCarpet] SKIPPED: no older non-overlapping box 1");
-      return;
-   }
-
-   // فاصله زمانی باید واقعی باشد
-   if(box1.endTime >= newestGroupOldestBox.startTime)
-   {
-      Print(
-         "[RedCarpet] SKIPPED: no chronological free gap",
-         " Box1End=",
-         TimeToString(box1.endTime, TIME_DATE | TIME_MINUTES),
-         " GroupStart=",
-         TimeToString(
-            newestGroupOldestBox.startTime,
-            TIME_DATE | TIME_MINUTES
-         )
-      );
-
-      return;
-   }
 
    int box1EndShift =
       iBarShift(_Symbol, PERIOD_H1, box1.endTime, false);
 
-   int groupStartShift =
-      iBarShift(
-         _Symbol,
-         PERIOD_H1,
-         newestGroupOldestBox.startTime,
-         false
-      );
-
    int box0EndShift =
       iBarShift(_Symbol, PERIOD_H1, box0.endTime, false);
 
+   int box0StartShift =
+      iBarShift(_Symbol, PERIOD_H1, box0.startTime, false);
+
    if(box1EndShift < 0 ||
-      groupStartShift < 0 ||
+      box0StartShift < 0 ||
       box0EndShift < 0)
    {
       Print("[RedCarpet] SKIPPED: invalid H1 shift");
-      return;
-   }
-
-   // دست‌کم یک کندل کامل آزاد باید وجود داشته باشد.
-   if(box1EndShift <= groupStartShift + 1)
-   {
-      Print(
-         "[RedCarpet] SKIPPED: no complete free H1 candle",
-         " Box1EndShift=", box1EndShift,
-         " GroupStartShift=", groupStartShift
-      );
-
       return;
    }
 
@@ -2213,8 +2131,6 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
       TimeToString(box0.startTime, TIME_DATE | TIME_MINUTES),
       " Box0End=",
       TimeToString(box0.endTime, TIME_DATE | TIME_MINUTES),
-      " Box1Index=", box1Index,
-      " OverlapBoxes=", overlapBoxCount,
       " Box1Start=",
       TimeToString(box1.startTime, TIME_DATE | TIME_MINUTES),
       " Box1End=",
@@ -2231,17 +2147,17 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
    bool islandActive = false;
    int reviewedCandles = 0;
 
-   // پیمایش کندل‌های آزاد از قدیمی به جدید
-   // کندل‌های متعلق به خود باکس‌ها حذف می‌شوند.
+   // پیمایش کندل‌های مستقل از قدیمی به جدید.
+   // کندل‌های متعلق به باکس‌ها وارد بررسی نمی‌شوند.
    for(int shift = box1EndShift - 1;
-       shift > groupStartShift;
+       shift > box0StartShift;
        shift--)
    {
       datetime candleTime =
          iTime(_Symbol, PERIOD_H1, shift);
 
       if(candleTime <= box1.endTime ||
-         candleTime >= newestGroupOldestBox.startTime)
+         candleTime >= box0.startTime)
          continue;
 
       double o = iOpen(_Symbol, PERIOD_H1, shift);
@@ -2264,7 +2180,7 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 
       reviewedCandles++;
 
-      // شیفت نقاط قدیمی‌تر از مبدأ باکس صفر منفی است.
+      // کندل‌های قدیمی‌تر از مبدأ باکس صفر، شیفت نسبی منفی دارند.
       Print(
          "[RedCarpet] CANDLE",
          " Time=",
@@ -2302,7 +2218,7 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
          continue;
       }
 
-      // تغییر خانواده: پایان جزیره قبلی
+      // تغییر خانواده: ثبت جزیره قبلی و شروع جزیره جدید
       if(family != island.family)
       {
          m_redCarpetNotebook.AddIsland(island);
@@ -2357,8 +2273,6 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 }
 
 
-
-
 };
 
 
@@ -2367,4 +2281,3 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 
 
 #endif
-
