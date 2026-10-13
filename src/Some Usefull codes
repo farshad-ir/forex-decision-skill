@@ -539,6 +539,252 @@ struct RiverIsland
 };
 
 
+#define RED_CARPET_CAPACITY    64
+#define RED_CARPET_MAX_POINTS 512
+
+struct RiverZigzagPoint
+{
+   int    shift;
+   double price;
+   bool   isHigh;
+};
+
+class CRedCarpetNotebook
+{
+private:
+   FlatZone         m_box1[RED_CARPET_CAPACITY];
+   RiverZigzagPoint m_points[RED_CARPET_CAPACITY][RED_CARPET_MAX_POINTS];
+   int              m_pointCount[RED_CARPET_CAPACITY];
+   CMarketObserver  m_observer;
+
+   int m_nextSlot;
+   int m_savedCount;
+   int m_currentSlot;
+   int m_originShift;
+
+   void AddPoint(datetime pointTime, double price, bool isHigh)
+   {
+      if(m_currentSlot < 0)
+         return;
+
+      int count = m_pointCount[m_currentSlot];
+
+      if(count >= RED_CARPET_MAX_POINTS)
+      {
+         Print("[RedCarpet] POINT CAPACITY REACHED");
+         return;
+      }
+
+      int pointShift =
+         iBarShift(_Symbol, PERIOD_H1, pointTime, false);
+
+      if(pointShift < 0 || m_originShift < 0)
+      {
+         Print("[RedCarpet] POINT SHIFT FAILED");
+         return;
+      }
+
+      // مبدأ: endTime باکس 0
+      // نقاط قدیمی‌تر از مبدأ باید شیفت منفی داشته باشند.
+      int relativeShift = m_originShift - pointShift;
+
+      if(relativeShift > 0)
+      {
+         Print("[RedCarpet] ERROR: point newer than box-0 origin");
+         return;
+      }
+
+      m_points[m_currentSlot][count].shift  = relativeShift;
+      m_points[m_currentSlot][count].price  = price;
+      m_points[m_currentSlot][count].isHigh = isHigh;
+
+      m_pointCount[m_currentSlot]++;
+
+      Print(
+         "[RedCarpet] ZIGZAG POINT",
+         " Index=", count,
+         " Shift=", relativeShift,
+         " Price=", DoubleToString(price, _Digits),
+         " Flag=", isHigh ? "HIGH" : "LOW"
+      );
+   }
+
+public:
+   CRedCarpetNotebook()
+   {
+      m_nextSlot    = 0;
+      m_savedCount  = 0;
+      m_currentSlot = -1;
+      m_originShift = -1;
+
+      for(int i = 0; i < RED_CARPET_CAPACITY; i++)
+         m_pointCount[i] = 0;
+   }
+
+   bool Begin(FlatZone &box1, datetime box0EndTime)
+   {
+      m_originShift =
+         iBarShift(_Symbol, PERIOD_H1, box0EndTime, false);
+
+      if(m_originShift < 0)
+      {
+         Print("[RedCarpet] BEGIN FAILED: invalid box-0 endTime");
+         m_currentSlot = -1;
+         return false;
+      }
+
+      m_currentSlot = m_nextSlot;
+      m_box1[m_currentSlot] = box1;
+      m_pointCount[m_currentSlot] = 0;
+
+      Print(
+         "[RedCarpet] BEGIN",
+         " Box1Start=",
+         TimeToString(box1.startTime, TIME_DATE | TIME_MINUTES),
+         " Box1End=",
+         TimeToString(box1.endTime, TIME_DATE | TIME_MINUTES),
+         " Box1High=", DoubleToString(box1.highPrice, _Digits),
+         " Box1Low=", DoubleToString(box1.lowPrice, _Digits),
+         " Box0Origin=",
+         TimeToString(box0EndTime, TIME_DATE | TIME_MINUTES),
+         " OriginShift=", m_originShift
+      );
+
+      return true;
+   }
+
+   void AddIsland(RiverIsland &island)
+   {
+      if(m_currentSlot < 0)
+         return;
+
+      Print(
+         "[RedCarpet] ISLAND",
+         " Family=", RiverFamilyName(island.family),
+         " High=", DoubleToString(island.maxHigh, _Digits),
+         " HighTime=",
+         TimeToString(island.maxHighTime, TIME_DATE | TIME_MINUTES),
+         " Low=", DoubleToString(island.minLow, _Digits),
+         " LowTime=",
+         TimeToString(island.minLowTime, TIME_DATE | TIME_MINUTES),
+         " Candles=", island.candleCount
+      );
+
+      // ثبت دو اکسترمم جزیره به ترتیب زمانی
+      if(island.maxHighTime < island.minLowTime)
+      {
+         AddPoint(island.maxHighTime, island.maxHigh, true);
+         AddPoint(island.minLowTime, island.minLow, false);
+      }
+      else if(island.minLowTime < island.maxHighTime)
+      {
+         AddPoint(island.minLowTime, island.minLow, false);
+         AddPoint(island.maxHighTime, island.maxHigh, true);
+      }
+      else
+      {
+         // ترتیب درون کندل از OHLC قابل تشخیص نیست.
+         Print(
+            "[RedCarpet] NOTE: High and Low occurred in the same candle"
+         );
+
+         AddPoint(island.maxHighTime, island.maxHigh, true);
+         AddPoint(island.minLowTime, island.minLow, false);
+      }
+   }
+
+   void Finish(int reviewedCandles)
+   {
+      if(m_currentSlot < 0)
+         return;
+
+      int slot  = m_currentSlot;
+      int count = m_pointCount[slot];
+
+      if(reviewedCandles <= 0 || count <= 0)
+      {
+         Print(
+            "[RedCarpet] NOT SAVED",
+            " Candles=", reviewedCandles,
+            " Points=", count
+         );
+
+         m_currentSlot = -1;
+         m_originShift = -1;
+         return;
+      }
+
+      Print(
+         "[RedCarpet] SAVED",
+         " Box1Start=",
+         TimeToString(m_box1[slot].startTime, TIME_DATE | TIME_MINUTES),
+         " Box1End=",
+         TimeToString(m_box1[slot].endTime, TIME_DATE | TIME_MINUTES),
+         " Box1High=", DoubleToString(m_box1[slot].highPrice, _Digits),
+         " Box1Low=", DoubleToString(m_box1[slot].lowPrice, _Digits),
+         " ReviewedCandles=", reviewedCandles,
+         " ZigzagPoints=", count
+      );
+
+      m_nextSlot = (m_nextSlot + 1) % RED_CARPET_CAPACITY;
+
+      if(m_savedCount < RED_CARPET_CAPACITY)
+         m_savedCount++;
+
+      m_currentSlot = -1;
+      m_originShift = -1;
+   }
+
+   int SavedCount()
+   {
+      return m_savedCount;
+   }
+
+   bool GetRecord(int ageIndex, FlatZone &box1, int &pointCount)
+   {
+      if(ageIndex < 0 || ageIndex >= m_savedCount)
+         return false;
+
+      int slot =
+         (m_nextSlot - 1 - ageIndex + RED_CARPET_CAPACITY)
+         % RED_CARPET_CAPACITY;
+
+      box1 = m_box1[slot];
+      pointCount = m_pointCount[slot];
+
+      return true;
+   }
+
+   bool GetPoint(
+      int ageIndex,
+      int pointIndex,
+      RiverZigzagPoint &point
+   )
+   {
+      if(ageIndex < 0 || ageIndex >= m_savedCount)
+         return false;
+
+      int slot =
+         (m_nextSlot - 1 - ageIndex + RED_CARPET_CAPACITY)
+         % RED_CARPET_CAPACITY;
+
+      if(pointIndex < 0 || pointIndex >= m_pointCount[slot])
+         return false;
+
+      point.shift =
+         m_points[slot][pointIndex].shift;
+
+      point.price =
+         m_points[slot][pointIndex].price;
+
+      point.isHigh =
+         m_points[slot][pointIndex].isHigh;
+
+      return true;
+   }
+};
+
+
 
 #ifndef __MARKET_OBSERVER_MQH__
 #define __MARKET_OBSERVER_MQH__
@@ -584,6 +830,11 @@ private:
 
    double m_lastAcceptedTouchPrice;
    bool   m_hasAcceptedTouchPrice;
+   
+   CRedCarpetNotebook m_redCarpetNotebook;
+
+   datetime m_lastRedCarpetBoxStart;
+   datetime m_lastRedCarpetBoxEnd;
 
    // ------------------------------
    // Random Theory Experiment
@@ -1340,6 +1591,9 @@ public:
       m_pendingDirectionBullish = false;
       
       m_lastRiverOpinion = "";
+      
+      m_lastRedCarpetBoxStart  = 0 ;
+      m_lastRedCarpetBoxEnd    = 0 ;
 
 
    }
@@ -1588,8 +1842,12 @@ public:
       // 5. پردازش باکس جدید
       // --------------------------------
       // مهم: این بخش پس از ارزیابی کندل و زنجیره قبلی اجرا می‌شود.
-      if(newBoxArrived)
+      if(newBoxArrived){
          CheckNewBox(fractal);
+         ReviewGapWithRiver(fractal);
+      }
+      
+         
    }
 
 
@@ -1823,94 +2081,178 @@ void PrintRiverIsland(RiverIsland &island)
 
 void ReviewGapWithRiver(CFractalGeometry &fractal)
 {
+   if(m_dyno == NULL)
+   {
+      Print("[RedCarpet] SKIPPED: Rainbow dynamics not set");
+      return;
+   }
+
    int total = fractal.SmallBoxCount();
 
-   // حداقل باید یک باکس عضو گروه و یک باکس بیرون گروه داشته باشیم.
-   if(total <= m_zoneBoxCount || m_zoneBoxCount < 1)
+   if(total < 2)
    {
-      Print(
-         "[RiverGap] No older non-overlapping box available."
-      );
+      Print("[RedCarpet] SKIPPED: fewer than two boxes");
       return;
    }
 
-   FlatZone newerBox;
-   FlatZone olderBox;
+   FlatZone box0;
 
-   int newerIndex = m_zoneBoxCount - 1;
-   int olderIndex = m_zoneBoxCount;
+   if(!fractal.GetSmallBox(0, box0))
+   {
+      Print("[RedCarpet] SKIPPED: cannot read box 0");
+      return;
+   }
 
-   if(!fractal.GetSmallBox(newerIndex, newerBox))
+   // جلوگیری از پردازش دوباره همان رویداد
+   if(box0.startTime == m_lastRedCarpetBoxStart &&
+      box0.endTime == m_lastRedCarpetBoxEnd)
       return;
 
-   if(!fractal.GetSmallBox(olderIndex, olderBox))
-      return;
+   m_lastRedCarpetBoxStart = box0.startTime;
+   m_lastRedCarpetBoxEnd   = box0.endTime;
 
-   // فقط فاصله واقعی زمانی بین دو باکس بررسی می‌شود.
-   if(olderBox.endTime >= newerBox.startTime)
+   if(total > MO_MAX_BOXES)
+      total = MO_MAX_BOXES;
+
+   int overlapBoxCount = 1;
+   int box1Index = -1;
+
+   FlatZone box;
+   FlatZone newestGroupOldestBox = box0;
+   FlatZone box1;
+
+   double eps = _Point * 0.5;
+
+   // پیدا کردن گروه باکس‌های هم‌پوشان با باکس صفر
+   for(int i = 1; i < total; i++)
+   {
+      if(!fractal.GetSmallBox(i, box))
+         break;
+
+      double commonHigh =
+         MathMin(box0.highPrice, box.highPrice);
+
+      double commonLow =
+         MathMax(box0.lowPrice, box.lowPrice);
+
+      double overlap = commonHigh - commonLow;
+
+      if(overlap <= eps)
+      {
+         box1 = box;
+         box1Index = i;
+         break;
+      }
+
+      overlapBoxCount++;
+      newestGroupOldestBox = box;
+   }
+
+   if(box1Index < 0)
+   {
+      Print("[RedCarpet] SKIPPED: no older non-overlapping box 1");
+      return;
+   }
+
+   // فاصله زمانی باید واقعی باشد
+   if(box1.endTime >= newestGroupOldestBox.startTime)
    {
       Print(
-         "[RiverGap] No chronological candle gap.",
-         " OlderEnd=",
-         TimeToString(olderBox.endTime, TIME_DATE | TIME_MINUTES),
-         " NewerStart=",
-         TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
+         "[RedCarpet] SKIPPED: no chronological free gap",
+         " Box1End=",
+         TimeToString(box1.endTime, TIME_DATE | TIME_MINUTES),
+         " GroupStart=",
+         TimeToString(
+            newestGroupOldestBox.startTime,
+            TIME_DATE | TIME_MINUTES
+         )
       );
 
       return;
    }
 
-   int olderShift =
-      iBarShift(_Symbol, PERIOD_H1, olderBox.endTime, false);
+   int box1EndShift =
+      iBarShift(_Symbol, PERIOD_H1, box1.endTime, false);
 
-   int newerShift =
-      iBarShift(_Symbol, PERIOD_H1, newerBox.startTime, false);
+   int groupStartShift =
+      iBarShift(
+         _Symbol,
+         PERIOD_H1,
+         newestGroupOldestBox.startTime,
+         false
+      );
 
-   if(olderShift < 0 || newerShift < 0 ||
-      olderShift <= newerShift)
+   int box0EndShift =
+      iBarShift(_Symbol, PERIOD_H1, box0.endTime, false);
+
+   if(box1EndShift < 0 ||
+      groupStartShift < 0 ||
+      box0EndShift < 0)
    {
-      Print("[RiverGap] Invalid candle shifts.");
+      Print("[RedCarpet] SKIPPED: invalid H1 shift");
+      return;
+   }
+
+   // دست‌کم یک کندل کامل آزاد باید وجود داشته باشد.
+   if(box1EndShift <= groupStartShift + 1)
+   {
+      Print(
+         "[RedCarpet] SKIPPED: no complete free H1 candle",
+         " Box1EndShift=", box1EndShift,
+         " GroupStartShift=", groupStartShift
+      );
+
       return;
    }
 
    Print(
-      "[RiverGap] REVIEW START",
-      " OlderBoxIndex=", olderIndex,
-      " NewerBoxIndex=", newerIndex,
-      " From=",
-      TimeToString(olderBox.endTime, TIME_DATE | TIME_MINUTES),
-      " To=",
-      TimeToString(newerBox.startTime, TIME_DATE | TIME_MINUTES)
+      "[RedCarpet] REVIEW START",
+      " Box0Start=",
+      TimeToString(box0.startTime, TIME_DATE | TIME_MINUTES),
+      " Box0End=",
+      TimeToString(box0.endTime, TIME_DATE | TIME_MINUTES),
+      " Box1Index=", box1Index,
+      " OverlapBoxes=", overlapBoxCount,
+      " Box1Start=",
+      TimeToString(box1.startTime, TIME_DATE | TIME_MINUTES),
+      " Box1End=",
+      TimeToString(box1.endTime, TIME_DATE | TIME_MINUTES),
+      " Box1High=", DoubleToString(box1.highPrice, _Digits),
+      " Box1Low=", DoubleToString(box1.lowPrice, _Digits),
+      " Box0OriginShift=", box0EndShift
    );
 
-   RiverIsland island={};
-   bool islandActive = false;
+   if(!m_redCarpetNotebook.Begin(box1, box0.endTime))
+      return;
 
+   RiverIsland island = {};
+   bool islandActive = false;
    int reviewedCandles = 0;
 
-   // شیفت بزرگ‌تر یعنی کندل قدیمی‌تر.
-   // پیمایش از قدیمی به جدید انجام می‌شود.
-   for(int shift = olderShift; shift >= newerShift; shift--)
+   // پیمایش کندل‌های آزاد از قدیمی به جدید
+   // کندل‌های متعلق به خود باکس‌ها حذف می‌شوند.
+   for(int shift = box1EndShift - 1;
+       shift > groupStartShift;
+       shift--)
    {
       datetime candleTime =
          iTime(_Symbol, PERIOD_H1, shift);
 
-      if(candleTime <= olderBox.endTime ||
-         candleTime >= newerBox.startTime)
-      {
+      if(candleTime <= box1.endTime ||
+         candleTime >= newestGroupOldestBox.startTime)
          continue;
-      }
 
       double o = iOpen(_Symbol, PERIOD_H1, shift);
       double h = iHigh(_Symbol, PERIOD_H1, shift);
       double l = iLow(_Symbol, PERIOD_H1, shift);
       double c = iClose(_Symbol, PERIOD_H1, shift);
 
-      if(candleTime == 0 || o == 0.0 ||
-         h == 0.0 || l == 0.0 || c == 0.0)
-      {
+      if(candleTime == 0 ||
+         o == 0 ||
+         h == 0 ||
+         l == 0 ||
+         c == 0)
          continue;
-      }
 
       double center = 0.0;
       double widthPips = 0.0;
@@ -1920,21 +2262,19 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 
       reviewedCandles++;
 
+      // شیفت نقاط قدیمی‌تر از مبدأ باکس صفر منفی است.
       Print(
-         "[RiverGap] CANDLE",
+         "[RedCarpet] CANDLE",
          " Time=",
          TimeToString(candleTime, TIME_DATE | TIME_MINUTES),
-
+         " ShiftFromBox0=", box0EndShift - shift,
          " Family=", RiverFamilyName(family),
-
          " O=", DoubleToString(o, _Digits),
          " H=", DoubleToString(h, _Digits),
          " L=", DoubleToString(l, _Digits),
          " C=", DoubleToString(c, _Digits),
-
          " RiverCenter=", DoubleToString(center, _Digits),
          " RiverWidthPips=", DoubleToString(widthPips, 2),
-
          " RiverData=",
          (center != 0.0 && widthPips > 0.0)
          ? "VALID"
@@ -1960,9 +2300,10 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
          continue;
       }
 
-      // تغییر خانواده یعنی پایان جزیره قبلی
+      // تغییر خانواده: پایان جزیره قبلی
       if(family != island.family)
       {
+         m_redCarpetNotebook.AddIsland(island);
          PrintRiverIsland(island);
 
          island.family      = family;
@@ -1980,7 +2321,7 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
          continue;
       }
 
-      // کندل جدید به همان جزیره تعلق دارد.
+      // ادامه جزیره جاری
       island.candleCount++;
       island.endTime = candleTime;
 
@@ -1999,14 +2340,19 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 
    // ثبت آخرین جزیره
    if(islandActive)
+   {
+      m_redCarpetNotebook.AddIsland(island);
       PrintRiverIsland(island);
+   }
+
+   m_redCarpetNotebook.Finish(reviewedCandles);
 
    Print(
-      "[RiverGap] REVIEW FINISHED",
-      " ReviewedCandles=", reviewedCandles
+      "[RedCarpet] REVIEW FINISHED",
+      " ReviewedCandles=", reviewedCandles,
+      " SavedRecords=", m_redCarpetNotebook.SavedCount()
    );
 }
-
 
 
 
@@ -2019,3 +2365,4 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 
 
 #endif
+
