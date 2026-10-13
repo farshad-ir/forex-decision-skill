@@ -10,7 +10,7 @@ ReferenceHigh=1.09517
 ReferenceLow=1.09262
 Evidence begins after candle=2023.08.14 23:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.09517 Low=1.09262 Start=2023.08.11 20:00 End=2023.08.14 09:00
-[RedCarpet] REVIEW START Box0Start=2023.08.11 20:00 Box0End=2023.08.14 09:00 Box1Index=1 OverlapBoxes=1 Box1Start=2023.08.11 07:00 Box1End=2023.08.11 15:00 Box1High=1.10050 Box1Low=1.09763 Box0OriginShift=15
+[RedCarpet] REVIEW START Box0Start=2023.08.11 20:00 Box0End=2023.08.14 09:00 Box1Start=2023.08.11 07:00 Box1End=2023.08.11 15:00 Box1High=1.10050 Box1Low=1.09763 Box0OriginShift=15
 [RedCarpet] BEGIN Box1Start=2023.08.11 07:00 Box1End=2023.08.11 15:00 Box1High=1.10050 Box1Low=1.09763 Box0Origin=2023.08.14 09:00 OriginShift=15
 [RedCarpet] CANDLE Time=2023.08.11 16:00 ShiftFromBox0=-17 Family=BELOW_RIVER O=1.09682 H=1.09812 L=1.09549 C=1.09627 RiverCenter=1.09841 RiverWidthPips=6.97 RiverData=VALID
 [RedCarpet] CANDLE Time=2023.08.11 17:00 ShiftFromBox0=-16 Family=BELOW_RIVER O=1.09627 H=1.09838 L=1.09576 C=1.09721 RiverCenter=1.09822 RiverWidthPips=7.83 RiverData=VALID
@@ -142,7 +142,7 @@ ReferenceHigh=1.09175
 ReferenceLow=1.09004
 Evidence begins after candle=2023.08.15 10:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.09175 Low=1.09004 Start=2023.08.15 00:00 End=2023.08.15 08:00
-[RedCarpet] REVIEW START Box0Start=2023.08.15 00:00 Box0End=2023.08.15 08:00 Box1Index=1 OverlapBoxes=1 Box1Start=2023.08.11 20:00 Box1End=2023.08.14 09:00 Box1High=1.09517 Box1Low=1.09262 Box0OriginShift=3
+[RedCarpet] REVIEW START Box0Start=2023.08.15 00:00 Box0End=2023.08.15 08:00 Box1Start=2023.08.11 20:00 Box1End=2023.08.14 09:00 Box1High=1.09517 Box1Low=1.09262 Box0OriginShift=3
 [RedCarpet] BEGIN Box1Start=2023.08.11 20:00 Box1End=2023.08.14 09:00 Box1High=1.09517 Box1Low=1.09262 Box0Origin=2023.08.15 08:00 OriginShift=3
 [RedCarpet] CANDLE Time=2023.08.14 10:00 ShiftFromBox0=-22 Family=ABOVE_RIVER O=1.09320 H=1.09561 L=1.09296 C=1.09519 RiverCenter=1.09402 RiverWidthPips=7.23 RiverData=VALID
 [RedCarpet] CANDLE Time=2023.08.14 11:00 ShiftFromBox0=-21 Family=ABOVE_RIVER O=1.09518 H=1.09603 L=1.09454 C=1.09462 RiverCenter=1.09410 RiverWidthPips=6.10 RiverData=VALID
@@ -638,7 +638,7 @@ ReferenceHigh=1.08834
 ReferenceLow=1.08617
 Evidence begins after candle=2023.08.17 10:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.08834 Low=1.08617 Start=2023.08.16 22:00 End=2023.08.17 08:00
-[RedCarpet] REVIEW START Box0Start=2023.08.16 22:00 Box0End=2023.08.17 08:00 Box1Index=1 OverlapBoxes=1 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
+[RedCarpet] REVIEW START Box0Start=2023.08.16 22:00 Box0End=2023.08.17 08:00 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
 [RedCarpet] BEGIN Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0Origin=2023.08.17 08:00 OriginShift=3
 [RedCarpet] CANDLE Time=2023.08.15 09:00 ShiftFromBox0=-47 Family=ABOVE_RIVER O=1.09128 H=1.09263 L=1.09100 C=1.09234 RiverCenter=1.09125 RiverWidthPips=3.99 RiverData=VALID
 [RedCarpet] CANDLE Time=2023.08.15 10:00 ShiftFromBox0=-46 Family=ABOVE_RIVER O=1.09232 H=1.09304 L=1.09154 C=1.09233 RiverCenter=1.09141 RiverWidthPips=5.92 RiverData=VALID
@@ -720,67 +720,6 @@ Theory=RANDOM_BULLISH
 Time=2023.08.17 09:00
 [MarketObserver] Theory: درجا می‌زنیم
 [MarketObserver] Shared OverLap group: 2 boxes; High=1.08867 Low=1.08617 Start=2023.08.16 22:00 End=2023.08.17 09:00
-[RedCarpet] REVIEW START Box0Start=2023.08.17 01:00 Box0End=2023.08.17 09:00 Box1Index=2 OverlapBoxes=2 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0Origin=2023.08.17 09:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.15 09:00 ShiftFromBox0=-48 Family=ABOVE_RIVER O=1.09128 H=1.09263 L=1.09100 C=1.09234 RiverCenter=1.09125 RiverWidthPips=3.99 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 10:00 ShiftFromBox0=-47 Family=ABOVE_RIVER O=1.09232 H=1.09304 L=1.09154 C=1.09233 RiverCenter=1.09141 RiverWidthPips=5.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 11:00 ShiftFromBox0=-46 Family=ABOVE_RIVER O=1.09232 H=1.09343 L=1.09178 C=1.09278 RiverCenter=1.09162 RiverWidthPips=7.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 12:00 ShiftFromBox0=-45 Family=ABOVE_RIVER O=1.09279 H=1.09448 L=1.09213 C=1.09402 RiverCenter=1.09201 RiverWidthPips=9.78 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 13:00 ShiftFromBox0=-44 Family=ABOVE_RIVER O=1.09401 H=1.09430 L=1.09327 C=1.09346 RiverCenter=1.09225 RiverWidthPips=10.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 14:00 ShiftFromBox0=-43 Family=ABOVE_RIVER O=1.09343 H=1.09362 L=1.09266 C=1.09293 RiverCenter=1.09240 RiverWidthPips=9.18 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 15:00 ShiftFromBox0=-42 Family=ABOVE_RIVER O=1.09293 H=1.09324 L=1.08969 C=1.09219 RiverCenter=1.09242 RiverWidthPips=9.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 16:00 ShiftFromBox0=-41 Family=ABOVE_RIVER O=1.09218 H=1.09524 L=1.09168 C=1.09402 RiverCenter=1.09269 RiverWidthPips=9.32 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 17:00 ShiftFromBox0=-40 Family=ABOVE_RIVER O=1.09403 H=1.09473 L=1.09240 C=1.09409 RiverCenter=1.09293 RiverWidthPips=9.44 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 18:00 ShiftFromBox0=-39 Family=ABOVE_RIVER O=1.09409 H=1.09444 L=1.09233 C=1.09269 RiverCenter=1.09292 RiverWidthPips=8.11 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 19:00 ShiftFromBox0=-38 Family=BELOW_RIVER O=1.09268 H=1.09285 L=1.09148 C=1.09178 RiverCenter=1.09274 RiverWidthPips=4.35 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09524 HighTime=2023.08.15 16:00 Low=1.08969 LowTime=2023.08.15 15:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-42 Price=1.08969 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-41 Price=1.09524 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=10 Start=2023.08.15 09:00 End=2023.08.15 18:00 MaxHigh=1.09524 MaxHighCandle=2023.08.15 16:00 MinLow=1.08969 MinLowCandle=2023.08.15 15:00
-[RedCarpet] CANDLE Time=2023.08.15 20:00 ShiftFromBox0=-37 Family=BELOW_RIVER O=1.09178 H=1.09211 L=1.09157 C=1.09178 RiverCenter=1.09260 RiverWidthPips=3.03 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 21:00 ShiftFromBox0=-36 Family=BELOW_RIVER O=1.09178 H=1.09192 L=1.09034 C=1.09043 RiverCenter=1.09230 RiverWidthPips=5.71 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 22:00 ShiftFromBox0=-35 Family=BELOW_RIVER O=1.09043 H=1.09064 L=1.08991 C=1.09059 RiverCenter=1.09209 RiverWidthPips=8.82 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 23:00 ShiftFromBox0=-34 Family=BELOW_RIVER O=1.09056 H=1.09057 L=1.09022 C=1.09046 RiverCenter=1.09181 RiverWidthPips=10.45 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 00:00 ShiftFromBox0=-33 Family=BELOW_RIVER O=1.09037 H=1.09060 L=1.08988 C=1.09033 RiverCenter=1.09152 RiverWidthPips=11.57 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 01:00 ShiftFromBox0=-32 Family=BELOW_RIVER O=1.09031 H=1.09058 L=1.09022 C=1.09028 RiverCenter=1.09130 RiverWidthPips=12.68 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 02:00 ShiftFromBox0=-31 Family=BELOW_RIVER O=1.09028 H=1.09049 L=1.09017 C=1.09038 RiverCenter=1.09112 RiverWidthPips=12.08 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 03:00 ShiftFromBox0=-30 Family=BELOW_RIVER O=1.09037 H=1.09052 L=1.08992 C=1.09032 RiverCenter=1.09095 RiverWidthPips=11.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 04:00 ShiftFromBox0=-29 Family=BELOW_RIVER O=1.09029 H=1.09117 L=1.08990 C=1.09059 RiverCenter=1.09089 RiverWidthPips=10.02 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 05:00 ShiftFromBox0=-28 Family=STREET_FIGHT O=1.09058 H=1.09109 L=1.09045 C=1.09045 RiverCenter=1.09082 RiverWidthPips=8.98 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09285 HighTime=2023.08.15 19:00 Low=1.08988 LowTime=2023.08.16 00:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-38 Price=1.09285 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-33 Price=1.08988 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=10 Start=2023.08.15 19:00 End=2023.08.16 04:00 MaxHigh=1.09285 MaxHighCandle=2023.08.15 19:00 MinLow=1.08988 MinLowCandle=2023.08.16 00:00
-[RedCarpet] CANDLE Time=2023.08.16 06:00 ShiftFromBox0=-27 Family=STREET_FIGHT O=1.09047 H=1.09104 L=1.09040 C=1.09065 RiverCenter=1.09076 RiverWidthPips=6.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 07:00 ShiftFromBox0=-26 Family=ABOVE_RIVER O=1.09065 H=1.09135 L=1.09060 C=1.09133 RiverCenter=1.09080 RiverWidthPips=4.27 RiverData=VALID
-[RedCarpet] ISLAND Family=STREET_FIGHT High=1.09109 HighTime=2023.08.16 05:00 Low=1.09040 LowTime=2023.08.16 06:00 Candles=2
-[RedCarpet] ZIGZAG POINT Index=4 Shift=-28 Price=1.09109 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=5 Shift=-27 Price=1.09040 Flag=LOW
-[RiverGap] ISLAND Family=STREET_FIGHT Candles=2 Start=2023.08.16 05:00 End=2023.08.16 06:00 MaxHigh=1.09109 MaxHighCandle=2023.08.16 05:00 MinLow=1.09040 MinLowCandle=2023.08.16 06:00
-[RedCarpet] CANDLE Time=2023.08.16 08:00 ShiftFromBox0=-25 Family=ABOVE_RIVER O=1.09133 H=1.09178 L=1.09115 C=1.09160 RiverCenter=1.09090 RiverWidthPips=3.19 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 09:00 ShiftFromBox0=-24 Family=ABOVE_RIVER O=1.09161 H=1.09272 L=1.09105 C=1.09192 RiverCenter=1.09105 RiverWidthPips=4.29 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 10:00 ShiftFromBox0=-23 Family=ABOVE_RIVER O=1.09191 H=1.09267 L=1.09165 C=1.09231 RiverCenter=1.09123 RiverWidthPips=6.63 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 11:00 ShiftFromBox0=-22 Family=ABOVE_RIVER O=1.09231 H=1.09345 L=1.09224 C=1.09282 RiverCenter=1.09149 RiverWidthPips=8.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 12:00 ShiftFromBox0=-21 Family=ABOVE_RIVER O=1.09282 H=1.09326 L=1.09208 C=1.09264 RiverCenter=1.09169 RiverWidthPips=8.81 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 13:00 ShiftFromBox0=-20 Family=ABOVE_RIVER O=1.09265 H=1.09268 L=1.09158 C=1.09182 RiverCenter=1.09175 RiverWidthPips=8.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 14:00 ShiftFromBox0=-19 Family=BELOW_RIVER O=1.09182 H=1.09195 L=1.09065 C=1.09130 RiverCenter=1.09171 RiverWidthPips=7.44 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09345 HighTime=2023.08.16 11:00 Low=1.09060 LowTime=2023.08.16 07:00 Candles=7
-[RedCarpet] ZIGZAG POINT Index=6 Shift=-26 Price=1.09060 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=7 Shift=-22 Price=1.09345 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=7 Start=2023.08.16 07:00 End=2023.08.16 13:00 MaxHigh=1.09345 MaxHighCandle=2023.08.16 11:00 MinLow=1.09060 MinLowCandle=2023.08.16 07:00
-[RedCarpet] CANDLE Time=2023.08.16 15:00 ShiftFromBox0=-18 Family=BELOW_RIVER O=1.09130 H=1.09180 L=1.09023 C=1.09024 RiverCenter=1.09151 RiverWidthPips=5.52 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 16:00 ShiftFromBox0=-17 Family=BELOW_RIVER O=1.09017 H=1.09232 L=1.08960 C=1.09088 RiverCenter=1.09143 RiverWidthPips=4.34 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 17:00 ShiftFromBox0=-16 Family=BELOW_RIVER O=1.09087 H=1.09233 L=1.08963 C=1.09067 RiverCenter=1.09132 RiverWidthPips=3.53 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 18:00 ShiftFromBox0=-15 Family=BELOW_RIVER O=1.09068 H=1.09125 L=1.08966 C=1.09030 RiverCenter=1.09114 RiverWidthPips=4.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 19:00 ShiftFromBox0=-14 Family=BELOW_RIVER O=1.09029 H=1.09047 L=1.08861 C=1.08868 RiverCenter=1.09074 RiverWidthPips=8.64 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 20:00 ShiftFromBox0=-13 Family=BELOW_RIVER O=1.08868 H=1.08919 L=1.08837 C=1.08907 RiverCenter=1.09048 RiverWidthPips=10.74 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 21:00 ShiftFromBox0=-12 Family=BELOW_RIVER O=1.08910 H=1.09003 L=1.08774 C=1.08808 RiverCenter=1.09010 RiverWidthPips=13.32 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09233 HighTime=2023.08.16 17:00 Low=1.08774 LowTime=2023.08.16 21:00 Candles=8
-[RedCarpet] ZIGZAG POINT Index=8 Shift=-16 Price=1.09233 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=9 Shift=-12 Price=1.08774 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.16 14:00 End=2023.08.16 21:00 MaxHigh=1.09233 MaxHighCandle=2023.08.16 17:00 MinLow=1.08774 MinLowCandle=2023.08.16 21:00
-[RedCarpet] SAVED Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 ReviewedCandles=37 ZigzagPoints=10
-[RedCarpet] REVIEW FINISHED ReviewedCandles=37 SavedRecords=4
 [ RiverCenter(Price), RiverWidth(pips): (1.08748,5.1) ]
 River Consultant: RIVER_UNCLEAR
 [ RiverCenter(Price), RiverWidth(pips): (1.08748,5.1) ]
@@ -811,67 +750,6 @@ Resume=RANDOM_BULLISH
 [MarketObserver] Theory: درجا زدن غیرفعال شد
 [MarketObserver] Theory: درجا می‌زنیم
 [MarketObserver] Shared OverLap group: 3 boxes; High=1.08867 Low=1.08617 Start=2023.08.16 22:00 End=2023.08.17 12:00
-[RedCarpet] REVIEW START Box0Start=2023.08.17 04:00 Box0End=2023.08.17 12:00 Box1Index=3 OverlapBoxes=3 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0Origin=2023.08.17 12:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.15 09:00 ShiftFromBox0=-51 Family=ABOVE_RIVER O=1.09128 H=1.09263 L=1.09100 C=1.09234 RiverCenter=1.09125 RiverWidthPips=3.99 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 10:00 ShiftFromBox0=-50 Family=ABOVE_RIVER O=1.09232 H=1.09304 L=1.09154 C=1.09233 RiverCenter=1.09141 RiverWidthPips=5.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 11:00 ShiftFromBox0=-49 Family=ABOVE_RIVER O=1.09232 H=1.09343 L=1.09178 C=1.09278 RiverCenter=1.09162 RiverWidthPips=7.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 12:00 ShiftFromBox0=-48 Family=ABOVE_RIVER O=1.09279 H=1.09448 L=1.09213 C=1.09402 RiverCenter=1.09201 RiverWidthPips=9.78 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 13:00 ShiftFromBox0=-47 Family=ABOVE_RIVER O=1.09401 H=1.09430 L=1.09327 C=1.09346 RiverCenter=1.09225 RiverWidthPips=10.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 14:00 ShiftFromBox0=-46 Family=ABOVE_RIVER O=1.09343 H=1.09362 L=1.09266 C=1.09293 RiverCenter=1.09240 RiverWidthPips=9.18 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 15:00 ShiftFromBox0=-45 Family=ABOVE_RIVER O=1.09293 H=1.09324 L=1.08969 C=1.09219 RiverCenter=1.09242 RiverWidthPips=9.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 16:00 ShiftFromBox0=-44 Family=ABOVE_RIVER O=1.09218 H=1.09524 L=1.09168 C=1.09402 RiverCenter=1.09269 RiverWidthPips=9.32 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 17:00 ShiftFromBox0=-43 Family=ABOVE_RIVER O=1.09403 H=1.09473 L=1.09240 C=1.09409 RiverCenter=1.09293 RiverWidthPips=9.44 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 18:00 ShiftFromBox0=-42 Family=ABOVE_RIVER O=1.09409 H=1.09444 L=1.09233 C=1.09269 RiverCenter=1.09292 RiverWidthPips=8.11 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 19:00 ShiftFromBox0=-41 Family=BELOW_RIVER O=1.09268 H=1.09285 L=1.09148 C=1.09178 RiverCenter=1.09274 RiverWidthPips=4.35 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09524 HighTime=2023.08.15 16:00 Low=1.08969 LowTime=2023.08.15 15:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-45 Price=1.08969 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-44 Price=1.09524 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=10 Start=2023.08.15 09:00 End=2023.08.15 18:00 MaxHigh=1.09524 MaxHighCandle=2023.08.15 16:00 MinLow=1.08969 MinLowCandle=2023.08.15 15:00
-[RedCarpet] CANDLE Time=2023.08.15 20:00 ShiftFromBox0=-40 Family=BELOW_RIVER O=1.09178 H=1.09211 L=1.09157 C=1.09178 RiverCenter=1.09260 RiverWidthPips=3.03 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 21:00 ShiftFromBox0=-39 Family=BELOW_RIVER O=1.09178 H=1.09192 L=1.09034 C=1.09043 RiverCenter=1.09230 RiverWidthPips=5.71 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 22:00 ShiftFromBox0=-38 Family=BELOW_RIVER O=1.09043 H=1.09064 L=1.08991 C=1.09059 RiverCenter=1.09209 RiverWidthPips=8.82 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 23:00 ShiftFromBox0=-37 Family=BELOW_RIVER O=1.09056 H=1.09057 L=1.09022 C=1.09046 RiverCenter=1.09181 RiverWidthPips=10.45 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 00:00 ShiftFromBox0=-36 Family=BELOW_RIVER O=1.09037 H=1.09060 L=1.08988 C=1.09033 RiverCenter=1.09152 RiverWidthPips=11.57 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 01:00 ShiftFromBox0=-35 Family=BELOW_RIVER O=1.09031 H=1.09058 L=1.09022 C=1.09028 RiverCenter=1.09130 RiverWidthPips=12.68 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 02:00 ShiftFromBox0=-34 Family=BELOW_RIVER O=1.09028 H=1.09049 L=1.09017 C=1.09038 RiverCenter=1.09112 RiverWidthPips=12.08 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 03:00 ShiftFromBox0=-33 Family=BELOW_RIVER O=1.09037 H=1.09052 L=1.08992 C=1.09032 RiverCenter=1.09095 RiverWidthPips=11.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 04:00 ShiftFromBox0=-32 Family=BELOW_RIVER O=1.09029 H=1.09117 L=1.08990 C=1.09059 RiverCenter=1.09089 RiverWidthPips=10.02 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 05:00 ShiftFromBox0=-31 Family=STREET_FIGHT O=1.09058 H=1.09109 L=1.09045 C=1.09045 RiverCenter=1.09082 RiverWidthPips=8.98 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09285 HighTime=2023.08.15 19:00 Low=1.08988 LowTime=2023.08.16 00:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-41 Price=1.09285 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-36 Price=1.08988 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=10 Start=2023.08.15 19:00 End=2023.08.16 04:00 MaxHigh=1.09285 MaxHighCandle=2023.08.15 19:00 MinLow=1.08988 MinLowCandle=2023.08.16 00:00
-[RedCarpet] CANDLE Time=2023.08.16 06:00 ShiftFromBox0=-30 Family=STREET_FIGHT O=1.09047 H=1.09104 L=1.09040 C=1.09065 RiverCenter=1.09076 RiverWidthPips=6.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 07:00 ShiftFromBox0=-29 Family=ABOVE_RIVER O=1.09065 H=1.09135 L=1.09060 C=1.09133 RiverCenter=1.09080 RiverWidthPips=4.27 RiverData=VALID
-[RedCarpet] ISLAND Family=STREET_FIGHT High=1.09109 HighTime=2023.08.16 05:00 Low=1.09040 LowTime=2023.08.16 06:00 Candles=2
-[RedCarpet] ZIGZAG POINT Index=4 Shift=-31 Price=1.09109 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=5 Shift=-30 Price=1.09040 Flag=LOW
-[RiverGap] ISLAND Family=STREET_FIGHT Candles=2 Start=2023.08.16 05:00 End=2023.08.16 06:00 MaxHigh=1.09109 MaxHighCandle=2023.08.16 05:00 MinLow=1.09040 MinLowCandle=2023.08.16 06:00
-[RedCarpet] CANDLE Time=2023.08.16 08:00 ShiftFromBox0=-28 Family=ABOVE_RIVER O=1.09133 H=1.09178 L=1.09115 C=1.09160 RiverCenter=1.09090 RiverWidthPips=3.19 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 09:00 ShiftFromBox0=-27 Family=ABOVE_RIVER O=1.09161 H=1.09272 L=1.09105 C=1.09192 RiverCenter=1.09105 RiverWidthPips=4.29 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 10:00 ShiftFromBox0=-26 Family=ABOVE_RIVER O=1.09191 H=1.09267 L=1.09165 C=1.09231 RiverCenter=1.09123 RiverWidthPips=6.63 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 11:00 ShiftFromBox0=-25 Family=ABOVE_RIVER O=1.09231 H=1.09345 L=1.09224 C=1.09282 RiverCenter=1.09149 RiverWidthPips=8.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 12:00 ShiftFromBox0=-24 Family=ABOVE_RIVER O=1.09282 H=1.09326 L=1.09208 C=1.09264 RiverCenter=1.09169 RiverWidthPips=8.81 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 13:00 ShiftFromBox0=-23 Family=ABOVE_RIVER O=1.09265 H=1.09268 L=1.09158 C=1.09182 RiverCenter=1.09175 RiverWidthPips=8.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 14:00 ShiftFromBox0=-22 Family=BELOW_RIVER O=1.09182 H=1.09195 L=1.09065 C=1.09130 RiverCenter=1.09171 RiverWidthPips=7.44 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09345 HighTime=2023.08.16 11:00 Low=1.09060 LowTime=2023.08.16 07:00 Candles=7
-[RedCarpet] ZIGZAG POINT Index=6 Shift=-29 Price=1.09060 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=7 Shift=-25 Price=1.09345 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=7 Start=2023.08.16 07:00 End=2023.08.16 13:00 MaxHigh=1.09345 MaxHighCandle=2023.08.16 11:00 MinLow=1.09060 MinLowCandle=2023.08.16 07:00
-[RedCarpet] CANDLE Time=2023.08.16 15:00 ShiftFromBox0=-21 Family=BELOW_RIVER O=1.09130 H=1.09180 L=1.09023 C=1.09024 RiverCenter=1.09151 RiverWidthPips=5.52 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 16:00 ShiftFromBox0=-20 Family=BELOW_RIVER O=1.09017 H=1.09232 L=1.08960 C=1.09088 RiverCenter=1.09143 RiverWidthPips=4.34 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 17:00 ShiftFromBox0=-19 Family=BELOW_RIVER O=1.09087 H=1.09233 L=1.08963 C=1.09067 RiverCenter=1.09132 RiverWidthPips=3.53 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 18:00 ShiftFromBox0=-18 Family=BELOW_RIVER O=1.09068 H=1.09125 L=1.08966 C=1.09030 RiverCenter=1.09114 RiverWidthPips=4.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 19:00 ShiftFromBox0=-17 Family=BELOW_RIVER O=1.09029 H=1.09047 L=1.08861 C=1.08868 RiverCenter=1.09074 RiverWidthPips=8.64 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 20:00 ShiftFromBox0=-16 Family=BELOW_RIVER O=1.08868 H=1.08919 L=1.08837 C=1.08907 RiverCenter=1.09048 RiverWidthPips=10.74 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 21:00 ShiftFromBox0=-15 Family=BELOW_RIVER O=1.08910 H=1.09003 L=1.08774 C=1.08808 RiverCenter=1.09010 RiverWidthPips=13.32 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09233 HighTime=2023.08.16 17:00 Low=1.08774 LowTime=2023.08.16 21:00 Candles=8
-[RedCarpet] ZIGZAG POINT Index=8 Shift=-19 Price=1.09233 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=9 Shift=-15 Price=1.08774 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.16 14:00 End=2023.08.16 21:00 MaxHigh=1.09233 MaxHighCandle=2023.08.16 17:00 MinLow=1.08774 MinLowCandle=2023.08.16 21:00
-[RedCarpet] SAVED Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 ReviewedCandles=37 ZigzagPoints=10
-[RedCarpet] REVIEW FINISHED ReviewedCandles=37 SavedRecords=5
 [ RiverCenter(Price), RiverWidth(pips): (1.08792,6.3) ]
 [ RiverCenter(Price), RiverWidth(pips): (1.08792,6.3) ]
 [MarketObserver] OVERLAP FINISHED: Boxes=3 High=1.08867 Low=1.08617 End=2023.08.17 12:00 Candle=2023.08.17 15:00 Close=1.09063
@@ -946,67 +824,73 @@ ReferenceHigh=1.08834
 ReferenceLow=1.08617
 Evidence begins after candle=2023.08.21 05:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.08841 Low=1.08646 Start=2023.08.18 17:00 End=2023.08.21 03:00
-[RedCarpet] REVIEW START Box0Start=2023.08.18 17:00 Box0End=2023.08.21 03:00 Box1Index=4 OverlapBoxes=4 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0Origin=2023.08.21 03:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.15 09:00 ShiftFromBox0=-90 Family=ABOVE_RIVER O=1.09128 H=1.09263 L=1.09100 C=1.09234 RiverCenter=1.09125 RiverWidthPips=3.99 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 10:00 ShiftFromBox0=-89 Family=ABOVE_RIVER O=1.09232 H=1.09304 L=1.09154 C=1.09233 RiverCenter=1.09141 RiverWidthPips=5.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 11:00 ShiftFromBox0=-88 Family=ABOVE_RIVER O=1.09232 H=1.09343 L=1.09178 C=1.09278 RiverCenter=1.09162 RiverWidthPips=7.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 12:00 ShiftFromBox0=-87 Family=ABOVE_RIVER O=1.09279 H=1.09448 L=1.09213 C=1.09402 RiverCenter=1.09201 RiverWidthPips=9.78 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 13:00 ShiftFromBox0=-86 Family=ABOVE_RIVER O=1.09401 H=1.09430 L=1.09327 C=1.09346 RiverCenter=1.09225 RiverWidthPips=10.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 14:00 ShiftFromBox0=-85 Family=ABOVE_RIVER O=1.09343 H=1.09362 L=1.09266 C=1.09293 RiverCenter=1.09240 RiverWidthPips=9.18 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 15:00 ShiftFromBox0=-84 Family=ABOVE_RIVER O=1.09293 H=1.09324 L=1.08969 C=1.09219 RiverCenter=1.09242 RiverWidthPips=9.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 16:00 ShiftFromBox0=-83 Family=ABOVE_RIVER O=1.09218 H=1.09524 L=1.09168 C=1.09402 RiverCenter=1.09269 RiverWidthPips=9.32 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 17:00 ShiftFromBox0=-82 Family=ABOVE_RIVER O=1.09403 H=1.09473 L=1.09240 C=1.09409 RiverCenter=1.09293 RiverWidthPips=9.44 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 18:00 ShiftFromBox0=-81 Family=ABOVE_RIVER O=1.09409 H=1.09444 L=1.09233 C=1.09269 RiverCenter=1.09292 RiverWidthPips=8.11 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 19:00 ShiftFromBox0=-80 Family=BELOW_RIVER O=1.09268 H=1.09285 L=1.09148 C=1.09178 RiverCenter=1.09274 RiverWidthPips=4.35 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09524 HighTime=2023.08.15 16:00 Low=1.08969 LowTime=2023.08.15 15:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-84 Price=1.08969 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-83 Price=1.09524 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=10 Start=2023.08.15 09:00 End=2023.08.15 18:00 MaxHigh=1.09524 MaxHighCandle=2023.08.15 16:00 MinLow=1.08969 MinLowCandle=2023.08.15 15:00
-[RedCarpet] CANDLE Time=2023.08.15 20:00 ShiftFromBox0=-79 Family=BELOW_RIVER O=1.09178 H=1.09211 L=1.09157 C=1.09178 RiverCenter=1.09260 RiverWidthPips=3.03 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 21:00 ShiftFromBox0=-78 Family=BELOW_RIVER O=1.09178 H=1.09192 L=1.09034 C=1.09043 RiverCenter=1.09230 RiverWidthPips=5.71 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 22:00 ShiftFromBox0=-77 Family=BELOW_RIVER O=1.09043 H=1.09064 L=1.08991 C=1.09059 RiverCenter=1.09209 RiverWidthPips=8.82 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 23:00 ShiftFromBox0=-76 Family=BELOW_RIVER O=1.09056 H=1.09057 L=1.09022 C=1.09046 RiverCenter=1.09181 RiverWidthPips=10.45 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 00:00 ShiftFromBox0=-75 Family=BELOW_RIVER O=1.09037 H=1.09060 L=1.08988 C=1.09033 RiverCenter=1.09152 RiverWidthPips=11.57 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 01:00 ShiftFromBox0=-74 Family=BELOW_RIVER O=1.09031 H=1.09058 L=1.09022 C=1.09028 RiverCenter=1.09130 RiverWidthPips=12.68 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 02:00 ShiftFromBox0=-73 Family=BELOW_RIVER O=1.09028 H=1.09049 L=1.09017 C=1.09038 RiverCenter=1.09112 RiverWidthPips=12.08 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 03:00 ShiftFromBox0=-72 Family=BELOW_RIVER O=1.09037 H=1.09052 L=1.08992 C=1.09032 RiverCenter=1.09095 RiverWidthPips=11.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 04:00 ShiftFromBox0=-71 Family=BELOW_RIVER O=1.09029 H=1.09117 L=1.08990 C=1.09059 RiverCenter=1.09089 RiverWidthPips=10.02 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 05:00 ShiftFromBox0=-70 Family=STREET_FIGHT O=1.09058 H=1.09109 L=1.09045 C=1.09045 RiverCenter=1.09082 RiverWidthPips=8.98 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09285 HighTime=2023.08.15 19:00 Low=1.08988 LowTime=2023.08.16 00:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-80 Price=1.09285 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-75 Price=1.08988 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=10 Start=2023.08.15 19:00 End=2023.08.16 04:00 MaxHigh=1.09285 MaxHighCandle=2023.08.15 19:00 MinLow=1.08988 MinLowCandle=2023.08.16 00:00
-[RedCarpet] CANDLE Time=2023.08.16 06:00 ShiftFromBox0=-69 Family=STREET_FIGHT O=1.09047 H=1.09104 L=1.09040 C=1.09065 RiverCenter=1.09076 RiverWidthPips=6.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 07:00 ShiftFromBox0=-68 Family=ABOVE_RIVER O=1.09065 H=1.09135 L=1.09060 C=1.09133 RiverCenter=1.09080 RiverWidthPips=4.27 RiverData=VALID
-[RedCarpet] ISLAND Family=STREET_FIGHT High=1.09109 HighTime=2023.08.16 05:00 Low=1.09040 LowTime=2023.08.16 06:00 Candles=2
-[RedCarpet] ZIGZAG POINT Index=4 Shift=-70 Price=1.09109 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=5 Shift=-69 Price=1.09040 Flag=LOW
-[RiverGap] ISLAND Family=STREET_FIGHT Candles=2 Start=2023.08.16 05:00 End=2023.08.16 06:00 MaxHigh=1.09109 MaxHighCandle=2023.08.16 05:00 MinLow=1.09040 MinLowCandle=2023.08.16 06:00
-[RedCarpet] CANDLE Time=2023.08.16 08:00 ShiftFromBox0=-67 Family=ABOVE_RIVER O=1.09133 H=1.09178 L=1.09115 C=1.09160 RiverCenter=1.09090 RiverWidthPips=3.19 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 09:00 ShiftFromBox0=-66 Family=ABOVE_RIVER O=1.09161 H=1.09272 L=1.09105 C=1.09192 RiverCenter=1.09105 RiverWidthPips=4.29 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 10:00 ShiftFromBox0=-65 Family=ABOVE_RIVER O=1.09191 H=1.09267 L=1.09165 C=1.09231 RiverCenter=1.09123 RiverWidthPips=6.63 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 11:00 ShiftFromBox0=-64 Family=ABOVE_RIVER O=1.09231 H=1.09345 L=1.09224 C=1.09282 RiverCenter=1.09149 RiverWidthPips=8.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 12:00 ShiftFromBox0=-63 Family=ABOVE_RIVER O=1.09282 H=1.09326 L=1.09208 C=1.09264 RiverCenter=1.09169 RiverWidthPips=8.81 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 13:00 ShiftFromBox0=-62 Family=ABOVE_RIVER O=1.09265 H=1.09268 L=1.09158 C=1.09182 RiverCenter=1.09175 RiverWidthPips=8.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 14:00 ShiftFromBox0=-61 Family=BELOW_RIVER O=1.09182 H=1.09195 L=1.09065 C=1.09130 RiverCenter=1.09171 RiverWidthPips=7.44 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09345 HighTime=2023.08.16 11:00 Low=1.09060 LowTime=2023.08.16 07:00 Candles=7
-[RedCarpet] ZIGZAG POINT Index=6 Shift=-68 Price=1.09060 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=7 Shift=-64 Price=1.09345 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=7 Start=2023.08.16 07:00 End=2023.08.16 13:00 MaxHigh=1.09345 MaxHighCandle=2023.08.16 11:00 MinLow=1.09060 MinLowCandle=2023.08.16 07:00
-[RedCarpet] CANDLE Time=2023.08.16 15:00 ShiftFromBox0=-60 Family=BELOW_RIVER O=1.09130 H=1.09180 L=1.09023 C=1.09024 RiverCenter=1.09151 RiverWidthPips=5.52 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 16:00 ShiftFromBox0=-59 Family=BELOW_RIVER O=1.09017 H=1.09232 L=1.08960 C=1.09088 RiverCenter=1.09143 RiverWidthPips=4.34 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 17:00 ShiftFromBox0=-58 Family=BELOW_RIVER O=1.09087 H=1.09233 L=1.08963 C=1.09067 RiverCenter=1.09132 RiverWidthPips=3.53 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 18:00 ShiftFromBox0=-57 Family=BELOW_RIVER O=1.09068 H=1.09125 L=1.08966 C=1.09030 RiverCenter=1.09114 RiverWidthPips=4.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 19:00 ShiftFromBox0=-56 Family=BELOW_RIVER O=1.09029 H=1.09047 L=1.08861 C=1.08868 RiverCenter=1.09074 RiverWidthPips=8.64 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 20:00 ShiftFromBox0=-55 Family=BELOW_RIVER O=1.08868 H=1.08919 L=1.08837 C=1.08907 RiverCenter=1.09048 RiverWidthPips=10.74 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 21:00 ShiftFromBox0=-54 Family=BELOW_RIVER O=1.08910 H=1.09003 L=1.08774 C=1.08808 RiverCenter=1.09010 RiverWidthPips=13.32 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09233 HighTime=2023.08.16 17:00 Low=1.08774 LowTime=2023.08.16 21:00 Candles=8
-[RedCarpet] ZIGZAG POINT Index=8 Shift=-58 Price=1.09233 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=9 Shift=-54 Price=1.08774 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.16 14:00 End=2023.08.16 21:00 MaxHigh=1.09233 MaxHighCandle=2023.08.16 17:00 MinLow=1.08774 MinLowCandle=2023.08.16 21:00
-[RedCarpet] SAVED Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 ReviewedCandles=37 ZigzagPoints=10
-[RedCarpet] REVIEW FINISHED ReviewedCandles=37 SavedRecords=6
+[RedCarpet] REVIEW START Box0Start=2023.08.18 17:00 Box0End=2023.08.21 03:00 Box1Start=2023.08.17 04:00 Box1End=2023.08.17 12:00 Box1High=1.08867 Box1Low=1.08617 Box0OriginShift=3
+[RedCarpet] BEGIN Box1Start=2023.08.17 04:00 Box1End=2023.08.17 12:00 Box1High=1.08867 Box1Low=1.08617 Box0Origin=2023.08.21 03:00 OriginShift=3
+[RedCarpet] CANDLE Time=2023.08.17 13:00 ShiftFromBox0=-38 Family=ABOVE_RIVER O=1.08737 H=1.08877 L=1.08731 C=1.08834 RiverCenter=1.08764 RiverWidthPips=4.03 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 14:00 ShiftFromBox0=-37 Family=ABOVE_RIVER O=1.08835 H=1.08957 L=1.08812 C=1.08945 RiverCenter=1.08792 RiverWidthPips=6.33 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 15:00 ShiftFromBox0=-36 Family=ABOVE_RIVER O=1.08945 H=1.09183 L=1.08857 C=1.09063 RiverCenter=1.08833 RiverWidthPips=10.65 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 16:00 ShiftFromBox0=-35 Family=ABOVE_RIVER O=1.09063 H=1.09180 L=1.08976 C=1.08995 RiverCenter=1.08856 RiverWidthPips=11.85 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 17:00 ShiftFromBox0=-34 Family=ABOVE_RIVER O=1.08994 H=1.08998 L=1.08843 C=1.08895 RiverCenter=1.08863 RiverWidthPips=10.17 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 18:00 ShiftFromBox0=-33 Family=BELOW_RIVER O=1.08896 H=1.08903 L=1.08668 C=1.08737 RiverCenter=1.08850 RiverWidthPips=7.99 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09183 HighTime=2023.08.17 15:00 Low=1.08731 LowTime=2023.08.17 13:00 Candles=5
+[RedCarpet] ZIGZAG POINT Index=0 Shift=-38 Price=1.08731 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=1 Shift=-36 Price=1.09183 Flag=HIGH
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=5 Start=2023.08.17 13:00 End=2023.08.17 17:00 MaxHigh=1.09183 MaxHighCandle=2023.08.17 15:00 MinLow=1.08731 MinLowCandle=2023.08.17 13:00
+[RedCarpet] CANDLE Time=2023.08.17 19:00 ShiftFromBox0=-32 Family=BELOW_RIVER O=1.08738 H=1.08896 L=1.08684 C=1.08780 RiverCenter=1.08847 RiverWidthPips=7.74 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 20:00 ShiftFromBox0=-31 Family=BELOW_RIVER O=1.08780 H=1.08785 L=1.08571 C=1.08610 RiverCenter=1.08816 RiverWidthPips=7.75 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 21:00 ShiftFromBox0=-30 Family=BELOW_RIVER O=1.08611 H=1.08630 L=1.08565 C=1.08569 RiverCenter=1.08779 RiverWidthPips=7.73 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 22:00 ShiftFromBox0=-29 Family=BELOW_RIVER O=1.08569 H=1.08739 L=1.08569 C=1.08718 RiverCenter=1.08764 RiverWidthPips=7.68 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.17 23:00 ShiftFromBox0=-28 Family=STREET_FIGHT O=1.08718 H=1.08735 L=1.08698 C=1.08726 RiverCenter=1.08751 RiverWidthPips=7.66 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08903 HighTime=2023.08.17 18:00 Low=1.08565 LowTime=2023.08.17 21:00 Candles=5
+[RedCarpet] ZIGZAG POINT Index=2 Shift=-33 Price=1.08903 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=3 Shift=-30 Price=1.08565 Flag=LOW
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=5 Start=2023.08.17 18:00 End=2023.08.17 22:00 MaxHigh=1.08903 MaxHighCandle=2023.08.17 18:00 MinLow=1.08565 MinLowCandle=2023.08.17 21:00
+[RedCarpet] CANDLE Time=2023.08.18 00:00 ShiftFromBox0=-27 Family=BELOW_RIVER O=1.08643 H=1.08739 L=1.08642 C=1.08675 RiverCenter=1.08735 RiverWidthPips=9.89 RiverData=VALID
+[RedCarpet] ISLAND Family=STREET_FIGHT High=1.08735 HighTime=2023.08.17 23:00 Low=1.08698 LowTime=2023.08.17 23:00 Candles=1
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=4 Shift=-28 Price=1.08735 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=5 Shift=-28 Price=1.08698 Flag=LOW
+[RiverGap] ISLAND Family=STREET_FIGHT Candles=1 Start=2023.08.17 23:00 End=2023.08.17 23:00 MaxHigh=1.08735 MaxHighCandle=2023.08.17 23:00 MinLow=1.08698 MinLowCandle=2023.08.17 23:00
+[RedCarpet] CANDLE Time=2023.08.18 01:00 ShiftFromBox0=-26 Family=BELOW_RIVER O=1.08675 H=1.08743 L=1.08675 C=1.08736 RiverCenter=1.08736 RiverWidthPips=9.94 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 02:00 ShiftFromBox0=-25 Family=STREET_FIGHT O=1.08736 H=1.08755 L=1.08727 C=1.08743 RiverCenter=1.08736 RiverWidthPips=10.51 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08743 HighTime=2023.08.18 01:00 Low=1.08642 LowTime=2023.08.18 00:00 Candles=2
+[RedCarpet] ZIGZAG POINT Index=6 Shift=-27 Price=1.08642 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=7 Shift=-26 Price=1.08743 Flag=HIGH
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=2 Start=2023.08.18 00:00 End=2023.08.18 01:00 MaxHigh=1.08743 MaxHighCandle=2023.08.18 01:00 MinLow=1.08642 MinLowCandle=2023.08.18 00:00
+[RedCarpet] CANDLE Time=2023.08.18 03:00 ShiftFromBox0=-24 Family=ABOVE_RIVER O=1.08741 H=1.08921 L=1.08716 C=1.08896 RiverCenter=1.08763 RiverWidthPips=6.87 RiverData=VALID
+[RedCarpet] ISLAND Family=STREET_FIGHT High=1.08755 HighTime=2023.08.18 02:00 Low=1.08727 LowTime=2023.08.18 02:00 Candles=1
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=8 Shift=-25 Price=1.08755 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=9 Shift=-25 Price=1.08727 Flag=LOW
+[RiverGap] ISLAND Family=STREET_FIGHT Candles=1 Start=2023.08.18 02:00 End=2023.08.18 02:00 MaxHigh=1.08755 MaxHighCandle=2023.08.18 02:00 MinLow=1.08727 MinLowCandle=2023.08.18 02:00
+[RedCarpet] CANDLE Time=2023.08.18 04:00 ShiftFromBox0=-23 Family=ABOVE_RIVER O=1.08897 H=1.08924 L=1.08837 C=1.08910 RiverCenter=1.08788 RiverWidthPips=3.14 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 05:00 ShiftFromBox0=-22 Family=ABOVE_RIVER O=1.08910 H=1.08938 L=1.08866 C=1.08884 RiverCenter=1.08799 RiverWidthPips=4.68 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 06:00 ShiftFromBox0=-21 Family=ABOVE_RIVER O=1.08883 H=1.08889 L=1.08824 C=1.08859 RiverCenter=1.08805 RiverWidthPips=6.54 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 07:00 ShiftFromBox0=-20 Family=ABOVE_RIVER O=1.08860 H=1.08879 L=1.08801 C=1.08823 RiverCenter=1.08809 RiverWidthPips=7.40 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 08:00 ShiftFromBox0=-19 Family=STREET_FIGHT O=1.08823 H=1.08849 L=1.08758 C=1.08829 RiverCenter=1.08815 RiverWidthPips=8.07 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.08938 HighTime=2023.08.18 05:00 Low=1.08716 LowTime=2023.08.18 03:00 Candles=5
+[RedCarpet] ZIGZAG POINT Index=10 Shift=-24 Price=1.08716 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=11 Shift=-22 Price=1.08938 Flag=HIGH
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=5 Start=2023.08.18 03:00 End=2023.08.18 07:00 MaxHigh=1.08938 MaxHighCandle=2023.08.18 05:00 MinLow=1.08716 MinLowCandle=2023.08.18 03:00
+[RedCarpet] CANDLE Time=2023.08.18 09:00 ShiftFromBox0=-18 Family=BELOW_RIVER O=1.08844 H=1.08871 L=1.08708 C=1.08718 RiverCenter=1.08803 RiverWidthPips=8.16 RiverData=VALID
+[RedCarpet] ISLAND Family=STREET_FIGHT High=1.08849 HighTime=2023.08.18 08:00 Low=1.08758 LowTime=2023.08.18 08:00 Candles=1
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=12 Shift=-19 Price=1.08849 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=13 Shift=-19 Price=1.08758 Flag=LOW
+[RiverGap] ISLAND Family=STREET_FIGHT Candles=1 Start=2023.08.18 08:00 End=2023.08.18 08:00 MaxHigh=1.08849 MaxHighCandle=2023.08.18 08:00 MinLow=1.08758 MinLowCandle=2023.08.18 08:00
+[RedCarpet] CANDLE Time=2023.08.18 10:00 ShiftFromBox0=-17 Family=BELOW_RIVER O=1.08717 H=1.08782 L=1.08644 C=1.08730 RiverCenter=1.08792 RiverWidthPips=4.93 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 11:00 ShiftFromBox0=-16 Family=BELOW_RIVER O=1.08730 H=1.08769 L=1.08637 C=1.08675 RiverCenter=1.08775 RiverWidthPips=3.16 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 12:00 ShiftFromBox0=-15 Family=BELOW_RIVER O=1.08674 H=1.08732 L=1.08624 C=1.08683 RiverCenter=1.08760 RiverWidthPips=3.94 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 13:00 ShiftFromBox0=-14 Family=BELOW_RIVER O=1.08683 H=1.08763 L=1.08621 C=1.08630 RiverCenter=1.08738 RiverWidthPips=5.96 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 14:00 ShiftFromBox0=-13 Family=BELOW_RIVER O=1.08630 H=1.08706 L=1.08602 C=1.08630 RiverCenter=1.08722 RiverWidthPips=7.67 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 15:00 ShiftFromBox0=-12 Family=BELOW_RIVER O=1.08629 H=1.08672 L=1.08449 C=1.08555 RiverCenter=1.08695 RiverWidthPips=9.77 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.18 16:00 ShiftFromBox0=-11 Family=BELOW_RIVER O=1.08555 H=1.08761 L=1.08530 C=1.08707 RiverCenter=1.08697 RiverWidthPips=9.35 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08871 HighTime=2023.08.18 09:00 Low=1.08449 LowTime=2023.08.18 15:00 Candles=8
+[RedCarpet] ZIGZAG POINT Index=14 Shift=-18 Price=1.08871 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=15 Shift=-12 Price=1.08449 Flag=LOW
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.18 09:00 End=2023.08.18 16:00 MaxHigh=1.08871 MaxHighCandle=2023.08.18 09:00 MinLow=1.08449 MinLowCandle=2023.08.18 15:00
+[RedCarpet] SAVED Box1Start=2023.08.17 04:00 Box1End=2023.08.17 12:00 Box1High=1.08867 Box1Low=1.08617 ReviewedCandles=28 ZigzagPoints=16
+[RedCarpet] REVIEW FINISHED ReviewedCandles=28 SavedRecords=4
 [ RiverCenter(Price), RiverWidth(pips): (1.08756,1.5) ]
 [ RiverCenter(Price), RiverWidth(pips): (1.08756,1.5) ]
 BOX High: 1.08841
@@ -1027,67 +911,6 @@ Theory=RANDOM_BULLISH
 Time=2023.08.21 04:00
 [MarketObserver] Theory: درجا می‌زنیم
 [MarketObserver] Shared OverLap group: 2 boxes; High=1.08841 Low=1.08646 Start=2023.08.18 17:00 End=2023.08.21 04:00
-[RedCarpet] REVIEW START Box0Start=2023.08.18 20:00 Box0End=2023.08.21 04:00 Box1Index=5 OverlapBoxes=5 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0Origin=2023.08.21 04:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.15 09:00 ShiftFromBox0=-91 Family=ABOVE_RIVER O=1.09128 H=1.09263 L=1.09100 C=1.09234 RiverCenter=1.09125 RiverWidthPips=3.99 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 10:00 ShiftFromBox0=-90 Family=ABOVE_RIVER O=1.09232 H=1.09304 L=1.09154 C=1.09233 RiverCenter=1.09141 RiverWidthPips=5.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 11:00 ShiftFromBox0=-89 Family=ABOVE_RIVER O=1.09232 H=1.09343 L=1.09178 C=1.09278 RiverCenter=1.09162 RiverWidthPips=7.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 12:00 ShiftFromBox0=-88 Family=ABOVE_RIVER O=1.09279 H=1.09448 L=1.09213 C=1.09402 RiverCenter=1.09201 RiverWidthPips=9.78 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 13:00 ShiftFromBox0=-87 Family=ABOVE_RIVER O=1.09401 H=1.09430 L=1.09327 C=1.09346 RiverCenter=1.09225 RiverWidthPips=10.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 14:00 ShiftFromBox0=-86 Family=ABOVE_RIVER O=1.09343 H=1.09362 L=1.09266 C=1.09293 RiverCenter=1.09240 RiverWidthPips=9.18 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 15:00 ShiftFromBox0=-85 Family=ABOVE_RIVER O=1.09293 H=1.09324 L=1.08969 C=1.09219 RiverCenter=1.09242 RiverWidthPips=9.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 16:00 ShiftFromBox0=-84 Family=ABOVE_RIVER O=1.09218 H=1.09524 L=1.09168 C=1.09402 RiverCenter=1.09269 RiverWidthPips=9.32 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 17:00 ShiftFromBox0=-83 Family=ABOVE_RIVER O=1.09403 H=1.09473 L=1.09240 C=1.09409 RiverCenter=1.09293 RiverWidthPips=9.44 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 18:00 ShiftFromBox0=-82 Family=ABOVE_RIVER O=1.09409 H=1.09444 L=1.09233 C=1.09269 RiverCenter=1.09292 RiverWidthPips=8.11 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 19:00 ShiftFromBox0=-81 Family=BELOW_RIVER O=1.09268 H=1.09285 L=1.09148 C=1.09178 RiverCenter=1.09274 RiverWidthPips=4.35 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09524 HighTime=2023.08.15 16:00 Low=1.08969 LowTime=2023.08.15 15:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-85 Price=1.08969 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-84 Price=1.09524 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=10 Start=2023.08.15 09:00 End=2023.08.15 18:00 MaxHigh=1.09524 MaxHighCandle=2023.08.15 16:00 MinLow=1.08969 MinLowCandle=2023.08.15 15:00
-[RedCarpet] CANDLE Time=2023.08.15 20:00 ShiftFromBox0=-80 Family=BELOW_RIVER O=1.09178 H=1.09211 L=1.09157 C=1.09178 RiverCenter=1.09260 RiverWidthPips=3.03 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 21:00 ShiftFromBox0=-79 Family=BELOW_RIVER O=1.09178 H=1.09192 L=1.09034 C=1.09043 RiverCenter=1.09230 RiverWidthPips=5.71 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 22:00 ShiftFromBox0=-78 Family=BELOW_RIVER O=1.09043 H=1.09064 L=1.08991 C=1.09059 RiverCenter=1.09209 RiverWidthPips=8.82 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 23:00 ShiftFromBox0=-77 Family=BELOW_RIVER O=1.09056 H=1.09057 L=1.09022 C=1.09046 RiverCenter=1.09181 RiverWidthPips=10.45 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 00:00 ShiftFromBox0=-76 Family=BELOW_RIVER O=1.09037 H=1.09060 L=1.08988 C=1.09033 RiverCenter=1.09152 RiverWidthPips=11.57 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 01:00 ShiftFromBox0=-75 Family=BELOW_RIVER O=1.09031 H=1.09058 L=1.09022 C=1.09028 RiverCenter=1.09130 RiverWidthPips=12.68 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 02:00 ShiftFromBox0=-74 Family=BELOW_RIVER O=1.09028 H=1.09049 L=1.09017 C=1.09038 RiverCenter=1.09112 RiverWidthPips=12.08 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 03:00 ShiftFromBox0=-73 Family=BELOW_RIVER O=1.09037 H=1.09052 L=1.08992 C=1.09032 RiverCenter=1.09095 RiverWidthPips=11.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 04:00 ShiftFromBox0=-72 Family=BELOW_RIVER O=1.09029 H=1.09117 L=1.08990 C=1.09059 RiverCenter=1.09089 RiverWidthPips=10.02 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 05:00 ShiftFromBox0=-71 Family=STREET_FIGHT O=1.09058 H=1.09109 L=1.09045 C=1.09045 RiverCenter=1.09082 RiverWidthPips=8.98 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09285 HighTime=2023.08.15 19:00 Low=1.08988 LowTime=2023.08.16 00:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-81 Price=1.09285 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-76 Price=1.08988 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=10 Start=2023.08.15 19:00 End=2023.08.16 04:00 MaxHigh=1.09285 MaxHighCandle=2023.08.15 19:00 MinLow=1.08988 MinLowCandle=2023.08.16 00:00
-[RedCarpet] CANDLE Time=2023.08.16 06:00 ShiftFromBox0=-70 Family=STREET_FIGHT O=1.09047 H=1.09104 L=1.09040 C=1.09065 RiverCenter=1.09076 RiverWidthPips=6.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 07:00 ShiftFromBox0=-69 Family=ABOVE_RIVER O=1.09065 H=1.09135 L=1.09060 C=1.09133 RiverCenter=1.09080 RiverWidthPips=4.27 RiverData=VALID
-[RedCarpet] ISLAND Family=STREET_FIGHT High=1.09109 HighTime=2023.08.16 05:00 Low=1.09040 LowTime=2023.08.16 06:00 Candles=2
-[RedCarpet] ZIGZAG POINT Index=4 Shift=-71 Price=1.09109 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=5 Shift=-70 Price=1.09040 Flag=LOW
-[RiverGap] ISLAND Family=STREET_FIGHT Candles=2 Start=2023.08.16 05:00 End=2023.08.16 06:00 MaxHigh=1.09109 MaxHighCandle=2023.08.16 05:00 MinLow=1.09040 MinLowCandle=2023.08.16 06:00
-[RedCarpet] CANDLE Time=2023.08.16 08:00 ShiftFromBox0=-68 Family=ABOVE_RIVER O=1.09133 H=1.09178 L=1.09115 C=1.09160 RiverCenter=1.09090 RiverWidthPips=3.19 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 09:00 ShiftFromBox0=-67 Family=ABOVE_RIVER O=1.09161 H=1.09272 L=1.09105 C=1.09192 RiverCenter=1.09105 RiverWidthPips=4.29 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 10:00 ShiftFromBox0=-66 Family=ABOVE_RIVER O=1.09191 H=1.09267 L=1.09165 C=1.09231 RiverCenter=1.09123 RiverWidthPips=6.63 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 11:00 ShiftFromBox0=-65 Family=ABOVE_RIVER O=1.09231 H=1.09345 L=1.09224 C=1.09282 RiverCenter=1.09149 RiverWidthPips=8.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 12:00 ShiftFromBox0=-64 Family=ABOVE_RIVER O=1.09282 H=1.09326 L=1.09208 C=1.09264 RiverCenter=1.09169 RiverWidthPips=8.81 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 13:00 ShiftFromBox0=-63 Family=ABOVE_RIVER O=1.09265 H=1.09268 L=1.09158 C=1.09182 RiverCenter=1.09175 RiverWidthPips=8.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 14:00 ShiftFromBox0=-62 Family=BELOW_RIVER O=1.09182 H=1.09195 L=1.09065 C=1.09130 RiverCenter=1.09171 RiverWidthPips=7.44 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09345 HighTime=2023.08.16 11:00 Low=1.09060 LowTime=2023.08.16 07:00 Candles=7
-[RedCarpet] ZIGZAG POINT Index=6 Shift=-69 Price=1.09060 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=7 Shift=-65 Price=1.09345 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=7 Start=2023.08.16 07:00 End=2023.08.16 13:00 MaxHigh=1.09345 MaxHighCandle=2023.08.16 11:00 MinLow=1.09060 MinLowCandle=2023.08.16 07:00
-[RedCarpet] CANDLE Time=2023.08.16 15:00 ShiftFromBox0=-61 Family=BELOW_RIVER O=1.09130 H=1.09180 L=1.09023 C=1.09024 RiverCenter=1.09151 RiverWidthPips=5.52 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 16:00 ShiftFromBox0=-60 Family=BELOW_RIVER O=1.09017 H=1.09232 L=1.08960 C=1.09088 RiverCenter=1.09143 RiverWidthPips=4.34 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 17:00 ShiftFromBox0=-59 Family=BELOW_RIVER O=1.09087 H=1.09233 L=1.08963 C=1.09067 RiverCenter=1.09132 RiverWidthPips=3.53 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 18:00 ShiftFromBox0=-58 Family=BELOW_RIVER O=1.09068 H=1.09125 L=1.08966 C=1.09030 RiverCenter=1.09114 RiverWidthPips=4.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 19:00 ShiftFromBox0=-57 Family=BELOW_RIVER O=1.09029 H=1.09047 L=1.08861 C=1.08868 RiverCenter=1.09074 RiverWidthPips=8.64 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 20:00 ShiftFromBox0=-56 Family=BELOW_RIVER O=1.08868 H=1.08919 L=1.08837 C=1.08907 RiverCenter=1.09048 RiverWidthPips=10.74 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 21:00 ShiftFromBox0=-55 Family=BELOW_RIVER O=1.08910 H=1.09003 L=1.08774 C=1.08808 RiverCenter=1.09010 RiverWidthPips=13.32 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09233 HighTime=2023.08.16 17:00 Low=1.08774 LowTime=2023.08.16 21:00 Candles=8
-[RedCarpet] ZIGZAG POINT Index=8 Shift=-59 Price=1.09233 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=9 Shift=-55 Price=1.08774 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.16 14:00 End=2023.08.16 21:00 MaxHigh=1.09233 MaxHighCandle=2023.08.16 17:00 MinLow=1.08774 MinLowCandle=2023.08.16 21:00
-[RedCarpet] SAVED Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 ReviewedCandles=37 ZigzagPoints=10
-[RedCarpet] REVIEW FINISHED ReviewedCandles=37 SavedRecords=7
 [ RiverCenter(Price), RiverWidth(pips): (1.08765,1.8) ]
 River Consultant: RIVER_RISING
 [ RiverCenter(Price), RiverWidth(pips): (1.08765,1.8) ]
@@ -1121,67 +944,6 @@ Last Candle Time: 2023.08.21 12:00
 [MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.15 00:00 Level=1.09004 Candle=2023.08.21 12:00
 [MarketObserver] Theory: درجا می‌زنیم
 [MarketObserver] Shared OverLap group: 3 boxes; High=1.08841 Low=1.08646 Start=2023.08.18 17:00 End=2023.08.21 10:00
-[RedCarpet] REVIEW START Box0Start=2023.08.21 00:00 Box0End=2023.08.21 10:00 Box1Index=6 OverlapBoxes=6 Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 Box0Origin=2023.08.21 10:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.15 09:00 ShiftFromBox0=-97 Family=ABOVE_RIVER O=1.09128 H=1.09263 L=1.09100 C=1.09234 RiverCenter=1.09125 RiverWidthPips=3.99 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 10:00 ShiftFromBox0=-96 Family=ABOVE_RIVER O=1.09232 H=1.09304 L=1.09154 C=1.09233 RiverCenter=1.09141 RiverWidthPips=5.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 11:00 ShiftFromBox0=-95 Family=ABOVE_RIVER O=1.09232 H=1.09343 L=1.09178 C=1.09278 RiverCenter=1.09162 RiverWidthPips=7.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 12:00 ShiftFromBox0=-94 Family=ABOVE_RIVER O=1.09279 H=1.09448 L=1.09213 C=1.09402 RiverCenter=1.09201 RiverWidthPips=9.78 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 13:00 ShiftFromBox0=-93 Family=ABOVE_RIVER O=1.09401 H=1.09430 L=1.09327 C=1.09346 RiverCenter=1.09225 RiverWidthPips=10.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 14:00 ShiftFromBox0=-92 Family=ABOVE_RIVER O=1.09343 H=1.09362 L=1.09266 C=1.09293 RiverCenter=1.09240 RiverWidthPips=9.18 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 15:00 ShiftFromBox0=-91 Family=ABOVE_RIVER O=1.09293 H=1.09324 L=1.08969 C=1.09219 RiverCenter=1.09242 RiverWidthPips=9.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 16:00 ShiftFromBox0=-90 Family=ABOVE_RIVER O=1.09218 H=1.09524 L=1.09168 C=1.09402 RiverCenter=1.09269 RiverWidthPips=9.32 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 17:00 ShiftFromBox0=-89 Family=ABOVE_RIVER O=1.09403 H=1.09473 L=1.09240 C=1.09409 RiverCenter=1.09293 RiverWidthPips=9.44 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 18:00 ShiftFromBox0=-88 Family=ABOVE_RIVER O=1.09409 H=1.09444 L=1.09233 C=1.09269 RiverCenter=1.09292 RiverWidthPips=8.11 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 19:00 ShiftFromBox0=-87 Family=BELOW_RIVER O=1.09268 H=1.09285 L=1.09148 C=1.09178 RiverCenter=1.09274 RiverWidthPips=4.35 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09524 HighTime=2023.08.15 16:00 Low=1.08969 LowTime=2023.08.15 15:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-91 Price=1.08969 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-90 Price=1.09524 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=10 Start=2023.08.15 09:00 End=2023.08.15 18:00 MaxHigh=1.09524 MaxHighCandle=2023.08.15 16:00 MinLow=1.08969 MinLowCandle=2023.08.15 15:00
-[RedCarpet] CANDLE Time=2023.08.15 20:00 ShiftFromBox0=-86 Family=BELOW_RIVER O=1.09178 H=1.09211 L=1.09157 C=1.09178 RiverCenter=1.09260 RiverWidthPips=3.03 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 21:00 ShiftFromBox0=-85 Family=BELOW_RIVER O=1.09178 H=1.09192 L=1.09034 C=1.09043 RiverCenter=1.09230 RiverWidthPips=5.71 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 22:00 ShiftFromBox0=-84 Family=BELOW_RIVER O=1.09043 H=1.09064 L=1.08991 C=1.09059 RiverCenter=1.09209 RiverWidthPips=8.82 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.15 23:00 ShiftFromBox0=-83 Family=BELOW_RIVER O=1.09056 H=1.09057 L=1.09022 C=1.09046 RiverCenter=1.09181 RiverWidthPips=10.45 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 00:00 ShiftFromBox0=-82 Family=BELOW_RIVER O=1.09037 H=1.09060 L=1.08988 C=1.09033 RiverCenter=1.09152 RiverWidthPips=11.57 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 01:00 ShiftFromBox0=-81 Family=BELOW_RIVER O=1.09031 H=1.09058 L=1.09022 C=1.09028 RiverCenter=1.09130 RiverWidthPips=12.68 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 02:00 ShiftFromBox0=-80 Family=BELOW_RIVER O=1.09028 H=1.09049 L=1.09017 C=1.09038 RiverCenter=1.09112 RiverWidthPips=12.08 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 03:00 ShiftFromBox0=-79 Family=BELOW_RIVER O=1.09037 H=1.09052 L=1.08992 C=1.09032 RiverCenter=1.09095 RiverWidthPips=11.92 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 04:00 ShiftFromBox0=-78 Family=BELOW_RIVER O=1.09029 H=1.09117 L=1.08990 C=1.09059 RiverCenter=1.09089 RiverWidthPips=10.02 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 05:00 ShiftFromBox0=-77 Family=STREET_FIGHT O=1.09058 H=1.09109 L=1.09045 C=1.09045 RiverCenter=1.09082 RiverWidthPips=8.98 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09285 HighTime=2023.08.15 19:00 Low=1.08988 LowTime=2023.08.16 00:00 Candles=10
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-87 Price=1.09285 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-82 Price=1.08988 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=10 Start=2023.08.15 19:00 End=2023.08.16 04:00 MaxHigh=1.09285 MaxHighCandle=2023.08.15 19:00 MinLow=1.08988 MinLowCandle=2023.08.16 00:00
-[RedCarpet] CANDLE Time=2023.08.16 06:00 ShiftFromBox0=-76 Family=STREET_FIGHT O=1.09047 H=1.09104 L=1.09040 C=1.09065 RiverCenter=1.09076 RiverWidthPips=6.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 07:00 ShiftFromBox0=-75 Family=ABOVE_RIVER O=1.09065 H=1.09135 L=1.09060 C=1.09133 RiverCenter=1.09080 RiverWidthPips=4.27 RiverData=VALID
-[RedCarpet] ISLAND Family=STREET_FIGHT High=1.09109 HighTime=2023.08.16 05:00 Low=1.09040 LowTime=2023.08.16 06:00 Candles=2
-[RedCarpet] ZIGZAG POINT Index=4 Shift=-77 Price=1.09109 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=5 Shift=-76 Price=1.09040 Flag=LOW
-[RiverGap] ISLAND Family=STREET_FIGHT Candles=2 Start=2023.08.16 05:00 End=2023.08.16 06:00 MaxHigh=1.09109 MaxHighCandle=2023.08.16 05:00 MinLow=1.09040 MinLowCandle=2023.08.16 06:00
-[RedCarpet] CANDLE Time=2023.08.16 08:00 ShiftFromBox0=-74 Family=ABOVE_RIVER O=1.09133 H=1.09178 L=1.09115 C=1.09160 RiverCenter=1.09090 RiverWidthPips=3.19 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 09:00 ShiftFromBox0=-73 Family=ABOVE_RIVER O=1.09161 H=1.09272 L=1.09105 C=1.09192 RiverCenter=1.09105 RiverWidthPips=4.29 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 10:00 ShiftFromBox0=-72 Family=ABOVE_RIVER O=1.09191 H=1.09267 L=1.09165 C=1.09231 RiverCenter=1.09123 RiverWidthPips=6.63 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 11:00 ShiftFromBox0=-71 Family=ABOVE_RIVER O=1.09231 H=1.09345 L=1.09224 C=1.09282 RiverCenter=1.09149 RiverWidthPips=8.24 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 12:00 ShiftFromBox0=-70 Family=ABOVE_RIVER O=1.09282 H=1.09326 L=1.09208 C=1.09264 RiverCenter=1.09169 RiverWidthPips=8.81 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 13:00 ShiftFromBox0=-69 Family=ABOVE_RIVER O=1.09265 H=1.09268 L=1.09158 C=1.09182 RiverCenter=1.09175 RiverWidthPips=8.17 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 14:00 ShiftFromBox0=-68 Family=BELOW_RIVER O=1.09182 H=1.09195 L=1.09065 C=1.09130 RiverCenter=1.09171 RiverWidthPips=7.44 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09345 HighTime=2023.08.16 11:00 Low=1.09060 LowTime=2023.08.16 07:00 Candles=7
-[RedCarpet] ZIGZAG POINT Index=6 Shift=-75 Price=1.09060 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=7 Shift=-71 Price=1.09345 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=7 Start=2023.08.16 07:00 End=2023.08.16 13:00 MaxHigh=1.09345 MaxHighCandle=2023.08.16 11:00 MinLow=1.09060 MinLowCandle=2023.08.16 07:00
-[RedCarpet] CANDLE Time=2023.08.16 15:00 ShiftFromBox0=-67 Family=BELOW_RIVER O=1.09130 H=1.09180 L=1.09023 C=1.09024 RiverCenter=1.09151 RiverWidthPips=5.52 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 16:00 ShiftFromBox0=-66 Family=BELOW_RIVER O=1.09017 H=1.09232 L=1.08960 C=1.09088 RiverCenter=1.09143 RiverWidthPips=4.34 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 17:00 ShiftFromBox0=-65 Family=BELOW_RIVER O=1.09087 H=1.09233 L=1.08963 C=1.09067 RiverCenter=1.09132 RiverWidthPips=3.53 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 18:00 ShiftFromBox0=-64 Family=BELOW_RIVER O=1.09068 H=1.09125 L=1.08966 C=1.09030 RiverCenter=1.09114 RiverWidthPips=4.30 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 19:00 ShiftFromBox0=-63 Family=BELOW_RIVER O=1.09029 H=1.09047 L=1.08861 C=1.08868 RiverCenter=1.09074 RiverWidthPips=8.64 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 20:00 ShiftFromBox0=-62 Family=BELOW_RIVER O=1.08868 H=1.08919 L=1.08837 C=1.08907 RiverCenter=1.09048 RiverWidthPips=10.74 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.16 21:00 ShiftFromBox0=-61 Family=BELOW_RIVER O=1.08910 H=1.09003 L=1.08774 C=1.08808 RiverCenter=1.09010 RiverWidthPips=13.32 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09233 HighTime=2023.08.16 17:00 Low=1.08774 LowTime=2023.08.16 21:00 Candles=8
-[RedCarpet] ZIGZAG POINT Index=8 Shift=-65 Price=1.09233 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=9 Shift=-61 Price=1.08774 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.16 14:00 End=2023.08.16 21:00 MaxHigh=1.09233 MaxHighCandle=2023.08.16 17:00 MinLow=1.08774 MinLowCandle=2023.08.16 21:00
-[RedCarpet] SAVED Box1Start=2023.08.15 00:00 Box1End=2023.08.15 08:00 Box1High=1.09175 Box1Low=1.09004 ReviewedCandles=37 ZigzagPoints=10
-[RedCarpet] REVIEW FINISHED ReviewedCandles=37 SavedRecords=8
 [ RiverCenter(Price), RiverWidth(pips): (1.08838,6.7) ]
 [ RiverCenter(Price), RiverWidth(pips): (1.08838,6.7) ]
 [MarketObserver] OVERLAP FINISHED: Boxes=3 High=1.08841 Low=1.08646 End=2023.08.21 10:00 Candle=2023.08.21 13:00 Close=1.08989
@@ -1223,40 +985,20 @@ ReferenceHigh=1.08834
 ReferenceLow=1.08617
 Evidence begins after candle=2023.08.22 05:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.09042 Low=1.08753 Start=2023.08.21 17:00 End=2023.08.22 03:00
-[RedCarpet] REVIEW START Box0Start=2023.08.21 17:00 Box0End=2023.08.22 03:00 Box1Index=8 OverlapBoxes=8 Box1Start=2023.08.11 20:00 Box1End=2023.08.14 09:00 Box1High=1.09517 Box1Low=1.09262 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.11 20:00 Box1End=2023.08.14 09:00 Box1High=1.09517 Box1Low=1.09262 Box0Origin=2023.08.22 03:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.14 10:00 ShiftFromBox0=-137 Family=ABOVE_RIVER O=1.09320 H=1.09561 L=1.09296 C=1.09519 RiverCenter=1.09402 RiverWidthPips=7.23 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 11:00 ShiftFromBox0=-136 Family=ABOVE_RIVER O=1.09518 H=1.09603 L=1.09454 C=1.09462 RiverCenter=1.09410 RiverWidthPips=6.10 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 12:00 ShiftFromBox0=-135 Family=ABOVE_RIVER O=1.09463 H=1.09519 L=1.09419 C=1.09495 RiverCenter=1.09424 RiverWidthPips=4.12 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 13:00 ShiftFromBox0=-134 Family=ABOVE_RIVER O=1.09497 H=1.09531 L=1.09449 C=1.09449 RiverCenter=1.09429 RiverWidthPips=4.33 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 14:00 ShiftFromBox0=-133 Family=BELOW_RIVER O=1.09445 H=1.09460 L=1.09367 C=1.09389 RiverCenter=1.09424 RiverWidthPips=4.19 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09603 HighTime=2023.08.14 11:00 Low=1.09296 LowTime=2023.08.14 10:00 Candles=4
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-137 Price=1.09296 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-136 Price=1.09603 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=4 Start=2023.08.14 10:00 End=2023.08.14 13:00 MaxHigh=1.09603 MaxHighCandle=2023.08.14 11:00 MinLow=1.09296 MinLowCandle=2023.08.14 10:00
-[RedCarpet] CANDLE Time=2023.08.14 15:00 ShiftFromBox0=-132 Family=BELOW_RIVER O=1.09388 H=1.09411 L=1.09022 C=1.09056 RiverCenter=1.09370 RiverWidthPips=5.51 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 16:00 ShiftFromBox0=-131 Family=BELOW_RIVER O=1.09056 H=1.09076 L=1.08746 C=1.08815 RiverCenter=1.09289 RiverWidthPips=12.39 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 17:00 ShiftFromBox0=-130 Family=BELOW_RIVER O=1.08816 H=1.09093 L=1.08802 C=1.09032 RiverCenter=1.09246 RiverWidthPips=14.26 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 18:00 ShiftFromBox0=-129 Family=BELOW_RIVER O=1.09033 H=1.09256 L=1.09023 C=1.09206 RiverCenter=1.09234 RiverWidthPips=12.05 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 19:00 ShiftFromBox0=-128 Family=STREET_FIGHT O=1.09206 H=1.09361 L=1.09199 C=1.09284 RiverCenter=1.09234 RiverWidthPips=11.53 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09460 HighTime=2023.08.14 14:00 Low=1.08746 LowTime=2023.08.14 16:00 Candles=5
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-133 Price=1.09460 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-131 Price=1.08746 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=5 Start=2023.08.14 14:00 End=2023.08.14 18:00 MaxHigh=1.09460 MaxHighCandle=2023.08.14 14:00 MinLow=1.08746 MinLowCandle=2023.08.14 16:00
-[RedCarpet] CANDLE Time=2023.08.14 20:00 ShiftFromBox0=-127 Family=STREET_FIGHT O=1.09284 H=1.09312 L=1.09151 C=1.09173 RiverCenter=1.09216 RiverWidthPips=14.42 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 21:00 ShiftFromBox0=-126 Family=BELOW_RIVER O=1.09173 H=1.09198 L=1.09038 C=1.09046 RiverCenter=1.09183 RiverWidthPips=17.11 RiverData=VALID
-[RedCarpet] ISLAND Family=STREET_FIGHT High=1.09361 HighTime=2023.08.14 19:00 Low=1.09151 LowTime=2023.08.14 20:00 Candles=2
-[RedCarpet] ZIGZAG POINT Index=4 Shift=-128 Price=1.09361 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=5 Shift=-127 Price=1.09151 Flag=LOW
-[RiverGap] ISLAND Family=STREET_FIGHT Candles=2 Start=2023.08.14 19:00 End=2023.08.14 20:00 MaxHigh=1.09361 MaxHighCandle=2023.08.14 19:00 MinLow=1.09151 MinLowCandle=2023.08.14 20:00
-[RedCarpet] CANDLE Time=2023.08.14 22:00 ShiftFromBox0=-125 Family=BELOW_RIVER O=1.09046 H=1.09131 L=1.09029 C=1.09030 RiverCenter=1.09161 RiverWidthPips=15.03 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.14 23:00 ShiftFromBox0=-124 Family=BELOW_RIVER O=1.09030 H=1.09075 L=1.09028 C=1.09061 RiverCenter=1.09156 RiverWidthPips=10.66 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09198 HighTime=2023.08.14 21:00 Low=1.09028 LowTime=2023.08.14 23:00 Candles=3
-[RedCarpet] ZIGZAG POINT Index=6 Shift=-126 Price=1.09198 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=7 Shift=-124 Price=1.09028 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=3 Start=2023.08.14 21:00 End=2023.08.14 23:00 MaxHigh=1.09198 MaxHighCandle=2023.08.14 21:00 MinLow=1.09028 MinLowCandle=2023.08.14 23:00
-[RedCarpet] SAVED Box1Start=2023.08.11 20:00 Box1End=2023.08.14 09:00 Box1High=1.09517 Box1Low=1.09262 ReviewedCandles=14 ZigzagPoints=8
-[RedCarpet] REVIEW FINISHED ReviewedCandles=14 SavedRecords=9
+[RedCarpet] REVIEW START Box0Start=2023.08.21 17:00 Box0End=2023.08.22 03:00 Box1Start=2023.08.21 00:00 Box1End=2023.08.21 10:00 Box1High=1.08841 Box1Low=1.08646 Box0OriginShift=3
+[RedCarpet] BEGIN Box1Start=2023.08.21 00:00 Box1End=2023.08.21 10:00 Box1High=1.08841 Box1Low=1.08646 Box0Origin=2023.08.22 03:00 OriginShift=3
+[RedCarpet] CANDLE Time=2023.08.21 11:00 ShiftFromBox0=-16 Family=ABOVE_RIVER O=1.08884 H=1.08897 L=1.08822 C=1.08860 RiverCenter=1.08807 RiverWidthPips=3.97 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.21 12:00 ShiftFromBox0=-15 Family=ABOVE_RIVER O=1.08859 H=1.09049 L=1.08856 C=1.09015 RiverCenter=1.08838 RiverWidthPips=6.69 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.21 13:00 ShiftFromBox0=-14 Family=ABOVE_RIVER O=1.09015 H=1.09043 L=1.08918 C=1.08989 RiverCenter=1.08862 RiverWidthPips=7.73 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.21 14:00 ShiftFromBox0=-13 Family=ABOVE_RIVER O=1.08989 H=1.09138 L=1.08982 C=1.09092 RiverCenter=1.08899 RiverWidthPips=10.04 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.21 15:00 ShiftFromBox0=-12 Family=ABOVE_RIVER O=1.09092 H=1.09130 L=1.08936 C=1.08983 RiverCenter=1.08915 RiverWidthPips=9.18 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.21 16:00 ShiftFromBox0=-11 Family=ABOVE_RIVER O=1.08985 H=1.09001 L=1.08803 C=1.08872 RiverCenter=1.08914 RiverWidthPips=8.24 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09138 HighTime=2023.08.21 14:00 Low=1.08803 LowTime=2023.08.21 16:00 Candles=6
+[RedCarpet] ZIGZAG POINT Index=0 Shift=-13 Price=1.09138 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=1 Shift=-11 Price=1.08803 Flag=LOW
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=6 Start=2023.08.21 11:00 End=2023.08.21 16:00 MaxHigh=1.09138 MaxHighCandle=2023.08.21 14:00 MinLow=1.08803 MinLowCandle=2023.08.21 16:00
+[RedCarpet] SAVED Box1Start=2023.08.21 00:00 Box1End=2023.08.21 10:00 Box1High=1.08841 Box1Low=1.08646 ReviewedCandles=6 ZigzagPoints=2
+[RedCarpet] REVIEW FINISHED ReviewedCandles=6 SavedRecords=5
 [ RiverCenter(Price), RiverWidth(pips): (1.08991,4.7) ]
 [ RiverCenter(Price), RiverWidth(pips): (1.08991,4.7) ]
 [TheoryExperiment] EVIDENCE
@@ -1314,20 +1056,6 @@ Theory=RANDOM_BULLISH
 Time=2023.08.22 08:00
 [MarketObserver] Theory: درجا می‌زنیم
 [MarketObserver] Shared OverLap group: 2 boxes; High=1.09045 Low=1.08753 Start=2023.08.21 17:00 End=2023.08.22 08:00
-[RedCarpet] REVIEW START Box0Start=2023.08.21 19:00 Box0End=2023.08.22 08:00 Box1Index=2 OverlapBoxes=2 Box1Start=2023.08.21 00:00 Box1End=2023.08.21 10:00 Box1High=1.08841 Box1Low=1.08646 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.21 00:00 Box1End=2023.08.21 10:00 Box1High=1.08841 Box1Low=1.08646 Box0Origin=2023.08.22 08:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.21 11:00 ShiftFromBox0=-21 Family=ABOVE_RIVER O=1.08884 H=1.08897 L=1.08822 C=1.08860 RiverCenter=1.08807 RiverWidthPips=3.97 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.21 12:00 ShiftFromBox0=-20 Family=ABOVE_RIVER O=1.08859 H=1.09049 L=1.08856 C=1.09015 RiverCenter=1.08838 RiverWidthPips=6.69 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.21 13:00 ShiftFromBox0=-19 Family=ABOVE_RIVER O=1.09015 H=1.09043 L=1.08918 C=1.08989 RiverCenter=1.08862 RiverWidthPips=7.73 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.21 14:00 ShiftFromBox0=-18 Family=ABOVE_RIVER O=1.08989 H=1.09138 L=1.08982 C=1.09092 RiverCenter=1.08899 RiverWidthPips=10.04 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.21 15:00 ShiftFromBox0=-17 Family=ABOVE_RIVER O=1.09092 H=1.09130 L=1.08936 C=1.08983 RiverCenter=1.08915 RiverWidthPips=9.18 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.21 16:00 ShiftFromBox0=-16 Family=ABOVE_RIVER O=1.08985 H=1.09001 L=1.08803 C=1.08872 RiverCenter=1.08914 RiverWidthPips=8.24 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09138 HighTime=2023.08.21 14:00 Low=1.08803 LowTime=2023.08.21 16:00 Candles=6
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-18 Price=1.09138 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-16 Price=1.08803 Flag=LOW
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=6 Start=2023.08.21 11:00 End=2023.08.21 16:00 MaxHigh=1.09138 MaxHighCandle=2023.08.21 14:00 MinLow=1.08803 MinLowCandle=2023.08.21 16:00
-[RedCarpet] SAVED Box1Start=2023.08.21 00:00 Box1End=2023.08.21 10:00 Box1High=1.08841 Box1Low=1.08646 ReviewedCandles=6 ZigzagPoints=2
-[RedCarpet] REVIEW FINISHED ReviewedCandles=6 SavedRecords=10
 [ RiverCenter(Price), RiverWidth(pips): (1.09093,8.3) ]
 [ RiverCenter(Price), RiverWidth(pips): (1.09093,8.3) ]
 [MarketObserver] OVERLAP FINISHED: Boxes=2 High=1.09045 Low=1.08753 End=2023.08.22 08:00 Candle=2023.08.22 11:00 Close=1.09099
@@ -1373,7 +1101,7 @@ ReferenceHigh=1.08834
 ReferenceLow=1.08617
 Evidence begins after candle=2023.08.23 06:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.08553 Low=1.08329 Start=2023.08.22 17:00 End=2023.08.23 04:00
-[RedCarpet] REVIEW START Box0Start=2023.08.22 17:00 Box0End=2023.08.23 04:00 Box1Index=1 OverlapBoxes=1 Box1Start=2023.08.21 19:00 Box1End=2023.08.22 08:00 Box1High=1.09045 Box1Low=1.08902 Box0OriginShift=3
+[RedCarpet] REVIEW START Box0Start=2023.08.22 17:00 Box0End=2023.08.23 04:00 Box1Start=2023.08.21 19:00 Box1End=2023.08.22 08:00 Box1High=1.09045 Box1Low=1.08902 Box0OriginShift=3
 [RedCarpet] BEGIN Box1Start=2023.08.21 19:00 Box1End=2023.08.22 08:00 Box1High=1.09045 Box1Low=1.08902 Box0Origin=2023.08.23 04:00 OriginShift=3
 [RedCarpet] CANDLE Time=2023.08.22 09:00 ShiftFromBox0=-19 Family=ABOVE_RIVER O=1.09053 H=1.09208 L=1.09053 C=1.09179 RiverCenter=1.09062 RiverWidthPips=5.99 RiverData=VALID
 [RedCarpet] CANDLE Time=2023.08.22 10:00 ShiftFromBox0=-18 Family=ABOVE_RIVER O=1.09179 H=1.09304 L=1.09174 C=1.09256 RiverCenter=1.09093 RiverWidthPips=8.29 RiverData=VALID
@@ -1397,7 +1125,7 @@ Evidence begins after candle=2023.08.23 06:00
 [RedCarpet] ZIGZAG POINT Index=5 Shift=-12 Price=1.08411 Flag=LOW
 [RiverGap] ISLAND Family=BELOW_RIVER Candles=4 Start=2023.08.22 13:00 End=2023.08.22 16:00 MaxHigh=1.09102 MaxHighCandle=2023.08.22 13:00 MinLow=1.08411 MinLowCandle=2023.08.22 16:00
 [RedCarpet] SAVED Box1Start=2023.08.21 19:00 Box1End=2023.08.22 08:00 Box1High=1.09045 Box1Low=1.08902 ReviewedCandles=8 ZigzagPoints=6
-[RedCarpet] REVIEW FINISHED ReviewedCandles=8 SavedRecords=11
+[RedCarpet] REVIEW FINISHED ReviewedCandles=8 SavedRecords=6
 [ RiverCenter(Price), RiverWidth(pips): (1.08520,6.5) ]
 River Consultant: RIVER_RISING
 [ RiverCenter(Price), RiverWidth(pips): (1.08520,6.5) ]
@@ -1647,7 +1375,7 @@ ReferenceHigh=1.08752
 ReferenceLow=1.08557
 Evidence begins after candle=2023.08.24 07:00
 [MarketObserver] Shared OverLap group: 1 boxes; High=1.08752 Low=1.08557 Start=2023.08.23 20:00 End=2023.08.24 05:00
-[RedCarpet] REVIEW START Box0Start=2023.08.23 20:00 Box0End=2023.08.24 05:00 Box1Index=1 OverlapBoxes=1 Box1Start=2023.08.22 17:00 Box1End=2023.08.23 04:00 Box1High=1.08553 Box1Low=1.08329 Box0OriginShift=3
+[RedCarpet] REVIEW START Box0Start=2023.08.23 20:00 Box0End=2023.08.24 05:00 Box1Start=2023.08.22 17:00 Box1End=2023.08.23 04:00 Box1High=1.08553 Box1Low=1.08329 Box0OriginShift=3
 [RedCarpet] BEGIN Box1Start=2023.08.22 17:00 Box1End=2023.08.23 04:00 Box1High=1.08553 Box1Low=1.08329 Box0Origin=2023.08.24 05:00 OriginShift=3
 [RedCarpet] CANDLE Time=2023.08.23 05:00 ShiftFromBox0=-24 Family=ABOVE_RIVER O=1.08549 H=1.08575 L=1.08524 C=1.08544 RiverCenter=1.08509 RiverWidthPips=7.31 RiverData=VALID
 [RedCarpet] CANDLE Time=2023.08.23 06:00 ShiftFromBox0=-23 Family=ABOVE_RIVER O=1.08544 H=1.08597 L=1.08519 C=1.08574 RiverCenter=1.08520 RiverWidthPips=6.48 RiverData=VALID
@@ -1677,7 +1405,7 @@ Evidence begins after candle=2023.08.24 07:00
 [RedCarpet] ZIGZAG POINT Index=5 Shift=-10 Price=1.08682 Flag=HIGH
 [RiverGap] ISLAND Family=ABOVE_RIVER Candles=3 Start=2023.08.23 17:00 End=2023.08.23 19:00 MaxHigh=1.08682 MaxHighCandle=2023.08.23 19:00 MinLow=1.08346 MinLowCandle=2023.08.23 17:00
 [RedCarpet] SAVED Box1Start=2023.08.22 17:00 Box1End=2023.08.23 04:00 Box1High=1.08553 Box1Low=1.08329 ReviewedCandles=15 ZigzagPoints=6
-[RedCarpet] REVIEW FINISHED ReviewedCandles=15 SavedRecords=12
+[RedCarpet] REVIEW FINISHED ReviewedCandles=15 SavedRecords=7
 [ RiverCenter(Price), RiverWidth(pips): (1.08640,5.0) ]
 [ RiverCenter(Price), RiverWidth(pips): (1.08640,5.0) ]
 [MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 20:00 Level=1.08752 Candle=2023.08.24 08:00
@@ -1719,26 +1447,1005 @@ Theory=RANDOM_BEARISH
 Time=2023.08.24 08:00
 [MarketObserver] Theory: درجا می‌زنیم
 [MarketObserver] Shared OverLap group: 2 boxes; High=1.08764 Low=1.08557 Start=2023.08.23 20:00 End=2023.08.24 08:00
-[RedCarpet] REVIEW START Box0Start=2023.08.23 21:00 Box0End=2023.08.24 08:00 Box1Index=2 OverlapBoxes=2 Box1Start=2023.08.22 17:00 Box1End=2023.08.23 04:00 Box1High=1.08553 Box1Low=1.08329 Box0OriginShift=3
-[RedCarpet] BEGIN Box1Start=2023.08.22 17:00 Box1End=2023.08.23 04:00 Box1High=1.08553 Box1Low=1.08329 Box0Origin=2023.08.24 08:00 OriginShift=3
-[RedCarpet] CANDLE Time=2023.08.23 05:00 ShiftFromBox0=-27 Family=ABOVE_RIVER O=1.08549 H=1.08575 L=1.08524 C=1.08544 RiverCenter=1.08509 RiverWidthPips=7.31 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 06:00 ShiftFromBox0=-26 Family=ABOVE_RIVER O=1.08544 H=1.08597 L=1.08519 C=1.08574 RiverCenter=1.08520 RiverWidthPips=6.48 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 07:00 ShiftFromBox0=-25 Family=ABOVE_RIVER O=1.08574 H=1.08606 L=1.08549 C=1.08606 RiverCenter=1.08534 RiverWidthPips=6.42 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 08:00 ShiftFromBox0=-24 Family=ABOVE_RIVER O=1.08607 H=1.08632 L=1.08583 C=1.08622 RiverCenter=1.08550 RiverWidthPips=5.97 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 09:00 ShiftFromBox0=-23 Family=ABOVE_RIVER O=1.08617 H=1.08646 L=1.08520 C=1.08613 RiverCenter=1.08562 RiverWidthPips=5.65 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 10:00 ShiftFromBox0=-22 Family=BELOW_RIVER O=1.08611 H=1.08714 L=1.08116 C=1.08180 RiverCenter=1.08507 RiverWidthPips=4.91 RiverData=VALID
-[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.08646 HighTime=2023.08.23 09:00 Low=1.08519 LowTime=2023.08.23 06:00 Candles=5
-[RedCarpet] ZIGZAG POINT Index=0 Shift=-26 Price=1.08519 Flag=LOW
-[RedCarpet] ZIGZAG POINT Index=1 Shift=-23 Price=1.08646 Flag=HIGH
-[RiverGap] ISLAND Family=ABOVE_RIVER Candles=5 Start=2023.08.23 05:00 End=2023.08.23 09:00 MaxHigh=1.08646 MaxHighCandle=2023.08.23 09:00 MinLow=1.08519 MinLowCandle=2023.08.23 06:00
-[RedCarpet] CANDLE Time=2023.08.23 11:00 ShiftFromBox0=-21 Family=BELOW_RIVER O=1.08180 H=1.08303 L=1.08155 C=1.08190 RiverCenter=1.08459 RiverWidthPips=7.49 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 12:00 ShiftFromBox0=-20 Family=BELOW_RIVER O=1.08198 H=1.08205 L=1.08083 C=1.08097 RiverCenter=1.08404 RiverWidthPips=11.94 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 13:00 ShiftFromBox0=-19 Family=BELOW_RIVER O=1.08098 H=1.08121 L=1.08053 C=1.08075 RiverCenter=1.08352 RiverWidthPips=15.56 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 14:00 ShiftFromBox0=-18 Family=BELOW_RIVER O=1.08074 H=1.08184 L=1.08039 C=1.08112 RiverCenter=1.08310 RiverWidthPips=17.00 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 15:00 ShiftFromBox0=-17 Family=BELOW_RIVER O=1.08112 H=1.08128 L=1.08024 C=1.08041 RiverCenter=1.08260 RiverWidthPips=18.66 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 16:00 ShiftFromBox0=-16 Family=BELOW_RIVER O=1.08041 H=1.08449 L=1.08033 C=1.08379 RiverCenter=1.08265 RiverWidthPips=20.75 RiverData=VALID
-[RedCarpet] CANDLE Time=2023.08.23 17:00 ShiftFromBox0=-15 Family=ABOVE_RIVER O=1.08378 H=1.08538 L=1.08346 C=1.08456 RiverCenter=1.08293 RiverWidthPips=16.70 RiverData=VALID
-[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08714 HighTime=2023.08.23 10:00 Low=1.08024 LowTime=2023.08.23 15:00 Candles=7
-[RedCarpet] ZIGZAG POINT Index=2 Shift=-22 Price=1.08714 Flag=HIGH
-[RedCarpet] ZIGZAG POINT Index=3 Shift=-17 Price=1.08024 Flag=LOW
-[RiverGap] ISLAND Family=BELOW_RIVER Candles=7 Start=2023.08.23 10:00 End=2023.08.23 16:00 MaxHigh=1.08714 MaxHighCandle=2023.08.23 10:00 MinLow=1.08024 MinLowCandle=2023.08.23 15:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08625,3.0) ]
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.08625,3.0) ]
+[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08764 Low=1.08557 OriginalEnd=2023.08.24 08:00 Candle=2023.08.24 11:00
+[MarketObserver] رویداد بازار: از کف برگشتیم
+نظریه: درجا می‌زنیم
+دلیل: قیمت از کف عبور کرد اما داخل محدوده بسته شد
+عامل تردید: حرکت بعدی هنوز مشخص نیست
+زمان رویداد: 2023.08.24 11:00
+زمان تغییر نظریه: 2023.08.24 08:00
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08627,3.1) ]
+[MarketObserver] رویداد بازار: به سمت پایین می‌رویم
+نظریه: درجا می‌زنیم
+دلیل: کندل پایین کف گروه زمانی بسته شد
+عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
+زمان رویداد: 2023.08.24 12:00
+زمان تغییر نظریه: 2023.08.24 08:00
+[MarketObserver] OVERLAP FINISHED: Boxes=2 High=1.08764 Low=1.08557 End=2023.08.24 08:00 Candle=2023.08.24 12:00 Close=1.08483
+[TheoryExperiment] SHORT OVERLAP
+Boxes=2
+Resume=RANDOM_BEARISH
+[MarketObserver] Theory: درجا زدن غیرفعال شد
+[ RiverCenter(Price), RiverWidth(pips): (1.08605,4.2) ]
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.08596,4.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08567,7.1) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.24 15:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08509,12.2) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08494,11.4) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08475,10.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08437,12.5) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08400,13.8) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08357,15.1) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08311,15.7) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08273,15.8) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08240,14.8) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08215,14.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08186,13.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08152,13.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08115,12.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08079,11.7) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08046,13.2) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08004,13.2) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07969,11.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07951,12.1) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07925,12.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07889,11.8) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07883,11.0) ]
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.07884,10.0) ]
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.07904,8.1) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07920,6.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07947,7.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07968,9.4) ]
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.07937,6.7) ]
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.07929,6.9) ]
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.07937,7.1) ]
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.07943,5.2) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07962,4.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07966,4.7) ]
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.07958,3.7) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07970,0.5) ]
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.07972,2.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07974,1.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07981,1.7) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07983,1.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.07994,4.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08008,5.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08024,4.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08040,4.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08061,5.1) ]
+BOX High: 1.08125
+BOX EndTime: 2023.08.28 08:00
+Last Candle close: 1.08087
+Last Candle Time: 2023.08.28 10:00
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.25 21:00 Level=1.08125 Candle=2023.08.28 10:00
+[TheoryExperiment] THEORY SELECTED
+Theory=RANDOM_BEARISH
+Mode=RESUMED
+Time=2023.08.28 08:00
+ReferenceHigh=1.08752
+ReferenceLow=1.08557
+Evidence begins after candle=2023.08.28 10:00
+[MarketObserver] Shared OverLap group: 1 boxes; High=1.08125 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 08:00
+[RedCarpet] REVIEW START Box0Start=2023.08.25 21:00 Box0End=2023.08.28 08:00 Box1Start=2023.08.23 21:00 Box1End=2023.08.24 08:00 Box1High=1.08764 Box1Low=1.08557 Box0OriginShift=3
+[RedCarpet] BEGIN Box1Start=2023.08.23 21:00 Box1End=2023.08.24 08:00 Box1High=1.08764 Box1Low=1.08557 Box0Origin=2023.08.28 08:00 OriginShift=3
+[RedCarpet] CANDLE Time=2023.08.24 09:00 ShiftFromBox0=-47 Family=BELOW_RIVER O=1.08708 H=1.08734 L=1.08564 C=1.08567 RiverCenter=1.08638 RiverWidthPips=4.07 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 10:00 ShiftFromBox0=-46 Family=BELOW_RIVER O=1.08567 H=1.08606 L=1.08519 C=1.08562 RiverCenter=1.08625 RiverWidthPips=3.00 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 11:00 ShiftFromBox0=-45 Family=BELOW_RIVER O=1.08561 H=1.08644 L=1.08551 C=1.08619 RiverCenter=1.08627 RiverWidthPips=3.08 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 12:00 ShiftFromBox0=-44 Family=BELOW_RIVER O=1.08619 H=1.08634 L=1.08467 C=1.08483 RiverCenter=1.08605 RiverWidthPips=4.20 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 13:00 ShiftFromBox0=-43 Family=BELOW_RIVER O=1.08482 H=1.08564 L=1.08465 C=1.08547 RiverCenter=1.08596 RiverWidthPips=4.57 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 14:00 ShiftFromBox0=-42 Family=BELOW_RIVER O=1.08547 H=1.08586 L=1.08415 C=1.08420 RiverCenter=1.08567 RiverWidthPips=7.07 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 15:00 ShiftFromBox0=-41 Family=BELOW_RIVER O=1.08421 H=1.08444 L=1.08141 C=1.08208 RiverCenter=1.08509 RiverWidthPips=12.18 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 16:00 ShiftFromBox0=-40 Family=BELOW_RIVER O=1.08208 H=1.08442 L=1.08203 C=1.08420 RiverCenter=1.08494 RiverWidthPips=11.39 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 17:00 ShiftFromBox0=-39 Family=BELOW_RIVER O=1.08420 H=1.08487 L=1.08350 C=1.08392 RiverCenter=1.08475 RiverWidthPips=10.58 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 18:00 ShiftFromBox0=-38 Family=BELOW_RIVER O=1.08392 H=1.08406 L=1.08225 C=1.08254 RiverCenter=1.08437 RiverWidthPips=12.50 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 19:00 ShiftFromBox0=-37 Family=BELOW_RIVER O=1.08255 H=1.08277 L=1.08180 C=1.08212 RiverCenter=1.08400 RiverWidthPips=13.77 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 20:00 ShiftFromBox0=-36 Family=BELOW_RIVER O=1.08213 H=1.08240 L=1.08137 C=1.08158 RiverCenter=1.08357 RiverWidthPips=15.12 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 21:00 ShiftFromBox0=-35 Family=BELOW_RIVER O=1.08159 H=1.08200 L=1.08088 C=1.08090 RiverCenter=1.08311 RiverWidthPips=15.71 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 22:00 ShiftFromBox0=-34 Family=BELOW_RIVER O=1.08091 H=1.08125 L=1.08056 C=1.08058 RiverCenter=1.08273 RiverWidthPips=15.77 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.24 23:00 ShiftFromBox0=-33 Family=BELOW_RIVER O=1.08057 H=1.08117 L=1.08050 C=1.08103 RiverCenter=1.08240 RiverWidthPips=14.85 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 00:00 ShiftFromBox0=-32 Family=BELOW_RIVER O=1.08073 H=1.08157 L=1.08067 C=1.08124 RiverCenter=1.08215 RiverWidthPips=14.93 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 01:00 ShiftFromBox0=-31 Family=BELOW_RIVER O=1.08127 H=1.08127 L=1.08065 C=1.08072 RiverCenter=1.08186 RiverWidthPips=13.62 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 02:00 ShiftFromBox0=-30 Family=BELOW_RIVER O=1.08072 H=1.08072 L=1.07926 C=1.07990 RiverCenter=1.08152 RiverWidthPips=13.27 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 03:00 ShiftFromBox0=-29 Family=BELOW_RIVER O=1.07990 H=1.08042 L=1.07933 C=1.07945 RiverCenter=1.08115 RiverWidthPips=12.01 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 04:00 ShiftFromBox0=-28 Family=BELOW_RIVER O=1.07945 H=1.07950 L=1.07873 C=1.07890 RiverCenter=1.08079 RiverWidthPips=11.72 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 05:00 ShiftFromBox0=-27 Family=BELOW_RIVER O=1.07891 H=1.07895 L=1.07828 C=1.07860 RiverCenter=1.08046 RiverWidthPips=13.23 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 06:00 ShiftFromBox0=-26 Family=BELOW_RIVER O=1.07859 H=1.07875 L=1.07798 C=1.07805 RiverCenter=1.08004 RiverWidthPips=13.20 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 07:00 ShiftFromBox0=-25 Family=BELOW_RIVER O=1.07805 H=1.07833 L=1.07766 C=1.07825 RiverCenter=1.07969 RiverWidthPips=11.93 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 08:00 ShiftFromBox0=-24 Family=BELOW_RIVER O=1.07824 H=1.07913 L=1.07783 C=1.07899 RiverCenter=1.07951 RiverWidthPips=12.13 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 09:00 ShiftFromBox0=-23 Family=BELOW_RIVER O=1.07899 H=1.07908 L=1.07796 C=1.07809 RiverCenter=1.07925 RiverWidthPips=12.05 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 10:00 ShiftFromBox0=-22 Family=BELOW_RIVER O=1.07808 H=1.07921 L=1.07683 C=1.07713 RiverCenter=1.07889 RiverWidthPips=11.77 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 11:00 ShiftFromBox0=-21 Family=BELOW_RIVER O=1.07712 H=1.07883 L=1.07659 C=1.07864 RiverCenter=1.07883 RiverWidthPips=11.04 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 12:00 ShiftFromBox0=-20 Family=STREET_FIGHT O=1.07862 H=1.07948 L=1.07847 C=1.07899 RiverCenter=1.07884 RiverWidthPips=10.00 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08734 HighTime=2023.08.24 09:00 Low=1.07659 LowTime=2023.08.25 11:00 Candles=27
+[RedCarpet] ZIGZAG POINT Index=0 Shift=-47 Price=1.08734 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=1 Shift=-21 Price=1.07659 Flag=LOW
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=27 Start=2023.08.24 09:00 End=2023.08.25 11:00 MaxHigh=1.08734 MaxHighCandle=2023.08.24 09:00 MinLow=1.07659 MinLowCandle=2023.08.25 11:00
+[RedCarpet] CANDLE Time=2023.08.25 13:00 ShiftFromBox0=-19 Family=ABOVE_RIVER O=1.07900 H=1.08034 L=1.07895 C=1.08028 RiverCenter=1.07904 RiverWidthPips=8.11 RiverData=VALID
+[RedCarpet] ISLAND Family=STREET_FIGHT High=1.07948 HighTime=2023.08.25 12:00 Low=1.07847 LowTime=2023.08.25 12:00 Candles=1
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=2 Shift=-20 Price=1.07948 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=3 Shift=-20 Price=1.07847 Flag=LOW
+[RiverGap] ISLAND Family=STREET_FIGHT Candles=1 Start=2023.08.25 12:00 End=2023.08.25 12:00 MaxHigh=1.07948 MaxHighCandle=2023.08.25 12:00 MinLow=1.07847 MinLowCandle=2023.08.25 12:00
+[RedCarpet] CANDLE Time=2023.08.25 14:00 ShiftFromBox0=-18 Family=ABOVE_RIVER O=1.08028 H=1.08113 L=1.07993 C=1.08029 RiverCenter=1.07920 RiverWidthPips=6.34 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 15:00 ShiftFromBox0=-17 Family=ABOVE_RIVER O=1.08026 H=1.08172 L=1.08004 C=1.08127 RiverCenter=1.07947 RiverWidthPips=7.57 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 16:00 ShiftFromBox0=-16 Family=ABOVE_RIVER O=1.08127 H=1.08150 L=1.07990 C=1.08079 RiverCenter=1.07968 RiverWidthPips=9.37 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 17:00 ShiftFromBox0=-15 Family=BELOW_RIVER O=1.08080 H=1.08417 L=1.07658 C=1.07716 RiverCenter=1.07937 RiverWidthPips=6.72 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.08172 HighTime=2023.08.25 15:00 Low=1.07895 LowTime=2023.08.25 13:00 Candles=4
+[RedCarpet] ZIGZAG POINT Index=4 Shift=-19 Price=1.07895 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=5 Shift=-17 Price=1.08172 Flag=HIGH
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=4 Start=2023.08.25 13:00 End=2023.08.25 16:00 MaxHigh=1.08172 MaxHighCandle=2023.08.25 15:00 MinLow=1.07895 MinLowCandle=2023.08.25 13:00
+[RedCarpet] CANDLE Time=2023.08.25 18:00 ShiftFromBox0=-14 Family=BELOW_RIVER O=1.07716 H=1.07910 L=1.07681 C=1.07863 RiverCenter=1.07929 RiverWidthPips=6.90 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 19:00 ShiftFromBox0=-13 Family=BELOW_RIVER O=1.07863 H=1.08002 L=1.07856 C=1.07963 RiverCenter=1.07937 RiverWidthPips=7.08 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.25 20:00 ShiftFromBox0=-12 Family=ABOVE_RIVER O=1.07963 H=1.08026 L=1.07907 C=1.07987 RiverCenter=1.07943 RiverWidthPips=5.19 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08417 HighTime=2023.08.25 17:00 Low=1.07658 LowTime=2023.08.25 17:00 Candles=3
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=6 Shift=-15 Price=1.08417 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=7 Shift=-15 Price=1.07658 Flag=LOW
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=3 Start=2023.08.25 17:00 End=2023.08.25 19:00 MaxHigh=1.08417 MaxHighCandle=2023.08.25 17:00 MinLow=1.07658 MinLowCandle=2023.08.25 17:00
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.08026 HighTime=2023.08.25 20:00 Low=1.07907 LowTime=2023.08.25 20:00 Candles=1
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=8 Shift=-12 Price=1.08026 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=9 Shift=-12 Price=1.07907 Flag=LOW
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=1 Start=2023.08.25 20:00 End=2023.08.25 20:00 MaxHigh=1.08026 MaxHighCandle=2023.08.25 20:00 MinLow=1.07907 MinLowCandle=2023.08.25 20:00
+[RedCarpet] SAVED Box1Start=2023.08.23 21:00 Box1End=2023.08.24 08:00 Box1High=1.08764 Box1Low=1.08557 ReviewedCandles=36 ZigzagPoints=10
+[RedCarpet] REVIEW FINISHED ReviewedCandles=36 SavedRecords=8
+[ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=SUPPORT
+Reason=Close below reference low
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.28 11:00
+Close=1.08005
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08058,5.2) ]
+BOX High: 1.08208
+BOX EndTime: 2023.08.28 10:00
+Last Candle close: 1.08076
+Last Candle Time: 2023.08.28 12:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=SUPPORT
+Reason=Close below reference low
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.28 12:00
+Close=1.08076
+[TheoryExperiment] THEORY EXPIRED
+Reason=STUCK_RESUMED
+Theory=RANDOM_BEARISH
+Time=2023.08.28 10:00
+[MarketObserver] Theory: درجا می‌زنیم
+[MarketObserver] Shared OverLap group: 2 boxes; High=1.08208 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 10:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
+BOX High: 1.08208
+BOX EndTime: 2023.08.28 11:00
+Last Candle close: 1.08118
+Last Candle Time: 2023.08.28 13:00
+[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08208 Low=1.07913 OriginalEnd=2023.08.28 10:00 Candle=2023.08.28 13:00
+[MarketObserver] رویداد بازار: از سقف برگشتیم
+نظریه: درجا می‌زنیم
+دلیل: قیمت از سقف عبور کرد اما داخل محدوده بسته شد
+عامل تردید: حرکت بعدی هنوز مشخص نیست
+زمان رویداد: 2023.08.28 13:00
+زمان تغییر نظریه: 2023.08.28 10:00
+[MarketObserver] Shared OverLap group: 3 boxes; High=1.08208 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 11:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
+[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08208 Low=1.07913 OriginalEnd=2023.08.28 11:00 Candle=2023.08.28 14:00
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08067,2.8) ]
+BOX High: 1.08222
+BOX EndTime: 2023.08.28 13:00
+Last Candle close: 1.08102
+Last Candle Time: 2023.08.28 15:00
+[MarketObserver] Shared OverLap group: 4 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 13:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
+[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08222 Low=1.07913 OriginalEnd=2023.08.28 13:00 Candle=2023.08.28 16:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08072,1.3) ]
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.08070,1.6) ]
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.7) ]
+BOX High: 1.08222
+BOX EndTime: 2023.08.28 17:00
+Last Candle close: 1.08075
+Last Candle Time: 2023.08.28 19:00
+[MarketObserver] Shared OverLap group: 6 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.28 17:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
+[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08222 Low=1.07913 OriginalEnd=2023.08.28 17:00 Candle=2023.08.28 20:00
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.08076,1.2) ]
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08083,1.2) ]
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.08096,2.1) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08110,3.8) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08121,4.4) ]
+[MarketObserver] رویداد بازار: به سمت بالا می‌رویم
+نظریه: درجا می‌زنیم
+دلیل: کندل بالای سقف گروه زمانی بسته شد
+عامل تردید: ادامه حرکت صعودی هنوز تأیید نشده است
+زمان رویداد: 2023.08.29 01:00
+زمان تغییر نظریه: 2023.08.28 10:00
+[MarketObserver] OVERLAP FINISHED: Boxes=6 High=1.08222 Low=1.07913 End=2023.08.28 17:00 Candle=2023.08.29 01:00 Close=1.08258
+[TheoryExperiment] LONG OVERLAP BREAKOUT
+Boxes=6
+Next direction=BULLISH
+[TheoryExperiment] THEORY SELECTED
+Theory=RANDOM_BULLISH
+Mode=BREAKOUT
+Time=2023.08.29 01:00
+ReferenceHigh=1.08222
+ReferenceLow=1.07913
+Evidence begins after candle=2023.08.29 01:00
+[MarketObserver] Theory: درجا زدن غیرفعال شد
+[ RiverCenter(Price), RiverWidth(pips): (1.08144,5.4) ]
+BOX High: 1.08222
+BOX EndTime: 2023.08.29 00:00
+Last Candle close: 1.08255
+Last Candle Time: 2023.08.29 02:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 02:00
+Close=1.08255
+[TheoryExperiment] THEORY EXPIRED
+Reason=STUCK_RESUMED
+Theory=RANDOM_BULLISH
+Time=2023.08.29 00:00
+[MarketObserver] Theory: درجا می‌زنیم
+[MarketObserver] Shared OverLap group: 7 boxes; High=1.08222 Low=1.07913 Start=2023.08.25 21:00 End=2023.08.29 00:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08163,6.3) ]
+[MarketObserver] OVERLAP FINISHED: Boxes=7 High=1.08222 Low=1.07913 End=2023.08.29 00:00 Candle=2023.08.29 03:00 Close=1.08237
+[TheoryExperiment] LONG OVERLAP BREAKOUT
+Boxes=7
+Next direction=BULLISH
+[TheoryExperiment] THEORY SELECTED
+Theory=RANDOM_BULLISH
+Mode=BREAKOUT
+Time=2023.08.29 03:00
+ReferenceHigh=1.08222
+ReferenceLow=1.07913
+Evidence begins after candle=2023.08.29 03:00
+[MarketObserver] Theory: درجا زدن غیرفعال شد
+[ RiverCenter(Price), RiverWidth(pips): (1.08176,6.5) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.22 17:00 Level=1.08329 Candle=2023.08.29 04:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 04:00
+Close=1.08347
+[ RiverCenter(Price), RiverWidth(pips): (1.08205,7.9) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 05:00
+Close=1.08355
+[ RiverCenter(Price), RiverWidth(pips): (1.08229,9.0) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 06:00
+Close=1.08362
+[ RiverCenter(Price), RiverWidth(pips): (1.08251,9.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 07:00
+Close=1.08241
+[ RiverCenter(Price), RiverWidth(pips): (1.08254,8.1) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 08:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 08:00
+Close=1.08217
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08250,6.7) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 09:00
+Close=1.08087
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.08229,5.4) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 10:00
+Close=1.08203
+[ RiverCenter(Price), RiverWidth(pips): (1.08228,5.0) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 11:00
+Close=1.08101
+[ RiverCenter(Price), RiverWidth(pips): (1.08209,4.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 12:00
+Close=1.08134
+[ RiverCenter(Price), RiverWidth(pips): (1.08195,5.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 13:00
+Close=1.08066
+[ RiverCenter(Price), RiverWidth(pips): (1.08171,7.1) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 14:00
+Close=1.08040
+[ RiverCenter(Price), RiverWidth(pips): (1.08150,8.7) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.28 13:00 Level=1.07988 Candle=2023.08.29 15:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 15:00
+Close=1.07922
+[ RiverCenter(Price), RiverWidth(pips): (1.08114,11.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 16:00
+Close=1.08036
+[ RiverCenter(Price), RiverWidth(pips): (1.08103,10.6) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.28 13:00 Level=1.08222 Candle=2023.08.29 17:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 17:00
+Close=1.08279
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08126,8.8) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.23 21:00 Level=1.08557 Candle=2023.08.29 18:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 18:00
+Close=1.08500
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.08179,7.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 19:00
+Close=1.08628
+[ RiverCenter(Price), RiverWidth(pips): (1.08242,11.5) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 20:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 20:00
+Close=1.08734
+[ RiverCenter(Price), RiverWidth(pips): (1.08315,19.3) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.29 21:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 21:00
+Close=1.08718
+[ RiverCenter(Price), RiverWidth(pips): (1.08380,23.3) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.29 22:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 22:00
+Close=1.08854
+[ RiverCenter(Price), RiverWidth(pips): (1.08464,27.7) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.29 23:00
+Close=1.08790
+[ RiverCenter(Price), RiverWidth(pips): (1.08528,28.6) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 00:00
+Close=1.08781
+[ RiverCenter(Price), RiverWidth(pips): (1.08576,31.6) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 01:00
+Close=1.08843
+[ RiverCenter(Price), RiverWidth(pips): (1.08623,31.2) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 02:00
+Close=1.08691
+[ RiverCenter(Price), RiverWidth(pips): (1.08638,28.1) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 03:00
+Close=1.08697
+[ RiverCenter(Price), RiverWidth(pips): (1.08651,23.1) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 04:00
+Close=1.08687
+[ RiverCenter(Price), RiverWidth(pips): (1.08663,18.0) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 05:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 05:00
+Close=1.08672
+[ RiverCenter(Price), RiverWidth(pips): (1.08671,12.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 06:00
+Close=1.08691
+[ RiverCenter(Price), RiverWidth(pips): (1.08681,9.8) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 07:00
+Close=1.08606
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08675,8.4) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 08:00
+Close=1.08665
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.08672,9.0) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 09:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 09:00
+Close=1.08693
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.08677,8.6) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.21 00:00 Level=1.08646 Candle=2023.08.30 10:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 10:00
+Close=1.08647
+[ RiverCenter(Price), RiverWidth(pips): (1.08672,7.9) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 11:00
+Close=1.08673
+[ RiverCenter(Price), RiverWidth(pips): (1.08672,7.1) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.23 21:00 Level=1.08764 Candle=2023.08.30 12:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 12:00
+Close=1.08888
+River Consultant: RIVER_RISING
+[ RiverCenter(Price), RiverWidth(pips): (1.08703,4.9) ]
+BOX High: 1.0885
+BOX EndTime: 2023.08.30 11:00
+Last Candle close: 1.08903
+Last Candle Time: 2023.08.30 13:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=SUPPORT
+Reason=Close above reference high
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 13:00
+Close=1.08903
+[TheoryExperiment] THEORY EXPIRED
+Reason=NEW_BOX_ARRIVED
+Theory=RANDOM_BULLISH
+Time=2023.08.30 11:00
+[TheoryExperiment] THEORY SELECTED
+Theory=RANDOM_BEARISH
+Mode=RANDOM
+Time=2023.08.30 11:00
+ReferenceHigh=1.08850
+ReferenceLow=1.08551
+Evidence begins after candle=2023.08.30 13:00
+[MarketObserver] Shared OverLap group: 1 boxes; High=1.08850 Low=1.08551 Start=2023.08.30 02:00 End=2023.08.30 11:00
+[RedCarpet] REVIEW START Box0Start=2023.08.30 02:00 Box0End=2023.08.30 11:00 Box1Start=2023.08.28 13:00 Box1End=2023.08.29 00:00 Box1High=1.08222 Box1Low=1.07988 Box0OriginShift=3
+[RedCarpet] BEGIN Box1Start=2023.08.28 13:00 Box1End=2023.08.29 00:00 Box1High=1.08222 Box1Low=1.07988 Box0Origin=2023.08.30 11:00 OriginShift=3
+[RedCarpet] CANDLE Time=2023.08.29 01:00 ShiftFromBox0=-34 Family=ABOVE_RIVER O=1.08179 H=1.08271 L=1.08179 C=1.08258 RiverCenter=1.08144 RiverWidthPips=5.45 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 02:00 ShiftFromBox0=-33 Family=ABOVE_RIVER O=1.08257 H=1.08299 L=1.08241 C=1.08255 RiverCenter=1.08163 RiverWidthPips=6.26 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 03:00 ShiftFromBox0=-32 Family=ABOVE_RIVER O=1.08255 H=1.08317 L=1.08207 C=1.08237 RiverCenter=1.08176 RiverWidthPips=6.53 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 04:00 ShiftFromBox0=-31 Family=ABOVE_RIVER O=1.08238 H=1.08369 L=1.08233 C=1.08347 RiverCenter=1.08205 RiverWidthPips=7.94 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 05:00 ShiftFromBox0=-30 Family=ABOVE_RIVER O=1.08346 H=1.08357 L=1.08295 C=1.08355 RiverCenter=1.08229 RiverWidthPips=9.02 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 06:00 ShiftFromBox0=-29 Family=ABOVE_RIVER O=1.08355 H=1.08383 L=1.08330 C=1.08362 RiverCenter=1.08251 RiverWidthPips=9.29 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 07:00 ShiftFromBox0=-28 Family=ABOVE_RIVER O=1.08362 H=1.08363 L=1.08240 C=1.08241 RiverCenter=1.08254 RiverWidthPips=8.15 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 08:00 ShiftFromBox0=-27 Family=STREET_FIGHT O=1.08242 H=1.08261 L=1.08207 C=1.08217 RiverCenter=1.08250 RiverWidthPips=6.66 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.08383 HighTime=2023.08.29 06:00 Low=1.08179 LowTime=2023.08.29 01:00 Candles=7
+[RedCarpet] ZIGZAG POINT Index=0 Shift=-34 Price=1.08179 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=1 Shift=-29 Price=1.08383 Flag=HIGH
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=7 Start=2023.08.29 01:00 End=2023.08.29 07:00 MaxHigh=1.08383 MaxHighCandle=2023.08.29 06:00 MinLow=1.08179 MinLowCandle=2023.08.29 01:00
+[RedCarpet] CANDLE Time=2023.08.29 09:00 ShiftFromBox0=-26 Family=BELOW_RIVER O=1.08216 H=1.08233 L=1.08084 C=1.08087 RiverCenter=1.08229 RiverWidthPips=5.41 RiverData=VALID
+[RedCarpet] ISLAND Family=STREET_FIGHT High=1.08261 HighTime=2023.08.29 08:00 Low=1.08207 LowTime=2023.08.29 08:00 Candles=1
+[RedCarpet] NOTE: High and Low occurred in the same candle
+[RedCarpet] ZIGZAG POINT Index=2 Shift=-27 Price=1.08261 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=3 Shift=-27 Price=1.08207 Flag=LOW
+[RiverGap] ISLAND Family=STREET_FIGHT Candles=1 Start=2023.08.29 08:00 End=2023.08.29 08:00 MaxHigh=1.08261 MaxHighCandle=2023.08.29 08:00 MinLow=1.08207 MinLowCandle=2023.08.29 08:00
+[RedCarpet] CANDLE Time=2023.08.29 10:00 ShiftFromBox0=-25 Family=BELOW_RIVER O=1.08087 H=1.08296 L=1.08086 C=1.08203 RiverCenter=1.08228 RiverWidthPips=5.02 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 11:00 ShiftFromBox0=-24 Family=BELOW_RIVER O=1.08204 H=1.08228 L=1.08082 C=1.08101 RiverCenter=1.08209 RiverWidthPips=4.26 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 12:00 ShiftFromBox0=-23 Family=BELOW_RIVER O=1.08101 H=1.08159 L=1.08056 C=1.08134 RiverCenter=1.08195 RiverWidthPips=5.26 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 13:00 ShiftFromBox0=-22 Family=BELOW_RIVER O=1.08133 H=1.08162 L=1.08040 C=1.08066 RiverCenter=1.08171 RiverWidthPips=7.06 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 14:00 ShiftFromBox0=-21 Family=BELOW_RIVER O=1.08066 H=1.08120 L=1.08036 C=1.08040 RiverCenter=1.08150 RiverWidthPips=8.74 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 15:00 ShiftFromBox0=-20 Family=BELOW_RIVER O=1.08041 H=1.08064 L=1.07861 C=1.07922 RiverCenter=1.08114 RiverWidthPips=11.29 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 16:00 ShiftFromBox0=-19 Family=BELOW_RIVER O=1.07923 H=1.08064 L=1.07822 C=1.08036 RiverCenter=1.08103 RiverWidthPips=10.58 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 17:00 ShiftFromBox0=-18 Family=ABOVE_RIVER O=1.08037 H=1.08504 L=1.08035 C=1.08279 RiverCenter=1.08126 RiverWidthPips=8.81 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.08296 HighTime=2023.08.29 10:00 Low=1.07822 LowTime=2023.08.29 16:00 Candles=8
+[RedCarpet] ZIGZAG POINT Index=4 Shift=-25 Price=1.08296 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=5 Shift=-19 Price=1.07822 Flag=LOW
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=8 Start=2023.08.29 09:00 End=2023.08.29 16:00 MaxHigh=1.08296 MaxHighCandle=2023.08.29 10:00 MinLow=1.07822 MinLowCandle=2023.08.29 16:00
+[RedCarpet] CANDLE Time=2023.08.29 18:00 ShiftFromBox0=-17 Family=ABOVE_RIVER O=1.08281 H=1.08571 L=1.08260 C=1.08500 RiverCenter=1.08179 RiverWidthPips=7.25 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 19:00 ShiftFromBox0=-16 Family=ABOVE_RIVER O=1.08500 H=1.08640 L=1.08465 C=1.08628 RiverCenter=1.08242 RiverWidthPips=11.49 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 20:00 ShiftFromBox0=-15 Family=ABOVE_RIVER O=1.08628 H=1.08768 L=1.08626 C=1.08734 RiverCenter=1.08315 RiverWidthPips=19.28 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 21:00 ShiftFromBox0=-14 Family=ABOVE_RIVER O=1.08733 H=1.08734 L=1.08603 C=1.08718 RiverCenter=1.08380 RiverWidthPips=23.31 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 22:00 ShiftFromBox0=-13 Family=ABOVE_RIVER O=1.08718 H=1.08919 L=1.08694 C=1.08854 RiverCenter=1.08464 RiverWidthPips=27.74 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.29 23:00 ShiftFromBox0=-12 Family=ABOVE_RIVER O=1.08853 H=1.08854 L=1.08782 C=1.08790 RiverCenter=1.08528 RiverWidthPips=28.58 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.30 00:00 ShiftFromBox0=-11 Family=ABOVE_RIVER O=1.08738 H=1.08788 L=1.08725 C=1.08781 RiverCenter=1.08576 RiverWidthPips=31.62 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.30 01:00 ShiftFromBox0=-10 Family=ABOVE_RIVER O=1.08778 H=1.08848 L=1.08774 C=1.08843 RiverCenter=1.08623 RiverWidthPips=31.22 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.08919 HighTime=2023.08.29 22:00 Low=1.08035 LowTime=2023.08.29 17:00 Candles=9
+[RedCarpet] ZIGZAG POINT Index=6 Shift=-18 Price=1.08035 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=7 Shift=-13 Price=1.08919 Flag=HIGH
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=9 Start=2023.08.29 17:00 End=2023.08.30 01:00 MaxHigh=1.08919 MaxHighCandle=2023.08.29 22:00 MinLow=1.08035 MinLowCandle=2023.08.29 17:00
+[RedCarpet] SAVED Box1Start=2023.08.28 13:00 Box1End=2023.08.29 00:00 Box1High=1.08222 Box1Low=1.07988 ReviewedCandles=25 ZigzagPoints=8
+[RedCarpet] REVIEW FINISHED ReviewedCandles=25 SavedRecords=9
+[ RiverCenter(Price), RiverWidth(pips): (1.08731,6.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08731,6.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.30 14:00
+Close=1.08787
+[ RiverCenter(Price), RiverWidth(pips): (1.08741,5.7) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=120.74
+Candle=2023.08.30 15:00
+Close=1.09211
+[ RiverCenter(Price), RiverWidth(pips): (1.08811,13.2) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.11 20:00 Level=1.09262 Candle=2023.08.30 16:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=200.00
+Candle=2023.08.30 16:00
+Close=1.09448
+[ RiverCenter(Price), RiverWidth(pips): (1.08909,21.9) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=146.49
+Candle=2023.08.30 17:00
+Close=1.09288
+[ RiverCenter(Price), RiverWidth(pips): (1.08973,24.3) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=136.12
+Candle=2023.08.30 18:00
+Close=1.09257
+[ RiverCenter(Price), RiverWidth(pips): (1.09026,24.4) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=136.45
+Candle=2023.08.30 19:00
+Close=1.09258
+[ RiverCenter(Price), RiverWidth(pips): (1.09067,23.5) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=118.06
+Candle=2023.08.30 20:00
+Close=1.09203
+[ RiverCenter(Price), RiverWidth(pips): (1.09095,24.1) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=128.43
+Candle=2023.08.30 21:00
+Close=1.09234
+[ RiverCenter(Price), RiverWidth(pips): (1.09133,26.0) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=122.41
+Candle=2023.08.30 22:00
+Close=1.09216
+[ RiverCenter(Price), RiverWidth(pips): (1.09150,22.2) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=126.76
+Candle=2023.08.30 23:00
+Close=1.09229
+[ RiverCenter(Price), RiverWidth(pips): (1.09159,15.2) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=126.09
+Candle=2023.08.31 00:00
+Close=1.09227
+[ RiverCenter(Price), RiverWidth(pips): (1.09173,11.4) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=138.80
+Candle=2023.08.31 01:00
+Close=1.09265
+[ RiverCenter(Price), RiverWidth(pips): (1.09192,9.5) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=148.16
+Candle=2023.08.31 02:00
+Close=1.09293
+[ RiverCenter(Price), RiverWidth(pips): (1.09210,8.2) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=160.54
+Candle=2023.08.31 03:00
+Close=1.09330
+[ RiverCenter(Price), RiverWidth(pips): (1.09233,8.2) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=146.49
+Candle=2023.08.31 04:00
+Close=1.09288
+[ RiverCenter(Price), RiverWidth(pips): (1.09249,7.4) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=122.74
+Candle=2023.08.31 05:00
+Close=1.09217
+River Consultant: RIVER_UNCLEAR
+[ RiverCenter(Price), RiverWidth(pips): (1.09247,7.0) ]
+BOX High: 1.09455
+BOX EndTime: 2023.08.31 04:00
+Last Candle close: 1.09203
+Last Candle Time: 2023.08.31 06:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BEARISH
+Assessment=CONTRADICTION
+Reason=Close above reference high
+AlertLevel=3
+ContradictionPercent=118.06
+Candle=2023.08.31 06:00
+Close=1.09203
+[TheoryExperiment] THEORY EXPIRED
+Reason=NEW_BOX_ARRIVED
+Theory=RANDOM_BEARISH
+Time=2023.08.31 04:00
+[TheoryExperiment] THEORY SELECTED
+Theory=RANDOM_BULLISH
+Mode=RANDOM
+Time=2023.08.31 04:00
+ReferenceHigh=1.09455
+ReferenceLow=1.09167
+Evidence begins after candle=2023.08.31 06:00
+[MarketObserver] Shared OverLap group: 1 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 04:00
+[RedCarpet] REVIEW START Box0Start=2023.08.30 16:00 Box0End=2023.08.31 04:00 Box1Start=2023.08.30 02:00 Box1End=2023.08.30 11:00 Box1High=1.08850 Box1Low=1.08551 Box0OriginShift=3
+[RedCarpet] BEGIN Box1Start=2023.08.30 02:00 Box1End=2023.08.30 11:00 Box1High=1.08850 Box1Low=1.08551 Box0Origin=2023.08.31 04:00 OriginShift=3
+[RedCarpet] CANDLE Time=2023.08.30 12:00 ShiftFromBox0=-16 Family=ABOVE_RIVER O=1.08676 H=1.08938 L=1.08661 C=1.08888 RiverCenter=1.08703 RiverWidthPips=4.87 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.30 13:00 ShiftFromBox0=-15 Family=ABOVE_RIVER O=1.08888 H=1.08915 L=1.08797 C=1.08903 RiverCenter=1.08731 RiverWidthPips=6.31 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.30 14:00 ShiftFromBox0=-14 Family=ABOVE_RIVER O=1.08904 H=1.08916 L=1.08785 C=1.08787 RiverCenter=1.08741 RiverWidthPips=5.68 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.30 15:00 ShiftFromBox0=-13 Family=ABOVE_RIVER O=1.08786 H=1.09258 L=1.08746 C=1.09211 RiverCenter=1.08811 RiverWidthPips=13.20 RiverData=VALID
+[RedCarpet] ISLAND Family=ABOVE_RIVER High=1.09258 HighTime=2023.08.30 15:00 Low=1.08661 LowTime=2023.08.30 12:00 Candles=4
+[RedCarpet] ZIGZAG POINT Index=0 Shift=-16 Price=1.08661 Flag=LOW
+[RedCarpet] ZIGZAG POINT Index=1 Shift=-13 Price=1.09258 Flag=HIGH
+[RiverGap] ISLAND Family=ABOVE_RIVER Candles=4 Start=2023.08.30 12:00 End=2023.08.30 15:00 MaxHigh=1.09258 MaxHighCandle=2023.08.30 15:00 MinLow=1.08661 MinLowCandle=2023.08.30 12:00
+[RedCarpet] SAVED Box1Start=2023.08.30 02:00 Box1End=2023.08.30 11:00 Box1High=1.08850 Box1Low=1.08551 ReviewedCandles=4 ZigzagPoints=2
+[RedCarpet] REVIEW FINISHED ReviewedCandles=4 SavedRecords=10
+[ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
+River Consultant: RIVER_FALLING
+[ RiverCenter(Price), RiverWidth(pips): (1.09238,6.1) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.31 07:00
+Close=1.09185
+[ RiverCenter(Price), RiverWidth(pips): (1.09231,5.7) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=INCONCLUSIVE
+Reason=Close inside reference zone
+AlertLevel=0
+ContradictionPercent=0.00
+Candle=2023.08.31 08:00
+Close=1.09178
+[ RiverCenter(Price), RiverWidth(pips): (1.09223,4.7) ]
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=CONTRADICTION
+Reason=Close below reference low
+AlertLevel=2
+ContradictionPercent=32.99
+Candle=2023.08.31 09:00
+Close=1.09072
+[ RiverCenter(Price), RiverWidth(pips): (1.09198,4.6) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.21 19:00 Level=1.09045 Candle=2023.08.31 10:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=CONTRADICTION
+Reason=Close below reference low
+AlertLevel=3
+ContradictionPercent=83.33
+Candle=2023.08.31 10:00
+Close=1.08927
+[ RiverCenter(Price), RiverWidth(pips): (1.09155,8.8) ]
+BOX High: 1.09395
+BOX EndTime: 2023.08.31 09:00
+Last Candle close: 1.08779
+Last Candle Time: 2023.08.31 11:00
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 11:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=CONTRADICTION
+Reason=Close below reference low
+AlertLevel=3
+ContradictionPercent=134.72
+Candle=2023.08.31 11:00
+Close=1.08779
+[TheoryExperiment] THEORY EXPIRED
+Reason=STUCK_RESUMED
+Theory=RANDOM_BULLISH
+Time=2023.08.31 09:00
+[MarketObserver] Theory: درجا می‌زنیم
+[MarketObserver] Shared OverLap group: 2 boxes; High=1.09455 Low=1.09167 Start=2023.08.30 16:00 End=2023.08.31 09:00
+[ RiverCenter(Price), RiverWidth(pips): (1.09095,14.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.09095,14.0) ]
+[MarketObserver] رویداد بازار: به سمت پایین می‌رویم
+نظریه: درجا می‌زنیم
+دلیل: کندل پایین کف گروه زمانی بسته شد
+عامل تردید: ادامه حرکت نزولی هنوز تأیید نشده است
+زمان رویداد: 2023.08.31 12:00
+زمان تغییر نظریه: 2023.08.31 09:00
+[MarketObserver] OVERLAP FINISHED: Boxes=2 High=1.09455 Low=1.09167 End=2023.08.31 09:00 Candle=2023.08.31 12:00 Close=1.08742
+[TheoryExperiment] SHORT OVERLAP
+Boxes=2
+Resume=RANDOM_BULLISH
+[MarketObserver] Theory: درجا زدن غیرفعال شد
+[ RiverCenter(Price), RiverWidth(pips): (1.09040,17.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08989,20.0) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.17 04:00 Level=1.08617 Candle=2023.08.31 14:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08937,21.6) ]
+[MarketObserver] LEVEL TOUCH: HIGH BoxStart=2023.08.30 02:00 Level=1.08850 Candle=2023.08.31 15:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08898,21.6) ]
+[MarketObserver] LEVEL TOUCH: LOW BoxStart=2023.08.30 02:00 Level=1.08551 Candle=2023.08.31 16:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08828,24.1) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08778,23.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08714,23.4) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08659,23.2) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08625,20.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08591,18.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08555,17.7) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08530,15.5) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08506,14.9) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08492,12.3) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08482,10.0) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08462,9.4) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08459,8.6) ]
+BOX High: 1.08541
+BOX EndTime: 2023.09.01 03:00
+Last Candle close: 1.08439
+Last Candle Time: 2023.09.01 05:00
+[TheoryExperiment] THEORY SELECTED
+Theory=RANDOM_BULLISH
+Mode=RESUMED
+Time=2023.09.01 03:00
+ReferenceHigh=1.09455
+ReferenceLow=1.09167
+Evidence begins after candle=2023.09.01 05:00
+[MarketObserver] Shared OverLap group: 1 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 03:00
+[RedCarpet] REVIEW START Box0Start=2023.08.31 19:00 Box0End=2023.09.01 03:00 Box1Start=2023.08.30 21:00 Box1End=2023.08.31 09:00 Box1High=1.09395 Box1Low=1.09167 Box0OriginShift=3
+[RedCarpet] BEGIN Box1Start=2023.08.30 21:00 Box1End=2023.08.31 09:00 Box1High=1.09395 Box1Low=1.09167 Box0Origin=2023.09.01 03:00 OriginShift=3
+[RedCarpet] CANDLE Time=2023.08.31 10:00 ShiftFromBox0=-17 Family=BELOW_RIVER O=1.09073 H=1.09088 L=1.08900 C=1.08927 RiverCenter=1.09155 RiverWidthPips=8.79 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 11:00 ShiftFromBox0=-16 Family=BELOW_RIVER O=1.08926 H=1.08932 L=1.08771 C=1.08779 RiverCenter=1.09095 RiverWidthPips=13.98 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 12:00 ShiftFromBox0=-15 Family=BELOW_RIVER O=1.08779 H=1.08810 L=1.08646 C=1.08742 RiverCenter=1.09040 RiverWidthPips=17.85 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 13:00 ShiftFromBox0=-14 Family=BELOW_RIVER O=1.08742 H=1.08766 L=1.08628 C=1.08732 RiverCenter=1.08989 RiverWidthPips=20.00 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 14:00 ShiftFromBox0=-13 Family=BELOW_RIVER O=1.08733 H=1.08733 L=1.08574 C=1.08681 RiverCenter=1.08937 RiverWidthPips=21.64 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 15:00 ShiftFromBox0=-12 Family=BELOW_RIVER O=1.08681 H=1.08851 L=1.08653 C=1.08743 RiverCenter=1.08898 RiverWidthPips=21.56 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 16:00 ShiftFromBox0=-11 Family=BELOW_RIVER O=1.08743 H=1.08747 L=1.08403 C=1.08494 RiverCenter=1.08828 RiverWidthPips=24.11 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 17:00 ShiftFromBox0=-10 Family=BELOW_RIVER O=1.08494 H=1.08566 L=1.08402 C=1.08548 RiverCenter=1.08778 RiverWidthPips=23.94 RiverData=VALID
+[RedCarpet] CANDLE Time=2023.08.31 18:00 ShiftFromBox0=-9 Family=BELOW_RIVER O=1.08549 H=1.08590 L=1.08368 C=1.08386 RiverCenter=1.08714 RiverWidthPips=23.39 RiverData=VALID
+[RedCarpet] ISLAND Family=BELOW_RIVER High=1.09088 HighTime=2023.08.31 10:00 Low=1.08368 LowTime=2023.08.31 18:00 Candles=9
+[RedCarpet] ZIGZAG POINT Index=0 Shift=-17 Price=1.09088 Flag=HIGH
+[RedCarpet] ZIGZAG POINT Index=1 Shift=-9 Price=1.08368 Flag=LOW
+[RiverGap] ISLAND Family=BELOW_RIVER Candles=9 Start=2023.08.31 10:00 End=2023.08.31 18:00 MaxHigh=1.09088 MaxHighCandle=2023.08.31 10:00 MinLow=1.08368 MinLowCandle=2023.08.31 18:00
+[RedCarpet] SAVED Box1Start=2023.08.30 21:00 Box1End=2023.08.31 09:00 Box1High=1.09395 Box1Low=1.09167 ReviewedCandles=9 ZigzagPoints=2
+[RedCarpet] REVIEW FINISHED ReviewedCandles=9 SavedRecords=11
+[ RiverCenter(Price), RiverWidth(pips): (1.08451,7.6) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08451,7.6) ]
+BOX High: 1.08541
+BOX EndTime: 2023.09.01 04:00
+Last Candle close: 1.08417
+Last Candle Time: 2023.09.01 06:00
+[TheoryExperiment] EVIDENCE
+Theory=RANDOM_BULLISH
+Assessment=CONTRADICTION
+Reason=Close below reference low
+AlertLevel=3
+ContradictionPercent=260.42
+Candle=2023.09.01 06:00
+Close=1.08417
+[TheoryExperiment] THEORY EXPIRED
+Reason=STUCK_RESUMED
+Theory=RANDOM_BULLISH
+Time=2023.09.01 04:00
+[MarketObserver] Theory: درجا می‌زنیم
+[MarketObserver] Shared OverLap group: 2 boxes; High=1.08541 Low=1.08352 Start=2023.08.31 19:00 End=2023.09.01 04:00
+[ RiverCenter(Price), RiverWidth(pips): (1.08445,6.8) ]
+[ RiverCenter(Price), RiverWidth(pips): (1.08445,6.8) ]
+[MarketObserver] OVERLAP EXTENDED: Price remains inside the zone; High=1.08541 Low=1.08352 OriginalEnd=2023.09.01 04:00 Candle=2023.09.01 07:00
+River Consultant: RIVER_UNCLEAR
