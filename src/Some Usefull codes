@@ -538,6 +538,18 @@ struct RiverIsland
    datetime minLowTime;
 };
 
+string RiverFamilyName(RIVER_FAMILY family)
+{
+   if(family == RIVER_FAMILY_BELOW)
+      return "BELOW_RIVER";
+
+   if(family == RIVER_FAMILY_ABOVE)
+      return "ABOVE_RIVER";
+
+   return "STREET_FIGHT";
+}
+
+
 
 #define RED_CARPET_CAPACITY    64
 #define RED_CARPET_MAX_POINTS 512
@@ -555,7 +567,7 @@ private:
    FlatZone         m_box1[RED_CARPET_CAPACITY];
    RiverZigzagPoint m_points[RED_CARPET_CAPACITY][RED_CARPET_MAX_POINTS];
    int              m_pointCount[RED_CARPET_CAPACITY];
-   CMarketObserver  m_observer;
+
 
    int m_nextSlot;
    int m_savedCount;
@@ -1972,16 +1984,6 @@ bool FindGapZone(CFractalGeometry &fractal)
 }
 
 
-string RiverFamilyName(RIVER_FAMILY family)
-{
-   if(family == RIVER_FAMILY_BELOW)
-      return "BELOW_RIVER";
-
-   if(family == RIVER_FAMILY_ABOVE)
-      return "ABOVE_RIVER";
-
-   return "STREET_FIGHT";
-}
 
 
 RIVER_FAMILY ClassifyRiverCandle(
@@ -2119,7 +2121,7 @@ void ReviewGapWithRiver(CFractalGeometry &fractal)
 
    FlatZone box;
    FlatZone newestGroupOldestBox = box0;
-   FlatZone box1;
+   FlatZone box1={};
 
    double eps = _Point * 0.5;
 
