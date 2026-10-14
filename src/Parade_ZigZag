@@ -1,656 +1,468 @@
 //+------------------------------------------------------------------+
-//|                                                          Two.mq5 |
-//|                       Copyright 2015 - 2026, Farshad Rezvan, PhD |
-//|                                               farezvan@gmail.com |
+//| Parade_ZigZag_Optimized.mq5                                      |
+//| Fractal + Parade candidate pool; fit-driven zigzag selection      |
 //+------------------------------------------------------------------+
-#property copyright "Copyright 2015 - 2026, Farshad Rezvan, PhD"
-#property link      "farezvan@gmail.com"
-
 #property strict
-#property version "1.10"
-#property description "Geometric Parade Engine"
+#property version   "2.00"
+#property description "Parade / Fractal Geometry Engine"
 
-input datetime StartTime;
-input datetime EndTime;
+input datetime StartTime = 0;       // older boundary
+input datetime EndTime   = 0;       // newer boundary
+input int    TrailingAfter = 3;
+input int    MatchDistance = 5;      // retained for comparison with v1.10
+input int    MaxZigZagPoints = 4;    // intermediate vertices; endpoints are fixed
+input double AmbiguityTolerancePercent = 2.0;
+input int    MaxCandidatePoints = 80;
 
-int StartShift      = 120;
-int EndShift        = 80;
-input int TrailingAfter   = 3;
-input int MatchDistance   = 5;
-input int MaxZigZagPoints = 4;
+#define SRC_FRACTAL  1
+#define SRC_PARADE1  2
+#define SRC_PARADE2  4
+#define SRC_PARADE3  8
+#define SRC_PARADE4 16
+#define SRC_PARADE5 32
 
 struct PathPoint
 {
-   int    shift;
-   double price;
-   int    type;
+   int      shift;
+   datetime time;
+   double   price;
+   int      type;       // +1 HIGH, -1 LOW, 0 fixed endpoint
+   int      sources;    // bit mask: multiple methods may propose same point
 };
 
 MqlRates rates[];
+PathPoint fractals[], parade[], candidates[], workPoints[], bestA[], bestB[];
+int StartShift=-1, EndShift=-1, candidateLimitHit=0;
+double bestErrorA=DBL_MAX, bestErrorB=DBL_MAX;
+double bestBalanceA=DBL_MAX, bestBalanceB=DBL_MAX;
+long evaluatedPaths=0;
 
-PathPoint fractals[];
-PathPoint parade[];
-PathPoint candidates[];
-PathPoint workPoints[];
-PathPoint methodBest[];
-PathPoint globalBest[];
-
-double methodMinLeg = 0.0;
-double methodSumLeg = 0.0;
-double globalMinLeg = 0.0;
-double globalSumLeg = 0.0;
-
-int methodCount = 0;
-int globalCount = 0;
-
-string globalMethod = "Default";
-
-//--------------------------------------------------
-void AddPoint(PathPoint &a[], int shift,
-              double price, int type)
+//+------------------------------------------------------------------+
+void AddPoint(PathPoint &arr[],const int shift,const double price,
+              const int type,const int source)
 {
-   int n = ArraySize(a);
-   ArrayResize(a, n + 1);
-
-   a[n].shift = shift;
-   a[n].price = price;
-   a[n].type  = type;
+   int n=ArraySize(arr); ArrayResize(arr,n+1);
+   arr[n].shift=shift; arr[n].time=rates[shift].time;
+   arr[n].price=price; arr[n].type=type; arr[n].sources=source;
 }
 
-//--------------------------------------------------
-int CandleDirection(int shift)
+int CandleDirection(const int shift)
 {
-   if(rates[shift].close > rates[shift].open)
-      return +1;
-
-   if(rates[shift].close < rates[shift].open)
-      return -1;
-
+   if(rates[shift].close>rates[shift].open) return +1;
+   if(rates[shift].close<rates[shift].open) return -1;
    return 0;
 }
 
-//--------------------------------------------------
-// فراکتال با حفظ منطق اصلی و سقف/کف مساوی
-//--------------------------------------------------
+//+------------------------------------------------------------------+
+void MergeCandidate(const PathPoint &p)
+{
+   if(p.shift>=StartShift || p.shift<=EndShift) return;
+   int n=ArraySize(candidates);
+   for(int i=0;i<n;i++)
+   {
+      if(candidates[i].shift!=p.shift || candidates[i].type!=p.type) continue;
+      candidates[i].sources|=p.sources;
+      if(p.type==+1 && p.price>candidates[i].price) candidates[i].price=p.price;
+      if(p.type==-1 && p.price<candidates[i].price) candidates[i].price=p.price;
+      return;
+   }
+   if(n>=MaxCandidatePoints) { candidateLimitHit=1; return; }
+   ArrayResize(candidates,n+1); candidates[n]=p;
+}
+
+void MergeArray(PathPoint &arr[],const int source)
+{
+   for(int i=0;i<ArraySize(arr);i++)
+   {
+      PathPoint p=arr[i]; p.sources|=source; MergeCandidate(p);
+   }
+}
+
+// Fractal with two bars on each side; equal neighbours require at least
+// one strict comparison, matching the original v1.10 behavior.
 void BuildFractals()
 {
-   ArrayResize(fractals, 0);
-
-   for(int i = StartShift; i >= EndShift; i--)
+   ArrayResize(fractals,0);
+   for(int i=StartShift;i>=EndShift;i--)
    {
-      double h = rates[i].high;
-      double l = rates[i].low;
-
-      bool fh = true, fl = true;
-      bool hs = false, ls = false;
-
-      for(int j = 1; j <= 2; j++)
+      double h=rates[i].high,l=rates[i].low;
+      bool fh=true,fl=true,hs=false,ls=false;
+      for(int j=1;j<=2;j++)
       {
-         if(h < rates[i-j].high ||
-            h < rates[i+j].high)
-            fh = false;
-
-         if(h > rates[i-j].high ||
-            h > rates[i+j].high)
-            hs = true;
-
-         if(l > rates[i-j].low ||
-            l > rates[i+j].low)
-            fl = false;
-
-         if(l < rates[i-j].low ||
-            l < rates[i+j].low)
-            ls = true;
+         if(h<rates[i-j].high || h<rates[i+j].high) fh=false;
+         if(h>rates[i-j].high || h>rates[i+j].high) hs=true;
+         if(l>rates[i-j].low || l>rates[i+j].low) fl=false;
+         if(l<rates[i-j].low || l<rates[i+j].low) ls=true;
       }
-
-      if(fh && hs)
-         AddPoint(fractals, i, h, +1);
-
-      if(fl && ls)
-         AddPoint(fractals, i, l, -1);
+      if(fh&&hs) AddPoint(fractals,i,h,+1,SRC_FRACTAL);
+      if(fl&&ls) AddPoint(fractals,i,l,-1,SRC_FRACTAL);
    }
 }
 
-//--------------------------------------------------
 int FindInitialDirection(int &start)
 {
-   for(int i = StartShift; i >= EndShift; i--)
-   {
-      int d = CandleDirection(i);
-
-      if(d != 0)
-      {
-         start = i;
-         return d;
-      }
-   }
-
+   for(int i=StartShift;i>=EndShift;i--)
+   { int d=CandleDirection(i); if(d!=0) { start=i; return d; } }
    return 0;
 }
 
-//--------------------------------------------------
-// روش 1: سه کندل مخالف
-//--------------------------------------------------
+// Method 1 preserved: reverse after three consecutive opposing bodies.
 void BuildParade1()
 {
-   ArrayResize(parade, 0);
-
-   int start;
-   int direction = FindInitialDirection(start);
-   if(direction == 0) return;
-
-   int extremeShift = start;
-   double extremePrice =
-      direction == +1 ? rates[start].high
-                      : rates[start].low;
-
-   int oppositeCount = 0;
-   int oppositeStart = -1;
-
-   for(int i = start - 1; i >= EndShift; i--)
+   ArrayResize(parade,0); int start; int dir=FindInitialDirection(start); if(dir==0)return;
+   int exShift=start,oppCount=0,oppStart=-1;
+   double exPrice=(dir==+1?rates[start].high:rates[start].low);
+   for(int i=start-1;i>=EndShift;i--)
    {
-      int cd = CandleDirection(i);
-
-      if(direction == +1 &&
-         rates[i].high > extremePrice)
+      int cd=CandleDirection(i);
+      if(dir==+1&&rates[i].high>exPrice){exPrice=rates[i].high;exShift=i;}
+      if(dir==-1&&rates[i].low<exPrice){exPrice=rates[i].low;exShift=i;}
+      if(cd==0)continue;
+      if(cd==dir){oppCount=0;oppStart=-1;continue;}
+      if(oppCount==0)oppStart=i;
+      oppCount++;
+      if(oppCount>=3)
       {
-         extremePrice = rates[i].high;
-         extremeShift = i;
-      }
-
-      if(direction == -1 &&
-         rates[i].low < extremePrice)
-      {
-         extremePrice = rates[i].low;
-         extremeShift = i;
-      }
-
-      if(cd == 0) continue;
-
-      if(cd == direction)
-      {
-         oppositeCount = 0;
-         oppositeStart = -1;
-         continue;
-      }
-
-      if(oppositeCount == 0)
-         oppositeStart = i;
-
-      oppositeCount++;
-
-      if(oppositeCount >= 3)
-      {
-         AddPoint(parade, extremeShift,
-                  extremePrice, direction);
-
-         direction = cd;
-         extremeShift = oppositeStart;
-
-         extremePrice =
-            direction == +1
-            ? rates[oppositeStart].high
-            : rates[oppositeStart].low;
-
-         oppositeCount = 0;
-         oppositeStart = -1;
+         AddPoint(parade,exShift,exPrice,dir,SRC_PARADE1);
+         dir=cd; exShift=oppStart;
+         exPrice=(dir==+1?rates[oppStart].high:rates[oppStart].low);
+         oppCount=0;oppStart=-1;
       }
    }
-
-   AddPoint(parade, extremeShift,
-            extremePrice, direction);
+   AddPoint(parade,exShift,exPrice,dir,SRC_PARADE1);
 }
 
-//--------------------------------------------------
-// روش 2: Strict
-// تغییر جهت فقط با عبور از اوپن نقطه شروع
-//--------------------------------------------------
+// Method 2 preserved: opposing candle wick crosses the anchor open.
 void BuildParade2()
 {
-   ArrayResize(parade, 0);
-
-   int start;
-   int direction = FindInitialDirection(start);
-   if(direction == 0) return;
-
-   int extremeShift = start;
-   double extremePrice =
-      direction == +1 ? rates[start].high
-                      : rates[start].low;
-
-   double anchorOpen = rates[start].open;
-
-   for(int i = start - 1; i >= EndShift; i--)
+   ArrayResize(parade,0); int start; int dir=FindInitialDirection(start); if(dir==0)return;
+   int exShift=start; double exPrice=(dir==+1?rates[start].high:rates[start].low);
+   double anchor=rates[start].open;
+   for(int i=start-1;i>=EndShift;i--)
    {
-      int cd = CandleDirection(i);
-
-      if(direction == +1 &&
-         rates[i].high > extremePrice)
-      {
-         extremePrice = rates[i].high;
-         extremeShift = i;
-      }
-
-      if(direction == -1 &&
-         rates[i].low < extremePrice)
-      {
-         extremePrice = rates[i].low;
-         extremeShift = i;
-      }
-
-      if(cd == 0 || cd == direction)
-         continue;
-
-      bool broken =
-         direction == +1
-         ? rates[i].low < anchorOpen
-         : rates[i].high > anchorOpen;
-
-      if(!broken) continue;
-
-      AddPoint(parade, extremeShift,
-               extremePrice, direction);
-
-      direction = -direction;
-      anchorOpen = rates[i].open;
-
-      extremeShift = i;
-      extremePrice =
-         direction == +1 ? rates[i].high
-                         : rates[i].low;
+      int cd=CandleDirection(i);
+      if(dir==+1&&rates[i].high>exPrice){exPrice=rates[i].high;exShift=i;}
+      if(dir==-1&&rates[i].low<exPrice){exPrice=rates[i].low;exShift=i;}
+      if(cd==0||cd==dir)continue;
+      bool broken=(dir==+1?rates[i].low<anchor:rates[i].high>anchor);
+      if(!broken)continue;
+      AddPoint(parade,exShift,exPrice,dir,SRC_PARADE2);
+      dir=-dir;anchor=rates[i].open;exShift=i;
+      exPrice=(dir==+1?rates[i].high:rates[i].low);
    }
-
-   AddPoint(parade, extremeShift,
-            extremePrice, direction);
+   AddPoint(parade,exShift,exPrice,dir,SRC_PARADE2);
 }
 
-//--------------------------------------------------
-// روش 3: Trailing
-// پس از هر N کندل موافق، لنگر یک کندل جلو می‌رود
-//--------------------------------------------------
+// Method 3 preserved exactly in principle: old one-bar-step trailing anchor.
 void BuildParade3()
 {
-   ArrayResize(parade, 0);
-
-   int start;
-   int direction = FindInitialDirection(start);
-   if(direction == 0) return;
-
-   int extremeShift = start;
-   int anchorShift = start;
-   int favorable = 0;
-
-   double extremePrice =
-      direction == +1 ? rates[start].high
-                      : rates[start].low;
-
-   double anchorOpen = rates[start].open;
-   int threshold = MathMax(1, TrailingAfter);
-
-   for(int i = start - 1; i >= EndShift; i--)
+   ArrayResize(parade,0); int start; int dir=FindInitialDirection(start); if(dir==0)return;
+   int exShift=start,anchorShift=start,favorable=0;
+   double exPrice=(dir==+1?rates[start].high:rates[start].low),anchor=rates[start].open;
+   int threshold=MathMax(1,TrailingAfter);
+   for(int i=start-1;i>=EndShift;i--)
    {
-      int cd = CandleDirection(i);
-
-      if(direction == +1 &&
-         rates[i].high > extremePrice)
-      {
-         extremePrice = rates[i].high;
-         extremeShift = i;
-      }
-
-      if(direction == -1 &&
-         rates[i].low < extremePrice)
-      {
-         extremePrice = rates[i].low;
-         extremeShift = i;
-      }
-
-      if(cd == 0) continue;
-
-      if(cd == direction)
+      int cd=CandleDirection(i);
+      if(dir==+1&&rates[i].high>exPrice){exPrice=rates[i].high;exShift=i;}
+      if(dir==-1&&rates[i].low<exPrice){exPrice=rates[i].low;exShift=i;}
+      if(cd==0)continue;
+      if(cd==dir)
       {
          favorable++;
-
-         if(favorable >= threshold)
-         {
-            anchorShift = MathMax(EndShift,
-                                  anchorShift - 1);
-
-            anchorOpen = rates[anchorShift].open;
-            favorable = 0;
-         }
-
+         if(favorable>=threshold){anchorShift=MathMax(EndShift,anchorShift-1);anchor=rates[anchorShift].open;favorable=0;}
          continue;
       }
-
-      bool broken =
-         direction == +1
-         ? rates[i].low < anchorOpen
-         : rates[i].high > anchorOpen;
-
-      if(!broken) continue;
-
-      AddPoint(parade, extremeShift,
-               extremePrice, direction);
-
-      direction = -direction;
-      anchorShift = i;
-      anchorOpen = rates[i].open;
-      favorable = 0;
-
-      extremeShift = i;
-      extremePrice =
-         direction == +1 ? rates[i].high
-                         : rates[i].low;
+      bool broken=(dir==+1?rates[i].low<anchor:rates[i].high>anchor);
+      if(!broken)continue;
+      AddPoint(parade,exShift,exPrice,dir,SRC_PARADE3);
+      dir=-dir;anchorShift=i;anchor=rates[i].open;favorable=0;exShift=i;
+      exPrice=(dir==+1?rates[i].high:rates[i].low);
    }
-
-   AddPoint(parade, extremeShift,
-            extremePrice, direction);
+   AddPoint(parade,exShift,exPrice,dir,SRC_PARADE3);
 }
 
-//--------------------------------------------------
-// تطبیق نقاط رژه با نزدیک‌ترین فراکتال هم‌نوع
-//--------------------------------------------------
-void MatchFractals()
+// Method 4 new: like Strict, but only a CLOSE beyond anchor open reverses.
+void BuildParade4()
 {
-   ArrayResize(candidates, 0);
-
-   for(int i = 0; i < ArraySize(parade); i++)
+   ArrayResize(parade,0); int start; int dir=FindInitialDirection(start); if(dir==0)return;
+   int exShift=start; double exPrice=(dir==+1?rates[start].high:rates[start].low);
+   double anchor=rates[start].open;
+   for(int i=start-1;i>=EndShift;i--)
    {
-      int best = -1;
-      int bestDistance = 2147483647;
+      int cd=CandleDirection(i);
+      if(dir==+1&&rates[i].high>exPrice){exPrice=rates[i].high;exShift=i;}
+      if(dir==-1&&rates[i].low<exPrice){exPrice=rates[i].low;exShift=i;}
+      if(cd==0||cd==dir)continue;
+      bool broken=(dir==+1?rates[i].close<anchor:rates[i].close>anchor);
+      if(!broken)continue;
+      AddPoint(parade,exShift,exPrice,dir,SRC_PARADE4);
+      dir=-dir;anchor=rates[i].open;exShift=i;
+      exPrice=(dir==+1?rates[i].high:rates[i].low);
+   }
+   AddPoint(parade,exShift,exPrice,dir,SRC_PARADE4);
+}
 
-      for(int j = 0; j < ArraySize(fractals); j++)
+// Method 5 new: favorable bodies accumulate despite intervening opposing bodies.
+// Each threshold advances the anchor to the next favorable candle in sequence.
+void BuildParade5()
+{
+   ArrayResize(parade,0); int start; int dir=FindInitialDirection(start); if(dir==0)return;
+   int exShift=start,anchorShift=start,favorableCount=0,nextAnchor=0;
+   double exPrice=(dir==+1?rates[start].high:rates[start].low),anchor=rates[start].open;
+   int favorableShifts[]; ArrayResize(favorableShifts,0);
+   int threshold=MathMax(1,TrailingAfter);
+   for(int i=start-1;i>=EndShift;i--)
+   {
+      int cd=CandleDirection(i);
+      if(dir==+1&&rates[i].high>exPrice){exPrice=rates[i].high;exShift=i;}
+      if(dir==-1&&rates[i].low<exPrice){exPrice=rates[i].low;exShift=i;}
+      if(cd==0)continue;
+      if(cd==dir)
       {
-         if(fractals[j].type != parade[i].type)
-            continue;
-
-         int d = MathAbs(
-            fractals[j].shift - parade[i].shift);
-
-         if(d <= MatchDistance && d < bestDistance)
+         int n=ArraySize(favorableShifts);ArrayResize(favorableShifts,n+1);favorableShifts[n]=i;
+         favorableCount++;
+         if(favorableCount>=threshold)
          {
-            best = j;
-            bestDistance = d;
+            while(nextAnchor<ArraySize(favorableShifts)&&favorableShifts[nextAnchor]>=anchorShift)nextAnchor++;
+            if(nextAnchor<ArraySize(favorableShifts))
+            { anchorShift=favorableShifts[nextAnchor];anchor=rates[anchorShift].open;nextAnchor++; }
+            favorableCount=0;
          }
-      }
-
-      if(best < 0) continue;
-
-      PathPoint p = fractals[best];
-      int n = ArraySize(candidates);
-
-      if(n > 0)
-      {
-         if(candidates[n-1].shift == p.shift)
-            continue;
-
-         if(p.shift >= candidates[n-1].shift)
-            continue;
-
-         if(candidates[n-1].type == p.type)
-         {
-            bool replace =
-               p.type == +1
-               ? p.price > candidates[n-1].price
-               : p.price < candidates[n-1].price;
-
-            if(replace)
-               candidates[n-1] = p;
-
-            continue;
-         }
-      }
-
-      AddPoint(candidates, p.shift,
-               p.price, p.type);
-   }
-}
-
-//--------------------------------------------------
-// ارزیابی مسیر:
-// اول تعداد نقاط بیشتر، سپس بزرگ‌ترین حداقل حرکت،
-// سپس مجموع حرکت‌ها.
-//--------------------------------------------------
-void EvaluateWork()
-{
-   int n = ArraySize(workPoints);
-   if(n < 2) return;
-
-   double minLeg = DBL_MAX;
-   double sumLeg = 0.0;
-
-   for(int i = 1; i < n; i++)
-   {
-      double leg = MathAbs(
-         workPoints[i].price -
-         workPoints[i-1].price);
-
-      if(leg < minLeg) minLeg = leg;
-      sumLeg += leg;
-   }
-
-   bool better = false;
-
-   if(n > methodCount)
-      better = true;
-   else if(n == methodCount && minLeg > methodMinLeg)
-      better = true;
-   else if(n == methodCount &&
-           minLeg == methodMinLeg &&
-           sumLeg > methodSumLeg)
-      better = true;
-
-   if(!better) return;
-
-   methodCount = n;
-   methodMinLeg = minLeg;
-   methodSumLeg = sumLeg;
-
-   ArrayResize(methodBest, n);
-   for(int i = 0; i < n; i++)
-      methodBest[i] = workPoints[i];
-}
-
-//--------------------------------------------------
-// جست‌وجوی همه ترکیب‌های متناوب تا سقف 4 نقطه
-//--------------------------------------------------
-void SearchSubsets(int start, int depth)
-{
-   if(depth >= 2)
-      EvaluateWork();
-
-   if(depth >= MaxZigZagPoints)
-      return;
-
-   int n = ArraySize(candidates);
-
-   for(int i = start; i < n; i++)
-   {
-      if(depth > 0 &&
-         candidates[i].type ==
-         workPoints[depth-1].type)
          continue;
-
-      ArrayResize(workPoints, depth + 1);
-      workPoints[depth] = candidates[i];
-
-      SearchSubsets(i + 1, depth + 1);
+      }
+      bool broken=(dir==+1?rates[i].low<anchor:rates[i].high>anchor);
+      if(!broken)continue;
+      AddPoint(parade,exShift,exPrice,dir,SRC_PARADE5);
+      dir=-dir;anchorShift=i;anchor=rates[i].open;favorableCount=0;
+      ArrayResize(favorableShifts,0);nextAnchor=0;exShift=i;
+      exPrice=(dir==+1?rates[i].high:rates[i].low);
    }
-
-   ArrayResize(workPoints, depth);
+   AddPoint(parade,exShift,exPrice,dir,SRC_PARADE5);
 }
 
-//--------------------------------------------------
-void TestMethod(string name, int method)
+void SortCandidatesOldToNew()
 {
-   if(method == 1) BuildParade1();
-   if(method == 2) BuildParade2();
-   if(method == 3) BuildParade3();
-
-   MatchFractals();
-
-   ArrayResize(workPoints, 0);
-   ArrayResize(methodBest, 0);
-
-   methodCount = 0;
-   methodMinLeg = -1.0;
-   methodSumLeg = -1.0;
-
-   SearchSubsets(0, 0);
-
-   PrintFormat(
-      "Test=%s | Parade=%d | Candidates=%d | BestPoints=%d | MinLeg=%s | SumLeg=%s",
-      name,
-      ArraySize(parade),
-      ArraySize(candidates),
-      methodCount,
-      DoubleToString(MathMax(0.0, methodMinLeg), _Digits),
-      DoubleToString(MathMax(0.0, methodSumLeg), _Digits)
-   );
-
-   bool better = false;
-
-   if(methodCount > globalCount)
-      better = true;
-   else if(methodCount == globalCount &&
-           methodMinLeg > globalMinLeg)
-      better = true;
-   else if(methodCount == globalCount &&
-           methodMinLeg == globalMinLeg &&
-           methodSumLeg > globalSumLeg)
-      better = true;
-
-   if(!better) return;
-
-   globalCount = methodCount;
-   globalMinLeg = methodMinLeg;
-   globalSumLeg = methodSumLeg;
-   globalMethod = name;
-
-   ArrayResize(globalBest, methodCount);
-   for(int i = 0; i < methodCount; i++)
-      globalBest[i] = methodBest[i];
+   int n=ArraySize(candidates);
+   for(int i=0;i<n-1;i++)for(int j=i+1;j<n;j++)
+      if(candidates[j].shift>candidates[i].shift)
+      {PathPoint t=candidates[i];candidates[i]=candidates[j];candidates[j]=t;}
 }
 
-//--------------------------------------------------
-void PrintFinal()
+string SourceNames(const int mask)
 {
-   Print("========================================");
-   Print("Selected method: ", globalMethod);
-   Print("Selected points: ", globalCount);
-   Print("Minimum leg: ",
-         DoubleToString(MathMax(0.0, globalMinLeg), _Digits));
-   Print("Total movement: ",
-         DoubleToString(MathMax(0.0, globalSumLeg), _Digits));
+   string s="";
+   if((mask&SRC_FRACTAL)!=0)s+="F";
+   if((mask&SRC_PARADE1)!=0)s+=(s==""?"P1":"+P1");
+   if((mask&SRC_PARADE2)!=0)s+=(s==""?"P2":"+P2");
+   if((mask&SRC_PARADE3)!=0)s+=(s==""?"P3":"+P3");
+   if((mask&SRC_PARADE4)!=0)s+=(s==""?"P4":"+P4");
+   if((mask&SRC_PARADE5)!=0)s+=(s==""?"P5":"+P5");
+   return(s==""?"END":s);
+}
 
-   for(int i = 0; i < globalCount; i++)
+// Calculate SSE between the polyline and all candle CLOSES in range.
+double ComputeFitError(PathPoint &v[])
+{
+   int n=ArraySize(v);if(n<2)return DBL_MAX;
+   double err=0.0;int seg=0;
+   for(int sh=StartShift;sh>=EndShift;sh--)
    {
-      PrintFormat(
-         "%d | Shift=%d | %s | Price=%s",
-         i + 1,
-         globalBest[i].shift,
-         globalBest[i].type == +1 ? "HIGH" : "LOW",
-         DoubleToString(globalBest[i].price, _Digits)
-      );
+      while(seg<n-2&&sh<v[seg+1].shift)seg++;
+      PathPoint a=v[seg],b=v[seg+1];int span=a.shift-b.shift;
+      double predicted=b.price;
+      if(span>0){double f=(double)(a.shift-sh)/(double)span;predicted=a.price+f*(b.price-a.price);}
+      double d=rates[sh].close-predicted;err+=d*d;
    }
-
-   Print("========================================");
+   return err;
 }
 
-//--------------------------------------------------
+// Secondary metric: variability of price amplitudes of strictly interior legs.
+double ComputeInteriorImbalance(PathPoint &v[])
+{
+   int n=ArraySize(v);if(n<4)return 0.0;
+   double prev=MathAbs(v[2].price-v[1].price),sum=0.0;int count=0;
+   for(int i=2;i<=n-3;i++){double cur=MathAbs(v[i+1].price-v[i].price);sum+=MathAbs(cur-prev);prev=cur;count++;}
+   return(count>0?sum/count:0.0);
+}
+
+bool SamePath(PathPoint &a[],PathPoint &b[])
+{
+   if(ArraySize(a)!=ArraySize(b))return false;
+   for(int i=0;i<ArraySize(a);i++)if(a[i].shift!=b[i].shift||a[i].type!=b[i].type)return false;
+   return true;
+}
+
+void CopyPath(PathPoint &src[],PathPoint &dst[])
+{
+   ArrayResize(dst,ArraySize(src));for(int i=0;i<ArraySize(src);i++)dst[i]=src[i];
+}
+
+void ConsiderCurrentPath()
+{
+   int d=ArraySize(workPoints);PathPoint full[];ArrayResize(full,d+2);
+   full[0].shift=StartShift;full[0].time=rates[StartShift].time;full[0].price=rates[StartShift].open;full[0].type=0;full[0].sources=0;
+   for(int i=0;i<d;i++)full[i+1]=workPoints[i];
+   full[d+1].shift=EndShift;full[d+1].time=rates[EndShift].time;full[d+1].price=rates[EndShift].close;full[d+1].type=0;full[d+1].sources=0;
+   double fit=ComputeFitError(full),bal=ComputeInteriorImbalance(full);evaluatedPaths++;
+
+   if(fit<bestErrorA-1e-12||(MathAbs(fit-bestErrorA)<=1e-12&&bal<bestBalanceA))
+   {
+      if(ArraySize(bestA)>0&&!SamePath(full,bestA))
+      {CopyPath(bestA,bestB);bestErrorB=bestErrorA;bestBalanceB=bestBalanceA;}
+      CopyPath(full,bestA);bestErrorA=fit;bestBalanceA=bal;
+   }
+   else if(!SamePath(full,bestA)&&(fit<bestErrorB-1e-12||(MathAbs(fit-bestErrorB)<=1e-12&&bal<bestBalanceB)))
+   {CopyPath(full,bestB);bestErrorB=fit;bestBalanceB=bal;}
+}
+
+void SearchSubsets(const int startIndex)
+{
+   ConsiderCurrentPath();int depth=ArraySize(workPoints);
+   if(depth>=MaxZigZagPoints)return;
+   int n=ArraySize(candidates);
+   for(int i=startIndex;i<n;i++)
+   {
+      PathPoint p=candidates[i];
+      if(depth>0&&(workPoints[depth-1].type==p.type||workPoints[depth-1].shift==p.shift))continue;
+      ArrayResize(workPoints,depth+1);workPoints[depth]=p;SearchSubsets(i+1);
+   }
+   ArrayResize(workPoints,depth);
+}
+
+void PrintPath(const string label,PathPoint &path[],const double error,const double balance)
+{
+   PrintFormat("%s | Close-SSE=%s | InteriorImbalance=%s | IntermediateVertices=%d",
+               label,DoubleToString(error,8),DoubleToString(balance,_Digits),MathMax(0,ArraySize(path)-2));
+   for(int i=0;i<ArraySize(path);i++)
+   {
+      string typ="END";if(path[i].type==1)typ="HIGH";if(path[i].type==-1)typ="LOW";
+      PrintFormat("  %d | %s | shift=%d | time=%s | price=%s | source=%s",i,typ,path[i].shift,
+                  TimeToString(path[i].time,TIME_DATE|TIME_MINUTES),DoubleToString(path[i].price,_Digits),SourceNames(path[i].sources));
+   }
+}
+
 void RunEngine()
 {
-   BuildFractals();
+   ArrayResize(candidates,0);candidateLimitHit=0;evaluatedPaths=0;
+   BuildFractals();MergeArray(fractals,SRC_FRACTAL);
+   BuildParade1();MergeArray(parade,SRC_PARADE1);
+   BuildParade2();MergeArray(parade,SRC_PARADE2);
+   BuildParade3();MergeArray(parade,SRC_PARADE3);
+   BuildParade4();MergeArray(parade,SRC_PARADE4);
+   BuildParade5();MergeArray(parade,SRC_PARADE5);
+   SortCandidatesOldToNew();
 
-   Print("Fractals found: ", ArraySize(fractals));
+   bestErrorA=DBL_MAX;bestErrorB=DBL_MAX;bestBalanceA=DBL_MAX;bestBalanceB=DBL_MAX;
+   ArrayResize(bestA,0);ArrayResize(bestB,0);ArrayResize(workPoints,0);
+   SearchSubsets(0);
+   StoreResults();
+   
+/*
+   Print("====================================================");
+   PrintFormat("Parade_ZigZag v2.00 | %s H1 | %s -> %s",_Symbol,
+      TimeToString(rates[StartShift].time,TIME_DATE|TIME_MINUTES),TimeToString(rates[EndShift].time,TIME_DATE|TIME_MINUTES));
+   PrintFormat("Fractals=%d | CandidatePool=%d | PathsEvaluated=%I64d",ArraySize(fractals),ArraySize(candidates),evaluatedPaths);
+   Print("Sources: F=Fractal, P1=ThreeOpposite, P2=StrictWick, P3=OriginalTrailing, P4=StrictClose, P5=CumulativeTrailing");
+   if(candidateLimitHit)PrintFormat("WARNING: candidate cap %d reached; later candidates omitted.",MaxCandidatePoints);
 
-   globalCount = 0;
-   globalMinLeg = -1.0;
-   globalSumLeg = -1.0;
-   globalMethod = "Default";
-
-   TestMethod("ThreeOpposite", 1);
-   TestMethod("Strict", 2);
-   TestMethod("Trailing", 3);
-
-   // اگر روش‌ها جواب ندادند، تمام فراکتال‌ها را
-   // به‌عنوان کاندیدا برای انتخاب مسیر پیش‌فرض بررسی کن.
-   if(globalCount < 2)
+   if(ArraySize(bestA)>=2)
    {
-      ArrayResize(candidates, ArraySize(fractals));
-
-      for(int i = 0; i < ArraySize(fractals); i++)
-         candidates[i] = fractals[i];
-
-      ArrayResize(workPoints, 0);
-      ArrayResize(methodBest, 0);
-
-      methodCount = 0;
-      methodMinLeg = -1.0;
-      methodSumLeg = -1.0;
-
-      SearchSubsets(0, 0);
-
-      globalCount = methodCount;
-      globalMinLeg = methodMinLeg;
-      globalSumLeg = methodSumLeg;
-      globalMethod = "Default";
-
-      ArrayResize(globalBest, methodCount);
-
-      for(int i = 0; i < methodCount; i++)
-         globalBest[i] = methodBest[i];
+      PrintPath("BEST PATH",bestA,bestErrorA,bestBalanceA);
+      bool ambiguous=false;
+      if(ArraySize(bestB)>=2&&bestErrorB<DBL_MAX)
+      {
+         double scale=MathMax(MathAbs(bestErrorA),_Point*_Point);
+         double pct=100.0*MathAbs(bestErrorB-bestErrorA)/scale;
+         ambiguous=(pct<=MathMax(0.0,AmbiguityTolerancePercent));
+         PrintFormat("Second path SSE difference=%.4f%% | threshold=%.4f%%",pct,AmbiguityTolerancePercent);
+         if(ambiguous)PrintPath("ALTERNATIVE PATH (GEOMETRIC AMBIGUITY)",bestB,bestErrorB,bestBalanceB);
+         else Print("Second-best path is outside ambiguity threshold; retained as diagnostic only.");
+      }
+      if(ambiguous)Print("Decision: present both geometries as alternatives.");
+      else Print("Decision: one leading geometry.");
    }
-
-   PrintFinal();
+   else Print("No valid path found. Check H1 history and time boundaries.");
+   Print("====================================================");
+*/
 }
 
-//--------------------------------------------------
+
+struct ZigZagResult
+{
+   PathPoint points[];
+   double    error;
+   double    balance;
+   string    label;
+};
+
+ZigZagResult results[];
+
+
+
+void StoreResults()
+{
+   ArrayResize(results, 0);
+
+   if(ArraySize(bestA) >= 2)
+   {
+      int n = ArraySize(results);
+      ArrayResize(results, n + 1);
+
+      ArrayResize(results[n].points, ArraySize(bestA));
+
+      for(int i = 0; i < ArraySize(bestA); i++)
+         results[n].points[i] = bestA[i];
+
+      results[n].error  = bestErrorA;
+      results[n].balance = bestBalanceA;
+      results[n].label  = "BEST";
+   }
+
+   if(ArraySize(bestB) >= 2 && bestErrorB < DBL_MAX)
+   {
+      int n = ArraySize(results);
+      ArrayResize(results, n + 1);
+
+      ArrayResize(results[n].points, ArraySize(bestB));
+
+      for(int i = 0; i < ArraySize(bestB); i++)
+         results[n].points[i] = bestB[i];
+
+      results[n].error  = bestErrorB;
+      results[n].balance = bestBalanceB;
+      results[n].label  = "ALTERNATIVE";
+   }
+}
+
+
 int OnInit()
 {
-   StartShift      = iBarShift(_Symbol, PERIOD_H1,StartTime);
-   EndShift        = iBarShift(_Symbol, PERIOD_H1, EndTime);
+   if(StartTime<=0||EndTime<=0)
+   {Print("Set StartTime to the older time and EndTime to the newer time.");return INIT_PARAMETERS_INCORRECT;}
+   StartShift=iBarShift(_Symbol,PERIOD_H1,StartTime,false);
+   EndShift=iBarShift(_Symbol,PERIOD_H1,EndTime,false);
+   if(StartShift<3||EndShift<2||StartShift<=EndShift||MaxZigZagPoints<0||MaxZigZagPoints>4||
+      MatchDistance<0||TrailingAfter<1||AmbiguityTolerancePercent<0.0||MaxCandidatePoints<2)
+   {Print("Invalid inputs or unavailable time range.");return INIT_PARAMETERS_INCORRECT;}
 
-   if(StartShift <= EndShift ||
-      EndShift < 2 ||
-      MaxZigZagPoints < 2 ||
-      MatchDistance < 0 ||
-      TrailingAfter < 1)
-   {
-      Print("Invalid input parameters.");
-      return INIT_PARAMETERS_INCORRECT;
-   }
-
-   ArraySetAsSeries(rates, true);
-
-   int required = StartShift + 3;
-
-   int copied = CopyRates(
-      _Symbol, PERIOD_H1, 0, required, rates);
-
-   if(copied < required)
-   {
-      PrintFormat(
-         "Not enough H1 bars: required=%d copied=%d",
-         required, copied);
-
-      return INIT_FAILED;
-   }
-
-   PrintFormat(
-      "Geometric engine: %s H1, shifts %d..%d",
-      _Symbol, StartShift, EndShift);
-
+   ArraySetAsSeries(rates,true);int required=StartShift+3;
+   int copied=CopyRates(_Symbol,PERIOD_H1,0,required,rates);
+   if(copied<required){PrintFormat("Not enough H1 bars: required=%d copied=%d",required,copied);return INIT_FAILED;}
+   
    RunEngine();
+   int count = ArraySize(results);
+   for(int i = 0 ; i < count; i++){
+      Print("========================");
+      Print(results[i].label);
+      Print(results[i].balance);
+      int pointCount = ArraySize(results[i].points);
+      
+      for(int j = 0 ; j < pointCount ; j ++){
+         Print( results[i].points[j].shift ,": ", results[i].points[j].price);
+      }
+   }
    return INIT_SUCCEEDED;
 }
 
-void OnTick()
-{
-   // تست فقط یک‌بار هنگام راه‌اندازی انجام می‌شود.
-}
-
-
-
+void OnTick(){ /* one-shot geometry test */ }
 //+------------------------------------------------------------------+
