@@ -1,0 +1,656 @@
+//+------------------------------------------------------------------+
+//|                                                          Two.mq5 |
+//|                       Copyright 2015 - 2026, Farshad Rezvan, PhD |
+//|                                               farezvan@gmail.com |
+//+------------------------------------------------------------------+
+#property copyright "Copyright 2015 - 2026, Farshad Rezvan, PhD"
+#property link      "farezvan@gmail.com"
+
+#property strict
+#property version "1.10"
+#property description "Geometric Parade Engine"
+
+input datetime StartTime;
+input datetime EndTime;
+
+int StartShift      = 120;
+int EndShift        = 80;
+input int TrailingAfter   = 3;
+input int MatchDistance   = 5;
+input int MaxZigZagPoints = 4;
+
+struct PathPoint
+{
+   int    shift;
+   double price;
+   int    type;
+};
+
+MqlRates rates[];
+
+PathPoint fractals[];
+PathPoint parade[];
+PathPoint candidates[];
+PathPoint workPoints[];
+PathPoint methodBest[];
+PathPoint globalBest[];
+
+double methodMinLeg = 0.0;
+double methodSumLeg = 0.0;
+double globalMinLeg = 0.0;
+double globalSumLeg = 0.0;
+
+int methodCount = 0;
+int globalCount = 0;
+
+string globalMethod = "Default";
+
+//--------------------------------------------------
+void AddPoint(PathPoint &a[], int shift,
+              double price, int type)
+{
+   int n = ArraySize(a);
+   ArrayResize(a, n + 1);
+
+   a[n].shift = shift;
+   a[n].price = price;
+   a[n].type  = type;
+}
+
+//--------------------------------------------------
+int CandleDirection(int shift)
+{
+   if(rates[shift].close > rates[shift].open)
+      return +1;
+
+   if(rates[shift].close < rates[shift].open)
+      return -1;
+
+   return 0;
+}
+
+//--------------------------------------------------
+// فراکتال با حفظ منطق اصلی و سقف/کف مساوی
+//--------------------------------------------------
+void BuildFractals()
+{
+   ArrayResize(fractals, 0);
+
+   for(int i = StartShift; i >= EndShift; i--)
+   {
+      double h = rates[i].high;
+      double l = rates[i].low;
+
+      bool fh = true, fl = true;
+      bool hs = false, ls = false;
+
+      for(int j = 1; j <= 2; j++)
+      {
+         if(h < rates[i-j].high ||
+            h < rates[i+j].high)
+            fh = false;
+
+         if(h > rates[i-j].high ||
+            h > rates[i+j].high)
+            hs = true;
+
+         if(l > rates[i-j].low ||
+            l > rates[i+j].low)
+            fl = false;
+
+         if(l < rates[i-j].low ||
+            l < rates[i+j].low)
+            ls = true;
+      }
+
+      if(fh && hs)
+         AddPoint(fractals, i, h, +1);
+
+      if(fl && ls)
+         AddPoint(fractals, i, l, -1);
+   }
+}
+
+//--------------------------------------------------
+int FindInitialDirection(int &start)
+{
+   for(int i = StartShift; i >= EndShift; i--)
+   {
+      int d = CandleDirection(i);
+
+      if(d != 0)
+      {
+         start = i;
+         return d;
+      }
+   }
+
+   return 0;
+}
+
+//--------------------------------------------------
+// روش 1: سه کندل مخالف
+//--------------------------------------------------
+void BuildParade1()
+{
+   ArrayResize(parade, 0);
+
+   int start;
+   int direction = FindInitialDirection(start);
+   if(direction == 0) return;
+
+   int extremeShift = start;
+   double extremePrice =
+      direction == +1 ? rates[start].high
+                      : rates[start].low;
+
+   int oppositeCount = 0;
+   int oppositeStart = -1;
+
+   for(int i = start - 1; i >= EndShift; i--)
+   {
+      int cd = CandleDirection(i);
+
+      if(direction == +1 &&
+         rates[i].high > extremePrice)
+      {
+         extremePrice = rates[i].high;
+         extremeShift = i;
+      }
+
+      if(direction == -1 &&
+         rates[i].low < extremePrice)
+      {
+         extremePrice = rates[i].low;
+         extremeShift = i;
+      }
+
+      if(cd == 0) continue;
+
+      if(cd == direction)
+      {
+         oppositeCount = 0;
+         oppositeStart = -1;
+         continue;
+      }
+
+      if(oppositeCount == 0)
+         oppositeStart = i;
+
+      oppositeCount++;
+
+      if(oppositeCount >= 3)
+      {
+         AddPoint(parade, extremeShift,
+                  extremePrice, direction);
+
+         direction = cd;
+         extremeShift = oppositeStart;
+
+         extremePrice =
+            direction == +1
+            ? rates[oppositeStart].high
+            : rates[oppositeStart].low;
+
+         oppositeCount = 0;
+         oppositeStart = -1;
+      }
+   }
+
+   AddPoint(parade, extremeShift,
+            extremePrice, direction);
+}
+
+//--------------------------------------------------
+// روش 2: Strict
+// تغییر جهت فقط با عبور از اوپن نقطه شروع
+//--------------------------------------------------
+void BuildParade2()
+{
+   ArrayResize(parade, 0);
+
+   int start;
+   int direction = FindInitialDirection(start);
+   if(direction == 0) return;
+
+   int extremeShift = start;
+   double extremePrice =
+      direction == +1 ? rates[start].high
+                      : rates[start].low;
+
+   double anchorOpen = rates[start].open;
+
+   for(int i = start - 1; i >= EndShift; i--)
+   {
+      int cd = CandleDirection(i);
+
+      if(direction == +1 &&
+         rates[i].high > extremePrice)
+      {
+         extremePrice = rates[i].high;
+         extremeShift = i;
+      }
+
+      if(direction == -1 &&
+         rates[i].low < extremePrice)
+      {
+         extremePrice = rates[i].low;
+         extremeShift = i;
+      }
+
+      if(cd == 0 || cd == direction)
+         continue;
+
+      bool broken =
+         direction == +1
+         ? rates[i].low < anchorOpen
+         : rates[i].high > anchorOpen;
+
+      if(!broken) continue;
+
+      AddPoint(parade, extremeShift,
+               extremePrice, direction);
+
+      direction = -direction;
+      anchorOpen = rates[i].open;
+
+      extremeShift = i;
+      extremePrice =
+         direction == +1 ? rates[i].high
+                         : rates[i].low;
+   }
+
+   AddPoint(parade, extremeShift,
+            extremePrice, direction);
+}
+
+//--------------------------------------------------
+// روش 3: Trailing
+// پس از هر N کندل موافق، لنگر یک کندل جلو می‌رود
+//--------------------------------------------------
+void BuildParade3()
+{
+   ArrayResize(parade, 0);
+
+   int start;
+   int direction = FindInitialDirection(start);
+   if(direction == 0) return;
+
+   int extremeShift = start;
+   int anchorShift = start;
+   int favorable = 0;
+
+   double extremePrice =
+      direction == +1 ? rates[start].high
+                      : rates[start].low;
+
+   double anchorOpen = rates[start].open;
+   int threshold = MathMax(1, TrailingAfter);
+
+   for(int i = start - 1; i >= EndShift; i--)
+   {
+      int cd = CandleDirection(i);
+
+      if(direction == +1 &&
+         rates[i].high > extremePrice)
+      {
+         extremePrice = rates[i].high;
+         extremeShift = i;
+      }
+
+      if(direction == -1 &&
+         rates[i].low < extremePrice)
+      {
+         extremePrice = rates[i].low;
+         extremeShift = i;
+      }
+
+      if(cd == 0) continue;
+
+      if(cd == direction)
+      {
+         favorable++;
+
+         if(favorable >= threshold)
+         {
+            anchorShift = MathMax(EndShift,
+                                  anchorShift - 1);
+
+            anchorOpen = rates[anchorShift].open;
+            favorable = 0;
+         }
+
+         continue;
+      }
+
+      bool broken =
+         direction == +1
+         ? rates[i].low < anchorOpen
+         : rates[i].high > anchorOpen;
+
+      if(!broken) continue;
+
+      AddPoint(parade, extremeShift,
+               extremePrice, direction);
+
+      direction = -direction;
+      anchorShift = i;
+      anchorOpen = rates[i].open;
+      favorable = 0;
+
+      extremeShift = i;
+      extremePrice =
+         direction == +1 ? rates[i].high
+                         : rates[i].low;
+   }
+
+   AddPoint(parade, extremeShift,
+            extremePrice, direction);
+}
+
+//--------------------------------------------------
+// تطبیق نقاط رژه با نزدیک‌ترین فراکتال هم‌نوع
+//--------------------------------------------------
+void MatchFractals()
+{
+   ArrayResize(candidates, 0);
+
+   for(int i = 0; i < ArraySize(parade); i++)
+   {
+      int best = -1;
+      int bestDistance = 2147483647;
+
+      for(int j = 0; j < ArraySize(fractals); j++)
+      {
+         if(fractals[j].type != parade[i].type)
+            continue;
+
+         int d = MathAbs(
+            fractals[j].shift - parade[i].shift);
+
+         if(d <= MatchDistance && d < bestDistance)
+         {
+            best = j;
+            bestDistance = d;
+         }
+      }
+
+      if(best < 0) continue;
+
+      PathPoint p = fractals[best];
+      int n = ArraySize(candidates);
+
+      if(n > 0)
+      {
+         if(candidates[n-1].shift == p.shift)
+            continue;
+
+         if(p.shift >= candidates[n-1].shift)
+            continue;
+
+         if(candidates[n-1].type == p.type)
+         {
+            bool replace =
+               p.type == +1
+               ? p.price > candidates[n-1].price
+               : p.price < candidates[n-1].price;
+
+            if(replace)
+               candidates[n-1] = p;
+
+            continue;
+         }
+      }
+
+      AddPoint(candidates, p.shift,
+               p.price, p.type);
+   }
+}
+
+//--------------------------------------------------
+// ارزیابی مسیر:
+// اول تعداد نقاط بیشتر، سپس بزرگ‌ترین حداقل حرکت،
+// سپس مجموع حرکت‌ها.
+//--------------------------------------------------
+void EvaluateWork()
+{
+   int n = ArraySize(workPoints);
+   if(n < 2) return;
+
+   double minLeg = DBL_MAX;
+   double sumLeg = 0.0;
+
+   for(int i = 1; i < n; i++)
+   {
+      double leg = MathAbs(
+         workPoints[i].price -
+         workPoints[i-1].price);
+
+      if(leg < minLeg) minLeg = leg;
+      sumLeg += leg;
+   }
+
+   bool better = false;
+
+   if(n > methodCount)
+      better = true;
+   else if(n == methodCount && minLeg > methodMinLeg)
+      better = true;
+   else if(n == methodCount &&
+           minLeg == methodMinLeg &&
+           sumLeg > methodSumLeg)
+      better = true;
+
+   if(!better) return;
+
+   methodCount = n;
+   methodMinLeg = minLeg;
+   methodSumLeg = sumLeg;
+
+   ArrayResize(methodBest, n);
+   for(int i = 0; i < n; i++)
+      methodBest[i] = workPoints[i];
+}
+
+//--------------------------------------------------
+// جست‌وجوی همه ترکیب‌های متناوب تا سقف 4 نقطه
+//--------------------------------------------------
+void SearchSubsets(int start, int depth)
+{
+   if(depth >= 2)
+      EvaluateWork();
+
+   if(depth >= MaxZigZagPoints)
+      return;
+
+   int n = ArraySize(candidates);
+
+   for(int i = start; i < n; i++)
+   {
+      if(depth > 0 &&
+         candidates[i].type ==
+         workPoints[depth-1].type)
+         continue;
+
+      ArrayResize(workPoints, depth + 1);
+      workPoints[depth] = candidates[i];
+
+      SearchSubsets(i + 1, depth + 1);
+   }
+
+   ArrayResize(workPoints, depth);
+}
+
+//--------------------------------------------------
+void TestMethod(string name, int method)
+{
+   if(method == 1) BuildParade1();
+   if(method == 2) BuildParade2();
+   if(method == 3) BuildParade3();
+
+   MatchFractals();
+
+   ArrayResize(workPoints, 0);
+   ArrayResize(methodBest, 0);
+
+   methodCount = 0;
+   methodMinLeg = -1.0;
+   methodSumLeg = -1.0;
+
+   SearchSubsets(0, 0);
+
+   PrintFormat(
+      "Test=%s | Parade=%d | Candidates=%d | BestPoints=%d | MinLeg=%s | SumLeg=%s",
+      name,
+      ArraySize(parade),
+      ArraySize(candidates),
+      methodCount,
+      DoubleToString(MathMax(0.0, methodMinLeg), _Digits),
+      DoubleToString(MathMax(0.0, methodSumLeg), _Digits)
+   );
+
+   bool better = false;
+
+   if(methodCount > globalCount)
+      better = true;
+   else if(methodCount == globalCount &&
+           methodMinLeg > globalMinLeg)
+      better = true;
+   else if(methodCount == globalCount &&
+           methodMinLeg == globalMinLeg &&
+           methodSumLeg > globalSumLeg)
+      better = true;
+
+   if(!better) return;
+
+   globalCount = methodCount;
+   globalMinLeg = methodMinLeg;
+   globalSumLeg = methodSumLeg;
+   globalMethod = name;
+
+   ArrayResize(globalBest, methodCount);
+   for(int i = 0; i < methodCount; i++)
+      globalBest[i] = methodBest[i];
+}
+
+//--------------------------------------------------
+void PrintFinal()
+{
+   Print("========================================");
+   Print("Selected method: ", globalMethod);
+   Print("Selected points: ", globalCount);
+   Print("Minimum leg: ",
+         DoubleToString(MathMax(0.0, globalMinLeg), _Digits));
+   Print("Total movement: ",
+         DoubleToString(MathMax(0.0, globalSumLeg), _Digits));
+
+   for(int i = 0; i < globalCount; i++)
+   {
+      PrintFormat(
+         "%d | Shift=%d | %s | Price=%s",
+         i + 1,
+         globalBest[i].shift,
+         globalBest[i].type == +1 ? "HIGH" : "LOW",
+         DoubleToString(globalBest[i].price, _Digits)
+      );
+   }
+
+   Print("========================================");
+}
+
+//--------------------------------------------------
+void RunEngine()
+{
+   BuildFractals();
+
+   Print("Fractals found: ", ArraySize(fractals));
+
+   globalCount = 0;
+   globalMinLeg = -1.0;
+   globalSumLeg = -1.0;
+   globalMethod = "Default";
+
+   TestMethod("ThreeOpposite", 1);
+   TestMethod("Strict", 2);
+   TestMethod("Trailing", 3);
+
+   // اگر روش‌ها جواب ندادند، تمام فراکتال‌ها را
+   // به‌عنوان کاندیدا برای انتخاب مسیر پیش‌فرض بررسی کن.
+   if(globalCount < 2)
+   {
+      ArrayResize(candidates, ArraySize(fractals));
+
+      for(int i = 0; i < ArraySize(fractals); i++)
+         candidates[i] = fractals[i];
+
+      ArrayResize(workPoints, 0);
+      ArrayResize(methodBest, 0);
+
+      methodCount = 0;
+      methodMinLeg = -1.0;
+      methodSumLeg = -1.0;
+
+      SearchSubsets(0, 0);
+
+      globalCount = methodCount;
+      globalMinLeg = methodMinLeg;
+      globalSumLeg = methodSumLeg;
+      globalMethod = "Default";
+
+      ArrayResize(globalBest, methodCount);
+
+      for(int i = 0; i < methodCount; i++)
+         globalBest[i] = methodBest[i];
+   }
+
+   PrintFinal();
+}
+
+//--------------------------------------------------
+int OnInit()
+{
+   StartShift      = iBarShift(_Symbol, PERIOD_H1,StartTime);
+   EndShift        = iBarShift(_Symbol, PERIOD_H1, EndTime);
+
+   if(StartShift <= EndShift ||
+      EndShift < 2 ||
+      MaxZigZagPoints < 2 ||
+      MatchDistance < 0 ||
+      TrailingAfter < 1)
+   {
+      Print("Invalid input parameters.");
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
+   ArraySetAsSeries(rates, true);
+
+   int required = StartShift + 3;
+
+   int copied = CopyRates(
+      _Symbol, PERIOD_H1, 0, required, rates);
+
+   if(copied < required)
+   {
+      PrintFormat(
+         "Not enough H1 bars: required=%d copied=%d",
+         required, copied);
+
+      return INIT_FAILED;
+   }
+
+   PrintFormat(
+      "Geometric engine: %s H1, shifts %d..%d",
+      _Symbol, StartShift, EndShift);
+
+   RunEngine();
+   return INIT_SUCCEEDED;
+}
+
+void OnTick()
+{
+   // تست فقط یک‌بار هنگام راه‌اندازی انجام می‌شود.
+}
+
+
+
+//+------------------------------------------------------------------+
