@@ -470,6 +470,7 @@ private:
    }
   
 
+public:
 
    double RainbowCenter(int s)
    {
@@ -484,6 +485,17 @@ private:
       
    }
    
+   double RainbowWidth(int s){
+   
+       double mx  = Max4( ma.SMA7(s), ma.SMA14(s), ma.EMA14(s), ma.EMA7(s) );
+       double nx  = Min4( ma.SMA7(s), ma.SMA14(s), ma.EMA14(s), ma.EMA7(s) );
+       
+       return MathAbs(mx-nx) /_Point / 10.0 ; 
+   
+   }
+
+private:
+
    double RainbowInertia(int s)
    {
       double center  = RainbowCenter(s);
