@@ -56,15 +56,8 @@ struct SBranchState
 //==============================================================
 int CountActiveBranches()
 {
-   int count = 0;
-
-   for(int i = 0; i < ArraySize(branches); ++i)
-   {
-      if(branches[i].active)
-         ++count;
-   }
-
-   return count;
+   int count;
+   return count = ArraySize(branches);
 }
 
 //==============================================================
@@ -212,7 +205,7 @@ void ExpireInactiveBranches(
 
    while(i < ArraySize(branches))
    {
-      int activeCount = ArraySize(branches);
+      int activeCount = CountActiveBranches();
 
       int waiting = CalculateWaitingPeriod(
          activeCount,
@@ -295,13 +288,17 @@ void ProcessNewPoint(
    // Create a new branch only when no existing branch accepts the point.
    if(!assigned)
    {
-      CreateBranch(
+      int newBranchIndex = CreateBranch(
          nextBranchId,
          point.price,
          step
       );
-
-      nextBranchId++;
+      if(newBranchIndex >= 0)
+         nextBranchId++;
+      else{
+         Print("Error: Failed to create a new branch.");
+         return;
+      }
    }
 
    // Expire branches according to the configured waiting period.
@@ -313,9 +310,6 @@ void ProcessNewPoint(
 
    for(int i = 0; i < ArraySize(branches); i++)
    {
-   
-      if(!branches[i].active)
-         continue;
       
       if(branches[i].pointCount < 2)
          continue;
