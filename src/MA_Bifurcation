@@ -20,8 +20,8 @@ struct SObserverPoint
    datetime time;
    double   price;
 
-   int      seriesId;
-   int      branchId;
+   //int      seriesId;
+   //int      branchId;
 };
 
 //==============================================================
@@ -54,7 +54,7 @@ struct SBranchState
 //==============================================================
 // Count active branches
 //==============================================================
-int CountActiveBranches(SBranchState &branches[])
+int CountActiveBranches()
 {
    int count = 0;
 
@@ -149,22 +149,9 @@ void AppendPointToBranch(
    const int step
 )
 {
-   if(branch.pointCount == 1)
-   {
-      branch.previousPrice = branch.lastPrice;
-      branch.lastPrice     = price;
-
-      branch.direction = PriceDirection(
-         branch.previousPrice,
-         branch.lastPrice
-      );
-
-      branch.pointCount++;
-      branch.lastSeenStep = step;
-
-      return;
-   }
-
+   
+   //We know it will remain monotonic
+   //
    branch.previousPrice = branch.lastPrice;
    branch.lastPrice     = price;
 
@@ -184,7 +171,6 @@ void AppendPointToBranch(
 // Create a new branch containing one point
 //==============================================================
 int CreateBranch(
-   SBranchState &branches[],
    const int branchId,
    const double price,
    const int step
@@ -218,7 +204,6 @@ int CreateBranch(
 // subsequent points reaches the waiting period.
 //==============================================================
 void ExpireInactiveBranches(
-   SBranchState &branches[],
    const int step,
    const SBranchConfig &config
 )
@@ -238,7 +223,7 @@ void ExpireInactiveBranches(
 
       if(elapsed >= waiting)
       {
-         RemoveBranch(branches, i);
+         RemoveBranch(i);
 
          // عضو بعدی به همین اندیس منتقل شده است.
          // بنابراین اندیس را افزایش نمی‌دهیم.
@@ -248,139 +233,6 @@ void ExpireInactiveBranches(
          ++i;
       }
    }
-}
-
-
-
-
-
-//==============================================================
-// Process all points
-//
-// IMPORTANT:
-// - points[0] is the newest point.
-// - points[last] is the oldest point.
-// - All source series must be combined into one array.
-// - The combined array must be ordered newest -> oldest.
-// - Every point is assigned to the first eligible active
-//   branch, in branch creation order.
-// - If no branch can accept the point, a new branch is created.
-// - Stale branches are removed from the active set.
-//==============================================================
-bool ProcessPointStream(
-   SObserverPoint &points[],
-   const SBranchConfig &config,
-   SBranchState &branches[],
-   ENUM_OBSERVER_DIRECTION &result
-)
-{
-   ArrayResize(branches, 0);
-
-   result = OBS_DIRECTION_UNKNOWN;
-
-   int count = ArraySize(points);
-
-   if(count == 0)
-      return false;
-
-   if(config.minWaitingPoints < 1 ||
-      config.maxWaitingPoints < config.minWaitingPoints)
-   {
-      Print("Invalid branch waiting configuration.");
-      return false;
-   }
-
-   int nextBranchId = 0;
-   int step = 0;
-
-   // Clear previous assignments.
-   for(int i = 0; i < count; ++i)
-      points[i].branchId = -1;
-
-   // Process chronologically: oldest -> newest.
-   for(int i = count - 1; i >= 0; --i)
-   {
-      ++step;
-
-      bool assigned = false;
-
-      // Search active branches in creation order.
-      // The first eligible branch wins.
-      for(int b = 0; b < ArraySize(branches); ++b)
-      {
-         if(!branches[b].active)
-            continue;
-
-         if(!CanAppendPoint(branches[b], points[i].price))
-            continue;
-
-         AppendPointToBranch(
-            branches[b],
-            points[i].price,
-            step
-         );
-
-         points[i].branchId = branches[b].id;
-
-         assigned = true;
-         break;
-      }
-
-      // No existing branch can accept this point.
-      if(!assigned)
-      {
-         int newId = nextBranchId++;
-
-         int index = CreateBranch(
-            branches,
-            newId,
-            points[i].price,
-            step
-         );
-
-         if(index < 0)
-            return false;
-
-         points[i].branchId = branches[index].id;
-      }
-
-      // Give other branches their configured opportunity.
-      ExpireInactiveBranches(
-         branches,
-         step,
-         config
-      );
-   }
-
-   //===========================================================
-   // Final report: count active directional branches only.
-   // Single-point branches have no direction and do not vote.
-   //===========================================================
-   int risingCount  = 0;
-   int fallingCount = 0;
-
-   for(int b = 0; b < ArraySize(branches); ++b)
-   {
-      if(!branches[b].active)
-         continue;
-
-      if(branches[b].pointCount < 2)
-         continue;
-
-      if(branches[b].direction > 0)
-         ++risingCount;
-      else if(branches[b].direction < 0)
-         ++fallingCount;
-   }
-
-   if(risingCount > fallingCount)
-      result = OBS_DIRECTION_UP;
-   else if(fallingCount > risingCount)
-      result = OBS_DIRECTION_DOWN;
-   else
-      result = OBS_DIRECTION_UNKNOWN;
-
-   return true;
 }
 
 //==============================================================
@@ -415,12 +267,80 @@ void PrintDirectionReport(
 
 
 
+void ProcessNewPoint(
+   const SObserverPoint &point,
+   const SBranchConfig &config,
+   int &nextBranchId,
+   int &step,
+   ENUM_OBSERVER_DIRECTION &result
+)
+{
+   // Advance the processing step.
+   step++;
+
+   bool assigned = false;
+
+   // Find the first branch that accepts the new point.
+   for(int i = 0; i < ArraySize(branches); i++)
+   {
+      if(!CanAppendPoint(branches[i], point.price))
+         continue;
+
+      AppendPointToBranch(branches[i], point.price, step);
+
+      assigned = true;
+      break;
+   }
+
+   // Create a new branch only when no existing branch accepts the point.
+   if(!assigned)
+   {
+      CreateBranch(
+         nextBranchId,
+         point.price,
+         step
+      );
+
+      nextBranchId++;
+   }
+
+   // Expire branches according to the configured waiting period.
+   ExpireInactiveBranches(step, config);
+
+   // Count the directions of the surviving branches.
+   int rising  = 0;
+   int falling = 0;
+
+   for(int i = 0; i < ArraySize(branches); i++)
+   {
+   
+      if(!branches[i].active)
+         continue;
+      
+      if(branches[i].pointCount < 2)
+         continue;
+
+      if(branches[i].direction > 0)
+         rising++;
+      else if(branches[i].direction < 0)
+         falling++;
+   }
+
+   // Determine the overall direction.
+   if(rising > falling)
+      result = OBS_DIRECTION_UP;
+   else if(falling > rising)
+      result = OBS_DIRECTION_DOWN;
+   else
+      result = OBS_DIRECTION_UNKNOWN;
+}
+
+
+
+
 
 // حذف فیزیکی شاخه از آرایه
-void RemoveBranch(
-   SBranchState &branches[],
-   const int index
-)
+void RemoveBranch( const int index )
 {
    int count = ArraySize(branches);
 
@@ -437,6 +357,13 @@ void RemoveBranch(
 
 SBranchConfig branchConfig;
 
+SBranchState branches[];
+
+int Step = 0;
+int BranchID = 0;
+
+datetime e1 = 0;
+
 //+------------------------------------------------------------------+
 //| Initialization                                                   |
 //+------------------------------------------------------------------+
@@ -445,27 +372,32 @@ int OnInit()
    branchConfig.minWaitingPoints = 2;
    branchConfig.maxWaitingPoints = 5;
 
+   ArrayResize(branches, 0);
+
+   Step = 0;
+   BranchID = 0;
+   e1 = 0;
+
    return INIT_SUCCEEDED;
 }
 
 void OnTick()
-{
+{  
 
-   SObserverPoint points[];
-   SBranchState branches[];
+   if(e1 == iTime(_Symbol,PERIOD_H1,0) ) return;
+   e1 = iTime(_Symbol,PERIOD_H1,0);
+   
+   SObserverPoint point;
+   
+   point.time  = iTime (_Symbol,PERIOD_H1,1);
+   point.price = iClose(_Symbol,PERIOD_H1,1);   
+   //point.branchId = -1 ;
+   
+   
 
-   ENUM_OBSERVER_DIRECTION direction;
-
-   if(!ProcessPointStream(
-         points,
-         branchConfig,
-         branches,
-         direction))
-   {
-      Print("Geometry analysis failed.");
-      return;
-   }
-
+   ENUM_OBSERVER_DIRECTION direction=OBS_DIRECTION_UNKNOWN;
+   ProcessNewPoint(point,branchConfig,BranchID,Step,direction); 
+   
    PrintDirectionReport(direction);
 }
 
