@@ -384,8 +384,8 @@ void OnTick()
    SObserverPoint point;
    
    point.time  = iTime (_Symbol,PERIOD_H1,1);
-   point.price = iClose(_Symbol,PERIOD_H1,1);   
-   //point.branchId = -1 ;
+   point.price = 1 ; // One MA or average of multiple MAs Price is needed here  
+   
    
    
 
