@@ -26,7 +26,7 @@ enum RC_EVENT_TYPE
    RC_EVENT_MA_THEORY,
    RC_EVENT_AM_REVERSAL,
    RC_EVENT_THEORY_CONTRADICTION,
-   RC_EVENT_IMPORTANT_LEVEL_NEAR,
+   RC_EVENT_IMPORTANT_LEVEL_TOUCHED,
    RC_EVENT_OVERLAP_STARTED,
    RC_EVENT_OVERLAP_FINISHED,
    RC_EVENT_OVERLAP_EXTENDED
@@ -123,6 +123,13 @@ private:
    datetime m_lastBoxEnd;
    int      m_lastMADirection;
    int      m_lastZigDirection;
+   
+   // Important levels: only SmallBox(0)
+   datetime m_levelBoxStart;
+   datetime m_levelBoxEnd;
+   bool     m_levelHighTouched;
+   bool     m_levelLowTouched;
+
 
    // Overlap-chain state
    bool     m_zoneReady;
@@ -805,6 +812,78 @@ private:
       RunZigZag(box0,box1);
    }
 
+
+   void CheckImportantLevelTouch(datetime candleTime)
+   {
+      // Do not alert while an overlap chain is active.
+      if(OverlapActive())
+         return;
+   
+      if(m_fractal==NULL || candleTime<=0)
+         return;
+   
+      // Only inspect the newest small box.
+      FlatZone box;
+      if(!m_fractal.GetSmallBox(0,box))
+         return;
+   
+      // Reset touch flags when SmallBox(0) changes.
+      if(box.startTime!=m_levelBoxStart ||
+         box.endTime!=m_levelBoxEnd)
+      {
+         m_levelBoxStart=box.startTime;
+         m_levelBoxEnd=box.endTime;
+   
+         m_levelHighTouched=false;
+         m_levelLowTouched=false;
+      }
+   
+      double candleHigh=iHigh(_Symbol,PERIOD_H1,1);
+      double candleLow =iLow(_Symbol,PERIOD_H1,1);
+   
+      if(candleHigh==0.0 || candleLow==0.0)
+         return;
+   
+      // The candle range must contain the important level.
+      bool touchedHigh=
+         (!m_levelHighTouched &&
+          candleLow<=box.highPrice &&
+          candleHigh>=box.highPrice);
+   
+      bool touchedLow=
+         (!m_levelLowTouched &&
+          candleLow<=box.lowPrice &&
+          candleHigh>=box.lowPrice);
+   
+      if(touchedHigh)
+      {
+         m_levelHighTouched=true;
+   
+         AddEvent(
+            RC_EVENT_IMPORTANT_LEVEL_TOUCHED,
+            candleTime,
+            "IMPORTANT_LEVEL_TOUCHED",
+            "HIGH",
+            box.highPrice,
+            RC_UP
+         );
+      }
+   
+      if(touchedLow)
+      {
+         m_levelLowTouched=true;
+   
+         AddEvent(
+            RC_EVENT_IMPORTANT_LEVEL_TOUCHED,
+            candleTime,
+            "IMPORTANT_LEVEL_TOUCHED",
+            "LOW",
+            box.lowPrice,
+            RC_DOWN
+         );
+      }
+   }
+
 public:
    CRedCarpet()
    {
@@ -819,6 +898,13 @@ public:
       m_bestBalanceA=DBL_MAX; m_bestBalanceB=DBL_MAX; m_evaluatedPaths=0;
       ArrayResize(m_events,0); ArrayResize(m_theories,0); ArrayResize(m_results,0);
       ArrayResize(m_branches,0);
+      
+      m_levelBoxStart=0;
+      m_levelBoxEnd=0;
+      m_levelHighTouched=false;
+      m_levelLowTouched=false;
+
+      
    }
 
    void Set(CFractalGeometry &fractal,CRainBowDynamics &dyno)
@@ -863,6 +949,7 @@ public:
                }
             }
             if(newBoxArrived) ProcessNewBox(t);
+            CheckImportantLevelTouch(t);
          }
       }
       else if(newBoxArrived)
