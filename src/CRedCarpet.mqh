@@ -904,7 +904,8 @@ public:
       m_levelBoxEnd=0;
       m_levelHighTouched=false;
       m_levelLowTouched=false;
-
+      m_lastZigDirection = RC_UNKNOWN;
+      m_lastMADirection  = RC_UNKNOWN;
       
    }
 
