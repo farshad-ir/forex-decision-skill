@@ -139,6 +139,8 @@ private:
    datetime m_zoneStart;
    datetime m_zoneEnd;
    int      m_zoneBoxCount;
+   bool closed_due_break;
+   
 
    // MA bifurcation state (member-owned; no global state)
    RCBranch       m_branches[];
@@ -778,17 +780,25 @@ private:
          if(box.highPrice>hi) hi=box.highPrice;
          if(box.lowPrice<lo) lo=box.lowPrice;
       }
-      double close = iClose(_Symbol,PERIOD_H1,1) ;
-      bool OverlapISBroken = ( close  > hi || close < lo );
-      bool wasActive=(m_zoneReady && m_zoneBoxCount>=2);
+      
+      if( count == 1) closed_due_break = false;
+      
+      bool wasActive=(m_zoneReady && m_zoneBoxCount>=2 && !closed_due_break);
       bool nowActive=(count>=2);
-      if(!wasActive && nowActive && !OverlapISBroken)
+      
+      if(!wasActive && nowActive && !closed_due_break)
          AddEvent(RC_EVENT_OVERLAP_STARTED,end,"OVERLAP_STARTED",
                   "Connected box chain started",0.0,RC_UNKNOWN);
-
-      m_zoneHigh=hi; m_zoneLow=lo; m_zoneStart=start; m_zoneEnd=end;
-      m_zoneBoxCount=count; m_zoneReady=true; m_zoneExtended=false;
+      
+      if(!closed_due_break){
+         m_zoneHigh=hi; m_zoneLow=lo; m_zoneStart=start; m_zoneEnd=end;
+         m_zoneBoxCount=count; m_zoneReady=true; m_zoneExtended=false;
       return true;
+      }
+      else{
+         m_zoneReady=true; m_zoneExtended=false;
+         return false;
+      }
    }
 
    void ProcessNewBox(datetime candleTime)
@@ -906,6 +916,7 @@ public:
       m_levelLowTouched=false;
       m_lastZigDirection = RC_UNKNOWN;
       m_lastMADirection  = RC_UNKNOWN;
+      closed_due_break = false;
       
    }
 
@@ -941,7 +952,8 @@ public:
                   AddEvent(RC_EVENT_OVERLAP_FINISHED,t,"OVERLAP_FINISHED",
                            "Time passed chain end and close exited its price range",close,
                            close>m_zoneHigh?RC_UP:RC_DOWN);
-                  m_zoneReady=false; m_zoneExtended=false; m_zoneBoxCount=0;
+                  m_zoneReady=false; m_zoneExtended=false;
+                  closed_due_break = true;
                }
                else if(timeExpired && !outside && !m_zoneExtended)
                {
@@ -997,7 +1009,7 @@ public:
    
    int MADirection() { return m_lastMADirection; }
    int ZigZagDirection() { return m_lastZigDirection; }
-   bool OverlapActive() { return (m_zoneReady && m_zoneBoxCount>=2); }
+   bool OverlapActive() { return (m_zoneReady && m_zoneBoxCount>=2 && !closed_due_break); }
    double OverlapHigh() { return m_zoneHigh; }
    double OverlapLow() { return m_zoneLow; }
    datetime OverlapStart() { return m_zoneStart; }
