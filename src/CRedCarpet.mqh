@@ -778,10 +778,11 @@ private:
          if(box.highPrice>hi) hi=box.highPrice;
          if(box.lowPrice<lo) lo=box.lowPrice;
       }
-
+      double close = iClose(_Symbol,PERIOD_H1,1) ;
+      bool OverlapISBroken = ( close  > hi || close < lo );
       bool wasActive=(m_zoneReady && m_zoneBoxCount>=2);
       bool nowActive=(count>=2);
-      if(!wasActive && nowActive)
+      if(!wasActive && nowActive && !OverlapISBroken)
          AddEvent(RC_EVENT_OVERLAP_STARTED,end,"OVERLAP_STARTED",
                   "Connected box chain started",0.0,RC_UNKNOWN);
 
