@@ -19,7 +19,6 @@ void LogRedCarpetState()
    }
 }
 
-
 void LogRedCarpetEvents()
 {
    int count = redCarpet.EventCount();
@@ -49,87 +48,22 @@ void LogRedCarpetEvents()
 
 void LogRedCarpetZigZagResults()
 {
-   static datetime lastBox1Start = 0;
-   static datetime lastBox1End   = 0;
-   static datetime lastBox0Start = 0;
-   static datetime lastBox0End   = 0;
 
-   int count = redCarpet.ZigZagResultCount();
-   if(count <= 0)
-      return;
-
-   // Identify this result set using the box time boundaries.
-   RCZigZagResult first;
-
-   if(!redCarpet.GetZigZagResult(0, first))
-      return;
-
-   // Do not log the same result set twice.
-   if(first.box1Start == lastBox1Start &&
-      first.box1End   == lastBox1End   &&
-      first.box0Start == lastBox0Start &&
-      first.box0End   == lastBox0End)
-      return;
-
-   // Remember the result set before logging it.
-   lastBox1Start = first.box1Start;
-   lastBox1End   = first.box1End;
-   lastBox0Start = first.box0Start;
-   lastBox0End   = first.box0End;
-
-   // Log BEST and ALTERNATIVE for this result set.
+   int count = redCarpet.TraderResultCount();
+   
    for(int i = 0; i < count; i++)
    {
       RCZigZagResult result;
-
-      if(!redCarpet.GetZigZagResult(i, result))
+   
+      if(!redCarpet.GetTraderResult(i, result))
          continue;
-
-      Print(
-         "[RED CARPET ZIGZAG] ",
-         result.label,
-         " | Box1: ",
-         TimeToString(result.box1Start),
-         " - ",
-         TimeToString(result.box1End),
-         " | Box0: ",
-         TimeToString(result.box0Start),
-         " - ",
-         TimeToString(result.box0End),
-         " | Points: ",
-         ArraySize(result.points),
-         " | SSE: ",
-         DoubleToString(result.sse, 8),
-         " | Imbalance: ",
-         DoubleToString(result.imbalance, 8),
-         " | High Slope: ",
-         DoubleToString(result.highSlopeDeg, 2),
-         " | Low Slope: ",
-         DoubleToString(result.lowSlopeDeg, 2)
-      );
-
-      for(int j = 0; j < ArraySize(result.points); j++)
-      {
-         RCPathPoint p = result.points[j];
-
-         string pointType = "ENDPOINT";
-
-         if(p.type > 0)
-            pointType = "HIGH";
-         else if(p.type < 0)
-            pointType = "LOW";
-
-         Print(
-            "[RED CARPET ZIGZAG POINT] ",
+   
+      Print("[TRADER STRUCTURE] ",
             result.label,
-            " | Index: ", j,
-            " | Time: ", TimeToString(p.time),
-            " | Price: ", DoubleToString(p.price, _Digits),
-            " | Type: ", pointType,
-            " | Shift: ", p.shift,
-            " | Sources: ", p.sources
-         );
-      }
+            " | Theory: ", result.theory,
+            " | Reason: ", result.reason);
    }
+
+
 }
 
