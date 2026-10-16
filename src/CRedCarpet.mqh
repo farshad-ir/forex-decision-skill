@@ -793,10 +793,11 @@ private:
       if(!closed_due_break){
          m_zoneHigh=hi; m_zoneLow=lo; m_zoneStart=start; m_zoneEnd=end;
          m_zoneBoxCount=count; m_zoneReady=true; m_zoneExtended=false;
-      return true;
+         return true;
       }
       else{
-         m_zoneReady=true; m_zoneExtended=false;
+         m_zoneReady=false; 
+         m_zoneExtended=false;
          return false;
       }
    }
@@ -943,7 +944,7 @@ public:
             MA_Advisor(t); // runs even while overlap is active
 
             double close=iClose(_Symbol,PERIOD_H1,1);
-            if(m_zoneReady && m_zoneBoxCount>=2 && close!=0.0)
+            if(m_zoneReady && m_zoneBoxCount>=2 && !closed_due_break && close!=0.0)
             {
                bool timeExpired=(t>m_zoneEnd);
                bool outside=(close>m_zoneHigh || close<m_zoneLow);
