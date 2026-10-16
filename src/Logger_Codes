@@ -1,0 +1,48 @@
+void LogRedCarpetState()
+{
+   Print(
+      "[RED CARPET STATE]",
+      " | MA Direction: ", redCarpet.MADirection(),
+      " | ZigZag Direction: ", redCarpet.ZigZagDirection(),
+      " | Overlap Active: ", redCarpet.OverlapActive()
+   );
+
+   if(redCarpet.OverlapActive())
+   {
+      Print(
+         "[RED CARPET OVERLAP]",
+         " | Start: ", TimeToString(redCarpet.OverlapStart()),
+         " | End: ", TimeToString(redCarpet.OverlapEnd()),
+         " | High: ", DoubleToString(redCarpet.OverlapHigh(), _Digits),
+         " | Low: ", DoubleToString(redCarpet.OverlapLow(), _Digits)
+      );
+   }
+}
+
+void LogRedCarpetEvents()
+{
+   int count = redCarpet.EventCount();
+
+   while(lastRedCarpetEvent < count)
+   {
+      RCEvent ev;
+
+      if(!redCarpet.GetEvent(lastRedCarpetEvent, ev))
+      {
+         lastRedCarpetEvent++;
+         continue;
+      }
+
+      Print(
+         "[RED CARPET EVENT] ",
+         ev.name,
+         " | Time: ", TimeToString(ev.time),
+         " | Detail: ", ev.detail,
+         " | Price: ", DoubleToString(ev.price, _Digits),
+         " | Direction: ", ev.direction
+      );
+
+      lastRedCarpetEvent++;
+   }
+}            
+
