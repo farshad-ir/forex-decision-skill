@@ -12,7 +12,7 @@
 // - Stores theory/event records in arrays; no mandatory Print.
 // ------------------------------------------------------------
 
-enum RC_DIRECTION
+enum RC_THEORY_DIRECTION
 {
    RC_DOWN    = -1,
    RC_UNKNOWN =  0,
@@ -121,7 +121,6 @@ private:
    datetime m_lastCandle;
    datetime m_lastBoxStart;
    datetime m_lastBoxEnd;
-   string   m_lastMAOpinion;
    int      m_lastMADirection;
    int      m_lastZigDirection;
 
@@ -274,17 +273,11 @@ private:
       return RC_UNKNOWN;
    }
 
-   // Exact existing source convention: RainbowCenter(1/2/3).
+   // Exact existing source convention: RainbowCenter(1).
    void MA_Advisor(datetime candleTime)
    {
       if(m_dyno==NULL) return;
       double r1=m_dyno.RainbowCenter(1);
-      double r2=m_dyno.RainbowCenter(2);
-      double r3=m_dyno.RainbowCenter(3);
-
-      string opinion="RIVER_UNCLEAR";
-      if(r1>r2 && r2>r3) opinion="RIVER_RISING";
-      else if(r1<r2 && r2<r3) opinion="RIVER_FALLING";
 
       if(r1!=0.0)
       {
@@ -300,19 +293,6 @@ private:
          if(dir!=RC_UNKNOWN) m_lastMADirection=dir;
       }
 
-      if(opinion!=m_lastMAOpinion)
-      {
-         // The direction is saved as a theory record only when it is clear.
-         if(opinion=="RIVER_RISING")
-            AddTheory(candleTime,"MA_Advisor","BULLISH",
-                      "RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3)",
-                      r1,r3,0.0,0.0);
-         else if(opinion=="RIVER_FALLING")
-            AddTheory(candleTime,"MA_Advisor","BEARISH",
-                      "RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3)",
-                      r1,r3,0.0,0.0);
-         m_lastMAOpinion=opinion;
-      }
    }
 
    void AddPathPoint(RCPathPoint &arr[],int shift,double price,int type,int source)
@@ -830,7 +810,6 @@ public:
    {
       m_fractal=NULL; m_dyno=NULL;
       m_lastCandle=0; m_lastBoxStart=0; m_lastBoxEnd=0;
-      m_lastMAOpinion=""; m_lastMADirection=RC_UNKNOWN; m_lastZigDirection=RC_UNKNOWN;
       m_zoneReady=false; m_zoneExtended=false;
       m_zoneHigh=0; m_zoneLow=0; m_zoneStart=0; m_zoneEnd=0; m_zoneBoxCount=0;
       m_step=0; m_nextBranchId=1;
@@ -926,7 +905,7 @@ public:
       return true;
    }
 
-   string MAOpinion() { return m_lastMAOpinion; }
+   
    int MADirection() { return m_lastMADirection; }
    int ZigZagDirection() { return m_lastZigDirection; }
    bool OverlapActive() { return (m_zoneReady && m_zoneBoxCount>=2); }
