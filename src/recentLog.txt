@@ -1,338 +1,483 @@
-CS	0	05:45:51.263	Tester	Intel Core i5-2520M  @ 2.50GHz, 8032 MB
-CS	0	05:45:51.298	Symbols	EURUSD: symbol to be synchronized
-CS	0	05:45:51.299	Symbols	EURUSD: symbol synchronized, 3720 bytes of symbol info received
-CS	0	05:45:51.299	History	EURUSD: history synchronization started
-CS	0	05:45:51.302	History	EURUSD: load 27 bytes of history data to synchronize in 0:00:00.001
-CS	0	05:45:51.302	History	EURUSD: history synchronized from 2022.01.03 to 2026.07.13
-CS	0	05:45:51.386	History	EURUSD,H1: history cache allocated for 19695 bars and contains 10043 bars from 2022.01.03 08:00 to 2023.08.14 23:00
-CS	0	05:45:51.386	History	EURUSD,H1: history begins from 2022.01.03 08:00
-CS	0	05:45:51.386	Tester	EURUSD,H1 (FIBOGroup-MT5 Server): OHLC bar states generating. OnTick executed on the bar begin only
-CS	0	05:45:51.386	Tester	execution delay discarded because of open prices testing mode
-CS	0	05:45:51.387	Tester	EURUSD,H1: testing of Experts\proTrader\dicTrader.ex5 from 2023.08.15 00:00 to 2025.02.28 00:00 started
-CS	0	05:45:51.553	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   NEW BOX Arrived!
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   BOX High: 1.09517
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   BOX EndTime: 2023.08.14 09:00
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   Last Candle close: 1.09061
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   Last Candle Time: 2023.08.14 23:00
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09156,10.7) ]
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.14 23:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.14 09:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
-CS	0	05:45:51.554	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: 0 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.592	dicTrader (EURUSD,H1)	2023.08.15 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.621	dicTrader (EURUSD,H1)	2023.08.15 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.647	dicTrader (EURUSD,H1)	2023.08.15 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.678	dicTrader (EURUSD,H1)	2023.08.15 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.723	dicTrader (EURUSD,H1)	2023.08.15 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.756	dicTrader (EURUSD,H1)	2023.08.15 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.786	dicTrader (EURUSD,H1)	2023.08.15 07:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.15 06:00 | Detail: Bifurcation direction changed | Price: 1.09105 | Direction: 1
-CS	0	05:45:51.786	dicTrader (EURUSD,H1)	2023.08.15 07:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.15 06:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:51.786	dicTrader (EURUSD,H1)	2023.08.15 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.819	dicTrader (EURUSD,H1)	2023.08.15 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.849	dicTrader (EURUSD,H1)	2023.08.15 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.875	dicTrader (EURUSD,H1)	2023.08.15 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   NEW BOX Arrived!
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   BOX High: 1.09175
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   BOX EndTime: 2023.08.15 08:00
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   Last Candle close: 1.09233
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   Last Candle Time: 2023.08.15 10:00
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09141,5.9) ]
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.15 08:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
-CS	0	05:45:51.902	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.941	dicTrader (EURUSD,H1)	2023.08.15 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:51.972	dicTrader (EURUSD,H1)	2023.08.15 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.000	dicTrader (EURUSD,H1)	2023.08.15 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.027	dicTrader (EURUSD,H1)	2023.08.15 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.070	dicTrader (EURUSD,H1)	2023.08.15 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.101	dicTrader (EURUSD,H1)	2023.08.15 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.126	dicTrader (EURUSD,H1)	2023.08.15 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.153	dicTrader (EURUSD,H1)	2023.08.15 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.188	dicTrader (EURUSD,H1)	2023.08.15 20:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.15 19:00 | Detail: Bifurcation direction changed | Price: 1.09274 | Direction: -1
-CS	0	05:45:52.188	dicTrader (EURUSD,H1)	2023.08.15 20:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.15 19:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:52.188	dicTrader (EURUSD,H1)	2023.08.15 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.216	dicTrader (EURUSD,H1)	2023.08.15 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.244	dicTrader (EURUSD,H1)	2023.08.15 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.270	dicTrader (EURUSD,H1)	2023.08.15 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.305	dicTrader (EURUSD,H1)	2023.08.16 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.334	dicTrader (EURUSD,H1)	2023.08.16 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.371	dicTrader (EURUSD,H1)	2023.08.16 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.404	dicTrader (EURUSD,H1)	2023.08.16 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.439	dicTrader (EURUSD,H1)	2023.08.16 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.467	dicTrader (EURUSD,H1)	2023.08.16 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.497	dicTrader (EURUSD,H1)	2023.08.16 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.523	dicTrader (EURUSD,H1)	2023.08.16 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.561	dicTrader (EURUSD,H1)	2023.08.16 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.590	dicTrader (EURUSD,H1)	2023.08.16 09:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.16 08:00 | Detail: Bifurcation direction changed | Price: 1.09090 | Direction: 1
-CS	0	05:45:52.590	dicTrader (EURUSD,H1)	2023.08.16 09:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.16 08:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:52.590	dicTrader (EURUSD,H1)	2023.08.16 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.617	dicTrader (EURUSD,H1)	2023.08.16 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.646	dicTrader (EURUSD,H1)	2023.08.16 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.681	dicTrader (EURUSD,H1)	2023.08.16 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.707	dicTrader (EURUSD,H1)	2023.08.16 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.734	dicTrader (EURUSD,H1)	2023.08.16 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.760	dicTrader (EURUSD,H1)	2023.08.16 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.793	dicTrader (EURUSD,H1)	2023.08.16 16:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.16 15:00 | Detail: Bifurcation direction changed | Price: 1.09151 | Direction: -1
-CS	0	05:45:52.793	dicTrader (EURUSD,H1)	2023.08.16 16:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.16 15:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:52.793	dicTrader (EURUSD,H1)	2023.08.16 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.819	dicTrader (EURUSD,H1)	2023.08.16 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.846	dicTrader (EURUSD,H1)	2023.08.16 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.873	dicTrader (EURUSD,H1)	2023.08.16 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.904	dicTrader (EURUSD,H1)	2023.08.16 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.930	dicTrader (EURUSD,H1)	2023.08.16 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.957	dicTrader (EURUSD,H1)	2023.08.16 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:52.982	dicTrader (EURUSD,H1)	2023.08.16 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.015	dicTrader (EURUSD,H1)	2023.08.17 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.041	dicTrader (EURUSD,H1)	2023.08.17 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.067	dicTrader (EURUSD,H1)	2023.08.17 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.095	dicTrader (EURUSD,H1)	2023.08.17 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.128	dicTrader (EURUSD,H1)	2023.08.17 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.159	dicTrader (EURUSD,H1)	2023.08.17 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.185	dicTrader (EURUSD,H1)	2023.08.17 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.210	dicTrader (EURUSD,H1)	2023.08.17 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.242	dicTrader (EURUSD,H1)	2023.08.17 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.267	dicTrader (EURUSD,H1)	2023.08.17 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.293	dicTrader (EURUSD,H1)	2023.08.17 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   NEW BOX Arrived!
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   BOX High: 1.08834
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   BOX EndTime: 2023.08.17 08:00
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   Last Candle close: 1.08803
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   Last Candle Time: 2023.08.17 10:00
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08750,6.8) ]
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.17 10:00 | Detail: Bifurcation direction changed | Price: 1.08750 | Direction: 1
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.17 10:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.17 08:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
-CS	0	05:45:53.317	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   NEW BOX Arrived!
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   BOX High: 1.08867
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   BOX EndTime: 2023.08.17 09:00
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   Last Candle close: 1.0873
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   Last Candle Time: 2023.08.17 11:00
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08748,5.1) ]
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.17 09:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
-CS	0	05:45:53.356	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 09:00 | High: 1.08867 | Low: 1.08617
-CS	0	05:45:53.382	dicTrader (EURUSD,H1)	2023.08.17 13:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.17 12:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08737 | Direction: 0
-CS	0	05:45:53.382	dicTrader (EURUSD,H1)	2023.08.17 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
-CS	0	05:45:53.382	dicTrader (EURUSD,H1)	2023.08.17 13:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 09:00 | High: 1.08867 | Low: 1.08617
-CS	0	05:45:53.407	dicTrader (EURUSD,H1)	2023.08.17 14:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.17 13:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:53.407	dicTrader (EURUSD,H1)	2023.08.17 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
-CS	0	05:45:53.407	dicTrader (EURUSD,H1)	2023.08.17 14:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 09:00 | High: 1.08867 | Low: 1.08617
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   NEW BOX Arrived!
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   BOX High: 1.08867
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   BOX EndTime: 2023.08.17 12:00
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   Last Candle close: 1.08945
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   Last Candle Time: 2023.08.17 14:00
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08792,6.3) ]
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.17 14:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08945 | Direction: 1
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.17 12:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
-CS	0	05:45:53.432	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 12:00 | High: 1.08867 | Low: 1.08617
-CS	0	05:45:53.463	dicTrader (EURUSD,H1)	2023.08.17 16:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.17 15:00 | Detail: Time passed chain end and close exited its price range | Price: 1.09063 | Direction: 1
-CS	0	05:45:53.463	dicTrader (EURUSD,H1)	2023.08.17 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.490	dicTrader (EURUSD,H1)	2023.08.17 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.515	dicTrader (EURUSD,H1)	2023.08.17 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.539	dicTrader (EURUSD,H1)	2023.08.17 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.567	dicTrader (EURUSD,H1)	2023.08.17 20:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.17 19:00 | Detail: Bifurcation direction changed | Price: 1.08847 | Direction: -1
-CS	0	05:45:53.567	dicTrader (EURUSD,H1)	2023.08.17 20:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.17 19:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:53.567	dicTrader (EURUSD,H1)	2023.08.17 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.592	dicTrader (EURUSD,H1)	2023.08.17 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.618	dicTrader (EURUSD,H1)	2023.08.17 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.642	dicTrader (EURUSD,H1)	2023.08.17 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.668	dicTrader (EURUSD,H1)	2023.08.18 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.701	dicTrader (EURUSD,H1)	2023.08.18 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.725	dicTrader (EURUSD,H1)	2023.08.18 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.750	dicTrader (EURUSD,H1)	2023.08.18 03:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.18 02:00 | Detail: Bifurcation direction changed | Price: 1.08736 | Direction: 1
-CS	0	05:45:53.750	dicTrader (EURUSD,H1)	2023.08.18 03:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.18 02:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:53.750	dicTrader (EURUSD,H1)	2023.08.18 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.774	dicTrader (EURUSD,H1)	2023.08.18 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.806	dicTrader (EURUSD,H1)	2023.08.18 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.836	dicTrader (EURUSD,H1)	2023.08.18 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.860	dicTrader (EURUSD,H1)	2023.08.18 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.884	dicTrader (EURUSD,H1)	2023.08.18 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.917	dicTrader (EURUSD,H1)	2023.08.18 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.942	dicTrader (EURUSD,H1)	2023.08.18 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.966	dicTrader (EURUSD,H1)	2023.08.18 11:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.18 10:00 | Detail: Bifurcation direction changed | Price: 1.08792 | Direction: -1
-CS	0	05:45:53.966	dicTrader (EURUSD,H1)	2023.08.18 11:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.18 10:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:53.966	dicTrader (EURUSD,H1)	2023.08.18 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:53.990	dicTrader (EURUSD,H1)	2023.08.18 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.021	dicTrader (EURUSD,H1)	2023.08.18 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.045	dicTrader (EURUSD,H1)	2023.08.18 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.071	dicTrader (EURUSD,H1)	2023.08.18 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.096	dicTrader (EURUSD,H1)	2023.08.18 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.121	dicTrader (EURUSD,H1)	2023.08.18 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.152	dicTrader (EURUSD,H1)	2023.08.18 18:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.18 17:00 | Detail: Bifurcation direction changed | Price: 1.08697 | Direction: 1
-CS	0	05:45:54.152	dicTrader (EURUSD,H1)	2023.08.18 18:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.18 17:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:54.152	dicTrader (EURUSD,H1)	2023.08.18 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.177	dicTrader (EURUSD,H1)	2023.08.18 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.202	dicTrader (EURUSD,H1)	2023.08.18 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.226	dicTrader (EURUSD,H1)	2023.08.18 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.255	dicTrader (EURUSD,H1)	2023.08.18 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.280	dicTrader (EURUSD,H1)	2023.08.18 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.305	dicTrader (EURUSD,H1)	2023.08.21 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.330	dicTrader (EURUSD,H1)	2023.08.21 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.355	dicTrader (EURUSD,H1)	2023.08.21 02:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.21 01:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:54.355	dicTrader (EURUSD,H1)	2023.08.21 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.387	dicTrader (EURUSD,H1)	2023.08.21 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.411	dicTrader (EURUSD,H1)	2023.08.21 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.435	dicTrader (EURUSD,H1)	2023.08.21 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   NEW BOX Arrived!
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   BOX High: 1.08841
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   BOX EndTime: 2023.08.21 03:00
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   Last Candle close: 1.08814
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   Last Candle Time: 2023.08.21 05:00
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08756,1.5) ]
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.21 03:00 | Detail: BEARISH | Lower highs and lower lows | Price: 0.00000 | Direction: -1
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [RED CARPET EVENT] THEORY_CONTRADICTION | Time: 2023.08.21 03:00 | Detail: Zigzag and MA bifurcation disagree | Price: 0.00000 | Direction: -1
-CS	0	05:45:54.459	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   NEW BOX Arrived!
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   BOX High: 1.08841
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   BOX EndTime: 2023.08.21 04:00
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   Last Candle close: 1.08804
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   Last Candle Time: 2023.08.21 06:00
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08765,1.8) ]
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.21 06:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.21 04:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
-CS	0	05:45:54.490	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
-CS	0	05:45:54.515	dicTrader (EURUSD,H1)	2023.08.21 08:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.21 07:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08811 | Direction: 0
-CS	0	05:45:54.515	dicTrader (EURUSD,H1)	2023.08.21 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
-CS	0	05:45:54.515	dicTrader (EURUSD,H1)	2023.08.21 08:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
-CS	0	05:45:54.539	dicTrader (EURUSD,H1)	2023.08.21 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
-CS	0	05:45:54.539	dicTrader (EURUSD,H1)	2023.08.21 09:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
-CS	0	05:45:54.563	dicTrader (EURUSD,H1)	2023.08.21 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
-CS	0	05:45:54.563	dicTrader (EURUSD,H1)	2023.08.21 10:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
-CS	0	05:45:54.588	dicTrader (EURUSD,H1)	2023.08.21 11:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.21 10:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08885 | Direction: 1
-CS	0	05:45:54.588	dicTrader (EURUSD,H1)	2023.08.21 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.619	dicTrader (EURUSD,H1)	2023.08.21 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   NEW BOX Arrived!
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   BOX High: 1.08841
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   BOX EndTime: 2023.08.21 10:00
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   Last Candle close: 1.09015
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   Last Candle Time: 2023.08.21 12:00
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08838,6.7) ]
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.21 10:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
-CS	0	05:45:54.643	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 10:00 | High: 1.08841 | Low: 1.08646
-CS	0	05:45:54.667	dicTrader (EURUSD,H1)	2023.08.21 14:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.21 13:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08989 | Direction: 1
-CS	0	05:45:54.667	dicTrader (EURUSD,H1)	2023.08.21 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.691	dicTrader (EURUSD,H1)	2023.08.21 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.716	dicTrader (EURUSD,H1)	2023.08.21 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.747	dicTrader (EURUSD,H1)	2023.08.21 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.773	dicTrader (EURUSD,H1)	2023.08.21 18:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.21 17:00 | Detail: Bifurcation direction changed | Price: 1.08911 | Direction: -1
-CS	0	05:45:54.773	dicTrader (EURUSD,H1)	2023.08.21 18:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.21 17:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:54.773	dicTrader (EURUSD,H1)	2023.08.21 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.800	dicTrader (EURUSD,H1)	2023.08.21 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.827	dicTrader (EURUSD,H1)	2023.08.21 20:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.21 19:00 | Detail: Bifurcation direction changed | Price: 1.08926 | Direction: 1
-CS	0	05:45:54.827	dicTrader (EURUSD,H1)	2023.08.21 20:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.21 19:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:54.827	dicTrader (EURUSD,H1)	2023.08.21 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.859	dicTrader (EURUSD,H1)	2023.08.21 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.889	dicTrader (EURUSD,H1)	2023.08.21 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.913	dicTrader (EURUSD,H1)	2023.08.21 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.938	dicTrader (EURUSD,H1)	2023.08.22 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.969	dicTrader (EURUSD,H1)	2023.08.22 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:54.993	dicTrader (EURUSD,H1)	2023.08.22 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.017	dicTrader (EURUSD,H1)	2023.08.22 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.041	dicTrader (EURUSD,H1)	2023.08.22 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.072	dicTrader (EURUSD,H1)	2023.08.22 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   NEW BOX Arrived!
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   BOX High: 1.09042
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   BOX EndTime: 2023.08.22 03:00
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   Last Candle close: 1.09076
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   Last Candle Time: 2023.08.22 05:00
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08991,4.7) ]
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.22 03:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
-CS	0	05:45:55.096	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.121	dicTrader (EURUSD,H1)	2023.08.22 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.145	dicTrader (EURUSD,H1)	2023.08.22 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.176	dicTrader (EURUSD,H1)	2023.08.22 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.201	dicTrader (EURUSD,H1)	2023.08.22 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   NEW BOX Arrived!
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   BOX High: 1.09045
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   BOX EndTime: 2023.08.22 08:00
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   Last Candle close: 1.09256
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   Last Candle Time: 2023.08.22 10:00
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09093,8.3) ]
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.22 08:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
-CS	0	05:45:55.225	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [RED CARPET OVERLAP] | Start: 2023.08.21 17:00 | End: 2023.08.22 08:00 | High: 1.09045 | Low: 1.08753
-CS	0	05:45:55.251	dicTrader (EURUSD,H1)	2023.08.22 12:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.22 11:00 | Detail: Time passed chain end and close exited its price range | Price: 1.09099 | Direction: 1
-CS	0	05:45:55.251	dicTrader (EURUSD,H1)	2023.08.22 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.276	dicTrader (EURUSD,H1)	2023.08.22 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.307	dicTrader (EURUSD,H1)	2023.08.22 14:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.22 13:00 | Detail: Bifurcation direction changed | Price: 1.09059 | Direction: -1
-CS	0	05:45:55.307	dicTrader (EURUSD,H1)	2023.08.22 14:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.22 13:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:55.307	dicTrader (EURUSD,H1)	2023.08.22 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.332	dicTrader (EURUSD,H1)	2023.08.22 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.360	dicTrader (EURUSD,H1)	2023.08.22 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.388	dicTrader (EURUSD,H1)	2023.08.22 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.421	dicTrader (EURUSD,H1)	2023.08.22 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.449	dicTrader (EURUSD,H1)	2023.08.22 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.477	dicTrader (EURUSD,H1)	2023.08.22 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.505	dicTrader (EURUSD,H1)	2023.08.22 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.539	dicTrader (EURUSD,H1)	2023.08.22 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.566	dicTrader (EURUSD,H1)	2023.08.22 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.593	dicTrader (EURUSD,H1)	2023.08.23 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.620	dicTrader (EURUSD,H1)	2023.08.23 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.650	dicTrader (EURUSD,H1)	2023.08.23 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.675	dicTrader (EURUSD,H1)	2023.08.23 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.699	dicTrader (EURUSD,H1)	2023.08.23 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.724	dicTrader (EURUSD,H1)	2023.08.23 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.755	dicTrader (EURUSD,H1)	2023.08.23 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   NEW BOX Arrived!
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   BOX High: 1.08553
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   BOX EndTime: 2023.08.23 04:00
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   Last Candle close: 1.08574
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   Last Candle Time: 2023.08.23 06:00
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08520,6.5) ]
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.23 06:00 | Detail: Bifurcation direction changed | Price: 1.08520 | Direction: 1
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.23 06:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.23 04:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
-CS	0	05:45:55.780	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.805	dicTrader (EURUSD,H1)	2023.08.23 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.829	dicTrader (EURUSD,H1)	2023.08.23 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.853	dicTrader (EURUSD,H1)	2023.08.23 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.880	dicTrader (EURUSD,H1)	2023.08.23 11:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.905	dicTrader (EURUSD,H1)	2023.08.23 12:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.23 11:00 | Detail: Bifurcation direction changed | Price: 1.08459 | Direction: -1
-CS	0	05:45:55.905	dicTrader (EURUSD,H1)	2023.08.23 12:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.23 11:00 | Detail: BEARISH | RainbowCenter(1)<RainbowCenter(2)<RainbowCenter(3) | Price: 0.00000 | Direction: -1
-CS	0	05:45:55.905	dicTrader (EURUSD,H1)	2023.08.23 12:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.929	dicTrader (EURUSD,H1)	2023.08.23 13:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.953	dicTrader (EURUSD,H1)	2023.08.23 14:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:55.978	dicTrader (EURUSD,H1)	2023.08.23 15:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.008	dicTrader (EURUSD,H1)	2023.08.23 16:00:00   [RED CARPET STATE] | MA Opinion: RIVER_FALLING | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.033	dicTrader (EURUSD,H1)	2023.08.23 17:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.057	dicTrader (EURUSD,H1)	2023.08.23 18:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.23 17:00 | Detail: Bifurcation direction changed | Price: 1.08293 | Direction: 1
-CS	0	05:45:56.057	dicTrader (EURUSD,H1)	2023.08.23 18:00:00   [RED CARPET EVENT] MA_Advisor | Time: 2023.08.23 17:00 | Detail: BULLISH | RainbowCenter(1)>RainbowCenter(2)>RainbowCenter(3) | Price: 0.00000 | Direction: 1
-CS	0	05:45:56.057	dicTrader (EURUSD,H1)	2023.08.23 18:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.081	dicTrader (EURUSD,H1)	2023.08.23 19:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.107	dicTrader (EURUSD,H1)	2023.08.23 20:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.137	dicTrader (EURUSD,H1)	2023.08.23 21:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.162	dicTrader (EURUSD,H1)	2023.08.23 22:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.186	dicTrader (EURUSD,H1)	2023.08.23 23:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.210	dicTrader (EURUSD,H1)	2023.08.24 00:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.242	dicTrader (EURUSD,H1)	2023.08.24 01:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.266	dicTrader (EURUSD,H1)	2023.08.24 02:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.291	dicTrader (EURUSD,H1)	2023.08.24 03:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.320	dicTrader (EURUSD,H1)	2023.08.24 04:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.353	dicTrader (EURUSD,H1)	2023.08.24 05:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.379	dicTrader (EURUSD,H1)	2023.08.24 06:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.404	dicTrader (EURUSD,H1)	2023.08.24 07:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   NEW BOX Arrived!
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   BOX High: 1.08752
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   BOX EndTime: 2023.08.24 05:00
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   Last Candle close: 1.08696
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   Last Candle Time: 2023.08.24 07:00
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   NEW BOX Arrived LOG finished!
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08640,5.0) ]
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.24 05:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
-CS	0	05:45:56.430	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.464	dicTrader (EURUSD,H1)	2023.08.24 09:00:00   [RED CARPET STATE] | MA Opinion: RIVER_RISING | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
-CS	0	05:45:56.492	dicTrader (EURUSD,H1)	2023.08.24 10:00:00   [RED CARPET STATE] | MA Opinion: RIVER_UNCLEAR | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:54.882	Startup	MetaTester 5 build 6230, 25 Sep 2026
+CS	0	12:23:54.883	Startup	Windows 10 build 19045, 4 x Intel Core i5-2520M  @ 2.50GHz, AVX, 2 / 7 Gb memory, 185 / 435 Gb disk, UAC, GMT+3
+CS	0	12:23:54.886	Server	MetaTester 5 started on 127.0.0.1:3000
+CS	0	12:23:54.891	Startup	cloud network mode is off
+CS	0	12:23:54.891	Startup	initialization finished
+CS	0	12:23:55.108	127.0.0.1	login (build 6230)
+CS	0	12:23:55.423	Network	16964 bytes of account info loaded
+CS	0	12:23:55.423	Network	1478 bytes of tester parameters loaded
+CS	0	12:23:55.423	Network	196 bytes of input parameters loaded
+CS	0	12:23:55.424	Network	506 bytes of symbols list loaded (97 symbols)
+CS	0	12:23:55.424	Tester	expert file added: Experts\proTrader\dicTrader.ex5. 200057 bytes loaded
+CS	0	12:23:55.444	Tester	2080 Mb available, 25 blocks set for ticks generating
+CS	0	12:23:55.444	Tester	initial deposit 1000000.00 USD, leverage 1:400
+CS	0	12:23:55.445	Tester	successfully initialized
+CS	0	12:23:55.445	Network	197 Kb of total initialization data received
+CS	0	12:23:55.445	Tester	Intel Core i5-2520M  @ 2.50GHz, 8032 MB
+CS	0	12:23:55.477	Symbols	EURUSD: symbol to be synchronized
+CS	0	12:23:55.502	Symbols	EURUSD: symbol synchronized, 3720 bytes of symbol info received
+CS	0	12:23:55.503	History	EURUSD: history synchronization started
+CS	0	12:23:55.505	History	EURUSD: load 27 bytes of history data to synchronize in 0:00:00.001
+CS	0	12:23:55.505	History	EURUSD: history synchronized from 2022.01.03 to 2026.07.13
+CS	0	12:23:55.573	History	EURUSD,H1: history cache allocated for 19695 bars and contains 10043 bars from 2022.01.03 08:00 to 2023.08.14 23:00
+CS	0	12:23:55.573	History	EURUSD,H1: history begins from 2022.01.03 08:00
+CS	0	12:23:55.574	Tester	EURUSD,H1 (FIBOGroup-MT5 Server): OHLC bar states generating. OnTick executed on the bar begin only
+CS	0	12:23:55.574	Tester	execution delay discarded because of open prices testing mode
+CS	0	12:23:55.574	Tester	EURUSD,H1: testing of Experts\proTrader\dicTrader.ex5 from 2023.08.15 00:00 to 2025.02.28 00:00 started
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   NEW BOX Arrived!
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   BOX High: 1.09517
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   BOX EndTime: 2023.08.14 09:00
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   Last Candle close: 1.09061
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   Last Candle Time: 2023.08.14 23:00
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09156,10.7) ]
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.14 09:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:23:55.712	dicTrader (EURUSD,H1)	2023.08.15 00:00:00   [RED CARPET STATE] | MA Direction: 0 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.738	dicTrader (EURUSD,H1)	2023.08.15 01:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.769	dicTrader (EURUSD,H1)	2023.08.15 02:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.794	dicTrader (EURUSD,H1)	2023.08.15 03:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.820	dicTrader (EURUSD,H1)	2023.08.15 04:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.847	dicTrader (EURUSD,H1)	2023.08.15 05:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.882	dicTrader (EURUSD,H1)	2023.08.15 06:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.907	dicTrader (EURUSD,H1)	2023.08.15 07:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.15 06:00 | Detail: Bifurcation direction changed | Price: 1.09105 | Direction: 1
+CS	0	12:23:55.907	dicTrader (EURUSD,H1)	2023.08.15 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.934	dicTrader (EURUSD,H1)	2023.08.15 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.961	dicTrader (EURUSD,H1)	2023.08.15 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:55.993	dicTrader (EURUSD,H1)	2023.08.15 10:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.15 09:00 | Detail: LOW | Price: 1.09262 | Direction: -1
+CS	0	12:23:55.993	dicTrader (EURUSD,H1)	2023.08.15 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   NEW BOX Arrived!
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   BOX High: 1.09175
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   BOX EndTime: 2023.08.15 08:00
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   Last Candle close: 1.09233
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   Last Candle Time: 2023.08.15 10:00
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09141,5.9) ]
+CS	0	12:23:56.018	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.15 08:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:23:56.019	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.15 10:00 | Detail: HIGH | Price: 1.09175 | Direction: 1
+CS	0	12:23:56.019	dicTrader (EURUSD,H1)	2023.08.15 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.046	dicTrader (EURUSD,H1)	2023.08.15 12:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.071	dicTrader (EURUSD,H1)	2023.08.15 13:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.105	dicTrader (EURUSD,H1)	2023.08.15 14:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.130	dicTrader (EURUSD,H1)	2023.08.15 15:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.156	dicTrader (EURUSD,H1)	2023.08.15 16:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.15 15:00 | Detail: LOW | Price: 1.09004 | Direction: -1
+CS	0	12:23:56.156	dicTrader (EURUSD,H1)	2023.08.15 16:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.181	dicTrader (EURUSD,H1)	2023.08.15 17:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.215	dicTrader (EURUSD,H1)	2023.08.15 18:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.241	dicTrader (EURUSD,H1)	2023.08.15 19:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.267	dicTrader (EURUSD,H1)	2023.08.15 20:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.15 19:00 | Detail: Bifurcation direction changed | Price: 1.09274 | Direction: -1
+CS	0	12:23:56.267	dicTrader (EURUSD,H1)	2023.08.15 20:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.292	dicTrader (EURUSD,H1)	2023.08.15 21:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.325	dicTrader (EURUSD,H1)	2023.08.15 22:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.351	dicTrader (EURUSD,H1)	2023.08.15 23:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.378	dicTrader (EURUSD,H1)	2023.08.16 00:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.403	dicTrader (EURUSD,H1)	2023.08.16 01:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.436	dicTrader (EURUSD,H1)	2023.08.16 02:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.464	dicTrader (EURUSD,H1)	2023.08.16 03:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.490	dicTrader (EURUSD,H1)	2023.08.16 04:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.515	dicTrader (EURUSD,H1)	2023.08.16 05:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.545	dicTrader (EURUSD,H1)	2023.08.16 06:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.570	dicTrader (EURUSD,H1)	2023.08.16 07:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.596	dicTrader (EURUSD,H1)	2023.08.16 08:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.621	dicTrader (EURUSD,H1)	2023.08.16 09:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.16 08:00 | Detail: Bifurcation direction changed | Price: 1.09090 | Direction: 1
+CS	0	12:23:56.621	dicTrader (EURUSD,H1)	2023.08.16 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.653	dicTrader (EURUSD,H1)	2023.08.16 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.680	dicTrader (EURUSD,H1)	2023.08.16 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.705	dicTrader (EURUSD,H1)	2023.08.16 12:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.731	dicTrader (EURUSD,H1)	2023.08.16 13:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.763	dicTrader (EURUSD,H1)	2023.08.16 14:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.788	dicTrader (EURUSD,H1)	2023.08.16 15:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.813	dicTrader (EURUSD,H1)	2023.08.16 16:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.16 15:00 | Detail: Bifurcation direction changed | Price: 1.09151 | Direction: -1
+CS	0	12:23:56.813	dicTrader (EURUSD,H1)	2023.08.16 16:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.838	dicTrader (EURUSD,H1)	2023.08.16 17:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.869	dicTrader (EURUSD,H1)	2023.08.16 18:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.895	dicTrader (EURUSD,H1)	2023.08.16 19:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.921	dicTrader (EURUSD,H1)	2023.08.16 20:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.946	dicTrader (EURUSD,H1)	2023.08.16 21:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:56.977	dicTrader (EURUSD,H1)	2023.08.16 22:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.002	dicTrader (EURUSD,H1)	2023.08.16 23:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.028	dicTrader (EURUSD,H1)	2023.08.17 00:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.053	dicTrader (EURUSD,H1)	2023.08.17 01:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.086	dicTrader (EURUSD,H1)	2023.08.17 02:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.111	dicTrader (EURUSD,H1)	2023.08.17 03:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.136	dicTrader (EURUSD,H1)	2023.08.17 04:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.161	dicTrader (EURUSD,H1)	2023.08.17 05:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.194	dicTrader (EURUSD,H1)	2023.08.17 06:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.219	dicTrader (EURUSD,H1)	2023.08.17 07:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.243	dicTrader (EURUSD,H1)	2023.08.17 08:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.268	dicTrader (EURUSD,H1)	2023.08.17 09:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.294	dicTrader (EURUSD,H1)	2023.08.17 10:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.321	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   NEW BOX Arrived!
+CS	0	12:23:57.321	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   BOX High: 1.08834
+CS	0	12:23:57.321	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   BOX EndTime: 2023.08.17 08:00
+CS	0	12:23:57.321	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   Last Candle close: 1.08803
+CS	0	12:23:57.321	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   Last Candle Time: 2023.08.17 10:00
+CS	0	12:23:57.321	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:57.322	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08750,6.8) ]
+CS	0	12:23:57.322	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.17 10:00 | Detail: Bifurcation direction changed | Price: 1.08750 | Direction: 1
+CS	0	12:23:57.322	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.17 08:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:23:57.322	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.17 10:00 | Detail: HIGH | Price: 1.08834 | Direction: 1
+CS	0	12:23:57.322	dicTrader (EURUSD,H1)	2023.08.17 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   NEW BOX Arrived!
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   BOX High: 1.08867
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   BOX EndTime: 2023.08.17 09:00
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   Last Candle close: 1.0873
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   Last Candle Time: 2023.08.17 11:00
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08748,5.1) ]
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.17 09:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
+CS	0	12:23:57.347	dicTrader (EURUSD,H1)	2023.08.17 12:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 09:00 | High: 1.08867 | Low: 1.08617
+CS	0	12:23:57.373	dicTrader (EURUSD,H1)	2023.08.17 13:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.17 12:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08737 | Direction: 0
+CS	0	12:23:57.373	dicTrader (EURUSD,H1)	2023.08.17 13:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
+CS	0	12:23:57.373	dicTrader (EURUSD,H1)	2023.08.17 13:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 09:00 | High: 1.08867 | Low: 1.08617
+CS	0	12:23:57.398	dicTrader (EURUSD,H1)	2023.08.17 14:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
+CS	0	12:23:57.398	dicTrader (EURUSD,H1)	2023.08.17 14:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 09:00 | High: 1.08867 | Low: 1.08617
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   NEW BOX Arrived!
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   BOX High: 1.08867
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   BOX EndTime: 2023.08.17 12:00
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   Last Candle close: 1.08945
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   Last Candle Time: 2023.08.17 14:00
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08792,6.3) ]
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.17 14:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08945 | Direction: 1
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.17 12:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: true
+CS	0	12:23:57.429	dicTrader (EURUSD,H1)	2023.08.17 15:00:00   [RED CARPET OVERLAP] | Start: 2023.08.16 22:00 | End: 2023.08.17 12:00 | High: 1.08867 | Low: 1.08617
+CS	0	12:23:57.454	dicTrader (EURUSD,H1)	2023.08.17 16:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.17 15:00 | Detail: Time passed chain end and close exited its price range | Price: 1.09063 | Direction: 1
+CS	0	12:23:57.454	dicTrader (EURUSD,H1)	2023.08.17 16:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.17 15:00 | Detail: HIGH | Price: 1.08867 | Direction: 1
+CS	0	12:23:57.454	dicTrader (EURUSD,H1)	2023.08.17 16:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.479	dicTrader (EURUSD,H1)	2023.08.17 17:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.503	dicTrader (EURUSD,H1)	2023.08.17 18:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.529	dicTrader (EURUSD,H1)	2023.08.17 19:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.562	dicTrader (EURUSD,H1)	2023.08.17 20:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.17 19:00 | Detail: Bifurcation direction changed | Price: 1.08847 | Direction: -1
+CS	0	12:23:57.562	dicTrader (EURUSD,H1)	2023.08.17 20:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.587	dicTrader (EURUSD,H1)	2023.08.17 21:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.17 20:00 | Detail: LOW | Price: 1.08617 | Direction: -1
+CS	0	12:23:57.587	dicTrader (EURUSD,H1)	2023.08.17 21:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.612	dicTrader (EURUSD,H1)	2023.08.17 22:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.636	dicTrader (EURUSD,H1)	2023.08.17 23:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.669	dicTrader (EURUSD,H1)	2023.08.18 00:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.694	dicTrader (EURUSD,H1)	2023.08.18 01:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.719	dicTrader (EURUSD,H1)	2023.08.18 02:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.744	dicTrader (EURUSD,H1)	2023.08.18 03:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.18 02:00 | Detail: Bifurcation direction changed | Price: 1.08736 | Direction: 1
+CS	0	12:23:57.744	dicTrader (EURUSD,H1)	2023.08.18 03:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.775	dicTrader (EURUSD,H1)	2023.08.18 04:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.800	dicTrader (EURUSD,H1)	2023.08.18 05:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.829	dicTrader (EURUSD,H1)	2023.08.18 06:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.853	dicTrader (EURUSD,H1)	2023.08.18 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.885	dicTrader (EURUSD,H1)	2023.08.18 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.910	dicTrader (EURUSD,H1)	2023.08.18 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.935	dicTrader (EURUSD,H1)	2023.08.18 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.959	dicTrader (EURUSD,H1)	2023.08.18 11:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.18 10:00 | Detail: Bifurcation direction changed | Price: 1.08792 | Direction: -1
+CS	0	12:23:57.959	dicTrader (EURUSD,H1)	2023.08.18 11:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:57.990	dicTrader (EURUSD,H1)	2023.08.18 12:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.015	dicTrader (EURUSD,H1)	2023.08.18 13:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.041	dicTrader (EURUSD,H1)	2023.08.18 14:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.066	dicTrader (EURUSD,H1)	2023.08.18 15:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.091	dicTrader (EURUSD,H1)	2023.08.18 16:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.122	dicTrader (EURUSD,H1)	2023.08.18 17:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.147	dicTrader (EURUSD,H1)	2023.08.18 18:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.18 17:00 | Detail: Bifurcation direction changed | Price: 1.08697 | Direction: 1
+CS	0	12:23:58.147	dicTrader (EURUSD,H1)	2023.08.18 18:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.172	dicTrader (EURUSD,H1)	2023.08.18 19:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.196	dicTrader (EURUSD,H1)	2023.08.18 20:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.228	dicTrader (EURUSD,H1)	2023.08.18 21:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.253	dicTrader (EURUSD,H1)	2023.08.18 22:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.277	dicTrader (EURUSD,H1)	2023.08.18 23:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.302	dicTrader (EURUSD,H1)	2023.08.21 00:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.333	dicTrader (EURUSD,H1)	2023.08.21 01:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.358	dicTrader (EURUSD,H1)	2023.08.21 02:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.382	dicTrader (EURUSD,H1)	2023.08.21 03:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.407	dicTrader (EURUSD,H1)	2023.08.21 04:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.432	dicTrader (EURUSD,H1)	2023.08.21 05:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 0 | Overlap Active: false
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   NEW BOX Arrived!
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   BOX High: 1.08841
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   BOX EndTime: 2023.08.21 03:00
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   Last Candle close: 1.08814
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   Last Candle Time: 2023.08.21 05:00
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08756,1.5) ]
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.21 03:00 | Detail: BEARISH | Lower highs and lower lows | Price: 0.00000 | Direction: -1
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [RED CARPET EVENT] THEORY_CONTRADICTION | Time: 2023.08.21 03:00 | Detail: Zigzag and MA bifurcation disagree | Price: 0.00000 | Direction: -1
+CS	0	12:23:58.464	dicTrader (EURUSD,H1)	2023.08.21 06:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   NEW BOX Arrived!
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   BOX High: 1.08841
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   BOX EndTime: 2023.08.21 04:00
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   Last Candle close: 1.08804
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   Last Candle Time: 2023.08.21 06:00
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08765,1.8) ]
+CS	0	12:23:58.488	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.21 04:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:23:58.489	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:23:58.489	dicTrader (EURUSD,H1)	2023.08.21 07:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
+CS	0	12:23:58.513	dicTrader (EURUSD,H1)	2023.08.21 08:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.21 07:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08811 | Direction: 0
+CS	0	12:23:58.513	dicTrader (EURUSD,H1)	2023.08.21 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:23:58.513	dicTrader (EURUSD,H1)	2023.08.21 08:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
+CS	0	12:23:58.539	dicTrader (EURUSD,H1)	2023.08.21 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:23:58.539	dicTrader (EURUSD,H1)	2023.08.21 09:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
+CS	0	12:23:58.571	dicTrader (EURUSD,H1)	2023.08.21 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:23:58.571	dicTrader (EURUSD,H1)	2023.08.21 10:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 04:00 | High: 1.08841 | Low: 1.08646
+CS	0	12:23:58.594	dicTrader (EURUSD,H1)	2023.08.21 11:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.21 10:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08885 | Direction: 1
+CS	0	12:23:58.594	dicTrader (EURUSD,H1)	2023.08.21 11:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.21 10:00 | Detail: HIGH | Price: 1.08841 | Direction: 1
+CS	0	12:23:58.594	dicTrader (EURUSD,H1)	2023.08.21 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.620	dicTrader (EURUSD,H1)	2023.08.21 12:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   NEW BOX Arrived!
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   BOX High: 1.08841
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   BOX EndTime: 2023.08.21 10:00
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   Last Candle close: 1.09015
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   Last Candle Time: 2023.08.21 12:00
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08838,6.7) ]
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.21 10:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:23:58.645	dicTrader (EURUSD,H1)	2023.08.21 13:00:00   [RED CARPET OVERLAP] | Start: 2023.08.18 17:00 | End: 2023.08.21 10:00 | High: 1.08841 | Low: 1.08646
+CS	0	12:23:58.677	dicTrader (EURUSD,H1)	2023.08.21 14:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.21 13:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08989 | Direction: 1
+CS	0	12:23:58.677	dicTrader (EURUSD,H1)	2023.08.21 14:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.702	dicTrader (EURUSD,H1)	2023.08.21 15:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.726	dicTrader (EURUSD,H1)	2023.08.21 16:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.751	dicTrader (EURUSD,H1)	2023.08.21 17:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.21 16:00 | Detail: HIGH | Price: 1.08841 | Direction: 1
+CS	0	12:23:58.751	dicTrader (EURUSD,H1)	2023.08.21 17:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.778	dicTrader (EURUSD,H1)	2023.08.21 18:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.21 17:00 | Detail: Bifurcation direction changed | Price: 1.08911 | Direction: -1
+CS	0	12:23:58.778	dicTrader (EURUSD,H1)	2023.08.21 18:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.813	dicTrader (EURUSD,H1)	2023.08.21 19:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.840	dicTrader (EURUSD,H1)	2023.08.21 20:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.21 19:00 | Detail: Bifurcation direction changed | Price: 1.08926 | Direction: 1
+CS	0	12:23:58.840	dicTrader (EURUSD,H1)	2023.08.21 20:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.865	dicTrader (EURUSD,H1)	2023.08.21 21:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.889	dicTrader (EURUSD,H1)	2023.08.21 22:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.921	dicTrader (EURUSD,H1)	2023.08.21 23:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.945	dicTrader (EURUSD,H1)	2023.08.22 00:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.970	dicTrader (EURUSD,H1)	2023.08.22 01:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:58.994	dicTrader (EURUSD,H1)	2023.08.22 02:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.025	dicTrader (EURUSD,H1)	2023.08.22 03:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.049	dicTrader (EURUSD,H1)	2023.08.22 04:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.075	dicTrader (EURUSD,H1)	2023.08.22 05:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   NEW BOX Arrived!
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   BOX High: 1.09042
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   BOX EndTime: 2023.08.22 03:00
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   Last Candle close: 1.09076
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   Last Candle Time: 2023.08.22 05:00
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08991,4.7) ]
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.22 03:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:23:59.099	dicTrader (EURUSD,H1)	2023.08.22 06:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.130	dicTrader (EURUSD,H1)	2023.08.22 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.156	dicTrader (EURUSD,H1)	2023.08.22 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.181	dicTrader (EURUSD,H1)	2023.08.22 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.205	dicTrader (EURUSD,H1)	2023.08.22 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   NEW BOX Arrived!
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   BOX High: 1.09045
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   BOX EndTime: 2023.08.22 08:00
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   Last Candle close: 1.09256
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   Last Candle Time: 2023.08.22 10:00
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.09093,8.3) ]
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.22 08:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:23:59.230	dicTrader (EURUSD,H1)	2023.08.22 11:00:00   [RED CARPET OVERLAP] | Start: 2023.08.21 17:00 | End: 2023.08.22 08:00 | High: 1.09045 | Low: 1.08753
+CS	0	12:23:59.260	dicTrader (EURUSD,H1)	2023.08.22 12:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.22 11:00 | Detail: Time passed chain end and close exited its price range | Price: 1.09099 | Direction: 1
+CS	0	12:23:59.260	dicTrader (EURUSD,H1)	2023.08.22 12:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.285	dicTrader (EURUSD,H1)	2023.08.22 13:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.22 12:00 | Detail: HIGH | Price: 1.09045 | Direction: 1
+CS	0	12:23:59.285	dicTrader (EURUSD,H1)	2023.08.22 13:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.309	dicTrader (EURUSD,H1)	2023.08.22 14:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.22 13:00 | Detail: Bifurcation direction changed | Price: 1.09059 | Direction: -1
+CS	0	12:23:59.309	dicTrader (EURUSD,H1)	2023.08.22 14:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.22 13:00 | Detail: LOW | Price: 1.08902 | Direction: -1
+CS	0	12:23:59.309	dicTrader (EURUSD,H1)	2023.08.22 14:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.333	dicTrader (EURUSD,H1)	2023.08.22 15:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.367	dicTrader (EURUSD,H1)	2023.08.22 16:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.394	dicTrader (EURUSD,H1)	2023.08.22 17:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.421	dicTrader (EURUSD,H1)	2023.08.22 18:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.447	dicTrader (EURUSD,H1)	2023.08.22 19:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.481	dicTrader (EURUSD,H1)	2023.08.22 20:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.508	dicTrader (EURUSD,H1)	2023.08.22 21:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.542	dicTrader (EURUSD,H1)	2023.08.22 22:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.571	dicTrader (EURUSD,H1)	2023.08.22 23:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.605	dicTrader (EURUSD,H1)	2023.08.23 00:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.632	dicTrader (EURUSD,H1)	2023.08.23 01:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.656	dicTrader (EURUSD,H1)	2023.08.23 02:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.681	dicTrader (EURUSD,H1)	2023.08.23 03:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.712	dicTrader (EURUSD,H1)	2023.08.23 04:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.737	dicTrader (EURUSD,H1)	2023.08.23 05:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.760	dicTrader (EURUSD,H1)	2023.08.23 06:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   NEW BOX Arrived!
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   BOX High: 1.08553
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   BOX EndTime: 2023.08.23 04:00
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   Last Candle close: 1.08574
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   Last Candle Time: 2023.08.23 06:00
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08520,6.5) ]
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.23 06:00 | Detail: Bifurcation direction changed | Price: 1.08520 | Direction: 1
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.23 04:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.23 06:00 | Detail: HIGH | Price: 1.08553 | Direction: 1
+CS	0	12:23:59.784	dicTrader (EURUSD,H1)	2023.08.23 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.809	dicTrader (EURUSD,H1)	2023.08.23 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.840	dicTrader (EURUSD,H1)	2023.08.23 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.864	dicTrader (EURUSD,H1)	2023.08.23 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.888	dicTrader (EURUSD,H1)	2023.08.23 11:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.23 10:00 | Detail: LOW | Price: 1.08329 | Direction: -1
+CS	0	12:23:59.888	dicTrader (EURUSD,H1)	2023.08.23 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.912	dicTrader (EURUSD,H1)	2023.08.23 12:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.23 11:00 | Detail: Bifurcation direction changed | Price: 1.08459 | Direction: -1
+CS	0	12:23:59.912	dicTrader (EURUSD,H1)	2023.08.23 12:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.943	dicTrader (EURUSD,H1)	2023.08.23 13:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.967	dicTrader (EURUSD,H1)	2023.08.23 14:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:23:59.992	dicTrader (EURUSD,H1)	2023.08.23 15:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.018	dicTrader (EURUSD,H1)	2023.08.23 16:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.049	dicTrader (EURUSD,H1)	2023.08.23 17:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.085	dicTrader (EURUSD,H1)	2023.08.23 18:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.23 17:00 | Detail: Bifurcation direction changed | Price: 1.08293 | Direction: 1
+CS	0	12:24:00.085	dicTrader (EURUSD,H1)	2023.08.23 18:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.110	dicTrader (EURUSD,H1)	2023.08.23 19:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.134	dicTrader (EURUSD,H1)	2023.08.23 20:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.158	dicTrader (EURUSD,H1)	2023.08.23 21:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.189	dicTrader (EURUSD,H1)	2023.08.23 22:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.214	dicTrader (EURUSD,H1)	2023.08.23 23:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.238	dicTrader (EURUSD,H1)	2023.08.24 00:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.262	dicTrader (EURUSD,H1)	2023.08.24 01:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.293	dicTrader (EURUSD,H1)	2023.08.24 02:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.317	dicTrader (EURUSD,H1)	2023.08.24 03:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.342	dicTrader (EURUSD,H1)	2023.08.24 04:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.366	dicTrader (EURUSD,H1)	2023.08.24 05:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.397	dicTrader (EURUSD,H1)	2023.08.24 06:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.421	dicTrader (EURUSD,H1)	2023.08.24 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   NEW BOX Arrived!
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   BOX High: 1.08752
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   BOX EndTime: 2023.08.24 05:00
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   Last Candle close: 1.08696
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   Last Candle Time: 2023.08.24 07:00
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08640,5.0) ]
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.24 05:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:24:00.445	dicTrader (EURUSD,H1)	2023.08.24 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.472	dicTrader (EURUSD,H1)	2023.08.24 09:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.24 08:00 | Detail: HIGH | Price: 1.08752 | Direction: 1
+CS	0	12:24:00.472	dicTrader (EURUSD,H1)	2023.08.24 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.506	dicTrader (EURUSD,H1)	2023.08.24 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   NEW BOX Arrived!
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   BOX High: 1.08764
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   BOX EndTime: 2023.08.24 08:00
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   Last Candle close: 1.08562
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   Last Candle Time: 2023.08.24 10:00
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08625,3.0) ]
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.24 10:00 | Detail: Bifurcation direction changed | Price: 1.08625 | Direction: -1
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.24 08:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:00.534	dicTrader (EURUSD,H1)	2023.08.24 11:00:00   [RED CARPET OVERLAP] | Start: 2023.08.23 20:00 | End: 2023.08.24 08:00 | High: 1.08764 | Low: 1.08557
+CS	0	12:24:00.562	dicTrader (EURUSD,H1)	2023.08.24 12:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.24 11:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08619 | Direction: 0
+CS	0	12:24:00.562	dicTrader (EURUSD,H1)	2023.08.24 12:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:00.562	dicTrader (EURUSD,H1)	2023.08.24 12:00:00   [RED CARPET OVERLAP] | Start: 2023.08.23 20:00 | End: 2023.08.24 08:00 | High: 1.08764 | Low: 1.08557
+CS	0	12:24:00.590	dicTrader (EURUSD,H1)	2023.08.24 13:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.24 12:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08483 | Direction: -1
+CS	0	12:24:00.590	dicTrader (EURUSD,H1)	2023.08.24 13:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.24 12:00 | Detail: LOW | Price: 1.08557 | Direction: -1
+CS	0	12:24:00.590	dicTrader (EURUSD,H1)	2023.08.24 13:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.624	dicTrader (EURUSD,H1)	2023.08.24 14:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.651	dicTrader (EURUSD,H1)	2023.08.24 15:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.679	dicTrader (EURUSD,H1)	2023.08.24 16:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.708	dicTrader (EURUSD,H1)	2023.08.24 17:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.742	dicTrader (EURUSD,H1)	2023.08.24 18:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.767	dicTrader (EURUSD,H1)	2023.08.24 19:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.792	dicTrader (EURUSD,H1)	2023.08.24 20:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.816	dicTrader (EURUSD,H1)	2023.08.24 21:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.843	dicTrader (EURUSD,H1)	2023.08.24 22:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.868	dicTrader (EURUSD,H1)	2023.08.24 23:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.893	dicTrader (EURUSD,H1)	2023.08.25 00:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.918	dicTrader (EURUSD,H1)	2023.08.25 01:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.942	dicTrader (EURUSD,H1)	2023.08.25 02:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.973	dicTrader (EURUSD,H1)	2023.08.25 03:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:00.997	dicTrader (EURUSD,H1)	2023.08.25 04:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.022	dicTrader (EURUSD,H1)	2023.08.25 05:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.046	dicTrader (EURUSD,H1)	2023.08.25 06:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.071	dicTrader (EURUSD,H1)	2023.08.25 07:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.101	dicTrader (EURUSD,H1)	2023.08.25 08:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.126	dicTrader (EURUSD,H1)	2023.08.25 09:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.150	dicTrader (EURUSD,H1)	2023.08.25 10:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.174	dicTrader (EURUSD,H1)	2023.08.25 11:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.198	dicTrader (EURUSD,H1)	2023.08.25 12:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.229	dicTrader (EURUSD,H1)	2023.08.25 13:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.253	dicTrader (EURUSD,H1)	2023.08.25 14:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.25 13:00 | Detail: Bifurcation direction changed | Price: 1.07904 | Direction: 1
+CS	0	12:24:01.253	dicTrader (EURUSD,H1)	2023.08.25 14:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.277	dicTrader (EURUSD,H1)	2023.08.25 15:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.301	dicTrader (EURUSD,H1)	2023.08.25 16:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.332	dicTrader (EURUSD,H1)	2023.08.25 17:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.357	dicTrader (EURUSD,H1)	2023.08.25 18:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.381	dicTrader (EURUSD,H1)	2023.08.25 19:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.25 18:00 | Detail: Bifurcation direction changed | Price: 1.07929 | Direction: -1
+CS	0	12:24:01.381	dicTrader (EURUSD,H1)	2023.08.25 19:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.405	dicTrader (EURUSD,H1)	2023.08.25 20:00:00   [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.429	dicTrader (EURUSD,H1)	2023.08.25 21:00:00   [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.08.25 20:00 | Detail: Bifurcation direction changed | Price: 1.07943 | Direction: 1
+CS	0	12:24:01.429	dicTrader (EURUSD,H1)	2023.08.25 21:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.460	dicTrader (EURUSD,H1)	2023.08.25 22:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.484	dicTrader (EURUSD,H1)	2023.08.25 23:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.508	dicTrader (EURUSD,H1)	2023.08.28 00:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.534	dicTrader (EURUSD,H1)	2023.08.28 01:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.558	dicTrader (EURUSD,H1)	2023.08.28 02:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.590	dicTrader (EURUSD,H1)	2023.08.28 03:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.614	dicTrader (EURUSD,H1)	2023.08.28 04:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.640	dicTrader (EURUSD,H1)	2023.08.28 05:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.665	dicTrader (EURUSD,H1)	2023.08.28 06:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.695	dicTrader (EURUSD,H1)	2023.08.28 07:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.719	dicTrader (EURUSD,H1)	2023.08.28 08:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.745	dicTrader (EURUSD,H1)	2023.08.28 09:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.770	dicTrader (EURUSD,H1)	2023.08.28 10:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   NEW BOX Arrived!
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   BOX High: 1.08125
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   BOX EndTime: 2023.08.28 08:00
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   Last Candle close: 1.08087
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   Last Candle Time: 2023.08.28 10:00
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08066,4.9) ]
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   [RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.08.28 08:00 | Detail: STUCK | Insufficient alternating swing points | Price: 0.00000 | Direction: 0
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   [RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.08.28 10:00 | Detail: HIGH | Price: 1.08125 | Direction: 1
+CS	0	12:24:01.800	dicTrader (EURUSD,H1)	2023.08.28 11:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.825	dicTrader (EURUSD,H1)	2023.08.28 12:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   NEW BOX Arrived!
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   BOX High: 1.08208
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   BOX EndTime: 2023.08.28 10:00
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   Last Candle close: 1.08076
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   Last Candle Time: 2023.08.28 12:00
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08060,4.7) ]
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   [RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.08.28 10:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:01.848	dicTrader (EURUSD,H1)	2023.08.28 13:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 10:00 | High: 1.08208 | Low: 1.07913
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   NEW BOX Arrived!
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   BOX High: 1.08208
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   BOX EndTime: 2023.08.28 11:00
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   Last Candle close: 1.08118
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   Last Candle Time: 2023.08.28 13:00
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08070,3.7) ]
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.28 13:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08118 | Direction: 0
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:01.873	dicTrader (EURUSD,H1)	2023.08.28 14:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 11:00 | High: 1.08208 | Low: 1.07913
+CS	0	12:24:01.898	dicTrader (EURUSD,H1)	2023.08.28 15:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.28 14:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08042 | Direction: 0
+CS	0	12:24:01.898	dicTrader (EURUSD,H1)	2023.08.28 15:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:01.898	dicTrader (EURUSD,H1)	2023.08.28 15:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 11:00 | High: 1.08208 | Low: 1.07913
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   NEW BOX Arrived!
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   BOX High: 1.08222
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   BOX EndTime: 2023.08.28 13:00
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   Last Candle close: 1.08102
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   Last Candle Time: 2023.08.28 15:00
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08073,2.2) ]
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:01.929	dicTrader (EURUSD,H1)	2023.08.28 16:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 13:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:01.955	dicTrader (EURUSD,H1)	2023.08.28 17:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.28 16:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08071 | Direction: 0
+CS	0	12:24:01.955	dicTrader (EURUSD,H1)	2023.08.28 17:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:01.955	dicTrader (EURUSD,H1)	2023.08.28 17:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 13:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:01.979	dicTrader (EURUSD,H1)	2023.08.28 18:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:01.979	dicTrader (EURUSD,H1)	2023.08.28 18:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 13:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.004	dicTrader (EURUSD,H1)	2023.08.28 19:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.004	dicTrader (EURUSD,H1)	2023.08.28 19:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 13:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   NEW BOX Arrived!
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   BOX High: 1.08222
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   BOX EndTime: 2023.08.28 17:00
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   Last Candle close: 1.08075
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   Last Candle Time: 2023.08.28 19:00
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   NEW BOX Arrived LOG finished!
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   [ RiverCenter(Price), RiverWidth(pips): (1.08076,1.5) ]
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.036	dicTrader (EURUSD,H1)	2023.08.28 20:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 17:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.061	dicTrader (EURUSD,H1)	2023.08.28 21:00:00   [RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.08.28 20:00 | Detail: Time passed chain end but close remains inside range | Price: 1.08086 | Direction: 0
+CS	0	12:24:02.061	dicTrader (EURUSD,H1)	2023.08.28 21:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.061	dicTrader (EURUSD,H1)	2023.08.28 21:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 17:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.086	dicTrader (EURUSD,H1)	2023.08.28 22:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.086	dicTrader (EURUSD,H1)	2023.08.28 22:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 17:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.111	dicTrader (EURUSD,H1)	2023.08.28 23:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.111	dicTrader (EURUSD,H1)	2023.08.28 23:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 17:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.136	dicTrader (EURUSD,H1)	2023.08.29 00:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.136	dicTrader (EURUSD,H1)	2023.08.29 00:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 17:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.167	dicTrader (EURUSD,H1)	2023.08.29 01:00:00   [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+CS	0	12:24:02.167	dicTrader (EURUSD,H1)	2023.08.29 01:00:00   [RED CARPET OVERLAP] | Start: 2023.08.25 21:00 | End: 2023.08.28 17:00 | High: 1.08222 | Low: 1.07913
+CS	0	12:24:02.192	dicTrader (EURUSD,H1)	2023.08.29 02:00:00   [RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.08.29 01:00 | Detail: Time passed chain end and close exited its price range | Price: 1.08258 | Direction: 1
