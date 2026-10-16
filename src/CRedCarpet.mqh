@@ -163,6 +163,7 @@ private:
    double        m_bestErrorB;
    double        m_bestBalanceA;
    double        m_bestBalanceB;
+   int           m_traderResultIndices[];
    long          m_evaluatedPaths;
 
    void AddEvent(RC_EVENT_TYPE type, datetime when, string name,
@@ -640,8 +641,10 @@ private:
       reason="Insufficient alternating swing points";
       highSlope=0.0; lowSlope=0.0;
       int n=ArraySize(p);
-      if(n<4) return "STUCK";
-
+      if(n<2) {
+         reason = "No measurable price movement";
+         return "STUCK";
+      }
       // Collect the latest two highs and latest two lows, in path order.
       int hi1=-1,hi2=-1,lo1=-1,lo2=-1;
       for(int i=1;i<n-1;i++)
@@ -649,8 +652,110 @@ private:
          if(p[i].type>0) {hi1=hi2;hi2=i;}
          if(p[i].type<0) {lo1=lo2;lo2=i;}
       }
-      if(hi1<0 || hi2<0 || lo1<0 || lo2<0)
+
+      
+      // When two highs and two lows exist, use the established
+      // higher-high / lower-high and higher-low / lower-low rules.
+      if(hi1 >= 0 && hi2 >= 0 && lo1 >= 0 && lo2 >= 0)
+      {
+         highSlope = SlopeDegrees(p[hi1], p[hi2]);
+         lowSlope  = SlopeDegrees(p[lo1], p[lo2]);
+      
+         bool higherHigh = (p[hi2].price > p[hi1].price);
+         bool lowerHigh  = (p[hi2].price < p[hi1].price);
+         bool higherLow  = (p[lo2].price > p[lo1].price);
+         bool lowerLow   = (p[lo2].price < p[lo1].price);
+      
+         if(higherHigh && higherLow)
+         {
+            reason = "Higher highs and higher lows";
+            return "BULLISH";
+         }
+      
+         if(lowerHigh && lowerLow)
+         {
+            reason = "Lower highs and lower lows";
+            return "BEARISH";
+         }
+      
+         if(MathAbs(p[hi2].price - p[hi1].price) <= _Point * 2.0
+            && lowerLow)
+         {
+            reason = "Peaks nearly level while floors are lower";
+            return "BEARISH";
+         }
+      
+         if(MathAbs(p[lo2].price - p[lo1].price) <= _Point * 2.0
+            && higherHigh)
+         {
+            reason = "Floors nearly level while peaks are higher";
+            return "BULLISH";
+         }
+      
+         reason = "Mixed swing geometry; no dominant direction";
          return "STUCK";
+      }
+      
+      // Short paths: interpret the actual movement rather than
+      // rejecting the path because it has fewer swing points.
+      double startPrice = p[0].price;
+      double endPrice   = p[n - 1].price;
+      
+      bool hasHigh = false;
+      bool hasLow  = false;
+      
+      for(int i = 1; i < n - 1; i++)
+      {
+         if(p[i].type > 0) hasHigh = true;
+         if(p[i].type < 0) hasLow  = true;
+      }
+      
+      // Both upward and downward swings exist, but there are not
+      // enough comparable peaks/floors to establish continuation.
+      if(hasHigh && hasLow)
+      {
+         reason = "Price moved both upward and downward; "
+                  "directional continuation is not established";
+         return "STUCK";
+      }
+      
+      if(endPrice > startPrice)
+      {
+         if(hasHigh && !hasLow)
+         {
+            reason = "Price reached a higher level and remains "
+                     "above its starting price";
+            return "BULLISH";
+         }
+      
+         if(!hasHigh && !hasLow)
+         {
+            reason = "Price endpoint is above its starting price";
+            return "BULLISH";
+         }
+      }
+      
+      if(endPrice < startPrice)
+      {
+         if(hasLow && !hasHigh)
+         {
+            reason = "Price reached a lower level and remains "
+                     "below its starting price";
+            return "BEARISH";
+         }
+      
+         if(!hasHigh && !hasLow)
+         {
+            reason = "Price endpoint is below its starting price";
+            return "BEARISH";
+         }
+      }
+      
+      reason = "Price returned to its starting level or "
+               "the movement does not establish a dominant direction";
+      
+      return "STUCK";
+
 
       highSlope=SlopeDegrees(p[hi1],p[hi2]);
       lowSlope=SlopeDegrees(p[lo1],p[lo2]);
@@ -749,12 +854,15 @@ private:
          double bestImbalance=m_results[0].imbalance;
          AddTheory(box0.endTime,"ZIGZAG_"+bestLabel,bestView,bestReason,
                    box0.highPrice,box0.lowPrice,bestFit,bestImbalance);
+                   
          int dir=(bestView=="BULLISH"?RC_UP:(bestView=="BEARISH"?RC_DOWN:RC_UNKNOWN));
          if(dir!=RC_UNKNOWN && m_lastMADirection!=RC_UNKNOWN && dir!=m_lastMADirection)
             AddEvent(RC_EVENT_THEORY_CONTRADICTION,box0.endTime,
                      "THEORY_CONTRADICTION","Zigzag and MA bifurcation disagree",0.0,dir);
          if(dir!=RC_UNKNOWN) m_lastZigDirection=dir;
       }
+      
+      BuildTraderSelection();
       return ArraySize(m_results)>0;
    }
 
@@ -896,6 +1004,63 @@ private:
       }
    }
 
+
+
+   void CountSwingTypes(RCPathPoint &path[], int &highs, int &lows)
+   {
+      highs = 0;
+      lows  = 0;
+   
+      for(int i = 1; i < ArraySize(path) - 1; i++)
+      {
+         if(path[i].type > 0)
+            highs++;
+   
+         if(path[i].type < 0)
+            lows++;
+      }
+   }
+   
+   
+   void BuildTraderSelection()
+   {
+      ArrayResize(m_traderResultIndices, 0);
+   
+      int resultCount = ArraySize(m_results);
+   
+      if(resultCount <= 0)
+         return;
+   
+      // BEST is always the first available result.
+      ArrayResize(m_traderResultIndices, 1);
+      m_traderResultIndices[0] = 0;
+   
+      // Without ALTERNATIVE, only BEST can be reported.
+      if(resultCount < 2)
+         return;
+   
+      int bestHighs, bestLows;
+      int altHighs,  altLows;
+   
+      CountSwingTypes(m_results[0].points, bestHighs, bestLows);
+      CountSwingTypes(m_results[1].points, altHighs, altLows);
+   
+      bool sameSwingCounts =
+         (bestHighs == altHighs && bestLows == altLows);
+   
+      bool sameTheory =
+         (m_results[0].theory == m_results[1].theory);
+   
+      // One report only when BOTH conditions are satisfied.
+      if(sameSwingCounts && sameTheory)
+         return;
+   
+      // Otherwise, report both hypotheses.
+      ArrayResize(m_traderResultIndices, 2);
+      m_traderResultIndices[0] = 0;
+      m_traderResultIndices[1] = 1;
+   }
+
 public:
    CRedCarpet()
    {
@@ -910,6 +1075,7 @@ public:
       m_bestBalanceA=DBL_MAX; m_bestBalanceB=DBL_MAX; m_evaluatedPaths=0;
       ArrayResize(m_events,0); ArrayResize(m_theories,0); ArrayResize(m_results,0);
       ArrayResize(m_branches,0);
+      ArrayResize(m_traderResultIndices,0);
       
       m_levelBoxStart=0;
       m_levelBoxEnd=0;
@@ -1004,6 +1170,46 @@ public:
       out.reason=m_results[index].reason;
       out.highSlopeDeg=m_results[index].highSlopeDeg;
       out.lowSlopeDeg=m_results[index].lowSlopeDeg;
+      return true;
+   }
+   int TraderResultCount()
+   {
+      return ArraySize(m_traderResultIndices);
+   }
+   
+   
+   bool GetTraderResult(int index, RCZigZagResult &out)
+   {
+      if(index < 0 || index >= ArraySize(m_traderResultIndices))
+         return false;
+   
+      int sourceIndex = m_traderResultIndices[index];
+   
+      if(sourceIndex < 0 || sourceIndex >= ArraySize(m_results))
+         return false;
+   
+      out.label = m_results[sourceIndex].label;
+   
+      ArrayResize(out.points,
+                  ArraySize(m_results[sourceIndex].points));
+   
+      for(int i = 0; i < ArraySize(out.points); i++)
+         out.points[i] = m_results[sourceIndex].points[i];
+   
+      out.sse          = m_results[sourceIndex].sse;
+      out.imbalance    = m_results[sourceIndex].imbalance;
+   
+      out.box1Start    = m_results[sourceIndex].box1Start;
+      out.box1End      = m_results[sourceIndex].box1End;
+      out.box0Start    = m_results[sourceIndex].box0Start;
+      out.box0End      = m_results[sourceIndex].box0End;
+   
+      out.theory       = m_results[sourceIndex].theory;
+      out.reason       = m_results[sourceIndex].reason;
+   
+      out.highSlopeDeg = m_results[sourceIndex].highSlopeDeg;
+      out.lowSlopeDeg  = m_results[sourceIndex].lowSlopeDeg;
+   
       return true;
    }
 
