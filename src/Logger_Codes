@@ -46,3 +46,63 @@ void LogRedCarpetEvents()
    }
 }            
 
+void LogRedCarpetZigZagResults()
+{
+   int count = redCarpet.ZigZagResultCount();
+
+   for(int i = 0; i < count; i++)
+   {
+      RCZigZagResult result;
+
+      if(!redCarpet.GetZigZagResult(i, result))
+         continue;
+
+      Print(
+         "[RED CARPET ZIGZAG] ",
+         result.label,
+         " | Box1: ",
+         TimeToString(result.box1Start),
+         " - ",
+         TimeToString(result.box1End),
+         " | Box0: ",
+         TimeToString(result.box0Start),
+         " - ",
+         TimeToString(result.box0End),
+         " | Points: ",
+         ArraySize(result.points),
+         " | SSE: ",
+         DoubleToString(result.sse, 8),
+         " | Imbalance: ",
+         DoubleToString(result.imbalance, 8),
+         " | High Slope: ",
+         DoubleToString(result.highSlopeDeg, 2),
+         " | Low Slope: ",
+         DoubleToString(result.lowSlopeDeg, 2)
+      );
+
+      for(int j = 0; j < ArraySize(result.points); j++)
+      {
+         RCPathPoint p = result.points[j];
+
+         string pointType = "ENDPOINT";
+
+         if(p.type > 0)
+            pointType = "HIGH";
+         else if(p.type < 0)
+            pointType = "LOW";
+
+         Print(
+            "[RED CARPET ZIGZAG POINT] ",
+            result.label,
+            " | Index: ", j,
+            " | Time: ", TimeToString(p.time),
+            " | Price: ", DoubleToString(p.price, _Digits),
+            " | Type: ", pointType,
+            " | Shift: ", p.shift,
+            " | Sources: ", p.sources
+         );
+      }
+   }
+}
+
+
