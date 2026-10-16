@@ -1,5 +1,5 @@
-#ifndef __RED_CARPET_MQH__
-#define __RED_CARPET_MQH__
+#ifndef __BOX_RED_CARPET_MQH__
+#define __BOX_RED_CARPET_MQH__
 
 #include "FractalGeometry.mqh"
 #include "../MA_INERTIA/RainBowDynamics.mqh"
@@ -22,13 +22,14 @@ enum RC_DIRECTION
 enum RC_EVENT_TYPE
 {
    RC_EVENT_NONE = 0,
-   RC_ZIGZAG_THEORY,
-   RC_AVERAGE_REVERSAL,
-   RC_THEORY_CONTRADICTION,
-   RC_IMPORTANT_LEVEL_NEAR,
-   RC_OVERLAP_STARTED,
-   RC_OVERLAP_FINISHED,
-   RC_OVERLAP_EXTENDED
+   RC_EVENT_ZIGZAG_THEORY,
+   RC_EVENT_MA_THEORY,
+   RC_EVENT_AM_REVERSAL,
+   RC_EVENT_THEORY_CONTRADICTION,
+   RC_EVENT_IMPORTANT_LEVEL_NEAR,
+   RC_EVENT_OVERLAP_STARTED,
+   RC_EVENT_OVERLAP_FINISHED,
+   RC_EVENT_OVERLAP_EXTENDED
 };
 
 struct RCPathPoint
@@ -291,7 +292,7 @@ private:
          if(dir!=RC_UNKNOWN && m_lastMADirection!=RC_UNKNOWN &&
             dir!=m_lastMADirection)
          {
-            AddEvent(RC_EVENT_AVERAGE_REVERSAL,candleTime,
+            AddEvent(RC_EVENT_AM_REVERSAL,candleTime,
                      "AVERAGE_REVERSAL",
                      "Bifurcation direction changed",
                      r1,dir);
