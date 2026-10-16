@@ -19,6 +19,7 @@ void LogRedCarpetState()
    }
 }
 
+
 void LogRedCarpetEvents()
 {
    int count = redCarpet.EventCount();
@@ -48,8 +49,35 @@ void LogRedCarpetEvents()
 
 void LogRedCarpetZigZagResults()
 {
-   int count = redCarpet.ZigZagResultCount();
+   static datetime lastBox1Start = 0;
+   static datetime lastBox1End   = 0;
+   static datetime lastBox0Start = 0;
+   static datetime lastBox0End   = 0;
 
+   int count = redCarpet.ZigZagResultCount();
+   if(count <= 0)
+      return;
+
+   // Identify this result set using the box time boundaries.
+   RCZigZagResult first;
+
+   if(!redCarpet.GetZigZagResult(0, first))
+      return;
+
+   // Do not log the same result set twice.
+   if(first.box1Start == lastBox1Start &&
+      first.box1End   == lastBox1End   &&
+      first.box0Start == lastBox0Start &&
+      first.box0End   == lastBox0End)
+      return;
+
+   // Remember the result set before logging it.
+   lastBox1Start = first.box1Start;
+   lastBox1End   = first.box1End;
+   lastBox0Start = first.box0Start;
+   lastBox0End   = first.box0End;
+
+   // Log BEST and ALTERNATIVE for this result set.
    for(int i = 0; i < count; i++)
    {
       RCZigZagResult result;
@@ -104,5 +132,4 @@ void LogRedCarpetZigZagResults()
       }
    }
 }
-
 
