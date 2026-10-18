@@ -1,0 +1,560 @@
+#ifndef __PRICE_CHESSBOARD_NARRATOR_MQH__
+#define __PRICE_CHESSBOARD_NARRATOR_MQH__
+
+// Phase 3: the neutral market history writer.
+//
+// Design rules, following the trader's feedback:
+//  - NO interpretation. No rival narratives, no verdicts drawn from a
+//    single wick or a single candle. Facts only.
+//  - The window runs from the OLDEST candle to the NEWEST closed one.
+//  - Price space is divided into rows (default 15 pips). Every output
+//    is expressed through these rows.
+//  - Three factual outputs, all old-to-new:
+//      1) the BOARD picture   (rows x time columns, body/wick marks)
+//      2) the TIMELINE        (chronological segments: FLAT / DROP / RISE)
+//      3) the LEVEL register  (per row: visits, first/last touch,
+//                              close-through dates, current side,
+//                              reclaim time when applicable)
+//    plus a short neutral summary.
+//
+// The grid may be anchored: rows are [anchor + n*step]. With anchor 0
+// the boundaries are pure multiples of the step (...1.0890, 1.0905...).
+// With anchor 1.09000 on a 15-pip step the boundaries become
+// 1.0900, 1.0915, 1.0930, 1.0945, 1.0960 ... matching the trader's
+// habitual levels.
+
+struct PCNCandle
+{
+   datetime time;
+   double   openPrice;
+   double   highPrice;
+   double   lowPrice;
+   double   closePrice;
+};
+
+class CPriceChessboardNarrator
+{
+private:
+   PCNCandle m_candles[];   // index 0 = OLDEST candle of the window
+   int       m_count;
+   double    m_step;        // row height in price units
+   double    m_offset;      // grid anchor offset (0 .. m_step)
+   double    m_minLow;
+   datetime  m_minLowTime;
+   double    m_maxHigh;
+   datetime  m_maxHighTime;
+
+   double PipSize() const
+   {
+      return ((_Digits == 3 || _Digits == 5) ? _Point * 10.0 : _Point);
+   }
+
+   // Row index of a price: rows are [offset + r*step, offset + (r+1)*step)
+   int RowIndexOf(const double price) const
+   {
+      return (int)MathFloor((price - m_offset) / m_step + 0.0000001);
+   }
+
+   double RowLowOf(const int r) const
+   {
+      return m_offset + r * m_step;
+   }
+
+   double RowHighOf(const int r) const
+   {
+      return m_offset + (r + 1) * m_step;
+   }
+
+   string T(const datetime t) const
+   {
+      return TimeToString(t, TIME_DATE | TIME_MINUTES);
+   }
+
+public:
+   CPriceChessboardNarrator()
+   {
+      m_count = 0;
+      m_step = 0.0015;
+      m_offset = 0.0;
+      m_minLow = 0.0;
+      m_minLowTime = 0;
+      m_maxHigh = 0.0;
+      m_maxHighTime = 0;
+      ArrayResize(m_candles, 0);
+   }
+
+   // Loads the last `lookbackClosedCandles` CLOSED H1 candles
+   // (shifts lookback..1), ordered oldest to newest.
+   // `rowPips`   : row height in pips (default 15).
+   // `anchor`    : price the grid is anchored on. 0 = pure multiples
+   //               of the step.
+   bool Build(const int lookbackClosedCandles,
+              const double rowPips,
+              const double anchor)
+   {
+      m_count = 0;
+      ArrayResize(m_candles, 0);
+
+      if(lookbackClosedCandles < 1 || rowPips <= 0.0)
+         return false;
+
+      m_step = rowPips * PipSize();
+
+      m_offset = 0.0;
+      if(anchor > 0.0)
+         m_offset = anchor - MathFloor(anchor / m_step) * m_step;
+
+      int available = Bars(_Symbol, PERIOD_H1);
+      if(available < lookbackClosedCandles + 1)
+         return false;
+
+      ArrayResize(m_candles, lookbackClosedCandles);
+
+      for(int shift = lookbackClosedCandles; shift >= 1; shift--)
+      {
+         datetime t = iTime(_Symbol, PERIOD_H1, shift);
+         if(t == 0)
+            return false;
+
+         int idx = lookbackClosedCandles - shift; // shift=lookback -> 0
+         m_candles[idx].time = t;
+         m_candles[idx].openPrice = iOpen(_Symbol, PERIOD_H1, shift);
+         m_candles[idx].highPrice = iHigh(_Symbol, PERIOD_H1, shift);
+         m_candles[idx].lowPrice = iLow(_Symbol, PERIOD_H1, shift);
+         m_candles[idx].closePrice = iClose(_Symbol, PERIOD_H1, shift);
+      }
+
+      m_count = lookbackClosedCandles;
+
+      m_minLow = m_candles[0].lowPrice;
+      m_minLowTime = m_candles[0].time;
+      m_maxHigh = m_candles[0].highPrice;
+      m_maxHighTime = m_candles[0].time;
+
+      for(int i = 1; i < m_count; i++)
+      {
+         if(m_candles[i].lowPrice < m_minLow)
+         {
+            m_minLow = m_candles[i].lowPrice;
+            m_minLowTime = m_candles[i].time;
+         }
+         if(m_candles[i].highPrice > m_maxHigh)
+         {
+            m_maxHigh = m_candles[i].highPrice;
+            m_maxHighTime = m_candles[i].time;
+         }
+      }
+
+      return true;
+   }
+
+   int CandleCount() const { return m_count; }
+   datetime WindowStart() const { return (m_count > 0 ? m_candles[0].time : 0); }
+   datetime WindowEnd() const { return (m_count > 0 ? m_candles[m_count - 1].time : 0); }
+   double WindowLow() const { return m_minLow; }
+   double WindowHigh() const { return m_maxHigh; }
+
+   // ---------------------------------------------------------------
+   // Output 1: the board picture.
+   // Rows = price (high to low). Columns = time buckets, OLD on the
+   // LEFT, NEW on the RIGHT. Each cell:
+   //   #  at least one candle BODY touched the row in that bucket
+   //   +  only wicks touched the row
+   //   .  the row was not touched
+   // ---------------------------------------------------------------
+   void PrintBoard(const int bucketCandles)
+   {
+      if(m_count < 1 || bucketCandles < 1)
+         return;
+
+      int topRow = RowIndexOf(m_maxHigh);
+      int botRow = RowIndexOf(m_minLow);
+      int rowCount = topRow - botRow + 1;
+
+      if(rowCount > 120)
+      {
+         PrintFormat(
+            "[BOARD] skipped: %d rows is too tall for a text board; raise the row height",
+            rowCount);
+         return;
+      }
+
+      int columns = (int)MathCeil((double)m_count / (double)bucketCandles);
+
+      PrintFormat(
+         "[BOARD] %s .. %s | %d closed candles | row height %s | %d columns x %d candles | marks: # body, + wick only, . empty | OLD is LEFT, NEW is RIGHT",
+         T(m_candles[0].time),
+         T(m_candles[m_count - 1].time),
+         m_count,
+         DoubleToString(m_step, _Digits),
+         columns,
+         bucketCandles);
+
+      double lastClose = m_candles[m_count - 1].closePrice;
+      int lastCloseRow = RowIndexOf(lastClose);
+
+      for(int r = topRow; r >= botRow; r--)
+      {
+         double rowLow = RowLowOf(r);
+         double rowHigh = RowHighOf(r);
+
+         string line = StringFormat("%s..%s |",
+                                    DoubleToString(rowLow, _Digits),
+                                    DoubleToString(rowHigh, _Digits));
+
+         for(int col = 0; col < columns; col++)
+         {
+            int from = col * bucketCandles;
+            if(from >= m_count)
+               break;
+            int to = from + bucketCandles - 1;
+            if(to >= m_count)
+               to = m_count - 1;
+
+            string cell = ".";
+            for(int i = from; i <= to; i++)
+            {
+               double bodyHigh = MathMax(m_candles[i].openPrice,
+                                         m_candles[i].closePrice);
+               double bodyLow = MathMin(m_candles[i].openPrice,
+                                        m_candles[i].closePrice);
+
+               bool wickTouch = (m_candles[i].highPrice >= rowLow &&
+                                 m_candles[i].lowPrice <= rowHigh);
+               bool bodyTouch = (bodyHigh >= rowLow &&
+                                 bodyLow <= rowHigh);
+
+               if(bodyTouch)
+               {
+                  cell = "#";
+                  break;
+               }
+               if(wickTouch)
+                  cell = "+";
+            }
+            line += cell;
+         }
+
+         if(r == lastCloseRow)
+            line += "  <= LAST CLOSE";
+
+         Print("[BOARD] " + line);
+      }
+
+      // Column ruler: one mark every 10 buckets to keep orientation.
+      string ruler = "            |";
+      for(int col = 0; col < columns; col++)
+      {
+         string mark = ((col % 10 == 0) ? "|" : " ");
+         ruler += mark;
+      }
+      Print("[BOARD] " + ruler);
+      PrintFormat(
+         "[BOARD] column 0 starts at %s ; each column spans %d candles",
+         T(m_candles[0].time),
+         bucketCandles);
+   }
+
+   // ---------------------------------------------------------------
+   // Output 2: the chronological timeline.
+   // Walks the closes from old to new and cuts a new segment when a
+   // close leaves the current segment's close range by more than one
+   // full row. Each segment is labeled with plain facts:
+   //   FLAT  = many candles, narrow range
+   //   DROP / RISE = wide range
+   //   SWING = anything else
+   // ---------------------------------------------------------------
+   void PrintTimeline()
+   {
+      if(m_count < 2)
+         return;
+
+      Print("[TIME] chronological segments, old to new (close-based, tolerance = one row)");
+
+      int segStart = 0;
+      double segLow = m_candles[0].closePrice;
+      double segHigh = segLow;
+
+      for(int i = 1; i < m_count; i++)
+      {
+         double c = m_candles[i].closePrice;
+
+         if(c < segLow - m_step || c > segHigh + m_step)
+         {
+            PrintSegment(segStart, i - 1, segLow, segHigh);
+            segStart = i;
+            segLow = c;
+            segHigh = c;
+         }
+         else
+         {
+            if(c < segLow)
+               segLow = c;
+            if(c > segHigh)
+               segHigh = c;
+         }
+      }
+
+      PrintSegment(segStart, m_count - 1, segLow, segHigh);
+   }
+
+   void PrintSegment(const int a,
+                     const int b,
+                     const double lowClose,
+                     const double highClose)
+   {
+      int candles = b - a + 1;
+      double spanRows = (highClose - lowClose) / m_step;
+      double direction = m_candles[b].closePrice - m_candles[a].closePrice;
+
+      string label = "SWING";
+      if(spanRows <= 1.5 && candles >= 10)
+         label = "FLAT (price stayed in a narrow band)";
+      else if(spanRows >= 3.0)
+         label = (direction < 0.0 ? "DROP" : "RISE");
+
+      PrintFormat(
+         "[TIME] %s .. %s | %3d candles | closes %s..%s | %.1f rows wide | %s",
+         T(m_candles[a].time),
+         T(m_candles[b].time),
+         candles,
+         DoubleToString(lowClose, _Digits),
+         DoubleToString(highClose, _Digits),
+         spanRows,
+         label);
+   }
+
+   // ---------------------------------------------------------------
+   // Output 3: the per-row level register.
+   // For every touched row, old to new inside the row:
+   //   - number of separate visits, candles spent inside
+   //   - first and last touch time
+   //   - first candle CLOSE above the row top / below the row bottom
+   //   - if the row bottom was closed below: when price closed back
+   //     at or above it (the reclaim), stated as a fact, not a verdict
+   //   - where the last close stands now: ABOVE / INSIDE / BELOW
+   // ---------------------------------------------------------------
+   void PrintLevelRegister()
+   {
+      if(m_count < 1)
+         return;
+
+      Print("[LEVELS] per-row register, top row first (facts only)");
+
+      int topRow = RowIndexOf(m_maxHigh);
+      int botRow = RowIndexOf(m_minLow);
+      double lastClose = m_candles[m_count - 1].closePrice;
+
+      for(int r = topRow; r >= botRow; r--)
+      {
+         double rowLow = RowLowOf(r);
+         double rowHigh = RowHighOf(r);
+
+         bool touched = false;
+         bool inVisit = false;
+         int visits = 0;
+         int candlesInside = 0;
+         datetime firstTouch = 0;
+         datetime lastTouch = 0;
+         datetime firstCloseBelow = 0;
+         datetime firstCloseAbove = 0;
+         datetime reclaimBelow = 0;
+
+         for(int i = 0; i < m_count; i++)
+         {
+            bool wickTouch = (m_candles[i].highPrice >= rowLow &&
+                              m_candles[i].lowPrice <= rowHigh);
+
+            if(wickTouch)
+            {
+               if(!touched)
+               {
+                  touched = true;
+                  firstTouch = m_candles[i].time;
+               }
+               lastTouch = m_candles[i].time;
+
+               if(!inVisit)
+               {
+                  visits++;
+                  inVisit = true;
+               }
+               candlesInside++;
+            }
+            else
+            {
+               inVisit = false;
+            }
+
+            if(firstCloseBelow == 0)
+            {
+               if(m_candles[i].closePrice < rowLow)
+                  firstCloseBelow = m_candles[i].time;
+            }
+            else if(reclaimBelow == 0)
+            {
+               if(m_candles[i].closePrice >= rowLow)
+                  reclaimBelow = m_candles[i].time;
+            }
+
+            if(firstCloseAbove == 0)
+            {
+               if(m_candles[i].closePrice > rowHigh)
+                  firstCloseAbove = m_candles[i].time;
+            }
+         }
+
+         if(!touched)
+            continue;
+
+         string status;
+         if(lastClose > rowHigh)
+            status = "last close ABOVE";
+         else if(lastClose < rowLow)
+            status = "last close BELOW";
+         else
+            status = "last close INSIDE";
+
+         string breakNote = "";
+         if(firstCloseBelow != 0)
+         {
+            breakNote += StringFormat(" | first close below %s at %s",
+                                      DoubleToString(rowLow, _Digits),
+                                      T(firstCloseBelow));
+            if(lastClose >= rowLow && reclaimBelow != 0)
+               breakNote += StringFormat(" | closed back at/above it at %s",
+                                         T(reclaimBelow));
+         }
+         if(firstCloseAbove != 0)
+         {
+            breakNote += StringFormat(" | first close above %s at %s",
+                                      DoubleToString(rowHigh, _Digits),
+                                      T(firstCloseAbove));
+         }
+
+         PrintFormat(
+            "[LEVELS] %s..%s | visits=%d candlesInside=%d | first touch %s | last touch %s%s | %s",
+            DoubleToString(rowLow, _Digits),
+            DoubleToString(rowHigh, _Digits),
+            visits,
+            candlesInside,
+            T(firstTouch),
+            T(lastTouch),
+            breakNote,
+            status);
+      }
+   }
+
+   // ---------------------------------------------------------------
+   // Short neutral summary, facts only, old to new.
+   // ---------------------------------------------------------------
+   void PrintSummary()
+   {
+      if(m_count < 1)
+         return;
+
+      double lastClose = m_candles[m_count - 1].closePrice;
+      int lastCloseRow = RowIndexOf(lastClose);
+
+      Print("[NARRATIVE] ===== neutral window summary, old to new =====");
+      PrintFormat(
+         "[NARRATIVE] window %s .. %s | %d closed candles",
+         T(m_candles[0].time),
+         T(m_candles[m_count - 1].time),
+         m_count);
+      PrintFormat(
+         "[NARRATIVE] highest high %s at %s | lowest low %s at %s",
+         DoubleToString(m_maxHigh, _Digits),
+         T(m_maxHighTime),
+         DoubleToString(m_minLow, _Digits),
+         T(m_minLowTime));
+      PrintFormat(
+         "[NARRATIVE] last closed candle %s | close %s | row %s..%s",
+         T(m_candles[m_count - 1].time),
+         DoubleToString(lastClose, _Digits),
+         DoubleToString(RowLowOf(lastCloseRow), _Digits),
+         DoubleToString(RowHighOf(lastCloseRow), _Digits));
+
+      // The row where price spent the most candles, and the most
+      // recently broken row bottom - all stated as facts.
+      int topRow = RowIndexOf(m_maxHigh);
+      int botRow = RowIndexOf(m_minLow);
+      int bestRow = -1;
+      int bestCandles = -1;
+
+      for(int r = topRow; r >= botRow; r--)
+      {
+         double rowLow = RowLowOf(r);
+         double rowHigh = RowHighOf(r);
+         int candlesInside = 0;
+
+         for(int i = 0; i < m_count; i++)
+         {
+            if(m_candles[i].highPrice >= rowLow &&
+               m_candles[i].lowPrice <= rowHigh)
+               candlesInside++;
+         }
+
+         if(candlesInside > bestCandles)
+         {
+            bestCandles = candlesInside;
+            bestRow = r;
+         }
+      }
+
+      if(bestRow >= 0)
+      {
+         PrintFormat(
+            "[NARRATIVE] price spent the most candles (%d of %d) in row %s..%s",
+            bestCandles,
+            m_count,
+            DoubleToString(RowLowOf(bestRow), _Digits),
+            DoubleToString(RowHighOf(bestRow), _Digits));
+      }
+
+      // Most recent close-below of any row bottom.
+      datetime newestBreak = 0;
+      int newestBreakRow = -1;
+      for(int r = topRow; r >= botRow; r--)
+      {
+         double rowLow = RowLowOf(r);
+         for(int i = 0; i < m_count; i++)
+         {
+            if(m_candles[i].closePrice < rowLow)
+            {
+               if(m_candles[i].time > newestBreak)
+               {
+                  newestBreak = m_candles[i].time;
+                  newestBreakRow = r;
+               }
+               break; // first close below this row is enough
+            }
+         }
+      }
+
+      if(newestBreakRow >= 0)
+      {
+         double rowLow = RowLowOf(newestBreakRow);
+         double rowHigh = RowHighOf(newestBreakRow);
+         string where;
+         if(lastClose > rowHigh)
+            where = "price is now ABOVE that row";
+         else if(lastClose < rowLow)
+            where = "price is now BELOW that row bottom";
+         else
+            where = "price is now back INSIDE that row";
+
+         PrintFormat(
+            "[NARRATIVE] most recent close below a row bottom: %s (row %s..%s) at %s | %s",
+            DoubleToString(rowLow, _Digits),
+            DoubleToString(rowLow, _Digits),
+            DoubleToString(rowHigh, _Digits),
+            T(newestBreak),
+            where);
+      }
+   }
+};
+
+#endif // __PRICE_CHESSBOARD_NARRATOR_MQH__
+
+
