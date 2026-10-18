@@ -3,12 +3,16 @@
 
 #include "FractalGeometry.mqh"
 #include "../MA_INERTIA/RainBowDynamics.mqh"
+#include "H6/ZigZagAdvisor.mqh"
 
 // ------------------------------------------------------------
 // CRedCarpet
-// - Independent zigzag and moving-average consultants.
-// - Uses the same five Parade candidate rules and fit-driven
-//   path selection used by src/Parade_ZigZag.
+// - H1 consultant: zigzag + MA bifurcation are computed by
+//   CZigZagAdvisor (m_advH1). CRedCarpet keeps the same event /
+//   theory journal and the same public API as before.
+// - H6 consultant (new): zigzag on 50 H6 candles (shift 53 -> 3),
+//   run once per closed H6 candle, published as ONE event
+//   (RC_EVENT_H6_ZIGZAG) together with the slow averages.
 // - Stores theory/event records in arrays; no mandatory Print.
 // ------------------------------------------------------------
 
@@ -29,7 +33,8 @@ enum RC_EVENT_TYPE
    RC_EVENT_IMPORTANT_LEVEL_TOUCHED,
    RC_EVENT_OVERLAP_STARTED,
    RC_EVENT_OVERLAP_FINISHED,
-   RC_EVENT_OVERLAP_EXTENDED
+   RC_EVENT_OVERLAP_EXTENDED,
+   RC_EVENT_H6_ZIGZAG            // new: appended last, older values keep their numbers
 };
 
 struct RCPathPoint
@@ -67,22 +72,6 @@ struct RCEvent
    int           direction;
 };
 
-struct RCBranch
-{
-   int    id;
-   int    pointCount;
-   double previousPrice;
-   double lastPrice;
-   int    direction;
-   int    lastSeenStep;
-};
-
-struct RCBranchConfig
-{
-   int minWaitingPoints;
-   int maxWaitingPoints;
-};
-
 struct RCTheory
 {
    datetime time;
@@ -95,41 +84,47 @@ struct RCTheory
    double   imbalance;
 };
 
-#define RC_SRC_FRACTAL  1
-#define RC_SRC_PARADE1  2
-#define RC_SRC_PARADE2  4
-#define RC_SRC_PARADE3  8
-#define RC_SRC_PARADE4 16
-#define RC_SRC_PARADE5 32
-
-#define RC_MAX_CANDIDATES 80
+#define RC_MAX_CANDIDATES    80
 #define RC_MAX_ZIGZAG_POINTS 4
-#define RC_TRAILING_AFTER 3
+#define RC_TRAILING_AFTER    3
+
+#define RC_H6_OLDER_SHIFT    53   // 53 -> 3 = 50 H6 candles
+#define RC_H6_NEWER_SHIFT    3
+#define RC_H6_MAX_PATHS      3000000   // safety cap for the H6 search
 
 class CRedCarpet
 {
 private:
    CFractalGeometry *m_fractal;
-   CRainBowDynamics  *m_dyno;
+   CRainBowDynamics *m_dyno;       // H1 averages (as before)
+   CRainBowDynamics *m_slowDyno;   // optional slow averages for the H6 event
+
+   // Consultants (zigzag engine + interpretation rules + MA bifurcation)
+   CZigZagAdvisor m_advH1;
+   CZigZagAdvisor m_advH6;
 
    // Event / theory journal
-   RCEvent   m_events[];
-   RCTheory  m_theories[];
-   RCZigZagResult m_results[];
+   RCEvent        m_events[];
+   RCTheory       m_theories[];
+   RCZigZagResult m_results[];         // H1 results (engine -> RC format)
+   RCZigZagResult m_traderResults[];   // H1 results the trader should read
 
    // Last processed inputs
    datetime m_lastCandle;
    datetime m_lastBoxStart;
    datetime m_lastBoxEnd;
-   int      m_lastMADirection;
-   int      m_lastZigDirection;
-   
+
+   // H6 state
+   datetime m_lastH6Fed;
+   datetime m_lastH6Run;
+   int      m_h6OlderShift;
+   int      m_h6NewerShift;
+
    // Important levels: only SmallBox(0)
    datetime m_levelBoxStart;
    datetime m_levelBoxEnd;
    bool     m_levelHighTouched;
    bool     m_levelLowTouched;
-
 
    // Overlap-chain state
    bool     m_zoneReady;
@@ -139,33 +134,11 @@ private:
    datetime m_zoneStart;
    datetime m_zoneEnd;
    int      m_zoneBoxCount;
-   bool closed_due_break;
-   
+   bool     closed_due_break;
 
-   // MA bifurcation state (member-owned; no global state)
-   RCBranch       m_branches[];
-   RCBranchConfig m_branchConfig;
-   int            m_step;
-   int            m_nextBranchId;
-
-   // Current zigzag-engine working state
-   MqlRates      m_rates[];
-   RCPathPoint   m_fractals[];
-   RCPathPoint   m_parade[];
-   RCPathPoint   m_candidates[];
-   RCPathPoint   m_workPoints[];
-   RCPathPoint   m_bestA[];
-   RCPathPoint   m_bestB[];
-   int           m_startShift;
-   int           m_endShift;
-   int           m_candidateLimitHit;
-   double        m_bestErrorA;
-   double        m_bestErrorB;
-   double        m_bestBalanceA;
-   double        m_bestBalanceB;
-   int           m_traderResultIndices[];
-   long          m_evaluatedPaths;
-
+   // ------------------------------------------------------------
+   // Journal
+   // ------------------------------------------------------------
    void AddEvent(RC_EVENT_TYPE type, datetime when, string name,
                  string detail, double price=0.0, int direction=0)
    {
@@ -198,92 +171,81 @@ private:
                view=="BULLISH"?RC_UP:(view=="BEARISH"?RC_DOWN:RC_UNKNOWN));
    }
 
-   int PriceDirection(double a,double b)
+   // ------------------------------------------------------------
+   // Engine result (ZZResult) -> RedCarpet result (RCZigZagResult)
+   // ------------------------------------------------------------
+   void FillRCResult(RCZigZagResult &dst,ZZResult &src,
+                     datetime b1s,datetime b1e,datetime b0s,datetime b0e)
    {
-      if(b>a) return 1;
-      if(b<a) return -1;
-      return 0;
-   }
-
-   int WaitingPeriod(int activeCount)
-   {
-      int waiting=activeCount-1;
-      if(waiting<m_branchConfig.minWaitingPoints) waiting=m_branchConfig.minWaitingPoints;
-      if(waiting>m_branchConfig.maxWaitingPoints) waiting=m_branchConfig.maxWaitingPoints;
-      return waiting;
-   }
-
-   bool BranchAccepts(const RCBranch &b,double price)
-   {
-      if(b.pointCount<2 || b.direction==0) return true;
-      if(b.direction>0) return price>=b.lastPrice;
-      return price<=b.lastPrice;
-   }
-
-   void AppendBranch(RCBranch &b,double price,int step)
-   {
-      b.previousPrice=b.lastPrice;
-      b.lastPrice=price;
-      if(b.direction==0) b.direction=PriceDirection(b.previousPrice,b.lastPrice);
-      b.pointCount++;
-      b.lastSeenStep=step;
-   }
-
-   void RemoveBranch(int idx)
-   {
-      int n=ArraySize(m_branches);
-      if(idx<0 || idx>=n) return;
-      for(int i=idx;i<n-1;i++) m_branches[i]=m_branches[i+1];
-      ArrayResize(m_branches,n-1);
-   }
-
-   void ExpireBranches()
-   {
-      int i=0;
-      while(i<ArraySize(m_branches))
+      dst.label=src.label;
+      int n=ArraySize(src.points);
+      ArrayResize(dst.points,n);
+      for(int i=0;i<n;i++)
       {
-         int wait=WaitingPeriod(ArraySize(m_branches));
-         if(m_step-m_branches[i].lastSeenStep>=wait) RemoveBranch(i);
-         else i++;
+         dst.points[i].shift  =src.points[i].shift;
+         dst.points[i].time   =src.points[i].time;
+         dst.points[i].price  =src.points[i].price;
+         dst.points[i].type   =src.points[i].type;
+         dst.points[i].sources=src.points[i].sources;
+      }
+      dst.sse=src.sse;
+      dst.imbalance=src.imbalance;
+      dst.box1Start=b1s;
+      dst.box1End=b1e;
+      dst.box0Start=b0s;
+      dst.box0End=b0e;
+      dst.theory=src.theory;
+      dst.reason=src.reason;
+      dst.highSlopeDeg=src.highSlopeDeg;
+      dst.lowSlopeDeg=src.lowSlopeDeg;
+   }
+
+   void CopyRCResult(RCZigZagResult &src,RCZigZagResult &dst)
+   {
+      dst.label=src.label;
+      ArrayResize(dst.points,ArraySize(src.points));
+      for(int i=0;i<ArraySize(dst.points);i++) dst.points[i]=src.points[i];
+      dst.sse=src.sse;
+      dst.imbalance=src.imbalance;
+      dst.box1Start=src.box1Start;
+      dst.box1End=src.box1End;
+      dst.box0Start=src.box0Start;
+      dst.box0End=src.box0End;
+      dst.theory=src.theory;
+      dst.reason=src.reason;
+      dst.highSlopeDeg=src.highSlopeDeg;
+      dst.lowSlopeDeg=src.lowSlopeDeg;
+   }
+
+   void SyncH1Results(FlatZone &box0,FlatZone &box1)
+   {
+      CZigZagEngine *zz=m_advH1.ZigZag();
+
+      ArrayResize(m_results,0);
+      for(int i=0;i<zz.ResultCount();i++)
+      {
+         ZZResult z;
+         if(!zz.GetResult(i,z)) continue;
+         int k=ArraySize(m_results);
+         if(ArrayResize(m_results,k+1)!=k+1) return;
+         FillRCResult(m_results[k],z,box1.startTime,box1.endTime,box0.startTime,box0.endTime);
+      }
+
+      ArrayResize(m_traderResults,0);
+      for(int i=0;i<zz.TraderResultCount();i++)
+      {
+         ZZResult z;
+         if(!zz.GetTraderResult(i,z)) continue;
+         int k=ArraySize(m_traderResults);
+         if(ArrayResize(m_traderResults,k+1)!=k+1) return;
+         FillRCResult(m_traderResults[k],z,box1.startTime,box1.endTime,box0.startTime,box0.endTime);
       }
    }
 
-   int ProcessMApoint(double price)
-   {
-      m_step++;
-      bool assigned=false;
-      for(int i=0;i<ArraySize(m_branches);i++)
-      {
-         if(!BranchAccepts(m_branches[i],price)) continue;
-         AppendBranch(m_branches[i],price,m_step);
-         assigned=true;
-         break;
-      }
-      if(!assigned)
-      {
-         int n=ArraySize(m_branches);
-         if(ArrayResize(m_branches,n+1)!=n+1) return RC_UNKNOWN;
-         m_branches[n].id=m_nextBranchId++;
-         m_branches[n].pointCount=1;
-         m_branches[n].previousPrice=price;
-         m_branches[n].lastPrice=price;
-         m_branches[n].direction=0;
-         m_branches[n].lastSeenStep=m_step;
-      }
-      ExpireBranches();
-      int up=0,down=0;
-      for(int j=0;j<ArraySize(m_branches);j++)
-      {
-         if(m_branches[j].pointCount<2) continue;
-         if(m_branches[j].direction>0) up++;
-         if(m_branches[j].direction<0) down++;
-      }
-      if(up>down) return RC_UP;
-      if(down>up) return RC_DOWN;
-      return RC_UNKNOWN;
-   }
-
+   // ------------------------------------------------------------
+   // MA consultant (H1): bifurcation lives in the advisor
    // Exact existing source convention: RainbowCenter(1).
+   // ------------------------------------------------------------
    void MA_Advisor(datetime candleTime)
    {
       if(m_dyno==NULL) return;
@@ -291,521 +253,20 @@ private:
 
       if(r1!=0.0)
       {
-         int dir=ProcessMApoint(r1);
-         if(dir!=RC_UNKNOWN && m_lastMADirection!=RC_UNKNOWN &&
-            dir!=m_lastMADirection)
+         int dir=m_advH1.FeedMA(candleTime,r1);
+         if(m_advH1.MA().JustReversed())
          {
             AddEvent(RC_EVENT_AM_REVERSAL,candleTime,
                      "AVERAGE_REVERSAL",
                      "Bifurcation direction changed",
                      r1,dir);
          }
-         if(dir!=RC_UNKNOWN) m_lastMADirection=dir;
-      }
-
-   }
-
-   void AddPathPoint(RCPathPoint &arr[],int shift,double price,int type,int source)
-   {
-      int n=ArraySize(arr);
-      if(ArrayResize(arr,n+1)!=n+1) return;
-      arr[n].shift=shift;
-      arr[n].time=m_rates[shift].time;
-      arr[n].price=price;
-      arr[n].type=type;
-      arr[n].sources=source;
-   }
-
-   int CandleDirection(int shift)
-   {
-      if(m_rates[shift].close>m_rates[shift].open) return 1;
-      if(m_rates[shift].close<m_rates[shift].open) return -1;
-      return 0;
-   }
-
-   void MergeCandidate(const RCPathPoint &p)
-   {
-      if(p.shift>=m_startShift || p.shift<=m_endShift) return;
-      int n=ArraySize(m_candidates);
-      for(int i=0;i<n;i++)
-      {
-         if(m_candidates[i].shift!=p.shift || m_candidates[i].type!=p.type) continue;
-         m_candidates[i].sources|=p.sources;
-         if(p.type==1 && p.price>m_candidates[i].price) m_candidates[i].price=p.price;
-         if(p.type==-1 && p.price<m_candidates[i].price) m_candidates[i].price=p.price;
-         return;
-      }
-      if(n>=RC_MAX_CANDIDATES) { m_candidateLimitHit=1; return; }
-      if(ArrayResize(m_candidates,n+1)!=n+1) return;
-      m_candidates[n]=p;
-   }
-
-   void MergeArray(RCPathPoint &arr[],int source)
-   {
-      for(int i=0;i<ArraySize(arr);i++)
-      {
-         RCPathPoint p=arr[i]; p.sources|=source; MergeCandidate(p);
       }
    }
 
-   void BuildFractals()
-   {
-      ArrayResize(m_fractals,0);
-      // Two bars on each side; only points fully inside the copied window.
-      for(int i=m_startShift-2;i>=m_endShift+2;i--)
-      {
-         double h=m_rates[i].high,l=m_rates[i].low;
-         bool fh=true,fl=true,hs=false,ls=false;
-         for(int j=1;j<=2;j++)
-         {
-            if(h<m_rates[i-j].high || h<m_rates[i+j].high) fh=false;
-            if(h>m_rates[i-j].high || h>m_rates[i+j].high) hs=true;
-            if(l>m_rates[i-j].low || l>m_rates[i+j].low) fl=false;
-            if(l<m_rates[i-j].low || l<m_rates[i+j].low) ls=true;
-         }
-         if(fh&&hs) AddPathPoint(m_fractals,i,h,1,RC_SRC_FRACTAL);
-         if(fl&&ls) AddPathPoint(m_fractals,i,l,-1,RC_SRC_FRACTAL);
-      }
-   }
-
-   int FindInitialDirection(int &start)
-   {
-      for(int i=m_startShift;i>=m_endShift;i--)
-      {
-         int d=CandleDirection(i);
-         if(d!=0) { start=i; return d; }
-      }
-      return 0;
-   }
-
-   void BuildParade1()
-   {
-      ArrayResize(m_parade,0);
-      int start; int dir=FindInitialDirection(start); if(dir==0) return;
-      int exShift=start,oppCount=0,oppStart=-1;
-      double exPrice=(dir==1?m_rates[start].high:m_rates[start].low);
-      for(int i=start-1;i>=m_endShift;i--)
-      {
-         int cd=CandleDirection(i);
-         if(dir==1 && m_rates[i].high>exPrice) {exPrice=m_rates[i].high;exShift=i;}
-         if(dir==-1 && m_rates[i].low<exPrice) {exPrice=m_rates[i].low;exShift=i;}
-         if(cd==0) continue;
-         if(cd==dir) {oppCount=0;oppStart=-1;continue;}
-         if(oppCount==0) oppStart=i;
-         oppCount++;
-         if(oppCount>=3)
-         {
-            AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE1);
-            dir=cd; exShift=oppStart;
-            exPrice=(dir==1?m_rates[oppStart].high:m_rates[oppStart].low);
-            oppCount=0;oppStart=-1;
-         }
-      }
-      AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE1);
-   }
-
-   void BuildParade2()
-   {
-      ArrayResize(m_parade,0);
-      int start; int dir=FindInitialDirection(start); if(dir==0) return;
-      int exShift=start;
-      double exPrice=(dir==1?m_rates[start].high:m_rates[start].low);
-      double anchor=m_rates[start].open;
-      for(int i=start-1;i>=m_endShift;i--)
-      {
-         int cd=CandleDirection(i);
-         if(dir==1 && m_rates[i].high>exPrice) {exPrice=m_rates[i].high;exShift=i;}
-         if(dir==-1 && m_rates[i].low<exPrice) {exPrice=m_rates[i].low;exShift=i;}
-         if(cd==0 || cd==dir) continue;
-         bool broken=(dir==1?m_rates[i].low<anchor:m_rates[i].high>anchor);
-         if(!broken) continue;
-         AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE2);
-         dir=-dir; anchor=m_rates[i].open; exShift=i;
-         exPrice=(dir==1?m_rates[i].high:m_rates[i].low);
-      }
-      AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE2);
-   }
-
-   void BuildParade3()
-   {
-      ArrayResize(m_parade,0);
-      int start; int dir=FindInitialDirection(start); if(dir==0) return;
-      int exShift=start,anchorShift=start,favorable=0;
-      double exPrice=(dir==1?m_rates[start].high:m_rates[start].low);
-      double anchor=m_rates[start].open;
-      for(int i=start-1;i>=m_endShift;i--)
-      {
-         int cd=CandleDirection(i);
-         if(dir==1 && m_rates[i].high>exPrice) {exPrice=m_rates[i].high;exShift=i;}
-         if(dir==-1 && m_rates[i].low<exPrice) {exPrice=m_rates[i].low;exShift=i;}
-         if(cd==0) continue;
-         if(cd==dir)
-         {
-            favorable++;
-            if(favorable>=RC_TRAILING_AFTER)
-            {
-               anchorShift=MathMax(m_endShift,anchorShift-1);
-               anchor=m_rates[anchorShift].open;
-               favorable=0;
-            }
-            continue;
-         }
-         bool broken=(dir==1?m_rates[i].low<anchor:m_rates[i].high>anchor);
-         if(!broken) continue;
-         AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE3);
-         dir=-dir; anchorShift=i; anchor=m_rates[i].open; favorable=0; exShift=i;
-         exPrice=(dir==1?m_rates[i].high:m_rates[i].low);
-      }
-      AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE3);
-   }
-
-   void BuildParade4()
-   {
-      ArrayResize(m_parade,0);
-      int start; int dir=FindInitialDirection(start); if(dir==0) return;
-      int exShift=start;
-      double exPrice=(dir==1?m_rates[start].high:m_rates[start].low);
-      double anchor=m_rates[start].open;
-      for(int i=start-1;i>=m_endShift;i--)
-      {
-         int cd=CandleDirection(i);
-         if(dir==1 && m_rates[i].high>exPrice) {exPrice=m_rates[i].high;exShift=i;}
-         if(dir==-1 && m_rates[i].low<exPrice) {exPrice=m_rates[i].low;exShift=i;}
-         if(cd==0 || cd==dir) continue;
-         bool broken=(dir==1?m_rates[i].close<anchor:m_rates[i].close>anchor);
-         if(!broken) continue;
-         AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE4);
-         dir=-dir; anchor=m_rates[i].open; exShift=i;
-         exPrice=(dir==1?m_rates[i].high:m_rates[i].low);
-      }
-      AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE4);
-   }
-
-   void BuildParade5()
-   {
-      ArrayResize(m_parade,0);
-      int start; int dir=FindInitialDirection(start); if(dir==0) return;
-      int exShift=start,anchorShift=start,favorableCount=0,nextAnchor=0;
-      double exPrice=(dir==1?m_rates[start].high:m_rates[start].low);
-      double anchor=m_rates[start].open;
-      int favorableShifts[]; ArrayResize(favorableShifts,0);
-      for(int i=start-1;i>=m_endShift;i--)
-      {
-         int cd=CandleDirection(i);
-         if(dir==1 && m_rates[i].high>exPrice) {exPrice=m_rates[i].high;exShift=i;}
-         if(dir==-1 && m_rates[i].low<exPrice) {exPrice=m_rates[i].low;exShift=i;}
-         if(cd==0) continue;
-         if(cd==dir)
-         {
-            int n=ArraySize(favorableShifts);
-            ArrayResize(favorableShifts,n+1); favorableShifts[n]=i;
-            favorableCount++;
-            if(favorableCount>=RC_TRAILING_AFTER)
-            {
-               while(nextAnchor<ArraySize(favorableShifts) && favorableShifts[nextAnchor]>=anchorShift) nextAnchor++;
-               if(nextAnchor<ArraySize(favorableShifts))
-               {
-                  anchorShift=favorableShifts[nextAnchor];
-                  anchor=m_rates[anchorShift].open;
-                  nextAnchor++;
-               }
-               favorableCount=0;
-            }
-            continue;
-         }
-         bool broken=(dir==1?m_rates[i].low<anchor:m_rates[i].high>anchor);
-         if(!broken) continue;
-         AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE5);
-         dir=-dir; anchorShift=i; anchor=m_rates[i].open; favorableCount=0;
-         ArrayResize(favorableShifts,0); nextAnchor=0; exShift=i;
-         exPrice=(dir==1?m_rates[i].high:m_rates[i].low);
-      }
-      AddPathPoint(m_parade,exShift,exPrice,dir,RC_SRC_PARADE5);
-   }
-
-   void SortCandidatesOldToNew()
-   {
-      int n=ArraySize(m_candidates);
-      for(int i=0;i<n-1;i++)
-         for(int j=i+1;j<n;j++)
-            if(m_candidates[j].shift>m_candidates[i].shift)
-            { RCPathPoint t=m_candidates[i];m_candidates[i]=m_candidates[j];m_candidates[j]=t; }
-   }
-
-   double ComputeFitError(RCPathPoint &v[])
-   {
-      int n=ArraySize(v); if(n<2) return DBL_MAX;
-      double err=0.0; int seg=0;
-      for(int sh=m_startShift;sh>=m_endShift;sh--)
-      {
-         while(seg<n-2 && sh<v[seg+1].shift) seg++;
-         RCPathPoint a=v[seg],b=v[seg+1];
-         int span=a.shift-b.shift;
-         double predicted=b.price;
-         if(span>0)
-         {
-            double f=(double)(a.shift-sh)/(double)span;
-            predicted=a.price+f*(b.price-a.price);
-         }
-         double d=m_rates[sh].close-predicted; err+=d*d;
-      }
-      return err;
-   }
-
-   double ComputeImbalance(RCPathPoint &v[])
-   {
-      int n=ArraySize(v); if(n<4) return 0.0;
-      double prev=MathAbs(v[2].price-v[1].price),sum=0.0; int count=0;
-      for(int i=2;i<=n-3;i++)
-      {
-         double cur=MathAbs(v[i+1].price-v[i].price);
-         sum+=MathAbs(cur-prev); prev=cur; count++;
-      }
-      return count>0?sum/count:0.0;
-   }
-
-   bool SamePath(RCPathPoint &a[],RCPathPoint &b[])
-   {
-      if(ArraySize(a)!=ArraySize(b)) return false;
-      for(int i=0;i<ArraySize(a);i++)
-         if(a[i].shift!=b[i].shift || a[i].type!=b[i].type) return false;
-      return true;
-   }
-
-   void CopyPath(RCPathPoint &src[],RCPathPoint &dst[])
-   {
-      ArrayResize(dst,ArraySize(src));
-      for(int i=0;i<ArraySize(src);i++) dst[i]=src[i];
-   }
-
-   void ConsiderCurrentPath()
-   {
-      int d=ArraySize(m_workPoints);
-      RCPathPoint full[]; ArrayResize(full,d+2);
-      full[0].shift=m_startShift;
-      full[0].time=m_rates[m_startShift].time;
-      full[0].price=m_rates[m_startShift].open;
-      full[0].type=0; full[0].sources=0;
-      for(int i=0;i<d;i++) full[i+1]=m_workPoints[i];
-      full[d+1].shift=m_endShift;
-      full[d+1].time=m_rates[m_endShift].time;
-      full[d+1].price=m_rates[m_endShift].close;
-      full[d+1].type=0; full[d+1].sources=0;
-
-      double fit=ComputeFitError(full),bal=ComputeImbalance(full);
-      m_evaluatedPaths++;
-      if(fit<m_bestErrorA-1e-12 || (MathAbs(fit-m_bestErrorA)<=1e-12 && bal<m_bestBalanceA))
-      {
-         if(ArraySize(m_bestA)>0 && !SamePath(full,m_bestA))
-         {
-            CopyPath(m_bestA,m_bestB);
-            m_bestErrorB=m_bestErrorA; m_bestBalanceB=m_bestBalanceA;
-         }
-         CopyPath(full,m_bestA); m_bestErrorA=fit; m_bestBalanceA=bal;
-      }
-      else if(!SamePath(full,m_bestA) &&
-              (fit<m_bestErrorB-1e-12 || (MathAbs(fit-m_bestErrorB)<=1e-12 && bal<m_bestBalanceB)))
-      {
-         CopyPath(full,m_bestB); m_bestErrorB=fit; m_bestBalanceB=bal;
-      }
-   }
-
-   void SearchSubsets(int startIndex)
-   {
-      ConsiderCurrentPath();
-      int depth=ArraySize(m_workPoints);
-      if(depth>=RC_MAX_ZIGZAG_POINTS) return;
-      int n=ArraySize(m_candidates);
-      for(int i=startIndex;i<n;i++)
-      {
-         RCPathPoint p=m_candidates[i];
-         if(depth>0 && (m_workPoints[depth-1].type==p.type ||
-                        m_workPoints[depth-1].shift==p.shift)) continue;
-         ArrayResize(m_workPoints,depth+1);
-         m_workPoints[depth]=p;
-         SearchSubsets(i+1);
-      }
-      ArrayResize(m_workPoints,depth);
-   }
-
-   double SlopeDegrees(RCPathPoint &a,RCPathPoint &b)
-   {
-      double dx=(double)(b.time-a.time)/3600.0;
-      if(dx==0.0) return 0.0;
-      double dy=(b.price-a.price)/_Point;
-      return MathArctan(dy/dx)*180.0/M_PI;
-   }
-
-   string InterpretPath(RCPathPoint &p[],string &reason,double &highSlope,double &lowSlope)
-   {
-      reason="Insufficient alternating swing points";
-      highSlope=0.0; lowSlope=0.0;
-      int n=ArraySize(p);
-      if(n<2) {
-         reason = "No measurable price movement";
-         return "STUCK";
-      }
-      // Collect the latest two highs and latest two lows, in path order.
-      int hi1=-1,hi2=-1,lo1=-1,lo2=-1;
-      for(int i=1;i<n-1;i++)
-      {
-         if(p[i].type>0) {hi1=hi2;hi2=i;}
-         if(p[i].type<0) {lo1=lo2;lo2=i;}
-      }
-
-      
-      // When two highs and two lows exist, use the established
-      // higher-high / lower-high and higher-low / lower-low rules.
-      if(hi1 >= 0 && hi2 >= 0 && lo1 >= 0 && lo2 >= 0)
-      {
-         highSlope = SlopeDegrees(p[hi1], p[hi2]);
-         lowSlope  = SlopeDegrees(p[lo1], p[lo2]);
-      
-         bool higherHigh = (p[hi2].price > p[hi1].price);
-         bool lowerHigh  = (p[hi2].price < p[hi1].price);
-         bool higherLow  = (p[lo2].price > p[lo1].price);
-         bool lowerLow   = (p[lo2].price < p[lo1].price);
-      
-         if(higherHigh && higherLow)
-         {
-            reason = "Higher highs and higher lows";
-            return "BULLISH";
-         }
-      
-         if(lowerHigh && lowerLow)
-         {
-            reason = "Lower highs and lower lows";
-            return "BEARISH";
-         }
-      
-         if(MathAbs(p[hi2].price - p[hi1].price) <= _Point * 2.0
-            && lowerLow)
-         {
-            reason = "Peaks nearly level while floors are lower";
-            return "BEARISH";
-         }
-      
-         if(MathAbs(p[lo2].price - p[lo1].price) <= _Point * 2.0
-            && higherHigh)
-         {
-            reason = "Floors nearly level while peaks are higher";
-            return "BULLISH";
-         }
-      
-         reason = "Mixed swing geometry; no dominant direction";
-         return "STUCK";
-      }
-      
-      // Short paths: interpret the actual movement rather than
-      // rejecting the path because it has fewer swing points.
-      double startPrice = p[0].price;
-      double endPrice   = p[n - 1].price;
-      
-      bool hasHigh = false;
-      bool hasLow  = false;
-      
-      for(int i = 1; i < n - 1; i++)
-      {
-         if(p[i].type > 0) hasHigh = true;
-         if(p[i].type < 0) hasLow  = true;
-      }
-      
-      // Both upward and downward swings exist, but there are not
-      // enough comparable peaks/floors to establish continuation.
-      if(hasHigh && hasLow)
-      {
-         reason = "Price moved both upward and downward; "
-                  "directional continuation is not established";
-         return "STUCK";
-      }
-      
-      if(endPrice > startPrice)
-      {
-         if(hasHigh && !hasLow)
-         {
-            reason = "Price reached a higher level and remains "
-                     "above its starting price";
-            return "BULLISH";
-         }
-      
-         if(!hasHigh && !hasLow)
-         {
-            reason = "Price endpoint is above its starting price";
-            return "BULLISH";
-         }
-      }
-      
-      if(endPrice < startPrice)
-      {
-         if(hasLow && !hasHigh)
-         {
-            reason = "Price reached a lower level and remains "
-                     "below its starting price";
-            return "BEARISH";
-         }
-      
-         if(!hasHigh && !hasLow)
-         {
-            reason = "Price endpoint is below its starting price";
-            return "BEARISH";
-         }
-      }
-      
-      reason = "Price returned to its starting level or "
-               "the movement does not establish a dominant direction";
-      
-      return "STUCK";
-
-
-      highSlope=SlopeDegrees(p[hi1],p[hi2]);
-      lowSlope=SlopeDegrees(p[lo1],p[lo2]);
-      bool higherHigh=(p[hi2].price>p[hi1].price);
-      bool lowerHigh=(p[hi2].price<p[hi1].price);
-      bool higherLow=(p[lo2].price>p[lo1].price);
-      bool lowerLow=(p[lo2].price<p[lo1].price);
-
-      if(higherHigh && higherLow)
-      {
-         reason="Higher highs and higher lows";
-         return "BULLISH";
-      }
-      if(lowerHigh && lowerLow)
-      {
-         reason="Lower highs and lower lows";
-         return "BEARISH";
-      }
-      if(MathAbs(p[hi2].price-p[hi1].price)<=_Point*2.0 && lowerLow)
-      {
-         reason="Peaks nearly level while floors are lower";
-         return "BEARISH";
-      }
-      if(MathAbs(p[lo2].price-p[lo1].price)<=_Point*2.0 && higherHigh)
-      {
-         reason="Floors nearly level while peaks are higher";
-         return "BULLISH";
-      }
-      reason="Mixed swing geometry; no dominant direction";
-      return "STUCK";
-   }
-
-   void StoreResult(RCPathPoint &path[],string label,double fit,double bal,
-                    FlatZone &box0,FlatZone &box1)
-   {
-      int n=ArraySize(m_results);
-      if(ArrayResize(m_results,n+1)!=n+1) return;
-      m_results[n].label=label;
-      ArrayResize(m_results[n].points,ArraySize(path));
-      for(int i=0;i<ArraySize(path);i++) m_results[n].points[i]=path[i];
-      m_results[n].sse=fit;
-      m_results[n].imbalance=bal;
-      m_results[n].box1Start=box1.startTime;
-      m_results[n].box1End=box1.endTime;
-      m_results[n].box0Start=box0.startTime;
-      m_results[n].box0End=box0.endTime;
-      m_results[n].theory=InterpretPath(m_results[n].points,m_results[n].reason,
-                                        m_results[n].highSlopeDeg,m_results[n].lowSlopeDeg);
-   }
-
+   // ------------------------------------------------------------
+   // Zigzag consultant (H1): window = box1.end -> box0.start
+   // ------------------------------------------------------------
    bool RunZigZag(FlatZone &box0,FlatZone &box1)
    {
       int olderEnd=iBarShift(_Symbol,PERIOD_H1,box1.endTime,false);
@@ -813,37 +274,10 @@ private:
       if(olderEnd<0 || newerStart<0 || olderEnd<=newerStart)
          return false;
 
-      m_startShift=olderEnd;
-      m_endShift=newerStart;
+      if(!m_advH1.RunZigZag(olderEnd,newerStart,box0.endTime))
+         return false;
 
-      int required=m_startShift+3;
-      ArrayResize(m_rates,0);
-      int copied=CopyRates(_Symbol,PERIOD_H1,0,required,m_rates);
-      if(copied<required) return false;
-      ArraySetAsSeries(m_rates,true);
-
-      ArrayResize(m_candidates,0);
-      m_candidateLimitHit=0;
-      m_evaluatedPaths=0;
-
-      BuildFractals(); MergeArray(m_fractals,RC_SRC_FRACTAL);
-      BuildParade1(); MergeArray(m_parade,RC_SRC_PARADE1);
-      BuildParade2(); MergeArray(m_parade,RC_SRC_PARADE2);
-      BuildParade3(); MergeArray(m_parade,RC_SRC_PARADE3);
-      BuildParade4(); MergeArray(m_parade,RC_SRC_PARADE4);
-      BuildParade5(); MergeArray(m_parade,RC_SRC_PARADE5);
-      SortCandidatesOldToNew();
-
-      m_bestErrorA=DBL_MAX; m_bestErrorB=DBL_MAX;
-      m_bestBalanceA=DBL_MAX; m_bestBalanceB=DBL_MAX;
-      ArrayResize(m_bestA,0); ArrayResize(m_bestB,0); ArrayResize(m_workPoints,0);
-      SearchSubsets(0);
-
-      ArrayResize(m_results,0);
-      if(ArraySize(m_bestA)>=2)
-         StoreResult(m_bestA,"BEST",m_bestErrorA,m_bestBalanceA,box0,box1);
-      if(ArraySize(m_bestB)>=2 && m_bestErrorB<DBL_MAX)
-         StoreResult(m_bestB,"ALTERNATIVE",m_bestErrorB,m_bestBalanceB,box0,box1);
+      SyncH1Results(box0,box1);
 
       if(ArraySize(m_results)>0)
       {
@@ -854,18 +288,65 @@ private:
          double bestImbalance=m_results[0].imbalance;
          AddTheory(box0.endTime,"ZIGZAG_"+bestLabel,bestView,bestReason,
                    box0.highPrice,box0.lowPrice,bestFit,bestImbalance);
-                   
+
          int dir=(bestView=="BULLISH"?RC_UP:(bestView=="BEARISH"?RC_DOWN:RC_UNKNOWN));
-         if(dir!=RC_UNKNOWN && m_lastMADirection!=RC_UNKNOWN && dir!=m_lastMADirection)
+         if(dir!=RC_UNKNOWN && m_advH1.Contradiction())
             AddEvent(RC_EVENT_THEORY_CONTRADICTION,box0.endTime,
                      "THEORY_CONTRADICTION","Zigzag and MA bifurcation disagree",0.0,dir);
-         if(dir!=RC_UNKNOWN) m_lastZigDirection=dir;
       }
-      
-      BuildTraderSelection();
       return ArraySize(m_results)>0;
    }
 
+   // ------------------------------------------------------------
+   // H6 consultant: zigzag on 50 H6 candles, once per closed H6 candle
+   // ------------------------------------------------------------
+   void ProcessH6Candle()
+   {
+      datetime t6=iTime(_Symbol,PERIOD_H6,1);          // last closed H6 candle
+      if(t6<=0 || t6==m_lastH6Run) return;
+
+      // slow averages: one bifurcation point per closed H6 candle (optional)
+      if(t6!=m_lastH6Fed)
+      {
+         m_lastH6Fed=t6;
+         if(m_slowDyno!=NULL)
+         {
+            double slow=m_slowDyno.RainbowCenter(1);
+            if(slow!=0.0) m_advH6.FeedMA(t6,slow);
+         }
+      }
+
+      // if H6 history is not ready the run fails and is retried on the next call
+      if(!m_advH6.RunZigZag(m_h6OlderShift,m_h6NewerShift,t6)) return;
+      m_lastH6Run=t6;
+
+      CZigZagEngine *zz=m_advH6.ZigZag();
+      ZZResult best;
+      if(!zz.GetResult(0,best)) return;
+
+      string detail="H6["+IntegerToString(m_h6OlderShift)+"->"+IntegerToString(m_h6NewerShift)+"] ";
+      for(int i=0;i<zz.TraderResultCount();i++)
+      {
+         ZZResult z;
+         if(!zz.GetTraderResult(i,z)) continue;
+         if(i>0) detail+=" ; ";
+         detail+=z.label+": "+z.theory+" ("+z.reason+")";
+      }
+
+      if(m_slowDyno!=NULL)
+      {
+         detail+=" | SLOW_MA: "+ZADirText(m_advH6.MADirection());
+         if(m_advH6.Contradiction()) detail+=" | CONTRADICTION";
+      }
+      else
+         detail+=" | SLOW_MA: N/A";
+
+      AddEvent(RC_EVENT_H6_ZIGZAG,t6,"H6_ZIGZAG",detail,0.0,best.direction);
+   }
+
+   // ------------------------------------------------------------
+   // Overlap chain (unchanged)
+   // ------------------------------------------------------------
    bool BuildOverLapZone()
    {
       if(m_fractal==NULL) return false;
@@ -888,23 +369,23 @@ private:
          if(box.highPrice>hi) hi=box.highPrice;
          if(box.lowPrice<lo) lo=box.lowPrice;
       }
-      
+
       if( count == 1) closed_due_break = false;
-      
+
       bool wasActive=(m_zoneReady && m_zoneBoxCount>=2 && !closed_due_break);
       bool nowActive=(count>=2);
-      
+
       if(!wasActive && nowActive && !closed_due_break)
          AddEvent(RC_EVENT_OVERLAP_STARTED,end,"OVERLAP_STARTED",
                   "Connected box chain started",0.0,RC_UNKNOWN);
-      
+
       if(!closed_due_break){
          m_zoneHigh=hi; m_zoneLow=lo; m_zoneStart=start; m_zoneEnd=end;
          m_zoneBoxCount=count; m_zoneReady=true; m_zoneExtended=false;
          return true;
       }
       else{
-         m_zoneReady=false; 
+         m_zoneReady=false;
          m_zoneExtended=false;
          return false;
       }
@@ -932,53 +413,52 @@ private:
       RunZigZag(box0,box1);
    }
 
-
    void CheckImportantLevelTouch(datetime candleTime)
    {
       // Do not alert while an overlap chain is active.
       if(OverlapActive())
          return;
-   
+
       if(m_fractal==NULL || candleTime<=0)
          return;
-   
+
       // Only inspect the newest small box.
       FlatZone box;
       if(!m_fractal.GetSmallBox(0,box))
          return;
-   
+
       // Reset touch flags when SmallBox(0) changes.
       if(box.startTime!=m_levelBoxStart ||
          box.endTime!=m_levelBoxEnd)
       {
          m_levelBoxStart=box.startTime;
          m_levelBoxEnd=box.endTime;
-   
+
          m_levelHighTouched=false;
          m_levelLowTouched=false;
       }
-   
+
       double candleHigh=iHigh(_Symbol,PERIOD_H1,1);
       double candleLow =iLow(_Symbol,PERIOD_H1,1);
-   
+
       if(candleHigh==0.0 || candleLow==0.0)
          return;
-   
+
       // The candle range must contain the important level.
       bool touchedHigh=
          (!m_levelHighTouched &&
           candleLow<=box.highPrice &&
           candleHigh>=box.highPrice);
-   
+
       bool touchedLow=
          (!m_levelLowTouched &&
           candleLow<=box.lowPrice &&
           candleHigh>=box.lowPrice);
-   
+
       if(touchedHigh)
       {
          m_levelHighTouched=true;
-   
+
          AddEvent(
             RC_EVENT_IMPORTANT_LEVEL_TOUCHED,
             candleTime,
@@ -988,11 +468,11 @@ private:
             RC_UP
          );
       }
-   
+
       if(touchedLow)
       {
          m_levelLowTouched=true;
-   
+
          AddEvent(
             RC_EVENT_IMPORTANT_LEVEL_TOUCHED,
             candleTime,
@@ -1004,93 +484,54 @@ private:
       }
    }
 
-
-
-   void CountSwingTypes(RCPathPoint &path[], int &highs, int &lows)
-   {
-      highs = 0;
-      lows  = 0;
-   
-      for(int i = 1; i < ArraySize(path) - 1; i++)
-      {
-         if(path[i].type > 0)
-            highs++;
-   
-         if(path[i].type < 0)
-            lows++;
-      }
-   }
-   
-   
-   void BuildTraderSelection()
-   {
-      ArrayResize(m_traderResultIndices, 0);
-   
-      int resultCount = ArraySize(m_results);
-   
-      if(resultCount <= 0)
-         return;
-   
-      // BEST is always the first available result.
-      ArrayResize(m_traderResultIndices, 1);
-      m_traderResultIndices[0] = 0;
-   
-      // Without ALTERNATIVE, only BEST can be reported.
-      if(resultCount < 2)
-         return;
-   
-      int bestHighs, bestLows;
-      int altHighs,  altLows;
-   
-      CountSwingTypes(m_results[0].points, bestHighs, bestLows);
-      CountSwingTypes(m_results[1].points, altHighs, altLows);
-   
-      bool sameSwingCounts =
-         (bestHighs == altHighs && bestLows == altLows);
-   
-      bool sameTheory =
-         (m_results[0].theory == m_results[1].theory);
-   
-      // One report only when BOTH conditions are satisfied.
-      if(sameSwingCounts && sameTheory)
-         return;
-   
-      // Otherwise, report both hypotheses.
-      ArrayResize(m_traderResultIndices, 2);
-      m_traderResultIndices[0] = 0;
-      m_traderResultIndices[1] = 1;
-   }
-
 public:
    CRedCarpet()
    {
-      m_fractal=NULL; m_dyno=NULL;
+      m_fractal=NULL; m_dyno=NULL; m_slowDyno=NULL;
       m_lastCandle=0; m_lastBoxStart=0; m_lastBoxEnd=0;
+      m_lastH6Fed=0; m_lastH6Run=0;
+      m_h6OlderShift=RC_H6_OLDER_SHIFT;
+      m_h6NewerShift=RC_H6_NEWER_SHIFT;
       m_zoneReady=false; m_zoneExtended=false;
       m_zoneHigh=0; m_zoneLow=0; m_zoneStart=0; m_zoneEnd=0; m_zoneBoxCount=0;
-      m_step=0; m_nextBranchId=1;
-      m_branchConfig.minWaitingPoints=2; m_branchConfig.maxWaitingPoints=5;
-      m_startShift=-1; m_endShift=-1; m_candidateLimitHit=0;
-      m_bestErrorA=DBL_MAX; m_bestErrorB=DBL_MAX;
-      m_bestBalanceA=DBL_MAX; m_bestBalanceB=DBL_MAX; m_evaluatedPaths=0;
-      ArrayResize(m_events,0); ArrayResize(m_theories,0); ArrayResize(m_results,0);
-      ArrayResize(m_branches,0);
-      ArrayResize(m_traderResultIndices,0);
-      
+      ArrayResize(m_events,0); ArrayResize(m_theories,0);
+      ArrayResize(m_results,0); ArrayResize(m_traderResults,0);
+
       m_levelBoxStart=0;
       m_levelBoxEnd=0;
       m_levelHighTouched=false;
       m_levelLowTouched=false;
-      m_lastZigDirection = RC_UNKNOWN;
-      m_lastMADirection  = RC_UNKNOWN;
       closed_due_break = false;
-      
    }
 
+   // The advisors are configured here (not in the constructor), because
+   // Set() is called at runtime from Init, when the symbol is ready.
    void Set(CFractalGeometry &fractal,CRainBowDynamics &dyno)
    {
       m_fractal=&fractal;
       m_dyno=&dyno;
+
+      // H1: identical limits to the former built-in engine
+      m_advH1.Configure(_Symbol,PERIOD_H1,
+                        RC_MAX_ZIGZAG_POINTS,RC_MAX_CANDIDATES,RC_TRAILING_AFTER,0,
+                        2,5);
+      // H6: same engine, safety cap on evaluated paths
+      m_advH6.Configure(_Symbol,PERIOD_H6,
+                        RC_MAX_ZIGZAG_POINTS,RC_MAX_CANDIDATES,RC_TRAILING_AFTER,RC_H6_MAX_PATHS,
+                        2,5);
+   }
+
+   // Optional: slow averages (e.g. 10x periods) used by the H6 event.
+   void SetSlow(CRainBowDynamics &slowDyno)
+   {
+      m_slowDyno=&slowDyno;
+   }
+
+   // Optional: change the H6 window (default 53 -> 3).
+   void SetH6Window(int olderShift,int newerShift)
+   {
+      m_h6OlderShift=olderShift;
+      m_h6NewerShift=newerShift;
    }
 
    // Call once after the observer's normal box/candle updates.
@@ -1107,7 +548,8 @@ public:
          if(t>0 && t!=m_lastCandle)
          {
             m_lastCandle=t;
-            MA_Advisor(t); // runs even while overlap is active
+            MA_Advisor(t);      // runs even while overlap is active
+            ProcessH6Candle();  // runs once per closed H6 candle, even while overlap is active
 
             double close=iClose(_Symbol,PERIOD_H1,1);
             if(m_zoneReady && m_zoneBoxCount>=2 && !closed_due_break && close!=0.0)
@@ -1139,6 +581,7 @@ public:
       }
    }
 
+   // ---- journal ----
    int EventCount() { return ArraySize(m_events); }
    bool GetEvent(int index,RCEvent &out)
    {
@@ -1153,69 +596,38 @@ public:
       out=m_theories[index]; return true;
    }
 
+   // ---- H1 zigzag results ----
    int ZigZagResultCount() { return ArraySize(m_results); }
    bool GetZigZagResult(int index,RCZigZagResult &out)
    {
       if(index<0 || index>=ArraySize(m_results)) return false;
-      out.label=m_results[index].label;
-      ArrayResize(out.points,ArraySize(m_results[index].points));
-      for(int i=0;i<ArraySize(out.points);i++) out.points[i]=m_results[index].points[i];
-      out.sse=m_results[index].sse;
-      out.imbalance=m_results[index].imbalance;
-      out.box1Start=m_results[index].box1Start;
-      out.box1End=m_results[index].box1End;
-      out.box0Start=m_results[index].box0Start;
-      out.box0End=m_results[index].box0End;
-      out.theory=m_results[index].theory;
-      out.reason=m_results[index].reason;
-      out.highSlopeDeg=m_results[index].highSlopeDeg;
-      out.lowSlopeDeg=m_results[index].lowSlopeDeg;
-      return true;
-   }
-   int TraderResultCount()
-   {
-      return ArraySize(m_traderResultIndices);
-   }
-   
-   
-   bool GetTraderResult(int index, RCZigZagResult &out)
-   {
-      if(index < 0 || index >= ArraySize(m_traderResultIndices))
-         return false;
-   
-      int sourceIndex = m_traderResultIndices[index];
-   
-      if(sourceIndex < 0 || sourceIndex >= ArraySize(m_results))
-         return false;
-   
-      out.label = m_results[sourceIndex].label;
-   
-      ArrayResize(out.points,
-                  ArraySize(m_results[sourceIndex].points));
-   
-      for(int i = 0; i < ArraySize(out.points); i++)
-         out.points[i] = m_results[sourceIndex].points[i];
-   
-      out.sse          = m_results[sourceIndex].sse;
-      out.imbalance    = m_results[sourceIndex].imbalance;
-   
-      out.box1Start    = m_results[sourceIndex].box1Start;
-      out.box1End      = m_results[sourceIndex].box1End;
-      out.box0Start    = m_results[sourceIndex].box0Start;
-      out.box0End      = m_results[sourceIndex].box0End;
-   
-      out.theory       = m_results[sourceIndex].theory;
-      out.reason       = m_results[sourceIndex].reason;
-   
-      out.highSlopeDeg = m_results[sourceIndex].highSlopeDeg;
-      out.lowSlopeDeg  = m_results[sourceIndex].lowSlopeDeg;
-   
+      CopyRCResult(m_results[index],out);
       return true;
    }
 
-   
-   int MADirection() { return m_lastMADirection; }
-   int ZigZagDirection() { return m_lastZigDirection; }
+   int TraderResultCount() { return ArraySize(m_traderResults); }
+   bool GetTraderResult(int index,RCZigZagResult &out)
+   {
+      if(index<0 || index>=ArraySize(m_traderResults)) return false;
+      CopyRCResult(m_traderResults[index],out);
+      return true;
+   }
+
+   // ---- H6 zigzag results (engine format) ----
+   int  H6ResultCount()       { return m_advH6.ZigZag().ResultCount(); }
+   bool GetH6Result(int index,ZZResult &out) { return m_advH6.ZigZag().GetResult(index,out); }
+   int  H6TraderResultCount() { return m_advH6.ZigZag().TraderResultCount(); }
+   bool GetH6TraderResult(int index,ZZResult &out) { return m_advH6.ZigZag().GetTraderResult(index,out); }
+   int  H6Direction()         { return m_advH6.ZigZagDirection(); }
+   int  SlowMADirection()     { return m_advH6.MADirection(); }
+
+   // ---- direct access to the advisors (e.g. to register new interpretation rules) ----
+   CZigZagAdvisor *H1() { return GetPointer(m_advH1); }
+   CZigZagAdvisor *H6() { return GetPointer(m_advH6); }
+
+   // ---- state (same as before) ----
+   int MADirection() { return m_advH1.MADirection(); }
+   int ZigZagDirection() { return m_advH1.ZigZagDirection(); }
    bool OverlapActive() { return (m_zoneReady && m_zoneBoxCount>=2 && !closed_due_break); }
    double OverlapHigh() { return m_zoneHigh; }
    double OverlapLow() { return m_zoneLow; }
@@ -1223,4 +635,4 @@ public:
    datetime OverlapEnd() { return m_zoneEnd; }
 };
 
-#endif // __RED_CARPET_MQH__
+#endif // __BOX_RED_CARPET_MQH__
