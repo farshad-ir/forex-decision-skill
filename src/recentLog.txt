@@ -2057,3 +2057,336 @@ NEW BOX Arrived LOG finished!
 [RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
 [RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.11 20:00 | Detail: Bifurcation direction changed | Price: 1.06090 | Direction: -1
 [RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.11 22:00 | Detail: Bifurcation direction changed | Price: 1.06097 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.11 18:00 | Detail: H6[53->3] BEST: BEARISH (Lower highs and lower lows) ; ALTERNATIVE: STUCK (Price moved both upward and downward; directional continuation is not established) | SLOW_CENTER: 1.05727 | SLOW_MA: UP | CONTRADICTION | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05727 | Direction: -1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_REGIME_WATCH | Time: 2023.10.11 18:00 | Detail: Counter-move against SELL reached 62.9 pips (notable level 60). History: not enough samples (0 similar counter-moves) | Price: 1.05727 | Direction: 1
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.12 00:00 | Detail: H6[53->3] BEST: STUCK (Price moved both upward and downward; directional continuation is not established) ; ALTERNATIVE: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05782 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05782 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.12 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) ; ALTERNATIVE: BEARISH (Lower highs and lower lows) | SLOW_CENTER: 1.05842 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05842 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.12 13:00 | Detail: Bifurcation direction changed | Price: 1.06240 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.12 12:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) ; ALTERNATIVE: BEARISH (Lower highs and lower lows) | SLOW_CENTER: 1.05861 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05861 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.12 18:00 | Detail: H6[53->3] BEST: BEARISH (Lower highs and lower lows) ; ALTERNATIVE: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05825 | SLOW_MA: UP | CONTRADICTION | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05825 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.13 00:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05792 | SLOW_MA: DOWN | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05792 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.13 06:00 | Detail: Bifurcation direction changed | Price: 1.05419 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.13 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05771 | SLOW_MA: DOWN | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05771 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.13 13:00 | Detail: Bifurcation direction changed | Price: 1.05399 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_REGIME_RECOVERED | Time: 2023.10.13 00:00 | Detail: False alarm: center direction returned to SELL, adverse peak 76.3 pips < 100.0; regime stays SELL | Price: 1.05792 | Direction: -1
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.13 12:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05724 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05724 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.13 18:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05664 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05664 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.16 01:00 | Detail: Bifurcation direction changed | Price: 1.05161 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.16 00:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05621 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05621 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.16 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05591 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05591 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.16 12:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05563 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05563 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: 1 | Overlap Active: false
+NEW BOX Arrived!
+BOX High: 1.05555
+BOX EndTime: 2023.10.16 17:00
+Last Candle close: 1.05473
+Last Candle Time: 2023.10.16 19:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: BEARISH | Reason: Lower highs and lower lows
+[RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.10.16 17:00 | Detail: BEARISH | Lower highs and lower lows | Price: 0.00000 | Direction: -1
+[RED CARPET EVENT] THEORY_CONTRADICTION | Time: 2023.10.16 17:00 | Detail: Zigzag and MA bifurcation disagree | Price: 0.00000 | Direction: -1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.10.16 20:00 | Detail: HIGH | Price: 1.05555 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.16 18:00 | Detail: H6[53->3] BEST: BULLISH (Higher highs and higher lows) | SLOW_CENTER: 1.05552 | SLOW_MA: DOWN | CONTRADICTION | REGIME: SELL | Price: 1.05552 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.17 00:00 | Detail: H6[53->3] BEST: BULLISH (Higher highs and higher lows) | SLOW_CENTER: 1.05539 | SLOW_MA: DOWN | CONTRADICTION | REGIME: SELL | Price: 1.05539 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.17 06:00 | Detail: Bifurcation direction changed | Price: 1.05526 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.17 06:00 | Detail: H6[53->3] BEST: BULLISH (Higher highs and higher lows) | SLOW_CENTER: 1.05519 | SLOW_MA: DOWN | CONTRADICTION | REGIME: SELL | Price: 1.05519 | Direction: 1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.17 13:00 | Detail: Bifurcation direction changed | Price: 1.05479 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.17 12:00 | Detail: H6[53->3] BEST: BULLISH (Higher highs and higher lows) | SLOW_CENTER: 1.05523 | SLOW_MA: DOWN | CONTRADICTION | REGIME: SELL | Price: 1.05523 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_REGIME_WARNING | Time: 2023.10.17 18:00 | Detail: SELL regime under pressure: center direction turned BUY, adverse move 45.1 pips (threshold 100.0) | Price: 1.05549 | Direction: 1
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.17 18:00 | Detail: H6[53->3] BEST: BULLISH (Higher highs and higher lows) ; ALTERNATIVE: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05549 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05549 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.18 04:00 | Detail: Bifurcation direction changed | Price: 1.05708 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.18 00:00 | Detail: H6[53->3] BEST: BULLISH (Higher highs and higher lows) | SLOW_CENTER: 1.05567 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05567 | Direction: 1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.18 06:00 | Detail: Bifurcation direction changed | Price: 1.05726 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.18 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) ; ALTERNATIVE: STUCK (Price moved both upward and downward; directional continuation is not established) | SLOW_CENTER: 1.05587 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05587 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.18 13:00 | Detail: Bifurcation direction changed | Price: 1.05730 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+NEW BOX Arrived!
+BOX High: 1.05944
+BOX EndTime: 2023.10.18 15:00
+Last Candle close: 1.05373
+Last Candle Time: 2023.10.18 17:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: BULLISH | Reason: Higher highs and higher lows
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.18 12:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05587 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05587 | Direction: 0
+[RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.10.18 15:00 | Detail: BULLISH | Higher highs and higher lows | Price: 0.00000 | Direction: 1
+[RED CARPET EVENT] THEORY_CONTRADICTION | Time: 2023.10.18 15:00 | Detail: Zigzag and MA bifurcation disagree | Price: 0.00000 | Direction: 1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.18 18:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05572 | SLOW_MA: DOWN | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05572 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.19 00:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05556 | SLOW_MA: DOWN | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05556 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: 1 | Overlap Active: false
+NEW BOX Arrived!
+BOX High: 1.05538
+BOX EndTime: 2023.10.19 04:00
+Last Candle close: 1.05338
+Last Candle Time: 2023.10.19 06:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: BEARISH | Reason: Price reached a lower level and remains below its starting price
+[TRADER STRUCTURE] ALTERNATIVE | Theory: BEARISH | Reason: Price endpoint is below its starting price
+[RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.10.19 04:00 | Detail: BEARISH | Price reached a lower level and remains below its starting price | Price: 0.00000 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.10.19 07:00 | Detail: LOW | Price: 1.05316 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+NEW BOX Arrived!
+BOX High: 1.05419
+BOX EndTime: 2023.10.19 09:00
+Last Candle close: 1.05357
+Last Candle Time: 2023.10.19 11:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: BEARISH | Reason: Price reached a lower level and remains below its starting price
+[TRADER STRUCTURE] ALTERNATIVE | Theory: BEARISH | Reason: Price endpoint is below its starting price
+[RED CARPET EVENT] H6_REGIME_RECOVERED | Time: 2023.10.18 18:00 | Detail: False alarm: center direction returned to SELL, adverse peak 48.9 pips < 100.0; regime stays SELL | Price: 1.05572 | Direction: -1
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.19 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05538 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05538 | Direction: 0
+[RED CARPET EVENT] OVERLAP_STARTED | Time: 2023.10.19 09:00 | Detail: Connected box chain started | Price: 0.00000 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: true
+[RED CARPET OVERLAP] | Start: 2023.10.18 20:00 | End: 2023.10.19 09:00 | High: 1.05538 | Low: 1.05281
+NEW BOX Arrived!
+BOX High: 1.05481
+BOX EndTime: 2023.10.19 10:00
+Last Candle close: 1.05444
+Last Candle Time: 2023.10.19 12:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: BEARISH | Reason: Price reached a lower level and remains below its starting price
+[TRADER STRUCTURE] ALTERNATIVE | Theory: BEARISH | Reason: Price endpoint is below its starting price
+[RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.10.19 12:00 | Detail: Time passed chain end but close remains inside range | Price: 1.05444 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: true
+[RED CARPET OVERLAP] | Start: 2023.10.18 20:00 | End: 2023.10.19 10:00 | High: 1.05538 | Low: 1.05281
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.19 13:00 | Detail: Bifurcation direction changed | Price: 1.05399 | Direction: 1
+[RED CARPET EVENT] OVERLAP_EXTENDED | Time: 2023.10.19 13:00 | Detail: Time passed chain end but close remains inside range | Price: 1.05512 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: true
+[RED CARPET OVERLAP] | Start: 2023.10.18 20:00 | End: 2023.10.19 10:00 | High: 1.05538 | Low: 1.05281
+[RED CARPET EVENT] OVERLAP_FINISHED | Time: 2023.10.19 14:00 | Detail: Time passed chain end and close exited its price range | Price: 1.05579 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.19 12:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05544 | SLOW_MA: DOWN | REGIME: SELL | Price: 1.05544 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.19 18:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05566 | SLOW_MA: UP | REGIME: SELL | Price: 1.05566 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.20 04:00 | Detail: Bifurcation direction changed | Price: 1.05791 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_REGIME_WARNING | Time: 2023.10.19 18:00 | Detail: SELL regime under pressure: center direction turned BUY, adverse move 46.8 pips (threshold 100.0) | Price: 1.05566 | Direction: 1
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.20 00:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) ; ALTERNATIVE: BEARISH (Lower highs and lower lows) | SLOW_CENTER: 1.05580 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05580 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+NEW BOX Arrived!
+BOX High: 1.05866
+BOX EndTime: 2023.10.20 09:00
+Last Candle close: 1.05879
+Last Candle Time: 2023.10.20 11:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: STUCK | Reason: Price moved both upward and downward; directional continuation is not established
+[TRADER STRUCTURE] ALTERNATIVE | Theory: BULLISH | Reason: Price reached a higher level and remains above its starting price
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.20 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05592 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05592 | Direction: 0
+[RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.10.20 09:00 | Detail: STUCK | Price moved both upward and downward; directional continuation is not established | Price: 0.00000 | Direction: 0
+[RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.10.20 11:00 | Detail: HIGH | Price: 1.05866 | Direction: 1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.20 12:00 | Detail: Bifurcation direction changed | Price: 1.05791 | Direction: 1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.20 12:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05615 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05615 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.20 18:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05641 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05641 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.23 03:00 | Detail: Bifurcation direction changed | Price: 1.05902 | Direction: -1
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.23 00:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05659 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05659 | Direction: 0
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: -1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] AVERAGE_REVERSAL | Time: 2023.10.23 11:00 | Detail: Bifurcation direction changed | Price: 1.05867 | Direction: 1
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.23 06:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05676 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05676 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.23 12:00 | Detail: H6[53->3] BEST: STUCK (Price moved both upward and downward; directional continuation is not established) ; ALTERNATIVE: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05720 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05720 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.23 18:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05815 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05815 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] H6_ZIGZAG | Time: 2023.10.24 00:00 | Detail: H6[53->3] BEST: STUCK (Mixed swing geometry; no dominant direction) | SLOW_CENTER: 1.05910 | SLOW_MA: UP | REGIME: SELL(UNDER_PRESSURE) | Price: 1.05910 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+NEW BOX Arrived!
+BOX High: 1.06871
+BOX EndTime: 2023.10.24 05:00
+Last Candle close: 1.0679
+Last Candle Time: 2023.10.24 07:00
+NEW BOX Arrived LOG finished!
+[TRADER STRUCTURE] BEST | Theory: STUCK | Reason: Price moved both upward and downward; directional continuation is not established
+[TRADER STRUCTURE] ALTERNATIVE | Theory: BULLISH | Reason: Higher highs and higher lows
+[RED CARPET EVENT] ZIGZAG_BEST | Time: 2023.10.24 05:00 | Detail: STUCK | Price moved both upward and downward; directional continuation is not established | Price: 0.00000 | Direction: 0
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
+[RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.10.24 10:00 | Detail: HIGH | Price: 1.06871 | Direction: 1
+[RED CARPET EVENT] IMPORTANT_LEVEL_TOUCHED | Time: 2023.10.24 10:00 | Detail: LOW | Price: 1.06597 | Direction: -1
+[RED CARPET STATE] | MA Direction: 1 | ZigZag Direction: -1 | Overlap Active: false
