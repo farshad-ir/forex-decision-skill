@@ -97,7 +97,7 @@ class CRedCarpet
 private:
    CFractalGeometry *m_fractal;
    CRainBowDynamics *m_dyno;       // H1 averages (as before)
-   CRainBowDynamics *m_slowDyno;   // optional slow averages for the H6 event
+   CRainBowDynamics *m_dynoH6;     // slow ("H6") averages, used by the H6 event
 
    // Consultants (zigzag engine + interpretation rules + MA bifurcation)
    CZigZagAdvisor m_advH1;
@@ -305,15 +305,16 @@ private:
       datetime t6=iTime(_Symbol,PERIOD_H6,1);          // last closed H6 candle
       if(t6<=0 || t6==m_lastH6Run) return;
 
-      // slow averages: one bifurcation point per closed H6 candle (optional)
+      // Center of the slow averages at the moment this H6 candle closed
+      // (same convention as the H1 consultant: RainbowCenter(1)).
+      double center=0.0;
+      if(m_dynoH6!=NULL) center=m_dynoH6.RainbowCenter(1);
+
+      // one bifurcation point per closed H6 candle
       if(t6!=m_lastH6Fed)
       {
          m_lastH6Fed=t6;
-         if(m_slowDyno!=NULL)
-         {
-            double slow=m_slowDyno.RainbowCenter(1);
-            if(slow!=0.0) m_advH6.FeedMA(t6,slow);
-         }
+         if(center!=0.0) m_advH6.FeedMA(t6,center);
       }
 
       // if H6 history is not ready the run fails and is retried on the next call
@@ -333,15 +334,17 @@ private:
          detail+=z.label+": "+z.theory+" ("+z.reason+")";
       }
 
-      if(m_slowDyno!=NULL)
+      if(center!=0.0)
       {
+         detail+=" | SLOW_CENTER: "+DoubleToString(center,_Digits);
          detail+=" | SLOW_MA: "+ZADirText(m_advH6.MADirection());
          if(m_advH6.Contradiction()) detail+=" | CONTRADICTION";
       }
       else
          detail+=" | SLOW_MA: N/A";
 
-      AddEvent(RC_EVENT_H6_ZIGZAG,t6,"H6_ZIGZAG",detail,0.0,best.direction);
+      // the event price carries the center of the slow averages
+      AddEvent(RC_EVENT_H6_ZIGZAG,t6,"H6_ZIGZAG",detail,center,best.direction);
    }
 
    // ------------------------------------------------------------
@@ -487,7 +490,7 @@ private:
 public:
    CRedCarpet()
    {
-      m_fractal=NULL; m_dyno=NULL; m_slowDyno=NULL;
+      m_fractal=NULL; m_dyno=NULL; m_dynoH6=NULL;
       m_lastCandle=0; m_lastBoxStart=0; m_lastBoxEnd=0;
       m_lastH6Fed=0; m_lastH6Run=0;
       m_h6OlderShift=RC_H6_OLDER_SHIFT;
@@ -506,10 +509,11 @@ public:
 
    // The advisors are configured here (not in the constructor), because
    // Set() is called at runtime from Init, when the symbol is ready.
-   void Set(CFractalGeometry &fractal,CRainBowDynamics &dyno)
+   void Set(CFractalGeometry &fractal,CRainBowDynamics &dyno,CRainBowDynamics &dynoH6)
    {
       m_fractal=&fractal;
       m_dyno=&dyno;
+      m_dynoH6=&dynoH6;
 
       // H1: identical limits to the former built-in engine
       m_advH1.Configure(_Symbol,PERIOD_H1,
@@ -521,10 +525,10 @@ public:
                         2,5);
    }
 
-   // Optional: slow averages (e.g. 10x periods) used by the H6 event.
+   // Optional alias: replace the slow averages after Set().
    void SetSlow(CRainBowDynamics &slowDyno)
    {
-      m_slowDyno=&slowDyno;
+      m_dynoH6=&slowDyno;
    }
 
    // Optional: change the H6 window (default 53 -> 3).
