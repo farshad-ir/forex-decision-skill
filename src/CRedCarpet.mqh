@@ -4,6 +4,7 @@
 #include "FractalGeometry.mqh"
 #include "../MA_INERTIA/RainBowDynamics.mqh"
 #include "H6/ZigZagAdvisor.mqh"
+#include "H6/RegimeMachine.mqh"
 
 // ------------------------------------------------------------
 // CRedCarpet
@@ -13,6 +14,8 @@
 // - H6 consultant (new): zigzag on 50 H6 candles (shift 53 -> 3),
 //   run once per closed H6 candle, published as ONE event
 //   (RC_EVENT_H6_ZIGZAG) together with the slow averages.
+// - H6 regime machine (new): BUY/SELL regime of the slow center with a
+//   100-pip confirmation; warns when the regime is changing / has changed.
 // - Stores theory/event records in arrays; no mandatory Print.
 // ------------------------------------------------------------
 
@@ -34,7 +37,13 @@ enum RC_EVENT_TYPE
    RC_EVENT_OVERLAP_STARTED,
    RC_EVENT_OVERLAP_FINISHED,
    RC_EVENT_OVERLAP_EXTENDED,
-   RC_EVENT_H6_ZIGZAG            // new: appended last, older values keep their numbers
+   RC_EVENT_H6_ZIGZAG,           // new: appended last, older values keep their numbers
+   RC_EVENT_H6_REGIME_ESTABLISHED,
+   RC_EVENT_H6_REGIME_WARNING,
+   RC_EVENT_H6_REGIME_RECOVERED,
+   RC_EVENT_H6_REGIME_CHANGED,
+   RC_EVENT_H6_REGIME_WATCH,     // live counter-move reached the notable level (with historical odds)
+   RC_EVENT_H6_REGIME_NOTE       // something was written in the regime notebook
 };
 
 struct RCPathPoint
@@ -92,6 +101,9 @@ struct RCTheory
 #define RC_H6_NEWER_SHIFT    3
 #define RC_H6_MAX_PATHS      3000000   // safety cap for the H6 search
 
+#define RC_H6_REGIME_PIPS    100.0     // 100 pips = 1000 points on a 5-digit symbol
+#define RC_H6_REGIME_EVERY   3         // evaluate every 3 H6 candles (18 h); 1 = every 6 h
+
 class CRedCarpet
 {
 private:
@@ -119,6 +131,11 @@ private:
    datetime m_lastH6Run;
    int      m_h6OlderShift;
    int      m_h6NewerShift;
+
+   // H6 regime machine
+   CRegimeMachine m_regime;
+   int            m_regimeEvery;
+   int            m_regimeCounter;
 
    // Important levels: only SmallBox(0)
    datetime m_levelBoxStart;
@@ -298,6 +315,37 @@ private:
    }
 
    // ------------------------------------------------------------
+   // H6 regime machine -> journal events
+   // ------------------------------------------------------------
+   void PublishRegimeEvents()
+   {
+      RegimeEvent e;
+      while(m_regime.PopEvent(e))
+      {
+         RC_EVENT_TYPE type=RC_EVENT_NONE;
+         string name="";
+         int dir=0;
+         switch(e.type)
+         {
+            case REGIME_EVT_ESTABLISHED:
+               type=RC_EVENT_H6_REGIME_ESTABLISHED; name="H6_REGIME_ESTABLISHED"; dir=e.toState; break;
+            case REGIME_EVT_WARNING:
+               type=RC_EVENT_H6_REGIME_WARNING;     name="H6_REGIME_WARNING";     dir=-e.fromState; break;
+            case REGIME_EVT_RECOVERED:
+               type=RC_EVENT_H6_REGIME_RECOVERED;   name="H6_REGIME_RECOVERED";   dir=e.toState; break;
+            case REGIME_EVT_CHANGED:
+               type=RC_EVENT_H6_REGIME_CHANGED;     name="H6_REGIME_CHANGED";     dir=e.toState; break;
+            case REGIME_EVT_WATCH:
+               type=RC_EVENT_H6_REGIME_WATCH;       name="H6_REGIME_WATCH";       dir=-e.fromState; break;
+            case REGIME_EVT_NOTE:
+               type=RC_EVENT_H6_REGIME_NOTE;        name="H6_REGIME_NOTE";        dir=e.toState; break;
+            default: continue;
+         }
+         AddEvent(type,e.time,name,e.text,e.center,dir);
+      }
+   }
+
+   // ------------------------------------------------------------
    // H6 consultant: zigzag on 50 H6 candles, once per closed H6 candle
    // ------------------------------------------------------------
    void ProcessH6Candle()
@@ -314,7 +362,20 @@ private:
       if(t6!=m_lastH6Fed)
       {
          m_lastH6Fed=t6;
-         if(center!=0.0) m_advH6.FeedMA(t6,center);
+         if(center!=0.0)
+         {
+            m_advH6.FeedMA(t6,center);
+
+            // regime machine: one point per closed H6 candle, evaluated every N candles
+            m_regime.Feed(t6,center,m_advH6.MADirection());
+            m_regimeCounter++;
+            if(m_regimeCounter>=m_regimeEvery)
+            {
+               m_regimeCounter=0;
+               m_regime.Process();
+               PublishRegimeEvents();
+            }
+         }
       }
 
       // if H6 history is not ready the run fails and is retried on the next call
@@ -342,6 +403,8 @@ private:
       }
       else
          detail+=" | SLOW_MA: N/A";
+
+      detail+=" | REGIME: "+m_regime.StateText();
 
       // the event price carries the center of the slow averages
       AddEvent(RC_EVENT_H6_ZIGZAG,t6,"H6_ZIGZAG",detail,center,best.direction);
@@ -495,6 +558,8 @@ public:
       m_lastH6Fed=0; m_lastH6Run=0;
       m_h6OlderShift=RC_H6_OLDER_SHIFT;
       m_h6NewerShift=RC_H6_NEWER_SHIFT;
+      m_regimeEvery=RC_H6_REGIME_EVERY;
+      m_regimeCounter=0;
       m_zoneReady=false; m_zoneExtended=false;
       m_zoneHigh=0; m_zoneLow=0; m_zoneStart=0; m_zoneEnd=0; m_zoneBoxCount=0;
       ArrayResize(m_events,0); ArrayResize(m_theories,0);
@@ -523,6 +588,24 @@ public:
       m_advH6.Configure(_Symbol,PERIOD_H6,
                         RC_MAX_ZIGZAG_POINTS,RC_MAX_CANDIDATES,RC_TRAILING_AFTER,RC_H6_MAX_PATHS,
                         2,5);
+      // H6 regime machine
+      m_regime.Configure(_Symbol,RC_H6_REGIME_PIPS);
+   }
+
+   // Optional: notebook. notePips: counter-moves from this size are written down and raise
+   // WATCH (default 60). weakCallPips: a regime that ran less than this after its declaration
+   // is a weak call (default 30). file: CSV in MQL5/Files to persist the notebook ("" = memory only).
+   void SetH6Notebook(double notePips,double weakCallPips,string file="")
+   {
+      m_regime.ConfigureNotebook(notePips,weakCallPips);
+      if(file!="") m_regime.SetNotebookFile(file);
+   }
+
+   // Optional: regime threshold (pips) and cadence (every N closed H6 candles).
+   void SetH6Regime(double thresholdPips,int everyNCandles)
+   {
+      m_regime.Configure(_Symbol,thresholdPips);
+      m_regimeEvery=MathMax(1,everyNCandles);
    }
 
    // Optional alias: replace the slow averages after Set().
@@ -624,6 +707,12 @@ public:
    bool GetH6TraderResult(int index,ZZResult &out) { return m_advH6.ZigZag().GetTraderResult(index,out); }
    int  H6Direction()         { return m_advH6.ZigZagDirection(); }
    int  SlowMADirection()     { return m_advH6.MADirection(); }
+
+   // ---- H6 regime ----
+   int  H6RegimeState()          { return m_regime.State(); }          // +1 BUY, -1 SELL, 0 UNKNOWN
+   bool H6RegimeUnderPressure()  { return m_regime.UnderPressure(); }
+   string H6RegimeText()         { return m_regime.StateText(); }
+   CRegimeMachine *H6Regime()    { return GetPointer(m_regime); }
 
    // ---- direct access to the advisors (e.g. to register new interpretation rules) ----
    CZigZagAdvisor *H1() { return GetPointer(m_advH1); }
