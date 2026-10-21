@@ -54,6 +54,16 @@ private:
       return Lots;
    }
 
+   //===========================================================
+   // Price distance
+   //===========================================================
+   double RequiredProfitDistance()
+   {
+      return (double)m_profitPoints * _Point;
+   }
+
+
+
    double BasketProfit(int direction)
    {
       double profit = 0.0;
