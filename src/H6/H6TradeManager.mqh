@@ -18,6 +18,9 @@ private:
    CH6HorizontalChannels ChannelDetector;
    CTrade trade;
 
+   int  m_profitReversalMinPositions;
+   bool m_basketWasProfitable;
+
    double m_lots;
    int    m_confirmGapBars;
    int    m_exitStageBars;
@@ -33,14 +36,93 @@ private:
    int exitBars;
 
    string processedKeys[];
-
-   //===========================================================
-   // Price distance
-   //===========================================================
-   double RequiredProfitDistance()
-   {
-      return (double)m_profitPoints * _Point;
+   
+   double BasketLots(int direction){
+   
+      double Lots = 0.0;
+   
+      for(int i = PositionsTotal() - 1; i >= 0; --i)
+      {
+         ulong ticket = PositionGetTicket(i);
+   
+         if(ticket == 0 || !IsOurPosition(ticket, direction))
+            continue;
+   
+         Lots += PositionGetDouble(POSITION_VOLUME);
+      }
+   
+      return Lots;
    }
+
+   double BasketProfit(int direction)
+   {
+      double profit = 0.0;
+   
+      for(int i = PositionsTotal() - 1; i >= 0; --i)
+      {
+         ulong ticket = PositionGetTicket(i);
+   
+         if(ticket == 0 || !IsOurPosition(ticket, direction))
+            continue;
+   
+         profit += PositionGetDouble(POSITION_PROFIT);
+         profit += PositionGetDouble(POSITION_SWAP);
+      }
+   
+      return profit;
+   }
+   
+   // Alternative regime switch based on basket profit reversal.
+
+   void CheckProfitReversalSwitch()
+   {
+      if(confirmedDir != DIR_BUY && confirmedDir != DIR_SELL)
+         return;
+   
+      int positions = CountPositions(confirmedDir);
+   
+      if(positions < m_profitReversalMinPositions)
+      {
+         m_basketWasProfitable = false;
+         return;
+      }
+   
+      double profit = BasketProfit(confirmedDir) / BasketLots(confirmedDir);
+   
+      // Stage 1: Basket must reach 100 points per position.
+      double targetProfit = positions * 100.0;
+   
+      if(!m_basketWasProfitable)
+      {
+         if(profit >= targetProfit)
+            m_basketWasProfitable = true;
+   
+         return;
+      }
+   
+      // Stage 2: Switch when profit falls below 20 points per position.
+      double minProfit = positions * 20.0;
+   
+      if(profit >= minProfit)
+         return;
+   
+      int oldDirection = confirmedDir;
+      int newDirection = -oldDirection;
+   
+      Print("PROFIT REVERSAL SWITCH | positions=", positions,
+            " | basketProfit=", DoubleToString(profit, 2),
+            " | targetProfit=", DoubleToString(targetProfit, 2),
+            " | minProfit=", DoubleToString(minProfit, 2),
+            " | old=", oldDirection,
+            " | new=", newDirection);
+   
+      StartSwitch(newDirection);
+   }
+
+
+
+
+
 
    //===========================================================
    // Signal identity
@@ -388,6 +470,7 @@ private:
 
       confirmedDir = newDirection;
       ResetPendingSignal();
+      m_basketWasProfitable = false;
 
       if(oldDirection == DIR_NONE ||
          oldDirection == newDirection)
@@ -710,6 +793,9 @@ public:
       exitBars = 0;
 
       ArrayResize(processedKeys, 0);
+      
+      m_profitReversalMinPositions = 4;
+      m_basketWasProfitable = false;
    }
 
    //===========================================================
@@ -726,6 +812,9 @@ public:
       m_profitPoints = profitPoints;
 
       trade.SetTypeFillingBySymbol(_Symbol);
+
+      m_profitReversalMinPositions = 4;
+      m_basketWasProfitable = false;
 
       if(_Symbol != "EURUSD")
          Print("WARNING: EURUSD point/pip assumptions may differ.");
@@ -761,6 +850,7 @@ public:
          newH6Bar = true;
       }
 
+      CheckProfitReversalSwitch();
       ManageExits(newH6Bar);
 
       if(newH6Bar)
