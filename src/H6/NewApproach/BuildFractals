@@ -1,0 +1,20 @@
+// Fractal with two bars on each side; equal neighbours require at least
+// one strict comparison, matching the original v1.10 behavior.
+void BuildFractals()
+{
+   ArrayResize(fractals,0);
+   for(int i=StartShift;i>=EndShift;i--)
+   {
+      double h=rates[i].high,l=rates[i].low;
+      bool fh=true,fl=true,hs=false,ls=false;
+      for(int j=1;j<=2;j++)
+      {
+         if(h<rates[i-j].high || h<rates[i+j].high) fh=false;
+         if(h>rates[i-j].high || h>rates[i+j].high) hs=true;
+         if(l>rates[i-j].low || l>rates[i+j].low) fl=false;
+         if(l<rates[i-j].low || l<rates[i+j].low) ls=true;
+      }
+      if(fh&&hs) AddPoint(fractals,i,h,+1,SRC_FRACTAL);
+      if(fl&&ls) AddPoint(fractals,i,l,-1,SRC_FRACTAL);
+   }
+}
